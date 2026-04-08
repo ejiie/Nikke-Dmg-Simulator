@@ -398,7 +398,8 @@ async def crawl(uid: str, headless: bool = False) -> dict:
         print("└─ 완료\n")
 
         # ──────────────────────────────────────────────
-        # Phase 3 : 개별 니케 상세 (스킬·오버로드·기본수치)
+        # Phase 3 : 개별 니케 상세 (스킬·오버로드·큐브·소장품·추가능력치)
+        # 상세 페이지에 장비/큐브/소장품 섹션이 모두 포함되어 있음
         # ──────────────────────────────────────────────
         print("┌─ [Phase 3] 니케 상세 데이터 수집")
         nikke_ids = collector.extract_nikke_ids()
@@ -415,7 +416,42 @@ async def crawl(uid: str, headless: bool = False) -> dict:
                         break
                 if not success:
                     print(f"│    ✗ 니케 ID {nid}: 모든 패턴 실패")
-                await page.wait_for_timeout(800)
+                    continue
+
+                # 전체 페이지 스크롤: 장비/큐브/소장품 lazy load 유발
+                await scroll_page(page, steps=18, delay_ms=400)
+
+                # "추가 능력치" 버튼 클릭 → 싱크로·호감도·기업 보너스 API 유발
+                extra_stat_selectors = [
+                    "text=추가 능력치",
+                    "button:has-text('추가')",
+                    "[class*='extra'][class*='stat']",
+                    "[class*='ExtraStat']",
+                    "[class*='AddStat']",
+                    "[class*='bonus-stat']",
+                ]
+                for sel in extra_stat_selectors:
+                    try:
+                        btn = await page.query_selector(sel)
+                        if btn:
+                            await btn.scroll_into_view_if_needed()
+                            await btn.click()
+                            await page.wait_for_timeout(1500)
+                            print(f"│    📊 추가 능력치 모달 열림 (ID={nid})")
+                            # 닫기 버튼
+                            for close_sel in ["text=닫기", "button:has-text('닫기')", "[class*='close']", "[class*='Close']"]:
+                                try:
+                                    close_btn = await page.query_selector(close_sel)
+                                    if close_btn:
+                                        await close_btn.click()
+                                        break
+                                except Exception:
+                                    pass
+                            break
+                    except Exception:
+                        pass
+
+                await page.wait_for_timeout(600)
 
         else:
             print("│  ⚠️  ID 없음 — UI 클릭으로 시도")
@@ -478,54 +514,67 @@ async def crawl(uid: str, headless: bool = False) -> dict:
         # Phase 4 : 하모니 큐브
         # ──────────────────────────────────────────────
         print("┌─ [Phase 4] 하모니 큐브")
-        found_cube = False
-        for path in CUBE_PATHS:
-            url = build_url(uid, path)
-            print(f"│  → /{path} 시도...")
-            prev_resp_count = len(collector.responses)
-            if await safe_goto(page, url, timeout=10000):
-                await page.wait_for_timeout(3000)
-                await scroll_page(page, steps=4, delay_ms=400)
-                # SPA는 잘못된 경로에도 200 응답 — URL 대신 새 API 응답 수로 판단
-                new_cube_apis = [
-                    r for r in collector.responses[prev_resp_count:]
-                    if any(kw in r.get("url","").lower()
-                           for kw in ["cube", "harmony"])
-                ]
-                # URL 자체에 정확히 경로 세그먼트가 있는지도 확인
-                url_match = path.split("/")[-1] in page.url
-                if new_cube_apis or url_match:
-                    print(f"│  ✅ 큐브 섹션 발견: /{path}  (새 API={len(new_cube_apis)}개)")
-                    found_cube = True
-                    break
+        # Phase 3 결과에서 큐브·소장품 API가 수집됐는지 확인
+        cube_already     = bool(collector.find("cube") or collector.find("harmony"))
+        souvenir_already = bool(
+            collector.find("souvenir") or collector.find("collection")
+            or collector.find("favorite") or collector.find("pilgrim")
+        )
+
+        if cube_already:
+            print("│  ✅ 큐브 데이터 Phase 3에서 이미 수집됨 → 생략")
+            found_cube = True
+        else:
+            found_cube = False
+            for path in CUBE_PATHS:
+                url = build_url(uid, path)
+                print(f"│  → /{path} 시도...")
+                prev_resp_count = len(collector.responses)
+                if await safe_goto(page, url, timeout=10000):
+                    await page.wait_for_timeout(3000)
+                    await scroll_page(page, steps=4, delay_ms=400)
+                    new_cube_apis = [
+                        r for r in collector.responses[prev_resp_count:]
+                        if any(kw in r.get("url", "").lower()
+                               for kw in ["cube", "harmony"])
+                    ]
+                    url_match = path.split("/")[-1] in page.url
+                    if new_cube_apis or url_match:
+                        print(f"│  ✅ 큐브 섹션 발견: /{path}  (새 API={len(new_cube_apis)}개)")
+                        found_cube = True
+                        break
         if not found_cube:
-            print("│  ⚠️  큐브 섹션 URL 미발견 (API 응답에서 확인 필요)")
+            print("│  ⚠️  큐브 섹션 URL 미발견 (Phase 3.5 API 프로브 결과 확인)")
         print("└─ 완료\n")
 
         # ──────────────────────────────────────────────
         # Phase 5 : 소장품
         # ──────────────────────────────────────────────
         print("┌─ [Phase 5] 소장품")
-        found_souvenir = False
-        for path in SOUVENIR_PATHS:
-            url = build_url(uid, path)
-            print(f"│  → /{path} 시도...")
-            prev_resp_count = len(collector.responses)
-            if await safe_goto(page, url, timeout=10000):
-                await page.wait_for_timeout(3000)
-                await scroll_page(page, steps=4, delay_ms=400)
-                new_souvenir_apis = [
-                    r for r in collector.responses[prev_resp_count:]
-                    if any(kw in r.get("url","").lower()
-                           for kw in ["souvenir", "collection", "favorite", "pilgrim"])
-                ]
-                url_match = path.split("/")[-1] in page.url
-                if new_souvenir_apis or url_match:
-                    print(f"│  ✅ 소장품 섹션 발견: /{path}  (새 API={len(new_souvenir_apis)}개)")
-                    found_souvenir = True
-                    break
+        if souvenir_already:
+            print("│  ✅ 소장품 데이터 Phase 3에서 이미 수집됨 → 생략")
+            found_souvenir = True
+        else:
+            found_souvenir = False
+            for path in SOUVENIR_PATHS:
+                url = build_url(uid, path)
+                print(f"│  → /{path} 시도...")
+                prev_resp_count = len(collector.responses)
+                if await safe_goto(page, url, timeout=10000):
+                    await page.wait_for_timeout(3000)
+                    await scroll_page(page, steps=4, delay_ms=400)
+                    new_souvenir_apis = [
+                        r for r in collector.responses[prev_resp_count:]
+                        if any(kw in r.get("url", "").lower()
+                               for kw in ["souvenir", "collection", "favorite", "pilgrim"])
+                    ]
+                    url_match = path.split("/")[-1] in page.url
+                    if new_souvenir_apis or url_match:
+                        print(f"│  ✅ 소장품 섹션 발견: /{path}  (새 API={len(new_souvenir_apis)}개)")
+                        found_souvenir = True
+                        break
         if not found_souvenir:
-            print("│  ⚠️  소장품 섹션 URL 미발견 (API 응답에서 확인 필요)")
+            print("│  ⚠️  소장품 섹션 URL 미발견 (Phase 3.5 API 프로브 결과 확인)")
         print("└─ 완료\n")
 
         # ──────────────────────────────────────────────
