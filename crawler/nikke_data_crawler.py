@@ -1,5 +1,5 @@
 """
-NIKKE Data Crawler v5
+NIKKE Data Crawler v5.1
 니케 블라블라(blablalink.com) 시프티패드에서 종합 게임 데이터 수집
 
 수집 항목:
@@ -9,6 +9,13 @@ NIKKE Data Crawler v5
   4. 하모니 큐브 효과 (전투 기준)
   5. 소장품 효과
   6. 스킬 레벨/설명/레벨당 수치, 속성, 클래스, 버스트 단계, 기업, 전투력
+
+변경 내역 (v5 → v5.1):
+  - ID 추출 버그 수정: GetNikkesOrder 정렬 인덱스 대신 GetUserCharacters.name_code 사용
+  - nikke_area_id 자동 추출 (GetUserCharacters 요청 바디에서)
+  - Phase 3.5 직접 API 프로브 추가: fetch()로 누락 엔드포인트 탐색
+    (GetNikkeDetail, GetHarmonyCube, GetSouvenir 등)
+  - 큐브/소장품 페이지 URL 감지 로직 개선 (SPA 리다이렉트 대응)
 
 실행:
   python crawler/nikke_data_crawler.py
@@ -27,6 +34,7 @@ from playwright.async_api import async_playwright, Page
 
 BASE_DOMAIN = "https://www.blablalink.com"
 API_DOMAIN  = "api.blablalink.com"
+API_BASE    = "https://api.blablalink.com/api/game/proxy/Game"
 
 # 큐브 섹션 후보 경로 (발견되면 루프 중단)
 CUBE_PATHS = [
@@ -46,6 +54,24 @@ SOUVENIR_PATHS = [
     "collectibles",
     "mementos",
     "trophy",
+]
+
+# 직접 API 프로브: 엔드포인트명 → 요청 바디 템플릿
+# {intl_open_id}, {nikke_area_id}, {name_code} 자리표시자 사용
+PROBE_ENDPOINTS = [
+    # 개별 니케 상세
+    ("GetNikkeDetail",      {"intl_open_id": "{intl_open_id}", "nikke_area_id": "{nikke_area_id}", "name_code": "{name_code}"}),
+    ("GetNikkeSkillInfo",   {"intl_open_id": "{intl_open_id}", "nikke_area_id": "{nikke_area_id}", "name_code": "{name_code}"}),
+    ("GetNikkeEquipInfo",   {"intl_open_id": "{intl_open_id}", "nikke_area_id": "{nikke_area_id}", "name_code": "{name_code}"}),
+    ("GetNikkeInfo",        {"intl_open_id": "{intl_open_id}", "nikke_area_id": "{nikke_area_id}", "name_code": "{name_code}"}),
+    # 전체 목록 (큐브/소장품)
+    ("GetHarmonyCubeInfo",  {"intl_open_id": "{intl_open_id}", "nikke_area_id": "{nikke_area_id}"}),
+    ("GetCubeInfo",         {"intl_open_id": "{intl_open_id}", "nikke_area_id": "{nikke_area_id}"}),
+    ("GetCubeList",         {"intl_open_id": "{intl_open_id}", "nikke_area_id": "{nikke_area_id}"}),
+    ("GetSouvenirInfo",     {"intl_open_id": "{intl_open_id}", "nikke_area_id": "{nikke_area_id}"}),
+    ("GetSouvenirList",     {"intl_open_id": "{intl_open_id}", "nikke_area_id": "{nikke_area_id}"}),
+    ("GetCollectionInfo",   {"intl_open_id": "{intl_open_id}", "nikke_area_id": "{nikke_area_id}"}),
+    ("GetFavoriteItemInfo", {"intl_open_id": "{intl_open_id}", "nikke_area_id": "{nikke_area_id}"}),
 ]
 
 # 니케 상세 페이지 URL 패턴 후보
@@ -118,7 +144,7 @@ class DataCollector:
 
         if "CheckLogin" in response.url and code == 0:
             self.login_done.set()
-        if "GetNikkesOrder" in response.url and code == 0:
+        if ("GetNikkesOrder" in response.url or "GetUserCharacters" in response.url) and code == 0:
             self.nikkes_loaded.set()
 
     def find(self, keyword: str) -> list[dict]:
@@ -126,37 +152,61 @@ class DataCollector:
         return [r for r in self.responses if kw in r["url"].lower()]
 
     def extract_nikke_ids(self) -> list[str]:
-        """GetNikkesOrder 응답에서 니케 ID 목록 추출"""
+        """
+        GetUserCharacters 응답의 name_code를 니케 ID로 추출.
+        (GetNikkesOrder는 정렬 인덱스만 반환하므로 사용 불가)
+        """
         ids: list[str] = []
+
+        # ── 주 소스: GetUserCharacters ──────────────────────────────────────
+        for r in self.find("GetUserCharacters"):
+            body = r.get("res_body", {})
+            if not isinstance(body, dict) or body.get("code") != 0:
+                continue
+            characters = body.get("data", {}).get("characters", [])
+            for char in characters:
+                nid = str(char.get("name_code", ""))
+                if nid and nid not in ids:
+                    ids.append(nid)
+
+        if ids:
+            return ids
+
+        # ── 폴백: GetNikkesOrder (list 항목이 dict인 경우) ─────────────────
         for r in self.find("GetNikkesOrder"):
             body = r.get("res_body", {})
             if not isinstance(body, dict) or body.get("code") != 0:
                 continue
             data = body.get("data", {})
-
-            # 응답 구조가 list 또는 dict 안의 list
-            items = []
-            if isinstance(data, list):
-                items = data
-            elif isinstance(data, dict):
-                for key in ["list", "nikke_list", "nikkes", "characters",
-                            "items", "data", "nikkeList", "charList"]:
-                    if key in data and isinstance(data[key], list):
-                        items = data[key]
-                        break
-
+            items = data if isinstance(data, list) else data.get("list", [])
             for item in items:
-                if not isinstance(item, dict):
-                    continue
-                nid = (item.get("id")
-                       or item.get("nikke_id")
-                       or item.get("char_id")
-                       or item.get("character_id")
-                       or item.get("charId"))
-                if nid and str(nid) not in ids:
-                    ids.append(str(nid))
+                if isinstance(item, dict):
+                    nid = str(item.get("id") or item.get("name_code") or "")
+                    if nid and nid not in ids:
+                        ids.append(nid)
+                # GetNikkesOrder.list = [191, 352, ...] 은 정렬 인덱스 → 스킵
 
         return ids
+
+    def extract_context(self) -> dict:
+        """
+        API 직접 호출에 필요한 intl_open_id / nikke_area_id 추출.
+        GetUserCharacters 요청 바디에서 읽어옴.
+        """
+        ctx = {"intl_open_id": "", "nikke_area_id": 83}
+        for r in self.find("GetUserCharacters"):
+            req = r.get("req_body", "{}")
+            try:
+                d = json.loads(req or "{}")
+                if d.get("intl_open_id"):
+                    ctx["intl_open_id"] = d["intl_open_id"]
+                if d.get("nikke_area_id"):
+                    ctx["nikke_area_id"] = d["nikke_area_id"]
+                if ctx["intl_open_id"]:
+                    break
+            except Exception:
+                pass
+        return ctx
 
 
 # ═══════════════════════════════════════════════════════
@@ -219,6 +269,59 @@ async def find_and_click_nikkes(page: Page, max_items: int = 30) -> int:
         return clicked
 
     return 0
+
+
+async def probe_api(page: Page, endpoint: str, payload: dict) -> dict | None:
+    """
+    browser fetch()를 이용해 auth 쿠키를 그대로 사용하면서
+    API 엔드포인트를 직접 호출한다.
+    """
+    url = f"{API_BASE}/{endpoint}"
+    js = """
+    async ({url, payload}) => {
+        try {
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload),
+                credentials: 'include'
+            });
+            const text = await res.text();
+            try { return JSON.parse(text); }
+            catch { return {_raw: text.slice(0, 500)}; }
+        } catch (e) {
+            return {_error: String(e)};
+        }
+    }
+    """
+    try:
+        result = await page.evaluate(js, {"url": url, "payload": payload})
+        return result
+    except Exception as e:
+        return {"_error": str(e)}
+
+
+def _fill_payload(template: dict, ctx: dict, name_code: str) -> dict:
+    """템플릿 딕셔너리의 자리표시자를 실제 값으로 치환"""
+    filled = {}
+    for k, v in template.items():
+        if isinstance(v, str):
+            v = v.replace("{intl_open_id}", ctx["intl_open_id"])
+            v = v.replace("{nikke_area_id}", str(ctx["nikke_area_id"]))
+            v = v.replace("{name_code}", str(name_code))
+            # 타입 복원: 숫자 필드는 int로
+            if k in ("nikke_area_id",):
+                try:
+                    v = int(v)
+                except Exception:
+                    pass
+            elif k == "name_code":
+                try:
+                    v = int(v)
+                except Exception:
+                    pass
+        filled[k] = v
+    return filled
 
 
 # ═══════════════════════════════════════════════════════
@@ -326,6 +429,52 @@ async def crawl(uid: str, headless: bool = False) -> dict:
         print("└─ 완료\n")
 
         # ──────────────────────────────────────────────
+        # Phase 3.5 : 직접 API 프로브 (미발견 엔드포인트)
+        # ──────────────────────────────────────────────
+        print("┌─ [Phase 3.5] 직접 API 프로브")
+        ctx = collector.extract_context()
+        if ctx["intl_open_id"]:
+            print(f"│  intl_open_id={ctx['intl_open_id'][:20]}...  nikke_area_id={ctx['nikke_area_id']}")
+            sample_ids = nikke_ids[:3] if nikke_ids else ["5001"]
+
+            for ep_name, template in PROBE_ENDPOINTS:
+                needs_name_code = "{name_code}" in str(template)
+                if needs_name_code:
+                    for nid in sample_ids:
+                        payload = _fill_payload(template, ctx, nid)
+                        result  = await probe_api(page, ep_name, payload)
+                        code_v  = result.get("code", "?") if isinstance(result, dict) else "?"
+                        tag     = "✅" if code_v == 0 else "❌"
+                        print(f"│  {tag} {ep_name}(name_code={nid}) → code={code_v}")
+                        collector.responses.append({
+                            "endpoint": ep_name,
+                            "url":      f"{API_BASE}/{ep_name}",
+                            "method":   "POST",
+                            "status":   200,
+                            "req_body": json.dumps(payload),
+                            "res_body": result,
+                        })
+                        if code_v == 0:
+                            break  # 하나 성공하면 패턴 확인됨
+                else:
+                    payload = _fill_payload(template, ctx, "")
+                    result  = await probe_api(page, ep_name, payload)
+                    code_v  = result.get("code", "?") if isinstance(result, dict) else "?"
+                    tag     = "✅" if code_v == 0 else "❌"
+                    print(f"│  {tag} {ep_name} → code={code_v}")
+                    collector.responses.append({
+                        "endpoint": ep_name,
+                        "url":      f"{API_BASE}/{ep_name}",
+                        "method":   "POST",
+                        "status":   200,
+                        "req_body": json.dumps(payload),
+                        "res_body": result,
+                    })
+        else:
+            print("│  ⚠️  intl_open_id 미확인 — 프로브 건너뜀")
+        print("└─ 완료\n")
+
+        # ──────────────────────────────────────────────
         # Phase 4 : 하모니 큐브
         # ──────────────────────────────────────────────
         print("┌─ [Phase 4] 하모니 큐브")
@@ -333,12 +482,20 @@ async def crawl(uid: str, headless: bool = False) -> dict:
         for path in CUBE_PATHS:
             url = build_url(uid, path)
             print(f"│  → /{path} 시도...")
+            prev_resp_count = len(collector.responses)
             if await safe_goto(page, url, timeout=10000):
                 await page.wait_for_timeout(3000)
                 await scroll_page(page, steps=4, delay_ms=400)
-                # 현재 URL에 해당 경로가 포함되면 성공으로 간주
-                if any(seg in page.url for seg in path.split("/")):
-                    print(f"│  ✅ 큐브 섹션 발견: /{path}")
+                # SPA는 잘못된 경로에도 200 응답 — URL 대신 새 API 응답 수로 판단
+                new_cube_apis = [
+                    r for r in collector.responses[prev_resp_count:]
+                    if any(kw in r.get("url","").lower()
+                           for kw in ["cube", "harmony"])
+                ]
+                # URL 자체에 정확히 경로 세그먼트가 있는지도 확인
+                url_match = path.split("/")[-1] in page.url
+                if new_cube_apis or url_match:
+                    print(f"│  ✅ 큐브 섹션 발견: /{path}  (새 API={len(new_cube_apis)}개)")
                     found_cube = True
                     break
         if not found_cube:
@@ -353,11 +510,18 @@ async def crawl(uid: str, headless: bool = False) -> dict:
         for path in SOUVENIR_PATHS:
             url = build_url(uid, path)
             print(f"│  → /{path} 시도...")
+            prev_resp_count = len(collector.responses)
             if await safe_goto(page, url, timeout=10000):
                 await page.wait_for_timeout(3000)
                 await scroll_page(page, steps=4, delay_ms=400)
-                if path in page.url:
-                    print(f"│  ✅ 소장품 섹션 발견: /{path}")
+                new_souvenir_apis = [
+                    r for r in collector.responses[prev_resp_count:]
+                    if any(kw in r.get("url","").lower()
+                           for kw in ["souvenir", "collection", "favorite", "pilgrim"])
+                ]
+                url_match = path.split("/")[-1] in page.url
+                if new_souvenir_apis or url_match:
+                    print(f"│  ✅ 소장품 섹션 발견: /{path}  (새 API={len(new_souvenir_apis)}개)")
                     found_souvenir = True
                     break
         if not found_souvenir:
