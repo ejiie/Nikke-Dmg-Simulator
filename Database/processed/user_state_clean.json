@@ -1,0 +1,5561 @@
+{
+  "uid": 15718125957108145492,
+  "global_state": {
+    "synchro_level": 1,
+    "consoles": []
+  },
+  "characters": {
+    "1007": {
+      "name_code": "1007",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7336,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "1010": {
+      "name_code": "1010",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 538663,
+      "bond_level": 30,
+      "favorite_item_lv": 2,
+      "skills": {
+        "skill1": 7,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatCritical",
+          "value": 298,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1795,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1056,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2496,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1935,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0688,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1935,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.097,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "1012": {
+      "name_code": "1012",
+      "level": 709,
+      "grade": 3,
+      "core": 1,
+      "combat": 279140,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 7,
+        "burst": 4
+      },
+      "overload_stats": []
+    },
+    "1013": {
+      "name_code": "1013",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7024,
+      "bond_level": 0,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "1014": {
+      "name_code": "1014",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 6851,
+      "bond_level": 0,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "1015": {
+      "name_code": "1015",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7818,
+      "bond_level": 0,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "1016": {
+      "name_code": "1016",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7147,
+      "bond_level": 0,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "1017": {
+      "name_code": "1017",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7065,
+      "bond_level": 0,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "1018": {
+      "name_code": "1018",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 6965,
+      "bond_level": 0,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "1019": {
+      "name_code": "1019",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7481,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "1020": {
+      "name_code": "1020",
+      "level": 709,
+      "grade": 3,
+      "core": 3,
+      "combat": 337267,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 7
+      },
+      "overload_stats": []
+    },
+    "1021": {
+      "name_code": "1021",
+      "level": 709,
+      "grade": 2,
+      "core": 0,
+      "combat": 487549,
+      "bond_level": 30,
+      "favorite_item_lv": 2,
+      "skills": {
+        "skill1": 7,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "1022": {
+      "name_code": "1022",
+      "level": 709,
+      "grade": 3,
+      "core": 1,
+      "combat": 266772,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 3,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "1023": {
+      "name_code": "1023",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 6976,
+      "bond_level": 0,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "1024": {
+      "name_code": "1024",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 6895,
+      "bond_level": 0,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "1025": {
+      "name_code": "1025",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 6753,
+      "bond_level": 0,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3001": {
+      "name_code": "3001",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 7962,
+      "bond_level": 22,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3002": {
+      "name_code": "3002",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 7055,
+      "bond_level": 3,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3003": {
+      "name_code": "3003",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 7133,
+      "bond_level": 3,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3004": {
+      "name_code": "3004",
+      "level": 709,
+      "grade": 2,
+      "core": 0,
+      "combat": 248380,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3005": {
+      "name_code": "3005",
+      "level": 709,
+      "grade": 2,
+      "core": 0,
+      "combat": 221348,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 4,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3006": {
+      "name_code": "3006",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 7944,
+      "bond_level": 18,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3007": {
+      "name_code": "3007",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 7737,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3008": {
+      "name_code": "3008",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 7269,
+      "bond_level": 3,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3009": {
+      "name_code": "3009",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 8146,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3010": {
+      "name_code": "3010",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 7278,
+      "bond_level": 3,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3011": {
+      "name_code": "3011",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 7804,
+      "bond_level": 12,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3012": {
+      "name_code": "3012",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 7105,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3013": {
+      "name_code": "3013",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 6958,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3014": {
+      "name_code": "3014",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 6874,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3015": {
+      "name_code": "3015",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 6874,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3016": {
+      "name_code": "3016",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 6874,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3017": {
+      "name_code": "3017",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 6883,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "3018": {
+      "name_code": "3018",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 6874,
+      "bond_level": 1,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5001": {
+      "name_code": "5001",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 588263,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 7,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.0759,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 503,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 664,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.4428,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2496,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0829,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.4428,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1111,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2776,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.097,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5002": {
+      "name_code": "5002",
+      "level": 709,
+      "grade": 3,
+      "core": 3,
+      "combat": 308224,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 4,
+        "burst": 7
+      },
+      "overload_stats": []
+    },
+    "5003": {
+      "name_code": "5003",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 297453,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5004": {
+      "name_code": "5004",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 592745,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 7,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.1111,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6482,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2496,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0759,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0286,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1935,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1111,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1111,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5005": {
+      "name_code": "5005",
+      "level": 709,
+      "grade": 3,
+      "core": 4,
+      "combat": 279595,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 1,
+        "burst": 3
+      },
+      "overload_stats": []
+    },
+    "5006": {
+      "name_code": "5006",
+      "level": 709,
+      "grade": 3,
+      "core": 2,
+      "combat": 274907,
+      "bond_level": 16,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 4,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5007": {
+      "name_code": "5007",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 430565,
+      "bond_level": 30,
+      "favorite_item_lv": 2,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 7
+      },
+      "overload_stats": []
+    },
+    "5008": {
+      "name_code": "5008",
+      "level": 709,
+      "grade": 3,
+      "core": 5,
+      "combat": 458171,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5009": {
+      "name_code": "5009",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 520369,
+      "bond_level": 30,
+      "favorite_item_lv": 5,
+      "skills": {
+        "skill1": 10,
+        "skill2": 9,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.4428,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 618,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5010": {
+      "name_code": "5010",
+      "level": 709,
+      "grade": 3,
+      "core": 6,
+      "combat": 271470,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5011": {
+      "name_code": "5011",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 530494,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 7,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5012": {
+      "name_code": "5012",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 722325,
+      "bond_level": 40,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.1393,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1546,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2636,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1463,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1546,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2916,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1938,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1463,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2636,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1463,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2916,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1546,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5013": {
+      "name_code": "5013",
+      "level": 709,
+      "grade": 3,
+      "core": 4,
+      "combat": 321245,
+      "bond_level": 40,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 5
+      },
+      "overload_stats": []
+    },
+    "5014": {
+      "name_code": "5014",
+      "level": 1,
+      "grade": 3,
+      "core": 0,
+      "combat": 8357,
+      "bond_level": 23,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5015": {
+      "name_code": "5015",
+      "level": 1,
+      "grade": 1,
+      "core": 0,
+      "combat": 7264,
+      "bond_level": 3,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5016": {
+      "name_code": "5016",
+      "level": 1,
+      "grade": 3,
+      "core": 7,
+      "combat": 17853,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 4,
+        "burst": 7
+      },
+      "overload_stats": []
+    },
+    "5017": {
+      "name_code": "5017",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 545143,
+      "bond_level": 30,
+      "favorite_item_lv": 2,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.104,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0759,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 537,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1448,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1935,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0759,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5018": {
+      "name_code": "5018",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 8088,
+      "bond_level": 23,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5019": {
+      "name_code": "5019",
+      "level": 709,
+      "grade": 3,
+      "core": 3,
+      "combat": 261095,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5020": {
+      "name_code": "5020",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 403299,
+      "bond_level": 30,
+      "favorite_item_lv": 2,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": [
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5021": {
+      "name_code": "5021",
+      "level": 709,
+      "grade": 3,
+      "core": 0,
+      "combat": 327565,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 5,
+        "skill2": 4,
+        "burst": 4
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeDamage",
+          "value": 477,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.525,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 537,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5022": {
+      "name_code": "5022",
+      "level": 709,
+      "grade": 3,
+      "core": 1,
+      "combat": 257854,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5023": {
+      "name_code": "5023",
+      "level": 1,
+      "grade": 3,
+      "core": 0,
+      "combat": 8492,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5024": {
+      "name_code": "5024",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 532284,
+      "bond_level": 30,
+      "favorite_item_lv": 2,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 400,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0477,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.097,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0228,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.4428,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5025": {
+      "name_code": "5025",
+      "level": 1,
+      "grade": 1,
+      "core": 0,
+      "combat": 7494,
+      "bond_level": 12,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5026": {
+      "name_code": "5026",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7294,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5027": {
+      "name_code": "5027",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 329984,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 4,
+        "burst": 4
+      },
+      "overload_stats": []
+    },
+    "5028": {
+      "name_code": "5028",
+      "level": 1,
+      "grade": 1,
+      "core": 0,
+      "combat": 8196,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 1,
+        "burst": 4
+      },
+      "overload_stats": []
+    },
+    "5029": {
+      "name_code": "5029",
+      "level": 709,
+      "grade": 3,
+      "core": 1,
+      "combat": 295158,
+      "bond_level": 30,
+      "favorite_item_lv": 5,
+      "skills": {
+        "skill1": 1,
+        "skill2": 10,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5030": {
+      "name_code": "5030",
+      "level": 1,
+      "grade": 3,
+      "core": 4,
+      "combat": 16389,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 4,
+        "burst": 4
+      },
+      "overload_stats": []
+    },
+    "5031": {
+      "name_code": "5031",
+      "level": 1,
+      "grade": 3,
+      "core": 2,
+      "combat": 29549,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 7,
+        "burst": 4
+      },
+      "overload_stats": [
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0228,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0618,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1463,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5032": {
+      "name_code": "5032",
+      "level": 709,
+      "grade": 3,
+      "core": 4,
+      "combat": 280197,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 3
+      },
+      "overload_stats": []
+    },
+    "5033": {
+      "name_code": "5033",
+      "level": 1,
+      "grade": 3,
+      "core": 2,
+      "combat": 13287,
+      "bond_level": 16,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 3,
+        "skill2": 3,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5034": {
+      "name_code": "5034",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 344859,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5035": {
+      "name_code": "5035",
+      "level": 709,
+      "grade": 3,
+      "core": 1,
+      "combat": 255182,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5036": {
+      "name_code": "5036",
+      "level": 709,
+      "grade": 3,
+      "core": 2,
+      "combat": 314309,
+      "bond_level": 30,
+      "favorite_item_lv": 5,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 4
+      },
+      "overload_stats": []
+    },
+    "5037": {
+      "name_code": "5037",
+      "level": 709,
+      "grade": 3,
+      "core": 3,
+      "combat": 391364,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.4017,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1234,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5038": {
+      "name_code": "5038",
+      "level": 1,
+      "grade": 3,
+      "core": 0,
+      "combat": 8230,
+      "bond_level": 20,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5039": {
+      "name_code": "5039",
+      "level": 709,
+      "grade": 3,
+      "core": 6,
+      "combat": 327737,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 4,
+        "burst": 4
+      },
+      "overload_stats": []
+    },
+    "5040": {
+      "name_code": "5040",
+      "level": 709,
+      "grade": 3,
+      "core": 4,
+      "combat": 318099,
+      "bond_level": 40,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 5,
+        "skill2": 4,
+        "burst": 4
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeTime",
+          "value": -0.0463,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5041": {
+      "name_code": "5041",
+      "level": 709,
+      "grade": 3,
+      "core": 3,
+      "combat": 580071,
+      "bond_level": 40,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2916,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0688,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1938,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1111,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.8126,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5042": {
+      "name_code": "5042",
+      "level": 1,
+      "grade": 3,
+      "core": 1,
+      "combat": 10314,
+      "bond_level": 40,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 4,
+        "burst": 4
+      },
+      "overload_stats": []
+    },
+    "5043": {
+      "name_code": "5043",
+      "level": 709,
+      "grade": 3,
+      "core": 4,
+      "combat": 344184,
+      "bond_level": 40,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 7
+      },
+      "overload_stats": []
+    },
+    "5044": {
+      "name_code": "5044",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 559616,
+      "bond_level": 40,
+      "favorite_item_lv": 5,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.1252,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2075,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1655,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.8537,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.0688,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6071,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.09,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1393,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1350,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2075,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5045": {
+      "name_code": "5045",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7545,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5046": {
+      "name_code": "5046",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7298,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5048": {
+      "name_code": "5048",
+      "level": 709,
+      "grade": 3,
+      "core": 5,
+      "combat": 304366,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 4,
+        "burst": 4
+      },
+      "overload_stats": []
+    },
+    "5049": {
+      "name_code": "5049",
+      "level": 709,
+      "grade": 3,
+      "core": 3,
+      "combat": 511051,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5050": {
+      "name_code": "5050",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 280125,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5051": {
+      "name_code": "5051",
+      "level": 709,
+      "grade": 3,
+      "core": 1,
+      "combat": 247023,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5053": {
+      "name_code": "5053",
+      "level": 1,
+      "grade": 3,
+      "core": 0,
+      "combat": 8123,
+      "bond_level": 22,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5054": {
+      "name_code": "5054",
+      "level": 709,
+      "grade": 3,
+      "core": 5,
+      "combat": 465454,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.0477,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 400,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5055": {
+      "name_code": "5055",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 359016,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 1,
+        "burst": 4
+      },
+      "overload_stats": [
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5056": {
+      "name_code": "5056",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7680,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5059": {
+      "name_code": "5059",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7066,
+      "bond_level": 1,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5061": {
+      "name_code": "5061",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 493125,
+      "bond_level": 40,
+      "favorite_item_lv": 5,
+      "skills": {
+        "skill1": 7,
+        "skill2": 1,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.0688,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.0618,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.09,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5063": {
+      "name_code": "5063",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 8094,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5064": {
+      "name_code": "5064",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 12539,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5065": {
+      "name_code": "5065",
+      "level": 709,
+      "grade": 3,
+      "core": 3,
+      "combat": 503420,
+      "bond_level": 40,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6071,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1094,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 230,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.3606,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5066": {
+      "name_code": "5066",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 578954,
+      "bond_level": 30,
+      "favorite_item_lv": 2,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1935,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2075,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.09,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 970,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5068": {
+      "name_code": "5068",
+      "level": 709,
+      "grade": 3,
+      "core": 0,
+      "combat": 245877,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5069": {
+      "name_code": "5069",
+      "level": 1,
+      "grade": 3,
+      "core": 0,
+      "combat": 13123,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5070": {
+      "name_code": "5070",
+      "level": 1,
+      "grade": 3,
+      "core": 3,
+      "combat": 13729,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5071": {
+      "name_code": "5071",
+      "level": 1,
+      "grade": 3,
+      "core": 0,
+      "combat": 7735,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5074": {
+      "name_code": "5074",
+      "level": 709,
+      "grade": 3,
+      "core": 5,
+      "combat": 368578,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 7
+      },
+      "overload_stats": []
+    },
+    "5075": {
+      "name_code": "5075",
+      "level": 709,
+      "grade": 3,
+      "core": 5,
+      "combat": 335989,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 7,
+        "burst": 10
+      },
+      "overload_stats": []
+    },
+    "5077": {
+      "name_code": "5077",
+      "level": 709,
+      "grade": 3,
+      "core": 2,
+      "combat": 429567,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1515,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0345,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0547,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2916,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.0547,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0286,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5078": {
+      "name_code": "5078",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 12989,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 5,
+        "burst": 4
+      },
+      "overload_stats": []
+    },
+    "5079": {
+      "name_code": "5079",
+      "level": 709,
+      "grade": 3,
+      "core": 6,
+      "combat": 336393,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 4,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5081": {
+      "name_code": "5081",
+      "level": 709,
+      "grade": 3,
+      "core": 6,
+      "combat": 522941,
+      "bond_level": 30,
+      "favorite_item_lv": 2,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5082": {
+      "name_code": "5082",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7083,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5085": {
+      "name_code": "5085",
+      "level": 709,
+      "grade": 3,
+      "core": 0,
+      "combat": 302899,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 4,
+        "burst": 7
+      },
+      "overload_stats": []
+    },
+    "5088": {
+      "name_code": "5088",
+      "level": 709,
+      "grade": 3,
+      "core": 2,
+      "combat": 397760,
+      "bond_level": 30,
+      "favorite_item_lv": 2,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": []
+    },
+    "5089": {
+      "name_code": "5089",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7330,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 4,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5092": {
+      "name_code": "5092",
+      "level": 709,
+      "grade": 3,
+      "core": 4,
+      "combat": 378972,
+      "bond_level": 30,
+      "favorite_item_lv": 5,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 10
+      },
+      "overload_stats": []
+    },
+    "5094": {
+      "name_code": "5094",
+      "level": 1,
+      "grade": 2,
+      "core": 0,
+      "combat": 24195,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 7,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 400,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5095": {
+      "name_code": "5095",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 20233,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeDamage",
+          "value": 900,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1655,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.0759,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0257,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5096": {
+      "name_code": "5096",
+      "level": 709,
+      "grade": 2,
+      "core": 0,
+      "combat": 262804,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 7,
+        "burst": 7
+      },
+      "overload_stats": []
+    },
+    "5097": {
+      "name_code": "5097",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 560068,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatCritical",
+          "value": 298,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1935,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1546,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.0688,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0433,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1935,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1111,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.097,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5098": {
+      "name_code": "5098",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 351219,
+      "bond_level": 10,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 7,
+        "skill2": 10,
+        "burst": 1
+      },
+      "overload_stats": [
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5099": {
+      "name_code": "5099",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 553663,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 860,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5100": {
+      "name_code": "5100",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 453626,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 10,
+        "skill2": 7,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5101": {
+      "name_code": "5101",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 606893,
+      "bond_level": 40,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.097,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2636,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 230,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2916,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.8537,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0759,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1111,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1252,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5102": {
+      "name_code": "5102",
+      "level": 709,
+      "grade": 3,
+      "core": 0,
+      "combat": 254960,
+      "bond_level": 40,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5103": {
+      "name_code": "5103",
+      "level": 709,
+      "grade": 3,
+      "core": 0,
+      "combat": 508974,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.0477,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.3195,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1375,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5104": {
+      "name_code": "5104",
+      "level": 709,
+      "grade": 1,
+      "core": 0,
+      "combat": 237990,
+      "bond_level": 20,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5105": {
+      "name_code": "5105",
+      "level": 709,
+      "grade": 3,
+      "core": 6,
+      "combat": 621329,
+      "bond_level": 40,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 7,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "IncElementDmg",
+          "value": 0.1935,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.097,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1252,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.566,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.058,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1111,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1795,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2075,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0257,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1393,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5106": {
+      "name_code": "5106",
+      "level": 709,
+      "grade": 3,
+      "core": 2,
+      "combat": 433386,
+      "bond_level": 30,
+      "favorite_item_lv": 5,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5107": {
+      "name_code": "5107",
+      "level": 709,
+      "grade": 2,
+      "core": 0,
+      "combat": 321604,
+      "bond_level": 20,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 1,
+        "burst": 5
+      },
+      "overload_stats": [
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5108": {
+      "name_code": "5108",
+      "level": 1,
+      "grade": 1,
+      "core": 0,
+      "combat": 20624,
+      "bond_level": 20,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": [
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5109": {
+      "name_code": "5109",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 348445,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 7,
+        "burst": 4
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.0618,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 230,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5110": {
+      "name_code": "5110",
+      "level": 709,
+      "grade": 3,
+      "core": 6,
+      "combat": 478411,
+      "bond_level": 30,
+      "favorite_item_lv": 5,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5111": {
+      "name_code": "5111",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7385,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5112": {
+      "name_code": "5112",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7468,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5113": {
+      "name_code": "5113",
+      "level": 709,
+      "grade": 3,
+      "core": 6,
+      "combat": 570410,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 298,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0688,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.4428,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2075,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0198,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2496,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.097,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.566,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.104,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1935,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5114": {
+      "name_code": "5114",
+      "level": 709,
+      "grade": 3,
+      "core": 1,
+      "combat": 286956,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 5,
+        "burst": 4
+      },
+      "overload_stats": []
+    },
+    "5116": {
+      "name_code": "5116",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 347701,
+      "bond_level": 10,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 9,
+        "skill2": 7,
+        "burst": 10
+      },
+      "overload_stats": []
+    },
+    "5117": {
+      "name_code": "5117",
+      "level": 709,
+      "grade": 3,
+      "core": 2,
+      "combat": 423574,
+      "bond_level": 30,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": [
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5118": {
+      "name_code": "5118",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 433812,
+      "bond_level": 10,
+      "favorite_item_lv": 5,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5119": {
+      "name_code": "5119",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 338739,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 4,
+        "skill2": 4,
+        "burst": 4
+      },
+      "overload_stats": [
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5120": {
+      "name_code": "5120",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 425969,
+      "bond_level": 10,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.0759,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5121": {
+      "name_code": "5121",
+      "level": 709,
+      "grade": 3,
+      "core": 2,
+      "combat": 404312,
+      "bond_level": 30,
+      "favorite_item_lv": 5,
+      "skills": {
+        "skill1": 4,
+        "skill2": 6,
+        "burst": 6
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5122": {
+      "name_code": "5122",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7347,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5123": {
+      "name_code": "5123",
+      "level": 1,
+      "grade": 1,
+      "core": 0,
+      "combat": 12307,
+      "bond_level": 12,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5124": {
+      "name_code": "5124",
+      "level": 709,
+      "grade": 3,
+      "core": 5,
+      "combat": 566571,
+      "bond_level": 40,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatDef",
+          "value": 0.104,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1935,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1111,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0829,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 860,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6071,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1795,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.0688,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6071,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5125": {
+      "name_code": "5125",
+      "level": 709,
+      "grade": 3,
+      "core": 0,
+      "combat": 536376,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5126": {
+      "name_code": "5126",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7204,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5127": {
+      "name_code": "5127",
+      "level": 709,
+      "grade": 1,
+      "core": 0,
+      "combat": 466338,
+      "bond_level": 20,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 7,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0404,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1094,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.7304,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1463,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5128": {
+      "name_code": "5128",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 14302,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 4
+      },
+      "overload_stats": []
+    },
+    "5129": {
+      "name_code": "5129",
+      "level": 709,
+      "grade": 3,
+      "core": 7,
+      "combat": 696799,
+      "bond_level": 40,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.1393,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2776,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1252,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1448,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1463,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2776,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2636,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1463,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.566,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1463,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2916,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.8537,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5130": {
+      "name_code": "5130",
+      "level": 709,
+      "grade": 3,
+      "core": 0,
+      "combat": 498163,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5131": {
+      "name_code": "5131",
+      "level": 709,
+      "grade": 3,
+      "core": 0,
+      "combat": 473618,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5132": {
+      "name_code": "5132",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 12240,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 4
+      },
+      "overload_stats": []
+    },
+    "5133": {
+      "name_code": "5133",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 457152,
+      "bond_level": 10,
+      "favorite_item_lv": 11,
+      "skills": {
+        "skill1": 10,
+        "skill2": 7,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.0547,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 366,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1154,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1094,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.0759,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5134": {
+      "name_code": "5134",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7217,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5135": {
+      "name_code": "5135",
+      "level": 709,
+      "grade": 2,
+      "core": 0,
+      "combat": 391716,
+      "bond_level": 26,
+      "favorite_item_lv": 5,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeTime",
+          "value": -0.0463,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 366,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 547,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 618,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.0759,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1515,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1375,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1111,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.3606,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.09,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 664,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5136": {
+      "name_code": "5136",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7296,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5137": {
+      "name_code": "5137",
+      "level": 709,
+      "grade": 2,
+      "core": 0,
+      "combat": 454445,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatCritical",
+          "value": 435,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.097,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0228,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.09,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1546,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0759,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 435,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.3606,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1111,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5138": {
+      "name_code": "5138",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 39208,
+      "bond_level": 10,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatCriticalDamage",
+          "value": 860,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1234,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1515,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0463,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5139": {
+      "name_code": "5139",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7309,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5140": {
+      "name_code": "5140",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7083,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5141": {
+      "name_code": "5141",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7336,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5142": {
+      "name_code": "5142",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 500835,
+      "bond_level": 10,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 537,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0829,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.0547,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 762,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.0547,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1252,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5143": {
+      "name_code": "5143",
+      "level": 709,
+      "grade": 1,
+      "core": 0,
+      "combat": 515993,
+      "bond_level": 20,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.2784,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2075,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1322,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 264,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1252,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1935,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.0759,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.104,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2075,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0618,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2075,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1840,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5144": {
+      "name_code": "5144",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7083,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5145": {
+      "name_code": "5145",
+      "level": 709,
+      "grade": 2,
+      "core": 0,
+      "combat": 507548,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatChargeTime",
+          "value": -0.0404,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0829,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.104,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6482,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1111,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1111,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 366,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6482,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.0688,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0759,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1546,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5146": {
+      "name_code": "5146",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 12906,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5149": {
+      "name_code": "5149",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 7334,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 1,
+        "skill2": 1,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5150": {
+      "name_code": "5150",
+      "level": 709,
+      "grade": 3,
+      "core": 1,
+      "combat": 513219,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "IncElementDmg",
+          "value": 0.2916,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.0477,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2496,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6482,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0404,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.3606,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2916,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.3606,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5151": {
+      "name_code": "5151",
+      "level": 709,
+      "grade": 3,
+      "core": 0,
+      "combat": 482527,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.104,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 900,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.0618,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 477,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.09,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5152": {
+      "name_code": "5152",
+      "level": 709,
+      "grade": 1,
+      "core": 0,
+      "combat": 438909,
+      "bond_level": 20,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 8,
+        "burst": 7
+      },
+      "overload_stats": [
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5154": {
+      "name_code": "5154",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 14217,
+      "bond_level": 10,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5155": {
+      "name_code": "5155",
+      "level": 709,
+      "grade": 1,
+      "core": 0,
+      "combat": 457217,
+      "bond_level": 20,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5156": {
+      "name_code": "5156",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 459414,
+      "bond_level": 10,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0198,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.3606,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.3606,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1322,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1350,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5157": {
+      "name_code": "5157",
+      "level": 709,
+      "grade": 3,
+      "core": 0,
+      "combat": 357095,
+      "bond_level": 39,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 7
+      },
+      "overload_stats": []
+    },
+    "5158": {
+      "name_code": "5158",
+      "level": 709,
+      "grade": 1,
+      "core": 0,
+      "combat": 271366,
+      "bond_level": 20,
+      "favorite_item_lv": 0,
+      "skills": {
+        "skill1": 10,
+        "skill2": 7,
+        "burst": 1
+      },
+      "overload_stats": []
+    },
+    "5159": {
+      "name_code": "5159",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 400497,
+      "bond_level": 10,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatCritical",
+          "value": 264,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.097,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1795,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 400,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0618,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5160": {
+      "name_code": "5160",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 21070,
+      "bond_level": 10,
+      "favorite_item_lv": 5,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 7
+      },
+      "overload_stats": []
+    },
+    "5161": {
+      "name_code": "5161",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 470079,
+      "bond_level": 10,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0316,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.525,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.097,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 762,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0547,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5162": {
+      "name_code": "5162",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 439704,
+      "bond_level": 10,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 7,
+        "skill2": 10,
+        "burst": 1
+      },
+      "overload_stats": [
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCritical",
+          "value": 571,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5163": {
+      "name_code": "5163",
+      "level": 709,
+      "grade": 0,
+      "core": 0,
+      "combat": 357269,
+      "bond_level": 10,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 7,
+        "skill2": 7,
+        "burst": 1
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5164": {
+      "name_code": "5164",
+      "level": 709,
+      "grade": 2,
+      "core": 0,
+      "combat": 472965,
+      "bond_level": 30,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "IncElementDmg",
+          "value": 0.1935,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0547,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeTime",
+          "value": -0.0492,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2356,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2075,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.525,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.0477,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 688,
+          "val_type": "Integer"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        }
+      ]
+    },
+    "5165": {
+      "name_code": "5165",
+      "level": 709,
+      "grade": 1,
+      "core": 0,
+      "combat": 423077,
+      "bond_level": 20,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 8,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.525,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.1655,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "IncElementDmg",
+          "value": 0.2215,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.3195,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatDef",
+          "value": 0.0618,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.0688,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1546,
+          "val_type": "Integer"
+        }
+      ]
+    },
+    "5167": {
+      "name_code": "5167",
+      "level": 1,
+      "grade": 0,
+      "core": 0,
+      "combat": 41416,
+      "bond_level": 8,
+      "favorite_item_lv": 15,
+      "skills": {
+        "skill1": 10,
+        "skill2": 10,
+        "burst": 10
+      },
+      "overload_stats": [
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAtk",
+          "value": 0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatAccuracyCircle",
+          "value": -0.1181,
+          "val_type": "Percent"
+        },
+        {
+          "type": "StatCriticalDamage",
+          "value": 1644,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatChargeDamage",
+          "value": 1181,
+          "val_type": "Integer"
+        },
+        {
+          "type": "StatAmmoLoad",
+          "value": 0.6893,
+          "val_type": "Percent"
+        }
+      ]
+    }
+  }
+}
