@@ -112,15 +112,20 @@ async def activate_overload_view(page: Page) -> bool:
             pass
 
     # ── 2단계: JS — 필터 버튼 앞 형제 버튼들을 순서대로 클릭 ──
+    # 필터 버튼은 한국어("필터") 또는 영어("Filter") 텍스트를 가짐.
+    # 그 앞의 버튼들은 아이콘 전용일 수 있으므로 텍스트 매칭 없이 위치로 탐색.
     try:
         result = await page.evaluate("""
         async () => {
-            // "필터" 텍스트를 포함한 버튼 찾기
             const allBtns = Array.from(document.querySelectorAll('button, [role="button"]'));
-            const filterBtn = allBtns.find(b =>
-                b.textContent.trim().startsWith('필터') ||
-                b.textContent.trim() === 'Filter'
-            );
+
+            // 필터 버튼 탐색: 텍스트 "필터" / "Filter" 포함, 또는 aria-label
+            const filterBtn = allBtns.find(b => {
+                const txt = b.textContent.trim();
+                const lbl = (b.getAttribute('aria-label') || '').toLowerCase();
+                return txt.startsWith('필터') || txt === 'Filter'
+                    || lbl.includes('filter') || lbl.includes('필터');
+            });
             if (!filterBtn) return { ok: false, reason: 'filter_not_found' };
 
             const parent = filterBtn.parentElement;
@@ -128,27 +133,35 @@ async def activate_overload_view(page: Page) -> bool:
             const filterIdx = siblings.indexOf(filterBtn);
             if (filterIdx <= 0) return { ok: false, reason: 'no_prev_sibling' };
 
-            // 필터 바로 앞 버튼부터 클릭 시도
-            for (let i = filterIdx - 1; i >= 0; i--) {
-                siblings[i].click();
-                return { ok: true, idx: i, text: siblings[i].textContent.trim() };
-            }
-            return { ok: false, reason: 'no_click' };
+            // 필터 바로 앞 버튼(idx-1)부터 순서대로 시도 — 첫 번째만 클릭 후 반환
+            const target = siblings[filterIdx - 1];
+            target.click();
+            return {
+                ok: true,
+                idx: filterIdx - 1,
+                text: target.textContent.trim(),
+                aria: target.getAttribute('aria-label') || '',
+            };
         }
         """)
         if result.get("ok"):
             await page.wait_for_timeout(1800)
             if await _overload_visible(page):
-                print(f"  ✅ 필터 이전 버튼 클릭 (idx={result.get('idx')}, text='{result.get('text')}')")
+                print(f"  ✅ 필터 이전 버튼 클릭 "
+                      f"(idx={result.get('idx')}, "
+                      f"text='{result.get('text')}', "
+                      f"aria='{result.get('aria')}')")
                 return True
-            # 성공 아니었으면 되돌리기 위해 한 번 더 클릭
+            # 오버로드 뷰 아니었으면 원복 (같은 버튼 재클릭 = 토글 off)
             await page.evaluate("""
             () => {
                 const allBtns = Array.from(document.querySelectorAll('button, [role="button"]'));
-                const filterBtn = allBtns.find(b =>
-                    b.textContent.trim().startsWith('필터') ||
-                    b.textContent.trim() === 'Filter'
-                );
+                const filterBtn = allBtns.find(b => {
+                    const txt = b.textContent.trim();
+                    const lbl = (b.getAttribute('aria-label') || '').toLowerCase();
+                    return txt.startsWith('필터') || txt === 'Filter'
+                        || lbl.includes('filter') || lbl.includes('필터');
+                });
                 if (filterBtn) {
                     const siblings = Array.from(filterBtn.parentElement.querySelectorAll('button, [role="button"]'));
                     const idx = siblings.indexOf(filterBtn);
@@ -156,6 +169,7 @@ async def activate_overload_view(page: Page) -> bool:
                 }
             }
             """)
+            await page.wait_for_timeout(500)
     except Exception as e:
         print(f"  ⚠️  JS 클릭 예외: {e}")
 
@@ -164,10 +178,19 @@ async def activate_overload_view(page: Page) -> bool:
 
 
 async def _overload_visible(page: Page) -> bool:
-    """페이지에 '▲ [' 패턴의 오버로드 텍스트가 보이는지 확인"""
+    """
+    페이지에 오버로드 옵션 텍스트가 보이는지 확인.
+    한국어: ▲ [옵션명]  /  영어: ▲ [Option Name] — 패턴 동일하므로 기호 기준으로 판단.
+    """
     try:
         content = await page.content()
-        return bool(re.search(r"▲\s*\[", content))
+        # ▲ [ 패턴 (한/영 공통)
+        if re.search(r"▲\s*\[", content):
+            return True
+        # 영문 사이트가 다른 기호 사용 가능성 대비 (△, ▴ 등)
+        if re.search(r"[▲△▴]\s*\[", content):
+            return True
+        return False
     except Exception:
         return False
 
@@ -214,9 +237,9 @@ _EXTRACT_JS = """
         const imgEl = card.querySelector('img[alt]');
         const imgAlt = imgEl ? imgEl.getAttribute('alt').trim() : '';
 
-        // 전투력(Pow.) 추출
+        // 전투력 추출 — 한국어: "전투력 721,363" / 영어: "Pow. 721363" 양쪽 대응
         const fullText = card.innerText || card.textContent || '';
-        const powMatch = fullText.match(/Pow\\.\\s*([\\d,]+)/);
+        const powMatch = fullText.match(/(?:Pow\\.?|전투력)\\s*([\\d,]+)/);
         const power = powMatch ? parseInt(powMatch[1].replace(',', '')) : 0;
 
         // 오버로드 옵션 라인 수집
@@ -285,7 +308,11 @@ async def scrape_overload(uid: str, headless: bool = False) -> dict:
     async with async_playwright() as p:
         browser = await p.chromium.launch(
             headless=headless,
-            args=["--start-maximized", "--disable-blink-features=AutomationControlled"],
+            args=[
+                "--start-maximized",
+                "--disable-blink-features=AutomationControlled",
+                "--lang=ko-KR",          # 브라우저 UI 언어 한국어
+            ],
         )
         context = await browser.new_context(
             user_agent=(
@@ -293,6 +320,7 @@ async def scrape_overload(uid: str, headless: bool = False) -> dict:
                 "AppleWebKit/537.36 (KHTML, like Gecko) "
                 "Chrome/122.0.0.0 Safari/537.36"
             ),
+            locale="ko-KR",             # Accept-Language 헤더 → 사이트 한국어 응답 유도
             viewport=None,
         )
         page = await context.new_page()
