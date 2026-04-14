@@ -15,7 +15,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/ea5becad4ddb742395cad6b8f2b7684d/60b4d/2b_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 5.59% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.59,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 5.59% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "99_1",
@@ -59,7 +65,13 @@
     "reloadTime": 1.5,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/638116c16322de01a39b8854ba038420/60b4d/A2_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 67.65% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 67.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 67.65% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "100_1",
@@ -103,7 +115,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/32df4e7d1b19358f24313394bebeb48d/60b4d/185_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 61.3% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 61.3% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "185_1",
@@ -147,7 +165,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/f1b35b8aca00fbf7e372d1b0c9559010/60b4d/Ade_Icon_160x160.webp",
-    "basicAttack": "■ Affects Target(s).Deals 14.71% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.71,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 14.71% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "76_1",
@@ -191,7 +215,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/2cad35e1e4ca68c85ae2d81c2b811b90/e9a79/182_sm.png",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "182_1",
@@ -235,7 +265,13 @@
     "reloadTime": 1.73,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/d6e63ad44ed106b64ed2d1b0897e97ea/60b4d/Admi_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 67.37% of ATK as damage.Charge Time: 1 sec.Full Charge Damage Multiplier: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 67.37,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 67.37% of ATK as damage.Charge Time: 1 sec.Full Charge Damage Multiplier: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "17_1",
@@ -279,7 +315,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/ae64fc1b879f1492c3e575922d392ef7/60b4d/alice_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 69.04% ATK as damage.Charge Time: 1.5 sec.Full Charge Damage: 350%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.5,
+      "chargeDamage": 3.5,
+      "rawText": "■ Affects target enemy. Deals 69.04% ATK as damage.Charge Time: 1.5 sec.Full Charge Damage: 350%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "19_1",
@@ -323,7 +365,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/e25baadc6ffda3aac850a2267fa4c1df/60b4d/alice_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 10.12% of ATK as damage. Deals 250% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 10.12,
+      "coreHitBonus": 1.5,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 10.12% of ATK as damage. Deals 250% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "125_1",
@@ -367,7 +415,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/bb54f9c234935b38dd4ab1c8f8e242fa/60b4d/Anchor_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "98_1",
@@ -411,7 +465,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/ac4fc37b352a8c2c069ce18f3bb34e64/60b4d/anchor_maid_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 61.3% of ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 61.3% of ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "148_1",
@@ -455,7 +515,13 @@
     "reloadTime": 2.03,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/35c848a3d43c65d2dc111930e5c5bcd0/60b4d/Anis_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 65.02% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 65.02,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 65.02% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "39_1",
@@ -499,7 +565,13 @@
     "reloadTime": 2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/f19ce5a41c58dda60254c58c8c827021/60b4d/Anis_Sparkling_Summer_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 259.2% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 259.2,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 259.2% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "96_1",
@@ -543,7 +615,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/9caf41ad71b7c3da1383c4abd2ba3995/60b4d/Anne_Mircale_Fairy_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "67_1",
@@ -587,7 +665,13 @@
     "reloadTime": 2.5,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/1bdd5595af70873f5704d792dc7421f1/60b4d/167_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 64.04% ATK as damage.Charge Time:1 seconds.Full Charge Damage: 250% of damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 64.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 64.04% ATK as damage.Charge Time:1 seconds.Full Charge Damage: 250% of damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "167_1",
@@ -631,7 +715,13 @@
     "reloadTime": 2.33,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/6dbe8cf198ff798c8cf4671156f5be96/60b4d/205_s.webp",
-    "basicAttack": "■ Affects Target(s).Deals 222.8% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 222.8,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 222.8% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "205_1",
@@ -675,7 +765,13 @@
     "reloadTime": 2.33,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/3f73e1a718db17f523b867f161b742c1/60b4d/Aria_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 5.47% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.47,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 5.47% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "25_1",
@@ -719,7 +815,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/b379580bd1db584b42036da849067a3b/60b4d/asuka_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 18.76% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 18.76,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 18.76% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "131_1",
@@ -763,7 +865,13 @@
     "reloadTime": 2.33,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/17b669b2ce94c9b10f05e9f5ed9b0503/60b4d/asuka_wille_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.47% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.47,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.47% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "150_1",
@@ -807,7 +915,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/7f408c2bf7d08e8744d55da6db9b73bd/60b4d/Bay_Icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 61.3% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damageDeals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 61.3% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damageDeals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "120_1",
@@ -851,7 +965,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/fc14c808aba43d8d1201ea4739b05d0d/60b4d/178_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 61.3% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damageDeals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 61.3% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damageDeals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "178_1",
@@ -895,7 +1015,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/de7b554a805713d11350abe2b5e74af2/60b4d/Belorta_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 61.3% ATK as damage. Charge Time: 1.5 secFull Charge Damage: 350% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.5,
+      "chargeDamage": 3.5,
+      "rawText": "■ Affects target enemy.Deals 61.3% ATK as damage. Charge Time: 1.5 secFull Charge Damage: 350% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "40_1",
@@ -939,7 +1065,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/a53aa27b3a8e986801c6e39a1bb3427b/60b4d/Biscuit_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "80_1",
@@ -983,7 +1115,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/0c2a42ea1472790bc43e33f067f83e79/60b4d/Blanc_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 13.65% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 13.65% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "86_1",
@@ -1027,7 +1165,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/f1a1338f21b185fe19943bd4e1f901de/60b4d/bready_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "162_1",
@@ -1071,7 +1215,13 @@
     "reloadTime": 1.3,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/715ca4752729e210bcb42b9f4772a4db/60b4d/Brid_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 14.29% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.29,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 14.29% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "6_1",
@@ -1115,7 +1265,13 @@
     "reloadTime": 1.5,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/5cba30e5d3a0e75ec24eb8c5248b2c89/60b4d/192_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 201.5% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 201.5,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 201.5% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "192_1",
@@ -1159,7 +1315,13 @@
     "reloadTime": 1.52,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/157e95138b997551cfbef2acd3b6ea66/60b4d/Centi_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 61.3% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 61.3% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "14_1",
@@ -1203,7 +1365,13 @@
     "reloadTime": 1.52,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/ee208ed206d0a7969424547dc350616e/60b4d/199_s.webp",
-    "basicAttack": "■ Affects target enemy. Deals 61.3% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 61.3% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "199_1",
@@ -1247,7 +1415,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/6d85d4d3816eb91c460f15acec0f3125/60b4d/190_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 8.1% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.1,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 8.1% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "190_1",
@@ -1291,7 +1465,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/773d650379b7b72fbf14706cfb3f60a8/60b4d/201_s.webp",
-    "basicAttack": "■ Affects Target(s).Deals 10.12% of ATK as damage.Deals 250% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 10.12,
+      "coreHitBonus": 1.5,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 10.12% of ATK as damage.Deals 250% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "201_1",
@@ -1335,7 +1515,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/13144c2e274e40c6fa9b526d1204a4f8/60b4d/cinderella_icon.webp",
-    "basicAttack": "■ Affects Target(s).Fires a laser to perform small-range attack.Deals 32.11% of ATK as damage. Charge Time: 1 secFull Charge Damage: 200% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 32.11,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.0,
+      "rawText": "■ Affects Target(s).Fires a laser to perform small-range attack.Deals 32.11% of ATK as damage. Charge Time: 1 secFull Charge Damage: 200% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "139_1",
@@ -1379,7 +1565,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/2c1fb4771bf36105a46781520f9ca6a3/60b4d/186_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 61.3% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 61.3% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "186_1",
@@ -1423,7 +1615,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/22a30d504c3821b5500d8e7185e7e19f/60b4d/clay_icon_2.webp",
-    "basicAttack": "■ Affects Target(s).Deals 10.12% of ATK as damage. Deals 250% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 10.12,
+      "coreHitBonus": 1.5,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 10.12% of ATK as damage. Deals 250% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "126_1",
@@ -1467,7 +1665,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/375a70103e288f2dc05624c39c2a04d0/60b4d/cocoa_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "74_1",
@@ -1511,7 +1715,13 @@
     "reloadTime": 1.67,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/146b6c8f7b9d381275f7b7b56266f560/60b4d/Crow_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 5.59% ATK as damage.Deals 250% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.59,
+      "coreHitBonus": 1.5,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 5.59% ATK as damage.Deals 250% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "16_1",
@@ -1555,7 +1765,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/e6dae15e91a67b559d3885af105c0ee2/60b4d/crown_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.57% of ATK as damage.Senses enemies that cannot be auto-targeted.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.57% of ATK as damage.Senses enemies that cannot be auto-targeted.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "121_1",
@@ -1599,7 +1815,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/b6e87165b47aefc2c02c24d5561f6034/60b4d/crust_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 61.3% of ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 61.3% of ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "163_1",
@@ -1643,7 +1865,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/c3fe96b081e3688ad5c23a2489d244da/60b4d/D_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 8.73% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.73,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 8.73% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "83_1",
@@ -1687,7 +1915,13 @@
     "reloadTime": 2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/24da1215fba164452a12f4ec809d535a/60b4d/D_Killer_Wife_Icon_160x160.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damageDeals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damageDeals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "116_1",
@@ -1731,7 +1965,13 @@
     "reloadTime": 1.5,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/25cfb19009af4c91601866e4f4edd246/60b4d/Delta_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 65.95% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 65.95,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 65.95% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "35_1",
@@ -1775,7 +2015,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/2fb14f3b20d4cd3a38cb60d03d262275/60b4d/187_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.57% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.57% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "187_1",
@@ -1819,7 +2065,13 @@
     "reloadTime": 2.16,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/d3a75a27659f2aa4baf6ac90679b6e6b/60b4d/Diesel_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 5.38% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.38,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 5.38% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "8_1",
@@ -1863,7 +2115,13 @@
     "reloadTime": 2.16,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/d3a75a27659f2aa4baf6ac90679b6e6b/60b4d/Diesel_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 5.38% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.38,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 5.38% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "149_1",
@@ -1907,7 +2165,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/c2f51781c27dd01ba830f8f58345278e/60b4d/193_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 61.3% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 61.3% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "193_1",
@@ -1951,7 +2215,13 @@
     "reloadTime": 2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/5ea7a84475db61f2a2ae80523d8a211e/60b4d/Dolla_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "43_1",
@@ -1995,7 +2265,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/beee8911531037361accaffdf4f77c38/60b4d/Dorothy_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 13.65% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 13.65% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "84_1",
@@ -2039,7 +2315,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/d519ae5b905f3573c17b5299fc297a64/60b4d/173_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 201.5% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 201.5,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 201.5% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "173_1",
@@ -2083,7 +2365,13 @@
     "reloadTime": 1.52,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/d7318d9f050b00cb34dd7a3d289985a8/60b4d/Drake_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 214.3% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 214.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 214.3% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "15_1",
@@ -2127,7 +2415,13 @@
     "reloadTime": 1.52,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/d7318d9f050b00cb34dd7a3d289985a8/60b4d/Drake_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 214.3% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 214.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 214.3% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "159_1",
@@ -2171,7 +2465,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/f04341778c0d3ff11b6edfb91cc38854/60b4d/204_s.webp",
-    "basicAttack": "■ Affects Target(s).Deals 10.12% of ATK as damage.Deals 250% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 10.12,
+      "coreHitBonus": 1.5,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 10.12% of ATK as damage.Deals 250% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "204_1",
@@ -2215,7 +2515,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/019ebfee7d1ed74683d74c04b6cb2939/60b4d/ein_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage. Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage. Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "129_1",
@@ -2259,7 +2565,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/957f936f45e2d58c9f9cbc400422a7f4/60b4d/elegg_Icon_160x160.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.57% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.57% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "115_1",
@@ -2303,7 +2615,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/6b50c19af099e977358cbef433664df3/60b4d/174_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.57% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.57% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "174_1",
@@ -2347,7 +2665,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/9f598f6095ea113c1223fd158dafc7a6/60b4d/Emilia_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "117_1",
@@ -2391,7 +2715,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/debc12934dddf429daf37f06dff5390b/60b4d/Emma_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 5.57% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 5.57% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "1_1",
@@ -2435,7 +2765,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/3995a9a042e6d2b1254d210521995281/60b4d/179_SM.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.57% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.57% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "179_1",
@@ -2479,7 +2815,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/6573f0f97e75c3b180405a4373b50a38/60b4d/Epinel_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 10.12% ATK as damage.Deals 250% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 10.12,
+      "coreHitBonus": 1.5,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 10.12% ATK as damage.Deals 250% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "24_1",
@@ -2523,7 +2865,13 @@
     "reloadTime": 2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/6660a6da9a73b49763199eae4b2c3442/60b4d/Ether_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 214.03% ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 214.03,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 214.03% ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "38_1",
@@ -2567,7 +2915,13 @@
     "reloadTime": 2.33,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/10c74d748ce3e7a584aa1028029d2069/60b4d/Eunhwa_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 71.07% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 71.07,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 71.07% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "9_1",
@@ -2611,7 +2965,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/d563d6b1cfa67f2d124d642d0c75b5bd/60b4d/180_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "180_1",
@@ -2655,7 +3015,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/bfa4fa4b9c6acf5ae5e803ca5be7bc16/60b4d/170_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 13.65% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 13.65% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "170_1",
@@ -2699,7 +3065,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/54405e739863e2131aa836fa0d8b4f65/60b4d/Exia_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 69.04% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 69.04% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "32_1",
@@ -2743,7 +3115,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/54405e739863e2131aa836fa0d8b4f65/60b4d/Exia_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 69.04% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 69.04% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "153_1",
@@ -2787,7 +3165,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/2f2302e5b3800447942472cdfcc320b6/60b4d/flora_Icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.57% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.57% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "142_1",
@@ -2831,7 +3215,13 @@
     "reloadTime": 1.3,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/e1ebcc09fd7033bc60a8a25bc2fb7172/60b4d/Folkwang_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 14.29% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.29,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 14.29% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "42_1",
@@ -2875,7 +3265,13 @@
     "reloadTime": 1.5,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/1033b1efa630bd84b5d8402aee648929/60b4d/Frima_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 65.95% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 65.95,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 65.95% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "20_1",
@@ -2919,7 +3315,13 @@
     "reloadTime": 1.5,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/1033b1efa630bd84b5d8402aee648929/60b4d/Frima_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 65.95% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 65.95,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 65.95% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "154_1",
@@ -2963,7 +3365,13 @@
     "reloadTime": 2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/52bf7000295c48a5bb19c06e37e549e3/60b4d/grave_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 17.91% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 17.91,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 17.91% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "140_1",
@@ -3007,7 +3415,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/360e8c785f05f2460d62920811de0f65/60b4d/Guilotine_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 5.57% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 5.57% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "10_1",
@@ -3051,7 +3465,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/39f72f4e6e7b7926dde951c6fef472a8/60b4d/guilo_ice_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 13.65% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 13.65% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "144_1",
@@ -3095,7 +3515,13 @@
     "reloadTime": 2.67,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/3844d2dbc8ab0bae495c8fd3ac0f112b/60b4d/Guilty_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 231.4% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 231.4,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 231.4% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "72_1",
@@ -3139,7 +3565,13 @@
     "reloadTime": 2.3,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/88cdf32ddf5d4d6856eb79f805b2d6dd/60b4d/Harran_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 70.89% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 70.89,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 70.89% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "30_1",
@@ -3183,7 +3615,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/aee3da3e51410c51514c35c7debd7de2/60b4d/Helm_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "47_1",
@@ -3227,7 +3665,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/aee3da3e51410c51514c35c7debd7de2/60b4d/Helm_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "157_1",
@@ -3271,7 +3715,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/028100c3d1983a5e5a5707a94138e7c1/60b4d/Helm_Aquamarine_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 13.65% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 13.65% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "97_1",
@@ -3315,7 +3765,13 @@
     "reloadTime": 2.3,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/0357d94dfd8ca82f8c12542b591d1097/60b4d/Himeno_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 70.89% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 70.89,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 70.89% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "79_1",
@@ -3359,7 +3815,13 @@
     "reloadTime": 1.86,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/a00482ba685a1bb24dbb868a6bf5b90f/60b4d/Isabel_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 210.7% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 210.7,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 210.7% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "44_1",
@@ -3403,7 +3865,13 @@
     "reloadTime": 2.03,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/4295ee7851694d543f9634c329366566/60b4d/Jackal_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 65.02% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 65.02,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 65.02% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "69_1",
@@ -3447,7 +3915,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/d930d3546c7b3a46621d893ab145289c/60b4d/184_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 71.05% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 71.05,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 71.05% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "184_1",
@@ -3491,7 +3965,13 @@
     "reloadTime": 1.2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/bbadd8b50f9452b54e733544f0e96910/60b4d/Julia_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 14.07% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.07,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 14.07% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "13_1",
@@ -3535,7 +4015,13 @@
     "reloadTime": 1.2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/ed189d84b373bdcd95d3ffcf009decff/60b4d/177_sm.webp",
-    "basicAttack": "■ Affects target enemy. Deals 14.07% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.07,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 14.07% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "177_1",
@@ -3579,7 +4065,13 @@
     "reloadTime": 1.8,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/94877b2bf418904df86032c2f52cd852/60b4d/168_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 4.55% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 4.55,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 4.55% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "168_1",
@@ -3623,7 +4115,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/7b9260c7493b28e71be74c69351c22e8/60b4d/kilo_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.57% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.57% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "122_1",
@@ -3667,7 +4165,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/9565345d242f71d0e2c7f922567ca700/60b4d/203_s.webp",
-    "basicAttack": "■ Affects Target(s).Deals 13.65% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 13.65% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "203_1",
@@ -3711,7 +4215,13 @@
     "reloadTime": 1,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/17c657ca69c7ded6665ffa9c9ef844f0/60b4d/195_s.webp",
-    "basicAttack": "■ Affects Target(s).Deals 13.65% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 13.65% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "195_1",
@@ -3755,7 +4265,13 @@
     "reloadTime": 2.33,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/f649fee5091506cfe7fda13104595621/60b4d/Laplace_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 63.13% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 63.13,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 63.13% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "46_1",
@@ -3799,7 +4315,13 @@
     "reloadTime": 2.33,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/f649fee5091506cfe7fda13104595621/60b4d/Laplace_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 63.13% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 63.13,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 63.13% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "156_1",
@@ -3843,7 +4365,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/b1c19b19e6e39d663398b0448d90398a/60b4d/Leone_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 201.5% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 201.5,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 201.5% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "112_1",
@@ -3887,7 +4415,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/4c88d8d8bbc7dc8e352121453e5e10d1/60b4d/189_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage. Charge Time: 1.5 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.5,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage. Charge Time: 1.5 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "189_1",
@@ -3931,7 +4465,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/27be536557a34620ac8d195cae26923f/60b4d/169_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 8.1% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.1,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 8.1% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "169_1",
@@ -3975,7 +4515,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/36b49bdd67b3748d4bdb4a7c7d6fb618/60b4d/Liter_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 8.73% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.73,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 8.73% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "45_1",
@@ -4019,7 +4565,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/ac5dbca4abe85de11ee24d81631e2283/60b4d/siren_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 10.12% of ATK as damage. Deals 250% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 10.12,
+      "coreHitBonus": 1.5,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 10.12% of ATK as damage. Deals 250% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "164_1",
@@ -4063,7 +4615,13 @@
     "reloadTime": 2.76,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/a5db86e18384b746585fdea9b5a7a1a4/60b4d/Ludmilla_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 10.32% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 10.32,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 10.32% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "22_1",
@@ -4107,7 +4665,13 @@
     "reloadTime": 3,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/e6e7e2cf26f9303f67fc39b26fd68e86/60b4d/Ludmila_Winter_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 5.86% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.86,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 5.86% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "108_1",
@@ -4151,7 +4715,13 @@
     "reloadTime": 2.03,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/48d045a236edef814747ee6d883676e1/60b4d/Maiden_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 231.6% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 231.6,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 231.6% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "48_1",
@@ -4195,7 +4765,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/67a4aa92084829411f88ec538206476c/60b4d/maiden_ice_rose_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 61.3% of ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 61.3% of ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "143_1",
@@ -4239,7 +4815,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/4edc2456578336aaf6b3da0f23683f3f/60b4d/Makima_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 8.73% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.73,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 8.73% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "78_1",
@@ -4283,7 +4865,13 @@
     "reloadTime": 1.67,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/22babaa3355231b4000b343043b3e407/60b4d/mana_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 15.07% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 15.07,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 15.07% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "146_1",
@@ -4327,7 +4915,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/ff3c80a2a117a399ec89ae9e2a9c3420/60b4d/Marciana_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 201.5% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 201.5,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 201.5% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "102_1",
@@ -4371,7 +4965,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/80fcb5d86dc1e02930538115448a1518/60b4d/mari_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage. Charge Time : 1 secFull Charge Damage : 250% of damageDeals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage. Charge Time : 1 secFull Charge Damage : 250% of damageDeals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "133_1",
@@ -4415,7 +5015,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/210dacf0a95f52cd14d47b37019524e3/60b4d/Mary_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 201.5% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 201.5,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 201.5% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "21_1",
@@ -4459,7 +5065,13 @@
     "reloadTime": 1.5,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/769aede64db9fe7d3454a205816628b3/60b4d/Mary_Summer_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 65.95% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 65.95,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 65.95% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "89_1",
@@ -4503,7 +5115,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/78819a80c8e6d7b0e6eeddc3f0cc1a2e/60b4d/Mast__Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 8.73% ATK as damage.\n\nDeals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.73,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 8.73% ATK as damage.\n\nDeals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "92_1",
@@ -4547,7 +5165,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/b4e25f450e2adb6d598e16fd0213a16d/60b4d/mast_maid_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.57% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.57% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "147_1",
@@ -4591,7 +5215,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/f53a59cea32072d26f55bed019324922/60b4d/Maxwell_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "11_1",
@@ -4635,7 +5265,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/bf6b64c25b69a847ccc6993cab99e259/60b4d/Mica_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "41_1",
@@ -4679,7 +5315,13 @@
     "reloadTime": 2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/20a742cbd73e466ab34915571182ad8e/60b4d/Mica_Snowbuddy__Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 11.7% ATK as damage.Deals 250% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 11.7,
+      "coreHitBonus": 1.5,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 11.7% ATK as damage.Deals 250% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "111_1",
@@ -4723,7 +5365,13 @@
     "reloadTime": 1.67,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/786f8878045443aeb2596d863fac6f14/60b4d/Mihara_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 15.07% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 15.07,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 15.07% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "36_1",
@@ -4767,7 +5415,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/19e19b97456fd8f5ecd229b70e6af495/60b4d/mihara_a_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.57% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.57% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "165_1",
@@ -4811,7 +5465,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/3c0279cadddc40a76e0ca9c3ad772136/60b4d/Milk_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "49_1",
@@ -4855,7 +5515,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/3c0279cadddc40a76e0ca9c3ad772136/60b4d/Milk_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "158_1",
@@ -4899,7 +5565,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/460d40879cb38faf44a3469459dff091/60b4d/183_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 2 secFull Charge Damage: 200% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 2.0,
+      "chargeDamage": 2.0,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 2 secFull Charge Damage: 200% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "183_1",
@@ -4943,7 +5615,13 @@
     "reloadTime": 1.43,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/3306ee367588cca27a6cffaf32872cc9/60b4d/MIranda_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 10.8% ATK as damage.\n\nDeals 250% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 10.8,
+      "coreHitBonus": 1.5,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 10.8% ATK as damage.\n\nDeals 250% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "5_1",
@@ -4987,7 +5665,13 @@
     "reloadTime": 1.43,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/3306ee367588cca27a6cffaf32872cc9/60b4d/MIranda_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 10.8% ATK as damage.\n\nDeals 250% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 10.8,
+      "coreHitBonus": 1.5,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 10.8% ATK as damage.\n\nDeals 250% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "160_1",
@@ -5031,7 +5715,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/e53709a2a0e27cbdccd02051f52528c5/60b4d/misato_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 8.1% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.1,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 8.1% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "134_1",
@@ -5075,7 +5765,13 @@
     "reloadTime": 2.3,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/b7f7ed2bb0d5cef12ac339e70384d726/60b4d/Modernia_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 7.71% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 7.71,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 7.71% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "68_1",
@@ -5119,7 +5815,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/f299488a948fe4eb6a9f57537ae9beed/60b4d/Moran_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 14.71% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.71,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 14.71% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "113_1",
@@ -5163,7 +5865,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/59ab7e80bb40209ab4505badb6186959/60b4d/197_s.webp",
-    "basicAttack": "■ Affects target enemy.Deals 14.71% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.71,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 14.71% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "197_1",
@@ -5207,7 +5915,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/80171854972d77d13578348a87be75c6/60b4d/mori_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 13.65% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 13.65% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "166_1",
@@ -5251,7 +5965,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/410c241223fdb7aa4ced665ef8611941/60b4d/N102_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 61.3% ATK as damage. Charge Time: 1.5 sec.Full Charge Damage: 350% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.5,
+      "chargeDamage": 3.5,
+      "rawText": "■ Affects target enemy.Deals 61.3% ATK as damage. Charge Time: 1.5 sec.Full Charge Damage: 350% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "37_1",
@@ -5295,7 +6015,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/4c8fdd27d721f0dba7b8d12d1d38493f/60b4d/Naga_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 204.8% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 204.8,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 204.8% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "103_1",
@@ -5339,7 +6065,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/e18324b03b7eab3fcc3b59da90103c08/60b4d/188_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 8.73% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.73,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 8.73% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "188_1",
@@ -5383,7 +6115,13 @@
     "reloadTime": 1.82,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/1e26a8a7edfbf59da236574a282eb76c/60b4d/Neon_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 224.5% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 224.5,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 224.5% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "34_1",
@@ -5427,7 +6165,13 @@
     "reloadTime": 2.5,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/1e5dde12ec2a5bddafce67fda64e31f8/60b4d/Neon_Blue_Ocean__Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 5.57% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 5.57% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "90_1",
@@ -5471,7 +6215,13 @@
     "reloadTime": 1.3,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/9adfb76e90c25b0c64668eaa561d4174/60b4d/Nero_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 8.39% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.39,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 8.39% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "91_1",
@@ -5515,7 +6265,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/3c79fb74895490a95a895e31cdf21df5/60b4d/Neve_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 201.5% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 201.5,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 201.5% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "65_1",
@@ -5559,7 +6315,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/89879e82d91c1779ed012b4e789b548e/60b4d/Nihilister_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 69.04% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 69.04% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "81_1",
@@ -5603,7 +6365,13 @@
     "reloadTime": 2.5,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/6e6109cfeeef40bd1226bcd000b3f8f2/60b4d/Noah_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 32.02% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 32.02,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 32.02% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "31_1",
@@ -5647,7 +6415,13 @@
     "reloadTime": 0.7,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/a59e34d0123cfef554dc938929e5eb90/60b4d/Noir_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 204.6% ATK as damage.\n\nDeals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 204.6,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 204.6% ATK as damage.\n\nDeals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "87_0",
@@ -5691,7 +6465,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/4d13ac2a2965502f712937fe844e080b/60b4d/Noise_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 61.3% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 61.3% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "26_1",
@@ -5735,7 +6515,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/3878b7325e4410f11237364b8d691f97/60b4d/Novel_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 8.1% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.1,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 8.1% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "50_1",
@@ -5779,7 +6565,13 @@
     "reloadTime": 1,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/4d5d60bdf4d4aee2393b45ce81d0e920/60b4d/Pascal_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemyDeals x% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 0.0,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemyDeals x% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "101_1",
@@ -5823,7 +6615,13 @@
     "reloadTime": 2.03,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/f789b404025ba6127d173a7eaf0c2348/60b4d/Pepper_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 231.6% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 231.6,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 231.6% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "51_1",
@@ -5867,7 +6665,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/432802e63e9fac395b734b1c7e89cdd4/60b4d/phantom_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 15.78% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 15.78,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 15.78% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "137_1",
@@ -5911,7 +6715,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/459714b2dcc3ed82bafa8643dfd2ea3c/60b4d/POli_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 201.5% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 201.5,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 201.5% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "4_1",
@@ -5955,7 +6765,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/784919207881e2fbdf45bafc422807b1/60b4d/175_sm.webp",
-    "basicAttack": "■ Affects target enemy.Deals 201.5% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 201.5,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 201.5% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "175_1",
@@ -5999,7 +6815,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/b0b02ef869519e1491b8e51cf1c48f22/60b4d/Power_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "77_1",
@@ -6043,7 +6865,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/8fd64ba84825e0e133de3e3283de95e6/60b4d/Privaty_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 13.65% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 13.65% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "2_1",
@@ -6087,7 +6915,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/5c76feea940032677e445da5657cee45/60b4d/198_s.webp",
-    "basicAttack": "■ Affects target enemy.Deals 13.65% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 13.65% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "198_1",
@@ -6131,7 +6965,13 @@
     "reloadTime": 2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/c0a7a1fcc2f13580151f6b40fee4003d/60b4d/Privaty_Unkined_Maid_Icon_160x160.webp",
-    "basicAttack": "■ Affects Target(s).Deals 182.1% ATK as damage.Increases Hit Rate when attacking.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 182.1,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 182.1% ATK as damage.Increases Hit Rate when attacking.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "114_1",
@@ -6175,7 +7015,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/5eeb1022cd37529d4438a5c375d08859/60b4d/Product_08_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 69.04% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "58_1",
@@ -6219,7 +7065,13 @@
     "reloadTime": 2.67,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/433aa5a80967fc46d68b2a69e7235818/60b4d/Product_12_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 5.67% ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.67,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 5.67% ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "63_1",
@@ -6263,7 +7115,13 @@
     "reloadTime": 2.03,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/88d2221f50a316f5757ef2ca59a3bc5c/60b4d/Product_23_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 231.6% ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 231.6,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 231.6% ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "60_1",
@@ -6307,7 +7165,13 @@
     "reloadTime": 1.67,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/a64e709e687d9d23ef8a7a3ba699cf78/60b4d/Quency_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 4.47% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 4.47,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 4.47% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "73_1",
@@ -6351,7 +7215,13 @@
     "reloadTime": 1,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/53aee13c23639cfa78924670e8acda5a/60b4d/quency_escape_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.06% of ATK as damage. Deals 250% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.06,
+      "coreHitBonus": 1.5,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.06% of ATK as damage. Deals 250% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "136_1",
@@ -6395,7 +7265,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/2fc8640fbd21b0e126d4cfea0fcdb472/60b4d/Quiry_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 61.3% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 61.3% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "105_1",
@@ -6439,7 +7315,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/db839b22641085fd825564f005ae8823/60b4d/Ram_Icon_160x160.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damageDeals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damageDeals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "119_1",
@@ -6483,7 +7365,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/3625a9d4292ce8c8d534da631156396d/60b4d/Rapi_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 13.65% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 13.65% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "33_1",
@@ -6527,7 +7415,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/4442e2461c098378b9143923358c2e8e/60b4d/rapired_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.57% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.57% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "145_1",
@@ -6571,7 +7465,13 @@
     "reloadTime": 2.3,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/e147f2c4077c6623ef33e825e7a1eea1/60b4d/Rapunzal_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 62.95% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 62.95,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 62.95% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "52_1",
@@ -6615,7 +7515,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/ad043d7350a6dbcbbe9b056b066345b2/60b4d/rapu_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage. Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage. Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "141_1",
@@ -6659,7 +7565,13 @@
     "reloadTime": 2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/0ec98795f891a3dddc96b80dc6c357d0/60b4d/171_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 61.3% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 61.3% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "171_1",
@@ -6703,7 +7615,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/5ad2ea075303304275339c731663b8ae/60b4d/Red_Hood_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 69.04% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 69.04% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "109_1",
@@ -6747,7 +7665,13 @@
     "reloadTime": 1.83,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/379e638eade2993c09a885f8e50f0942/60b4d/Rei_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 9.15% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 9.15,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 9.15% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "85_1",
@@ -6791,7 +7715,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/f5590e65b6a38fe400cbc73986a48cfe/60b4d/rei_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.57% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.57% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "132_1",
@@ -6835,7 +7765,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/4943e4b8e0233b9bd6eea748860550af/60b4d/rei_tentative_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 14.71% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.71,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 14.71% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "151_1",
@@ -6879,7 +7815,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/1a16edd5f7df4332e0fad8bfd2be70dd/60b4d/Rem_Icon_160x160.webp",
-    "basicAttack": "■ Affects Target(s).Deals 5.57% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 5.57% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "118_1",
@@ -6923,7 +7865,13 @@
     "reloadTime": 1.67,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/5f67929fa213ca81fdcc03a7d9ef7e27/60b4d/Rosanna_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 5.1% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.1,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 5.1% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "88_1",
@@ -6967,7 +7915,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/4b97364df926710da2200a52a6242e24/60b4d/Rosanna_Chic_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 13.65% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 13.65% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "128_1",
@@ -7011,7 +7965,13 @@
     "reloadTime": 2.33,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/583fdb3be9d7aa005a3949628a18a460/60b4d/rouge_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 71.07% of ATK as damage. Charge Time: 1 Sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 71.07,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 71.07% of ATK as damage. Charge Time: 1 Sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "135_1",
@@ -7055,7 +8015,13 @@
     "reloadTime": 1.82,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/301bca67ffd8c8efceb58e23071d698e/60b4d/rumani_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 56.38% of ATK as damage. Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 56.38,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 56.38% of ATK as damage. Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "138_1",
@@ -7099,7 +8065,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/e6beac535429b206df8b95b1e9a122d1/60b4d/Rupee_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 13.65% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 13.65% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "53_1",
@@ -7143,7 +8115,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/0297745a8689868c1c8dfe52b5481d6c/60b4d/Rupee_Winter_Shopper_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 13.65% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 13.65% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "66_1",
@@ -7187,7 +8165,13 @@
     "reloadTime": 1.67,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/40ce0e5394e8ff471eda763380114816/60b4d/Sakura_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 67% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 67.0,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 67% of ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "82_1",
@@ -7231,7 +8215,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/f2943ae67c9a3efddf4973daea117798/60b4d/sakura_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 8.1% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.1,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 8.1% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "152_1",
@@ -7275,7 +8265,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/1ef9f63a6c5c6f301088b245afd60499/60b4d/Sakura_Bloom_Icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 13.65% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 13.65% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "127_1",
@@ -7319,7 +8315,13 @@
     "reloadTime": 2.3,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/dbcc118dd2720ce4e2ab6feb36a60dd1/60b4d/Scarlet_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 27.08% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 27.08,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 27.08% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "29_1",
@@ -7363,7 +8365,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/035face70263fa89d7137910e29b9612/60b4d/Scarlet_Black_Shadow_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 57.09% ATK as damage.Charge Time: 0.3 sec.Full Charge Damage: 150% (200% on core hits).",
+    "basicAttack": {
+      "multiplier": 57.09,
+      "coreHitBonus": 0.0,
+      "chargeTime": 0.3,
+      "chargeDamage": 1.5,
+      "rawText": "■ Affects target enemy.Deals 57.09% ATK as damage.Charge Time: 0.3 sec.Full Charge Damage: 150% (200% on core hits)."
+    },
     "skills": [
       {
         "skillId": "1110_1",
@@ -7407,7 +8415,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/352506b432d720f294187f0150e60a45/60b4d/Signal_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy Deals 8.1% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.1,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy Deals 8.1% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "3_1",
@@ -7451,7 +8465,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/9f7aa8a219933e8bccaf5c1dd596be43/60b4d/Sin_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 13.65% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 13.65% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "71_1",
@@ -7495,7 +8515,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/7a8cfb528846f7f32b4243fecec128de/60b4d/Snow_White_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 14.71% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.71,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 14.71% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "28_1",
@@ -7539,7 +8565,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/af52bce506dbf01e1a0676c5dd54807e/60b4d/194_s.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 1.2 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.2,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 1.2 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "194_1",
@@ -7583,7 +8615,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/893432efd2f3ef920e0487f0ed413cf0/60b4d/Snow_White_Innocent_Days__Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 13.65% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 13.65,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 13.65% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "106_1",
@@ -7627,7 +8665,13 @@
     "reloadTime": 2.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/c4228528e4737b920cad7c7b66903748/60b4d/soda_Icon_160x160.webp",
-    "basicAttack": "Deals 5.57% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.57,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "Deals 5.57% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "75_1",
@@ -7671,7 +8715,13 @@
     "reloadTime": 2.03,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/fef551b954d61f0b823408c10897f46d/60b4d/soda_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 231.6% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 231.6,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 231.6% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "124_1",
@@ -7715,7 +8765,13 @@
     "reloadTime": 1.17,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/3b12dfcfd102c65361f8770eecc82230/60b4d/Soldier_EG_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 14.01% ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.01,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 14.01% ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "64_1",
@@ -7759,7 +8815,13 @@
     "reloadTime": 2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/339fe0a760c83ba2d2fa6787c10bf243/60b4d/Soldier_FA_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 214.3% ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 214.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 214.3% ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "61_1",
@@ -7803,7 +8865,13 @@
     "reloadTime": 2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/89c049e8cfb307aad0eee73cf4dabecb/60b4d/Soldier_OW_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 9.36% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 9.36,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 9.36% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "59_1",
@@ -7847,7 +8915,13 @@
     "reloadTime": 2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/37f8d6686920374d3e8934148dc4ca70/60b4d/Soline_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 5.85% ATK as damage.Deals 250% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 5.85,
+      "coreHitBonus": 1.5,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 5.85% ATK as damage.Deals 250% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "7_1",
@@ -7891,7 +8965,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/48ec6b2450cd2831fb60ed7a5ceea2d2/60b4d/191_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 201.5% of ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 201.5,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 201.5% of ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "191_1",
@@ -7935,7 +9015,13 @@
     "reloadTime": 2,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/87761b40d79710c0952b28e776065604/60b4d/sora_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 61.3% ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 61.3% ATK as damage.Charge Time: 1 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "172_1",
@@ -7979,7 +9065,13 @@
     "reloadTime": 2.03,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/2890b84a8f9244e1489776c8b001948c/60b4d/Sugar_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 231.6% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 231.6,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 231.6% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "18_1",
@@ -8023,7 +9115,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/6d35fcef896bdb9ddd7daf7f83b38cbf/60b4d/202_s.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 2 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 2.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 2 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "202_1",
@@ -8067,7 +9165,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/c08d918dc44ff35de584bdd8ffc619bc/60b4d/Tia_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 61.3% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 61.3% ATK as damage.Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "104_1",
@@ -8111,7 +9215,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/edc45b37dfb203f43214d3b838a2a05d/60b4d/Tove_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 14.2% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.2,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 14.2% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "107_1",
@@ -8155,7 +9265,13 @@
     "reloadTime": 1,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/15335e86c9945a04e83c8b5911b58c6a/60b4d/176_sm.webp",
-    "basicAttack": "■ Affects target enemy.Deals 14.2% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.2,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 14.2% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "176_1",
@@ -8199,7 +9315,13 @@
     "reloadTime": 2.52,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/91f5773e5382b4caf28f666a6d66a166/60b4d/trina_sm.webp",
-    "basicAttack": "■ Affects Target(s).Deals 68.59% of ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 68.59,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 68.59% of ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "161_1",
@@ -8243,7 +9365,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/044df61acf227c66aef59beaed9ec45f/60b4d/trony_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage. Charge Time: 1 sec. Full Charge Damage: 250% of damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage. Charge Time: 1 sec. Full Charge Damage: 250% of damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "123_1",
@@ -8287,7 +9415,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/53d161468c92c9e9862c6e17f5f81366/60b4d/196_s.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 2 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 2.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 2 secFull Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "196_1",
@@ -8331,7 +9465,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/85d0dd0007a257dcea6aece2ea132e2a/60b4d/Vesti_copy_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy. Deals 61.3% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "54_1",
@@ -8375,7 +9515,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/acec0d6dc041cdd9c772d80f562f1f39/60b4d/181_SM.webp",
-    "basicAttack": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 2 secFull Charge Damage: 200% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 69.04,
+      "coreHitBonus": 1.0,
+      "chargeTime": 2.0,
+      "chargeDamage": 2.0,
+      "rawText": "■ Affects Target(s).Deals 69.04% of ATK as damage.Charge Time: 2 secFull Charge Damage: 200% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "181_1",
@@ -8419,7 +9565,13 @@
     "reloadTime": 1.7,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/366f90ca516c719e6bf33abaf991e6f0/60b4d/Viper_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 220.4% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 220.4,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 220.4% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "70_1",
@@ -8463,7 +9615,13 @@
     "reloadTime": 1.7,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/366f90ca516c719e6bf33abaf991e6f0/60b4d/Viper_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 220.4% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 220.4,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 220.4% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "155_1",
@@ -8507,7 +9665,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/299c7e2215161043fa146b46591aed1d/60b4d/Volume_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 8.73% ATK as damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.73,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy. Deals 8.73% ATK as damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "27_1",
@@ -8551,7 +9715,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/f9519f7278e455d4af9679ac827c6417/60b4d/Yan_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 61.3% ATK as damage.Charge Time: 1.5 sec.Full Charge Damage: 350%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.5,
+      "chargeDamage": 3.5,
+      "rawText": "■ Affects target enemy. Deals 61.3% ATK as damage.Charge Time: 1.5 sec.Full Charge Damage: 350%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "23_1",
@@ -8595,7 +9765,13 @@
     "reloadTime": 1.87,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/5ba49d25829d20e0da9ed321ecab80e4/60b4d/Yulja_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 68.23% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.",
+    "basicAttack": {
+      "multiplier": 68.23,
+      "coreHitBonus": 0.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 68.23% ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage."
+    },
     "skills": [
       {
         "skillId": "55_1",
@@ -8639,7 +9815,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/190554444acb940003b3f6ea9b684ef3/60b4d/Yuni_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy. Deals 61.3% ATK as damage.Charge Time: 1.5 sec.Full Charge Damage: 350%.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.5,
+      "chargeDamage": 3.5,
+      "rawText": "■ Affects target enemy. Deals 61.3% ATK as damage.Charge Time: 1.5 sec.Full Charge Damage: 350%.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "12_1",
@@ -8683,7 +9865,13 @@
     "reloadTime": 1.5,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/19f98b4538e47099a8435e51168c66b7/60b4d/zwei_icon.webp",
-    "basicAttack": "■ Affects Target(s).Deals 100.75% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 100.75,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 100.75% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "130_1",
@@ -8727,7 +9915,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/0cd6663ccb803aa3a6c060cf7fa32f3b/60b4d/200_s.webp",
-    "basicAttack": "■ Affects Target(s).Deals 100.75% of ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 100.75,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects Target(s).Deals 100.75% of ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "200_1",
@@ -8771,7 +9965,13 @@
     "reloadTime": 2,
     "controlMode": "Charge",
     "iconUrl": "https://www.prydwen.gg/static/5e93913464ad6bfed4d8a46791c08a78/60b4d/Idol_Flower_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 61.3% of ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 61.3,
+      "coreHitBonus": 1.0,
+      "chargeTime": 1.0,
+      "chargeDamage": 2.5,
+      "rawText": "■ Affects target enemy.Deals 61.3% of ATK as damage. Charge Time: 1 sec.Full Charge Damage: 250% of damage.Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "56_1",
@@ -8815,7 +10015,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/0210f676553a0027750f60289ea3503e/60b4d/idol_ocean_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 8.73% ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 8.73,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 8.73% ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "57_1",
@@ -8859,7 +10065,13 @@
     "reloadTime": 1.5,
     "controlMode": "Normal",
     "iconUrl": "https://www.prydwen.gg/static/53a4a7e699c474238bd935a5edcfcfb3/60b4d/Idol_Sun_Icon_160x160.webp",
-    "basicAttack": "■ Affects target enemy.Deals 14.71% ATK as damage. Deals 200% damage when attacking core.",
+    "basicAttack": {
+      "multiplier": 14.71,
+      "coreHitBonus": 1.0,
+      "chargeTime": 0.0,
+      "chargeDamage": 1.0,
+      "rawText": "■ Affects target enemy.Deals 14.71% ATK as damage. Deals 200% damage when attacking core."
+    },
     "skills": [
       {
         "skillId": "62_1",

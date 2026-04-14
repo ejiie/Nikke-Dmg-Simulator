@@ -42,6 +42,7 @@ def merge_blabla_data_v3():
                     merged_characters[nc] = {
                         "name_code": nc,
                         "level": char.get("lv", 1),
+                        "grade": char.get("grade", 1),
                         "core": char.get("core", 0),
                         "combat": char.get("combat", 0),
                         "bond_level": 1,
