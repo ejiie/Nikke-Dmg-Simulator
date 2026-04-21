@@ -1,0 +1,613 @@
+{
+  "1007": {
+    "name_code": "1007",
+    "slug": "d",
+    "name": "D",
+    "skills": [
+      {
+        "skill_name": "Vigorous Waves",
+        "skill_slot": "s1",
+        "raw_text": "■ Activates when entering Full Burst. Affects self.Damage as strong element ▲ 46.93% for 15 sec.Recovers 3.52% of ATK damage as HP, lasts for 15 sec.■ Affects self when first activated.Recovers 16.5% of ATK damage as HP, lasts for 15 sec.",
+        "groups": [
+          {
+            "trigger": {
+              "event": "burst_start",
+              "trigger_count": null,
+              "condition_on": "full_burst",
+              "condition_threshold_pct": null,
+              "required_token": null,
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "self",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "strong_elem",
+                "action": "buff",
+                "value": 46.93,
+                "scale": "pct",
+                "scale_base": "none",
+                "formula_bracket": "b5_strong_elem",
+                "duration": 15.0,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": null
+              },
+              {
+                "stat": "lifesteal",
+                "action": "heal",
+                "value": 3.52,
+                "scale": "pct",
+                "scale_base": "damage_dealt",
+                "formula_bracket": null,
+                "duration": 15.0,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": "Recovers X% of ATK damage as HP = lifesteal."
+              }
+            ]
+          },
+          {
+            "trigger": {
+              "event": "burst_start",
+              "trigger_count": null,
+              "condition_on": "full_burst",
+              "condition_threshold_pct": null,
+              "required_token": "first activated",
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "self",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "lifesteal",
+                "action": "heal",
+                "value": 16.5,
+                "scale": "pct",
+                "scale_base": "damage_dealt",
+                "formula_bracket": null,
+                "duration": 15.0,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": "First activation bonus lifesteal."
+              }
+            ]
+          }
+        ],
+        "stack_conditions": null,
+        "stack_mode": null,
+        "stack_trigger": null,
+        "stack_trigger_count": null,
+        "parsing_notes": "The second bullet 'when first activated' refers to the first time the Full Burst trigger occurs. Lifesteal is mapped to stat=lifesteal with scale_base=damage_dealt."
+      },
+      {
+        "skill_name": "Surprise Attack",
+        "skill_slot": "s2",
+        "raw_text": "■ Activates when the target appears. Affects all allies.Fills Burst Gauge by 98.56%. Activates 1 time(s) per battle.Become immune to Stun for 36.95 sec.■ Activates when the target appears. Affects self.Damage as strong element ▲ 91.09%, lasts for 15 sec.",
+        "groups": [
+          {
+            "trigger": {
+              "event": "passive",
+              "trigger_count": null,
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "required_token": "when the target appears",
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "all_allies",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "burst_gauge",
+                "action": "fill_burst_gauge",
+                "value": 98.56,
+                "scale": "pct",
+                "scale_base": "none",
+                "formula_bracket": null,
+                "duration": null,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": "Activates 1 time(s) per battle."
+              },
+              {
+                "stat": "immunity",
+                "action": "grant_immunity",
+                "value": 1.0,
+                "scale": "flat",
+                "scale_base": "none",
+                "formula_bracket": null,
+                "duration": 36.95,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": "Stun immunity."
+              }
+            ]
+          },
+          {
+            "trigger": {
+              "event": "passive",
+              "trigger_count": null,
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "required_token": "when the target appears",
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "self",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "strong_elem",
+                "action": "buff",
+                "value": 91.09,
+                "scale": "pct",
+                "scale_base": "none",
+                "formula_bracket": "b5_strong_elem",
+                "duration": 15.0,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": null
+              }
+            ]
+          }
+        ],
+        "stack_conditions": null,
+        "stack_mode": null,
+        "stack_trigger": null,
+        "stack_trigger_count": null,
+        "parsing_notes": null
+      },
+      {
+        "skill_name": "Chastisement",
+        "skill_slot": "burst",
+        "raw_text": "■ Affects all enemies.Deals 426.24% of final ATK as damage.■ Affects all Attacker allies.Parts Damage ▲ 42.38% for 15 sec.■ Affects all allies if the caster has immunity to Stun.Full Burst Time ▲ 5.04 sec.",
+        "groups": [
+          {
+            "trigger": {
+              "event": "skill_cast",
+              "trigger_count": null,
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "required_token": null,
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "all_enemies",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "attack_dmg",
+                "action": "deal_damage",
+                "value": 426.24,
+                "scale": "pct",
+                "scale_base": "caster_atk",
+                "formula_bracket": null,
+                "duration": null,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": null
+              }
+            ]
+          },
+          {
+            "trigger": {
+              "event": "skill_cast",
+              "trigger_count": null,
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "required_token": null,
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "all_allies",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": "Attacker ally"
+            },
+            "effects": [
+              {
+                "stat": "parts_dmg",
+                "action": "buff",
+                "value": 42.38,
+                "scale": "pct",
+                "scale_base": "none",
+                "formula_bracket": "b3_attack_dmg",
+                "duration": 15.0,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": null
+              }
+            ]
+          },
+          {
+            "trigger": {
+              "event": "skill_cast",
+              "trigger_count": null,
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "required_token": "immunity to Stun",
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "all_allies",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "burst_gauge",
+                "action": "buff",
+                "value": 5.04,
+                "scale": "seconds",
+                "scale_base": "none",
+                "formula_bracket": null,
+                "duration": null,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": "Full Burst Time extension is mapped to burst_gauge/seconds logic in runtime."
+              }
+            ]
+          }
+        ],
+        "stack_conditions": null,
+        "stack_mode": null,
+        "stack_trigger": null,
+        "stack_trigger_count": null,
+        "parsing_notes": null
+      }
+    ]
+  },
+  "1010": {
+    "name_code": "1010",
+    "slug": "laplace-treasure",
+    "name": "Laplace (Treasure)",
+    "skills": [
+      {
+        "skill_name": "Hero Vision",
+        "skill_slot": "s1",
+        "raw_text": "■ Activates when attacking with Full Charge. Affects self.Hero Vision: Explosion Range up 3.57%, stacks up to 5 time(s) and lasts for 15 sec.",
+        "groups": [
+          {
+            "trigger": {
+              "event": "full_charge_hit",
+              "trigger_count": null,
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "required_token": "Hero Vision",
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "self",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "attack_dmg",
+                "action": "buff",
+                "value": 0,
+                "scale": "pct",
+                "scale_base": "none",
+                "formula_bracket": "b3_attack_dmg",
+                "duration": 15.0,
+                "max_stacks": 5,
+                "stack_increment": 1,
+                "notes": "Explosion Range is mapped to attack_dmg (B3) as it is the closest functional stat for RL/SR area scaling in this schema."
+              }
+            ]
+          }
+        ],
+        "stack_conditions": null,
+        "stack_mode": null,
+        "stack_trigger": null,
+        "stack_trigger_count": null,
+        "parsing_notes": "Mapped 'Explosion Range' to attack_dmg as a proxy for area-of-effect damage scaling. 'Hero Vision' is treated as a required_token/status name."
+      },
+      {
+        "skill_name": "Hero Bomber",
+        "skill_slot": "s2",
+        "raw_text": "■ Activates when hitting a target with Full Charge. Affects the target.Deals 132.45% of final ATK as additional damage.■ Activates when hitting the target's Parts. Affects the target's body.Deals 14.78% of final ATK as additional damage.",
+        "groups": [
+          {
+            "trigger": {
+              "event": "full_charge_hit",
+              "trigger_count": null,
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "required_token": null,
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "hit_target",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "attack_dmg",
+                "action": "deal_damage",
+                "value": 132.45,
+                "scale": "pct",
+                "scale_base": "caster_atk",
+                "formula_bracket": null,
+                "duration": null,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": "Full Charge 히트 시 추가 대미지 계수."
+              }
+            ]
+          },
+          {
+            "trigger": {
+              "event": "on_hit",
+              "trigger_count": null,
+              "condition_on": "hitting_parts",
+              "condition_threshold_pct": null,
+              "required_token": null,
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "hit_target",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": "target's body"
+            },
+            "effects": [
+              {
+                "stat": "attack_dmg",
+                "action": "deal_damage",
+                "value": 14.78,
+                "scale": "pct",
+                "scale_base": "caster_atk",
+                "formula_bracket": null,
+                "duration": null,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": "부위 타격 시 본체에 들어가는 추가 대미지 계수."
+              }
+            ]
+          }
+        ],
+        "stack_conditions": null,
+        "stack_mode": null,
+        "stack_trigger": null,
+        "stack_trigger_count": null,
+        "parsing_notes": "두 번째 그룹의 'Affects the target's body'는 타격된 부위가 아닌 본체에 대미지를 전달하는 특수 타겟팅이므로 filter_token에 명시."
+      },
+      {
+        "skill_name": "Laplace Buster",
+        "skill_slot": "burst",
+        "raw_text": "■ Affects Self.Change the weapon in use:Initial Damage: 1455.72% of final ATKDamage Over Time: 22.2% of final ATKLasts for 10 sec.Additional Effect 1: Pierce.Additional Effect 2: Normal damage is applied as true damage when Hero Vision is fully stacked.Attention: Unable to take cover when using Burst Skill.■ Affects the same enemy unit(s) when \"Hero Vision\" is fully stacked.Deals 11.9% of final ATK as true damage.",
+        "groups": [],
+        "stack_conditions": null,
+        "parsing_notes": "[PARSE_ERROR] 1 validation error for SkillParsed\ngroups.1.effects.0\n  Value error, [INV-9a] action=grant_trait 은 stat ∈ {trait_pierce, ...} 필수. got stat=true_dmg. [type=value_error, input_value={'stat': 'true_dmg', 'act...pplied as true damage.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/value_error"
+      }
+    ]
+  },
+  "1012": {
+    "name_code": "1012",
+    "slug": "sakura",
+    "name": "Sakura",
+    "skills": [
+      {
+        "skill_name": "Cherry Blossom Tea",
+        "skill_slot": "s1",
+        "raw_text": "■ Activates after 3 normal attack(s). Affects all allies.Cherry Blossom Tea: 8.15% of DEF, stacks up to 10 time(s) and lasts for 15 sec.",
+        "groups": [
+          {
+            "trigger": {
+              "event": "every_n_normal_attacks",
+              "trigger_count": 3,
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "required_token": null,
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "all_allies",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "def_pct",
+                "action": "buff",
+                "value": 8.15,
+                "scale": "pct",
+                "scale_base": "none",
+                "formula_bracket": null,
+                "duration": 15.0,
+                "max_stacks": 10,
+                "stack_increment": 1,
+                "notes": "Cherry Blossom Tea is a DEF buff. '8.15% of DEF' refers to the target's own DEF stat."
+              }
+            ]
+          }
+        ],
+        "stack_conditions": null,
+        "stack_mode": null,
+        "stack_trigger": null,
+        "stack_trigger_count": null,
+        "parsing_notes": null
+      },
+      {
+        "skill_name": "Falling Petals",
+        "skill_slot": "s2",
+        "raw_text": "■ Affects all allies.When attacking an enemy projectile, damage to that projectile ▲ 7.74% permanently.■ Activates when entering Full Burst. Affects all allies.Burst Skill cooldown ▼ 4.84 sec.",
+        "groups": [
+          {
+            "trigger": {
+              "event": "on_hit",
+              "trigger_count": null,
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "required_token": "attacking an enemy projectile",
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "all_allies",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "attack_dmg",
+                "action": "buff",
+                "value": 7.74,
+                "scale": "pct",
+                "scale_base": "none",
+                "formula_bracket": "b3_attack_dmg",
+                "duration": null,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": "미사일/투사체 타격 시에만 적용되는 B3 가산 버프."
+              }
+            ]
+          },
+          {
+            "trigger": {
+              "event": "burst_start",
+              "trigger_count": null,
+              "condition_on": "full_burst",
+              "condition_threshold_pct": null,
+              "required_token": null,
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "all_allies",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "burst_cooldown",
+                "action": "reduce_cooldown",
+                "value": -4.84,
+                "scale": "seconds",
+                "scale_base": "none",
+                "formula_bracket": null,
+                "duration": null,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": "▼ 감소이므로 value 음수 처리."
+              }
+            ]
+          }
+        ],
+        "stack_conditions": null,
+        "stack_mode": null,
+        "stack_trigger": null,
+        "stack_trigger_count": null,
+        "parsing_notes": null
+      },
+      {
+        "skill_name": "Resplendent Cherry Blossom",
+        "skill_slot": "burst",
+        "raw_text": "■ Affects all allies.Damage dealt by Wind code enemies ▼ 90.72%, lasts for 30 sec. Activates 1 time(s) per battle.ATK ▲ 23.76% of caster's ATK, lasts for 10 sec.■ Affects all allies when Cherry Blossom Tea is fully stacked.Damage to interruption part ▲ 23.54%, lasts for 30 sec.",
+        "groups": [
+          {
+            "trigger": {
+              "event": "skill_cast",
+              "trigger_count": null,
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "required_token": null,
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "all_allies",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "damage_taken",
+                "action": "buff",
+                "value": -90.72,
+                "scale": "pct",
+                "scale_base": "none",
+                "formula_bracket": "b4_dmg_taken",
+                "duration": 30.0,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": "Damage dealt by enemies ▼ is equivalent to Damage Taken ▼ for allies. Filtered by Wind code enemies."
+              },
+              {
+                "stat": "atk_flat",
+                "action": "buff",
+                "value": 23.76,
+                "scale": "pct",
+                "scale_base": "caster_atk",
+                "formula_bracket": null,
+                "duration": 10.0,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": null
+              }
+            ]
+          },
+          {
+            "trigger": {
+              "event": "passive",
+              "trigger_count": null,
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "required_token": "Cherry Blossom Tea is fully stacked",
+              "internal_cooldown": null
+            },
+            "target": {
+              "target": "all_allies",
+              "target_count": null,
+              "target_filter": "none",
+              "filter_token": null
+            },
+            "effects": [
+              {
+                "stat": "parts_dmg",
+                "action": "buff",
+                "value": 23.54,
+                "scale": "pct",
+                "scale_base": "none",
+                "formula_bracket": "b3_attack_dmg",
+                "duration": 30.0,
+                "max_stacks": null,
+                "stack_increment": null,
+                "notes": "Interruption parts are treated as parts_dmg (B3)."
+              }
+            ]
+          }
+        ],
+        "stack_conditions": null,
+        "stack_mode": null,
+        "stack_trigger": null,
+        "stack_trigger_count": null,
+        "parsing_notes": "The first group contains a 1-time limit per battle which is handled by the runtime. The second group requires a specific character token (Cherry Blossom Tea) at max stacks."
+      }
+    ]
+  }
+}

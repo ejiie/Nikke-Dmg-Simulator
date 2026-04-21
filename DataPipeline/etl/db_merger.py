@@ -24,7 +24,7 @@ def get_merged_nikke_data(user_db_path: str, prydwen_db_path: str, mapping_path:
     final_fusion_db = {
         "uid": uid,
         "global_state": global_state,
-        "roster": {} # 프리드웬 슬러그(slug)를 Key로 하는 캐릭터 목록
+        "roster": {}
     }
 
     skip_count = 0
@@ -55,6 +55,7 @@ def get_merged_nikke_data(user_db_path: str, prydwen_db_path: str, mapping_path:
                 "manufacturer": p_char.get("manufacturer"),
                 "ammoCapacity": p_char.get("ammoCapacity"),
                 "reloadTime": p_char.get("reloadTime"),
+                "iconUrl": p_char.get("iconUrl"),
                 "basicAttack": p_char.get("basicAttack"),
                 "skills": p_char.get("skills", [])
             },
@@ -68,6 +69,7 @@ def get_merged_nikke_data(user_db_path: str, prydwen_db_path: str, mapping_path:
                 "bond_level": u_char.get("bond_level"),
                 "favorite_item_lv": u_char.get("favorite_item_lv"),
                 "skills": u_char.get("skills"),
+                "equipments": u_char.get("equipments", {}), # [핵심 패치] 부위별 장비 티어 및 레벨 정보 추가
                 "overload_stats": u_char.get("overload_stats", [])
             }
         }

@@ -1,8 +1,18 @@
 {
   "uid": 15718125957108145492,
   "global_state": {
-    "synchro_level": 1,
-    "consoles": []
+    "synchro_level": 709,
+    "consoles": {
+      "1001": 330,
+      "1101": 245,
+      "1102": 231,
+      "1103": 223,
+      "1201": 221,
+      "1202": 233,
+      "1203": 240,
+      "1204": 252,
+      "1205": 208
+    }
   },
   "characters": {
     "1007": {
@@ -18,6 +28,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "1010": {
@@ -32,6 +60,24 @@
         "skill1": 7,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -89,6 +135,24 @@
         "skill2": 7,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "1013": {
@@ -103,6 +167,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -119,6 +201,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "1015": {
@@ -133,6 +233,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -149,6 +267,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "1017": {
@@ -163,6 +299,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -179,6 +333,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "1019": {
@@ -193,6 +365,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -209,6 +399,24 @@
         "skill2": 7,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 1
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "1021": {
@@ -223,6 +431,24 @@
         "skill1": 7,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 3
+        }
       },
       "overload_stats": [
         {
@@ -275,6 +501,24 @@
         "skill2": 3,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "1023": {
@@ -289,6 +533,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -305,6 +567,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "1025": {
@@ -319,6 +599,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -335,6 +633,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "3002": {
@@ -349,6 +665,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -365,6 +699,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "3004": {
@@ -379,6 +731,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -395,6 +765,24 @@
         "skill2": 4,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "3006": {
@@ -409,6 +797,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -425,6 +831,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "3008": {
@@ -439,6 +863,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -455,6 +897,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "3010": {
@@ -469,6 +929,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -485,6 +963,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "3012": {
@@ -499,6 +995,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -515,6 +1029,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "3014": {
@@ -529,6 +1061,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -545,6 +1095,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "3016": {
@@ -559,6 +1127,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -575,6 +1161,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "3018": {
@@ -590,6 +1194,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5001": {
@@ -604,6 +1226,24 @@
         "skill1": 10,
         "skill2": 7,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -681,6 +1321,24 @@
         "skill2": 4,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5003": {
@@ -696,6 +1354,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 3
+        }
+      },
       "overload_stats": []
     },
     "5004": {
@@ -710,6 +1386,24 @@
         "skill1": 10,
         "skill2": 7,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -782,6 +1476,24 @@
         "skill2": 1,
         "burst": 3
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5006": {
@@ -796,6 +1508,24 @@
         "skill1": 4,
         "skill2": 4,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -812,6 +1542,24 @@
         "skill2": 10,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 5
+        },
+        "torso": {
+          "tier": 9,
+          "level": 5
+        },
+        "arm": {
+          "tier": 9,
+          "level": 5
+        },
+        "leg": {
+          "tier": 9,
+          "level": 5
+        }
+      },
       "overload_stats": []
     },
     "5008": {
@@ -826,6 +1574,24 @@
         "skill1": 7,
         "skill2": 7,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 3
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 1
+        }
       },
       "overload_stats": [
         {
@@ -867,6 +1633,24 @@
         "skill1": 10,
         "skill2": 9,
         "burst": 7
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -919,6 +1703,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5011": {
@@ -933,6 +1735,24 @@
         "skill1": 10,
         "skill2": 7,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -984,6 +1804,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -1061,6 +1899,24 @@
         "skill2": 1,
         "burst": 5
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5014": {
@@ -1075,6 +1931,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -1091,6 +1965,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5016": {
@@ -1106,6 +1998,24 @@
         "skill2": 4,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5017": {
@@ -1120,6 +2030,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 3
+        }
       },
       "overload_stats": [
         {
@@ -1182,6 +2110,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5019": {
@@ -1197,6 +2143,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5020": {
@@ -1211,6 +2175,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 2
+        },
+        "torso": {
+          "tier": 10,
+          "level": 3
+        },
+        "arm": {
+          "tier": 10,
+          "level": 0
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -1253,6 +2235,24 @@
         "skill2": 4,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": [
         {
           "type": "StatChargeDamage",
@@ -1284,6 +2284,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5023": {
@@ -1299,6 +2317,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5024": {
@@ -1313,6 +2349,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 3
+        }
       },
       "overload_stats": [
         {
@@ -1370,6 +2424,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5026": {
@@ -1384,6 +2456,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -1400,6 +2490,24 @@
         "skill2": 4,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5028": {
@@ -1414,6 +2522,24 @@
         "skill1": 4,
         "skill2": 1,
         "burst": 4
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -1430,6 +2556,24 @@
         "skill2": 10,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5030": {
@@ -1445,6 +2589,24 @@
         "skill2": 4,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5031": {
@@ -1459,6 +2621,24 @@
         "skill1": 4,
         "skill2": 7,
         "burst": 4
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 1
+        }
       },
       "overload_stats": [
         {
@@ -1526,6 +2706,24 @@
         "skill2": 1,
         "burst": 3
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5033": {
@@ -1541,6 +2739,24 @@
         "skill2": 3,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5034": {
@@ -1555,6 +2771,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 4
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 10,
+          "level": 2
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -1587,6 +2821,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5036": {
@@ -1602,6 +2854,24 @@
         "skill2": 7,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5037": {
@@ -1616,6 +2886,24 @@
         "skill1": 7,
         "skill2": 7,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 0
+        },
+        "torso": {
+          "tier": 10,
+          "level": 2
+        },
+        "arm": {
+          "tier": 10,
+          "level": 0
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -1663,6 +2951,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5039": {
@@ -1678,6 +2984,24 @@
         "skill2": 4,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5040": {
@@ -1692,6 +3016,24 @@
         "skill1": 5,
         "skill2": 4,
         "burst": 4
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 1
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -1713,6 +3055,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 7
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -1785,6 +3145,24 @@
         "skill2": 4,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5043": {
@@ -1800,6 +3178,24 @@
         "skill2": 7,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5044": {
@@ -1814,6 +3210,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 7
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -1881,6 +3295,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5046": {
@@ -1895,6 +3327,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -1911,6 +3361,24 @@
         "skill2": 4,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5049": {
@@ -1925,6 +3393,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -1977,6 +3463,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5051": {
@@ -1991,6 +3495,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -2007,6 +3529,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5054": {
@@ -2021,6 +3561,24 @@
         "skill1": 7,
         "skill2": 7,
         "burst": 7
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -2073,6 +3631,24 @@
         "skill2": 1,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 0
+        },
+        "arm": {
+          "tier": 10,
+          "level": 4
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
+      },
       "overload_stats": [
         {
           "type": "IncElementDmg",
@@ -2114,6 +3690,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5059": {
@@ -2129,6 +3723,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5061": {
@@ -2143,6 +3755,24 @@
         "skill1": 7,
         "skill2": 1,
         "burst": 7
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -2200,6 +3830,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5064": {
@@ -2215,6 +3863,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5065": {
@@ -2229,6 +3895,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -2291,6 +3975,24 @@
         "skill2": 10,
         "burst": 10
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
+      },
       "overload_stats": [
         {
           "type": "StatAtk",
@@ -2352,6 +4054,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5069": {
@@ -2366,6 +4086,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -2382,6 +4120,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5071": {
@@ -2396,6 +4152,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -2412,6 +4186,24 @@
         "skill2": 7,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 1
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5075": {
@@ -2427,6 +4219,24 @@
         "skill2": 7,
         "burst": 10
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5077": {
@@ -2441,6 +4251,24 @@
         "skill1": 7,
         "skill2": 7,
         "burst": 7
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 1
+        }
       },
       "overload_stats": [
         {
@@ -2503,6 +4331,24 @@
         "skill2": 5,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5079": {
@@ -2517,6 +4363,24 @@
         "skill1": 7,
         "skill2": 4,
         "burst": 7
+      },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -2538,6 +4402,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 9,
+          "level": 3
+        }
       },
       "overload_stats": [
         {
@@ -2580,6 +4462,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5085": {
@@ -2594,6 +4494,24 @@
         "skill1": 1,
         "skill2": 4,
         "burst": 7
+      },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 1
+        }
       },
       "overload_stats": []
     },
@@ -2610,6 +4528,24 @@
         "skill2": 10,
         "burst": 10
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 2
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5089": {
@@ -2624,6 +4560,24 @@
         "skill1": 4,
         "skill2": 4,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -2640,6 +4594,24 @@
         "skill2": 7,
         "burst": 10
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 5
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 5
+        },
+        "leg": {
+          "tier": 9,
+          "level": 5
+        }
+      },
       "overload_stats": []
     },
     "5094": {
@@ -2654,6 +4626,24 @@
         "skill1": 4,
         "skill2": 7,
         "burst": 7
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 2
+        },
+        "torso": {
+          "tier": 10,
+          "level": 3
+        },
+        "arm": {
+          "tier": 10,
+          "level": 0
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -2690,6 +4680,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 3
+        },
+        "torso": {
+          "tier": 10,
+          "level": 0
+        },
+        "arm": {
+          "tier": 10,
+          "level": 3
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -2747,6 +4755,24 @@
         "skill2": 7,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5097": {
@@ -2761,6 +4787,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -2823,6 +4867,24 @@
         "skill2": 10,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 9,
+          "level": 5
+        },
+        "leg": {
+          "tier": 9,
+          "level": 5
+        }
+      },
       "overload_stats": [
         {
           "type": "StatDef",
@@ -2853,6 +4915,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -2905,6 +4985,24 @@
         "skill2": 7,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
+      },
       "overload_stats": [
         {
           "type": "StatCritical",
@@ -2945,6 +5043,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -3012,6 +5128,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5103": {
@@ -3026,6 +5160,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -3093,6 +5245,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5105": {
@@ -3107,6 +5277,24 @@
         "skill1": 10,
         "skill2": 7,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -3184,6 +5372,24 @@
         "skill2": 7,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 3
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 10,
+          "level": 2
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": [
         {
           "type": "StatChargeTime",
@@ -3230,6 +5436,24 @@
         "skill2": 1,
         "burst": 5
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 3
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 10,
+          "level": 2
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": [
         {
           "type": "StatCritical",
@@ -3265,6 +5489,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 4
+        },
+        "torso": {
+          "tier": 10,
+          "level": 0
+        },
+        "arm": {
+          "tier": 10,
+          "level": 0
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -3317,6 +5559,24 @@
         "skill2": 7,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 0
+        },
+        "arm": {
+          "tier": 10,
+          "level": 4
+        },
+        "leg": {
+          "tier": 10,
+          "level": 1
+        }
+      },
       "overload_stats": [
         {
           "type": "StatChargeTime",
@@ -3368,6 +5628,24 @@
         "skill2": 10,
         "burst": 10
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
+      },
       "overload_stats": [
         {
           "type": "StatCriticalDamage",
@@ -3414,6 +5692,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5112": {
@@ -3429,6 +5725,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5113": {
@@ -3443,6 +5757,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -3515,6 +5847,24 @@
         "skill2": 5,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5116": {
@@ -3530,6 +5880,24 @@
         "skill2": 7,
         "burst": 10
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 5
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5117": {
@@ -3544,6 +5912,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 1
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -3606,6 +5992,24 @@
         "skill2": 7,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 3
+        }
+      },
       "overload_stats": [
         {
           "type": "IncElementDmg",
@@ -3662,6 +6066,24 @@
         "skill2": 4,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 4
+        },
+        "torso": {
+          "tier": 10,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
+      },
       "overload_stats": [
         {
           "type": "StatDef",
@@ -3707,6 +6129,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 3
+        }
       },
       "overload_stats": [
         {
@@ -3759,6 +6199,24 @@
         "skill2": 6,
         "burst": 6
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 3
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
+      },
       "overload_stats": [
         {
           "type": "StatChargeTime",
@@ -3805,6 +6263,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5123": {
@@ -3820,6 +6296,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5124": {
@@ -3834,6 +6328,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -3906,6 +6418,24 @@
         "skill2": 10,
         "burst": 10
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 3
+        }
+      },
       "overload_stats": [
         {
           "type": "StatCritical",
@@ -3967,6 +6497,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5127": {
@@ -3981,6 +6529,24 @@
         "skill1": 7,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -4038,6 +6604,24 @@
         "skill2": 7,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5129": {
@@ -4052,6 +6636,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -4129,6 +6731,24 @@
         "skill2": 10,
         "burst": 10
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
+      },
       "overload_stats": [
         {
           "type": "StatChargeTime",
@@ -4185,6 +6805,24 @@
         "skill2": 10,
         "burst": 10
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 9,
+          "level": 5
+        }
+      },
       "overload_stats": [
         {
           "type": "StatDef",
@@ -4236,6 +6874,24 @@
         "skill2": 7,
         "burst": 4
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5133": {
@@ -4250,6 +6906,24 @@
         "skill1": 10,
         "skill2": 7,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 3
+        },
+        "arm": {
+          "tier": 10,
+          "level": 4
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -4327,6 +7001,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5135": {
@@ -4341,6 +7033,24 @@
         "skill1": 7,
         "skill2": 7,
         "burst": 7
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 3
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -4413,6 +7123,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5137": {
@@ -4427,6 +7155,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -4489,6 +7235,24 @@
         "skill2": 10,
         "burst": 10
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 2
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
+      },
       "overload_stats": [
         {
           "type": "StatCriticalDamage",
@@ -4540,6 +7304,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5140": {
@@ -4554,6 +7336,24 @@
         "skill1": 1,
         "skill2": 1,
         "burst": 1
+      },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
       },
       "overload_stats": []
     },
@@ -4570,6 +7370,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5142": {
@@ -4584,6 +7402,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -4655,6 +7491,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -4732,6 +7586,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5145": {
@@ -4746,6 +7618,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -4818,6 +7708,24 @@
         "skill2": 7,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5149": {
@@ -4833,6 +7741,24 @@
         "skill2": 1,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 0,
+          "level": 0
+        },
+        "torso": {
+          "tier": 0,
+          "level": 0
+        },
+        "arm": {
+          "tier": 0,
+          "level": 0
+        },
+        "leg": {
+          "tier": 0,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5150": {
@@ -4847,6 +7773,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -4908,6 +7852,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -4975,6 +7937,24 @@
         "skill2": 8,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 0
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": [
         {
           "type": "StatAccuracyCircle",
@@ -5026,6 +8006,24 @@
         "skill2": 7,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5155": {
@@ -5040,6 +8038,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 3
+        }
       },
       "overload_stats": [
         {
@@ -5086,6 +8102,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 5
+        }
       },
       "overload_stats": [
         {
@@ -5148,6 +8182,24 @@
         "skill2": 10,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5158": {
@@ -5163,6 +8215,24 @@
         "skill2": 7,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5159": {
@@ -5177,6 +8247,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -5224,6 +8312,24 @@
         "skill2": 7,
         "burst": 7
       },
+      "equipments": {
+        "head": {
+          "tier": 9,
+          "level": 0
+        },
+        "torso": {
+          "tier": 9,
+          "level": 0
+        },
+        "arm": {
+          "tier": 9,
+          "level": 0
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": []
     },
     "5161": {
@@ -5238,6 +8344,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -5305,6 +8429,24 @@
         "skill2": 10,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 3
+        },
+        "torso": {
+          "tier": 10,
+          "level": 0
+        },
+        "arm": {
+          "tier": 10,
+          "level": 3
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
+      },
       "overload_stats": [
         {
           "type": "IncElementDmg",
@@ -5361,6 +8503,24 @@
         "skill2": 7,
         "burst": 1
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 9,
+          "level": 0
+        }
+      },
       "overload_stats": [
         {
           "type": "StatAtk",
@@ -5396,6 +8556,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {
@@ -5458,6 +8636,24 @@
         "skill2": 10,
         "burst": 10
       },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 5
+        },
+        "torso": {
+          "tier": 10,
+          "level": 5
+        },
+        "arm": {
+          "tier": 10,
+          "level": 5
+        },
+        "leg": {
+          "tier": 10,
+          "level": 3
+        }
+      },
       "overload_stats": [
         {
           "type": "StatAmmoLoad",
@@ -5518,6 +8714,24 @@
         "skill1": 10,
         "skill2": 10,
         "burst": 10
+      },
+      "equipments": {
+        "head": {
+          "tier": 10,
+          "level": 3
+        },
+        "torso": {
+          "tier": 10,
+          "level": 0
+        },
+        "arm": {
+          "tier": 10,
+          "level": 3
+        },
+        "leg": {
+          "tier": 10,
+          "level": 0
+        }
       },
       "overload_stats": [
         {

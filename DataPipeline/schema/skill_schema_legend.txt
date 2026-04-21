@@ -1,0 +1,501 @@
+════════════════════════════════════════════════════════════════════════
+  NIKKE Skill Schema — Code Legend (v3 / A')
+  skills_parsed.json 등 파서 출력 JSON의 약어/코드값을 해석하기 위한 레퍼런스.
+  (스키마 정의: DataPipeline/schema/skill_schema.py)
+════════════════════════════════════════════════════════════════════════
+
+  v3 핵심 변경점 (v2 대비)
+  ──────────────────────────
+  1. 3-layer 구조: SkillParsed → groups[] → (trigger, target, effects[])
+     - 같은 trigger+target 으로 묶인 효과들이 하나의 group 을 공유.
+  2. trigger / target 이 EffectBlock 에서 분리되어 각각 TriggerBlock /
+     TargetBlock 으로 승격. 동일 게이트의 중복 기재 제거.
+  3. value_basis 단일 enum 폐기 → 직교 2축으로 분리:
+        scale       : 값의 단위 (pct / flat / seconds)
+        scale_base  : 값이 곱해지는 기준량 (none / caster_atk /
+                      caster_max_hp / caster_charge_speed /
+                      target_max_hp / target_current_hp / damage_dealt)
+     '4.0% of caster's Max HP'  →  scale=pct + scale_base=caster_max_hp
+  4. StatType.atk_ratio_of_caster 폐지.
+     'ATK ▲ X% of caster's Max HP' 같은 cross-stat caster 스케일링은
+     stat=atk_flat + scale_base=caster_max_hp 로 표현.
+  5. INV-11 (pct_of_caster_stat 화이트리스트) 폐지.
+     ScaleBase 자체가 닫힌 enum 이라 별도 가드 불필요.
+  6. INV-12 재정의 — 같은 stat × 같은 caster_base 만 collapse:
+        target=self + (atk_pct,    caster_atk)            금지
+        target=self + (atk_flat,   caster_atk)            금지
+        target=self + (max_hp_pct, caster_max_hp)         금지
+        target=self + (max_hp_flat, caster_max_hp)        금지
+        target=self + (charge_speed, caster_charge_speed) 금지
+     cross-stat (atk_flat × caster_max_hp 등) 은 허용.
+  7. required_token / filter_token (free-form string) 추가.
+     enum 으로 잡기 어려운 캐릭터 고유 상태를 원문 문구 그대로 보존.
+
+─── 대미지 공식 (참고) ───────────────────────────────────────────────────
+
+Damage = (FinalAtk - FinalDef)
+       × (1 + fullBurst + properDist + Σcrit_dmg + coreHitBase + Σcore_hit_buff)    [B2]
+       × (1 + Σattack_dmg [+pierce_dmg][+parts_dmg][+dot_dmg][+sequential_dmg])     [B3]
+       × (1 + Σdamage_taken + Σdistrib_dmg)                                         [B4]
+       × (1 + Σstrong_elem)                                                         [B5]
+       × 계수
+
+  ─── Full Charge 공격일 때 추가 적용 (2-축 계산) ───
+  chargeDmg_final = (chargeDmg_base + Σcharge_dmg) × (1 + Σcharge_dmg_mult)
+                        └─ COEFF_CHARGE_ADD ─┘     └── COEFF_CHARGE_MULT ──┘
+  ① 'Charge Damage ▲ X%'             → charge_dmg      (가산 축, coeff_charge_add)
+  ② 'Charge Damage Multiplier ▲ X%'  → charge_dmg_mult (곱셈 축, coeff_charge_mult)
+  두 축은 서로 다른 연산. 어느 쪽도 B3(Σattack_dmg) 와는 독립.
+
+────────────────────────────────────────────────────────────────────────
+  SkillParsed 최상위 필드
+────────────────────────────────────────────────────────────────────────
+
+  skill_name        스킬 이름 (예: "Survival")
+  skill_slot        스킬 슬롯 → 아래 [skill_slot] 참조
+  raw_text          원문 descriptionLevel10 그대로 보존
+  groups            TriggeredEffectGroup 배열 — 하나의 trigger+target 묶음 안에
+                    여러 effects 가 함께 존재. (v2 의 effects[] 대체)
+  stack_conditions  Once/Twice/Three times 분기 스킬에서만 사용, 없으면 null
+  stack_mode        stack_conditions 있을 때만 의미. → [stack_mode]
+  stack_trigger     스택 카운터를 +1 시키는 이벤트 (발동 이벤트).
+                    값은 [trigger event] enum 과 동일.
+                    예: skill_cast, burst_end, enter_battle, every_n_shots 등.
+                    stack_conditions 내부 group 의 trigger.event 는
+                    'stack_threshold' 고정.
+  stack_trigger_count   카운팅형 stack_trigger 의 N 값 (예: every_n_shots → N).
+  parsing_notes     LLM의 파싱 판단 근거 또는 엣지케이스 메모 (없으면 null)
+
+  [skill_slot]
+  ─────────────
+  s1            Skill 1
+  s2            Skill 2
+  burst         Burst Skill
+
+────────────────────────────────────────────────────────────────────────
+  TriggeredEffectGroup 구조
+────────────────────────────────────────────────────────────────────────
+
+  trigger    TriggerBlock — 언제 발동? + 어떤 조건? + 어느 토큰 필요?
+  target     TargetBlock  — 누구에게? + 몇 명? + 어떤 필터?
+  effects    EffectBlock[] — 실제 효과 목록 (stat/value/duration 등)
+
+  같은 trigger+target 을 공유하는 효과 두 개를 그룹 하나로 묶는 것이 권장.
+  예: "ATK ▲ 5% / Crit Rate ▲ 10% for 5 sec" → 1 group, 2 effects.
+
+────────────────────────────────────────────────────────────────────────
+  TriggerBlock 필드
+────────────────────────────────────────────────────────────────────────
+
+  event                   트리거 이벤트 → [trigger event]
+  trigger_count           카운팅형 event 의 N 값
+                          (every_n_shots, every_n_normal_attacks,
+                           when_attacked_n_times)
+                          예: "after firing 300 time(s)" → trigger_count=300
+  condition_on            추가 조건 → [condition_on]
+  condition_threshold_pct hp_below_pct / hp_above_pct 의 HP 임계치(%)
+  required_token          [NEW] enum 으로 잡기 어려운 발동 전제 상태/토큰.
+                          원문 문구 그대로 보존.
+                          예: "Nano Coating status", "Sword Coin",
+                              "Wheel of Fortune", "Reactivation"
+                          런타임이 dict 매칭으로 활성 여부 판정.
+  internal_cooldown       트리거 최소 간격(초, ICD)
+
+────────────────────────────────────────────────────────────────────────
+  TargetBlock 필드
+────────────────────────────────────────────────────────────────────────
+
+  target          효과 대상 → [target]
+  target_count    "Affects N ally/enemy unit(s)" 의 N.
+                  'all_allies'/'all_enemies' 이면 null.
+                  예: "Affects 1 enemy" → 1
+  target_filter   target 선정 부가 필터 → [target_filter]
+  filter_token    [NEW] enum 으로 잡기 어려운 추가 필터 문구.
+                  원문 문구 그대로 보존.
+                  예: "in Reactivation status", "without shield",
+                      "of caster's element"
+
+────────────────────────────────────────────────────────────────────────
+  EffectBlock 필드
+────────────────────────────────────────────────────────────────────────
+
+  stat              버프/디버프되는 스탯 → [stat]
+  action            어떤 종류의 행동인지 → [action]
+  value             수치 (예: 15.22 → "15.22%" 또는 "15.22초")
+  scale             값의 단위 → [scale]
+  scale_base        값이 곱해지는 기준량 → [scale_base]
+  formula_bracket   이 스탯이 속하는 대미지 공식 브래킷 → [formula_bracket]
+                    비대미지 스탯은 null (런타임에서 STAT_BRACKET 으로 추론 가능)
+  duration          지속 시간(초). null이면 영구/패시브
+  max_stacks        최대 버프 스택 수. null이면 스택 없음
+  stack_increment   트리거당 획득 스택 수
+  notes             런타임 참고용 메모
+
+  ※ trigger / target 은 EffectBlock 에 없음 (group 차원에 있음).
+
+────────────────────────────────────────────────────────────────────────
+  [scale]  Scale (값의 단위)
+────────────────────────────────────────────────────────────────────────
+
+  pct       퍼센트 (value=10.0 → 10%). 가장 흔함.
+  flat      절대값 (value=100.0 → 100). 정수 부여 등.
+  seconds   초 단위 (쿨다운 감소 등).
+
+────────────────────────────────────────────────────────────────────────
+  [scale_base]  ScaleBase (값이 곱해지는 기준)
+────────────────────────────────────────────────────────────────────────
+
+  none                 기준 없음. value 를 자기 자신에게 직접 적용.
+                       - 'ATK ▲ 10%' → scale=pct + scale_base=none
+                         (= 대상 자신의 ATK × 1.10)
+                       - 'Cooldown -3 sec' → scale=seconds + scale_base=none
+  caster_atk           시전자 FinalAtk 기준.
+                       - deal_damage 의 표준 (계수 X% of caster's ATK)
+                       - target=self + stat=atk_pct/atk_flat 와 결합 시
+                         INV-12 위반 (자기 자신은 caster 와 동일).
+  caster_max_hp        시전자 MaxHP 기준.
+                       - 'X% of caster's Max HP' 류 회복/실드.
+                       - cross-stat (atk_flat 등) 도 가능: Alice S1 같은
+                         "ATK ▲ 6.16% of caster's Max HP" 패턴.
+  caster_charge_speed  시전자 차지 속도 기준.
+                       - 'X% of caster's Charge Speed' 등.
+  target_max_hp        대상 MaxHP 기준 (heal/shield 흔함).
+  target_current_hp    대상 현재 HP 기준.
+  damage_dealt         인플릭티드 대미지 기준.
+                       - 흡혈 lifesteal 전용
+                         ("Recover HP by X% of attack damage").
+
+  action 별 권장 조합:
+    buff / debuff (자기 stat %)         → scale=pct      + scale_base=none
+    buff / debuff (의 caster stat 비율) → scale=pct      + scale_base=caster_*
+    deal_damage                         → scale=pct      + scale_base=caster_atk
+    heal (lifesteal)                    → scale=pct      + scale_base=damage_dealt
+    heal / grant_shield (target 기준)   → scale=pct      + scale_base=target_max_hp
+                                                            / target_current_hp
+                                          또는 scale=flat + scale_base=none
+    grant_trait                         → scale=flat     + scale_base=none, value=1.0
+    reduce_cooldown                     → scale=seconds  + scale_base=none
+
+────────────────────────────────────────────────────────────────────────
+  [stat]  StatType
+────────────────────────────────────────────────────────────────────────
+
+  ── Final ATK modifiers ──
+  atk_pct             ATK × (1 + Σatk_pct) 에 가산
+  atk_flat            ATK 에 절대값 가산 (cross-stat caster 스케일링도 여기)
+
+  ── Defense / HP ──
+  def_pct             방어력 %
+  def_flat            방어력 절대값
+  max_hp_pct          최대 HP %
+  max_hp_flat         최대 HP 절대값
+
+  ── B2: Crit / Core ──
+  crit_rate           치명타 확률 (독립 계산, 브래킷 없음)
+  crit_dmg            치명타 대미지 (B2 가산항)
+  core_hit_buff       코어 힛 대미지 스킬 버프 (B2 가산항; coreHitBase와 별도)
+
+  ── B3: Attack Damage 계열 ──
+  attack_dmg          공격 대미지 증가 (모든 공격 공통)
+  pierce_dmg          관통 대미지 증가 (관통탄 시에만)
+  parts_dmg           파츠 대미지 증가 (보스 파츠 힛 시에만)
+  dot_dmg             지속 대미지 증가 (DoT 틱 시에만)
+  sequential_dmg      순차 대미지 증가 (순차 대미지 시에만)
+
+  ── B4: Damage Taken / Distribution ──
+  damage_taken        받는 대미지 증가 (무조건 B4 가산)
+  distrib_dmg         분배 대미지 증가 (B4 가산, 분배 공격 시에만)
+                      ※ attack_dmg 계열 중 유일하게 B3가 아닌 B4에 속함
+
+  ── B5: Strong Element ──
+  strong_elem         속성 유리 대미지 증가
+
+  ── 계수 측 배율 (Full Charge 2-축) ──
+  charge_dmg          "Charge Damage ▲ X%" — **가산** 축.
+                      formula_bracket = coeff_charge_add.
+                      chargeDmg_base 에 직접 더해진다.
+                      예: base=250%, +10% → 250+10 = 260%.
+  charge_dmg_mult     "Charge Damage Multiplier ▲ X%" — **곱셈** 축.
+                      formula_bracket = coeff_charge_mult.
+                      chargeDmg 전체에 (1 + Σ)로 곱해진다.
+                      예: base=250%, ×1.10 → 250×1.1 = 275%.
+                      ※ 최종: chargeDmg_final = (base + Σcharge_dmg) × (1 + Σcharge_dmg_mult)
+                      ※ 두 축 모두 B3 의 attack_dmg 와 독립 (혼용 금지).
+                      ※ 원문의 'Multiplier' 단어 유무로 분기 판정.
+
+  ── Trait (플래그성 상태, action=grant_trait 전용) ──
+  trait_pierce                 "Gains continuous Pierce" / "Additional Effect: Pierce"
+                               관통 특성 획득. value=1.0 flat.
+  trait_true_dmg_conversion    "Normal damage is applied as true damage when <조건>"
+                               조건부 대미지 타입 변환 플래그.
+                               조건 문구는 trigger.required_token 에 원문 보존.
+                               (예: "Hero Vision fully stacked")
+  trait_weapon_transformed     "Change the weapon in use: ..."
+                               무기 파라미터 덮어쓰기 플래그 (long-tail).
+                               덮어쓸 수치 (Charge Time / Damage% / FC Damage% /
+                               Max Ammo / DoT%) 는 EffectBlock.notes 에 원문 보존.
+                               실제 weapon 덮어쓰기는 시뮬레이터 C# 쪽의
+                               per-character override table 이 처리.
+                               동반되는 Initial Damage / DoT 의 수치형 대미지는
+                               별도 group 의 deal_damage 로 분해.
+
+  ── 브래킷 외 스탯 ──
+  ammo_capacity       탄창 용량
+  reload_speed        재장전 속도
+  true_dmg            방어 무시 대미지 (별도 계산, 브래킷 없음)
+  hp_potency          회복/실드 효율 증가
+  burst_gauge         버스트 게이지 충전
+  burst_cooldown      버스트 스킬 쿨다운 감소 (단위: 초)
+  heal                HP 회복 (일반)
+  lifesteal           흡혈: "Recover HP by X% of attack damage"
+                      scale=pct + scale_base=damage_dealt 필수.
+                      일반 heal 과 별도: lifesteal 은 인플릭티드 대미지 기준.
+  shield              실드 부여
+  charge_speed        차지 무기 차지 속도 (+% = 차지시간 감소)
+                      "of caster's Charge Speed" 수식어 붙으면
+                      scale_base=caster_charge_speed 로 (caster 기준).
+  move_speed          이동 속도
+  immunity            CC/디버프 면역
+
+────────────────────────────────────────────────────────────────────────
+  [formula_bracket]  FormulaBracket
+────────────────────────────────────────────────────────────────────────
+
+  b2_crit_core        (1 + ... + Σcrit_dmg + Σcore_hit_buff)
+  b3_attack_dmg       (1 + Σattack_dmg [+pierce][+parts][+dot][+sequential])
+  b4_dmg_taken        (1 + Σdamage_taken + Σdistrib_dmg)
+  b5_strong_elem      (1 + Σstrong_elem)
+  coeff_charge_add    (chargeDmg_base + Σcharge_dmg)  — Full Charge 가산 축.
+                      'Charge Damage ▲ X%' 전용.
+  coeff_charge_mult   × (1 + Σcharge_dmg_mult)        — Full Charge 곱셈 축.
+                      'Charge Damage Multiplier ▲ X%' 전용.
+                      ※ 두 축 합쳐: chargeDmg_final = (base + ΣADD) × (1 + ΣMULT).
+                      ※ B2~B5 와 독립. 섞지 말 것.
+  null                브래킷 외 스탯 (ATK/DEF/HP 배율, 회복, true_dmg, trait 등)
+
+────────────────────────────────────────────────────────────────────────
+  [target]  TargetType
+────────────────────────────────────────────────────────────────────────
+
+  self                자신
+  single_ally         아군 1명
+  all_allies          전체 아군
+  attacker            명중 이벤트를 발생시킨 아군
+  most_injured_ally   가장 많이 다친 아군
+  random_ally         무작위 아군
+  single_enemy        적 1명
+  all_enemies         전체 적
+  random_enemy        무작위 적
+  hit_target          명중된 특정 적
+
+────────────────────────────────────────────────────────────────────────
+  [target_filter]  TargetFilter
+────────────────────────────────────────────────────────────────────────
+
+  target 에 추가로 걸리는 선정 필터 (enum). 이외의 캐릭터 특수 필터는
+  TargetBlock.filter_token 에 원문 그대로 보존.
+
+  none                    추가 필터 없음
+  highest_max_hp          "with the highest Max HP"
+  lowest_hp_pct           "most injured" / "lowest HP"
+  highest_atk             "with the highest ATK"
+  highest_def             "with the highest DEF"
+  nearest_to_crosshair    "nearest to the crosshair"
+  nearest_to_caster       "nearest to the caster"
+  within_attack_range     "within attack range"
+  same_squad              "of the same squad"
+  same_element_code       "Water/Fire/Wind/Iron/Electric Code allies" 등
+
+────────────────────────────────────────────────────────────────────────
+  [trigger event]  TriggerEvent
+────────────────────────────────────────────────────────────────────────
+
+  passive                 항상 활성 (조건/토큰 없으면 무조건)
+  enter_battle            전투 시작 시
+  skill_cast              ※ "이 group 이 속한 스킬(동일 슬롯) 자체 발동 시" 로 한정.
+                          '다른 슬롯' 지칭 문구("when using Burst Skill" 등)에는
+                          skill_cast 를 쓰지 말고 아래 전용 트리거를 쓴다.
+  skill1_use              자신의 Skill 1 사용 시  ("when using Skill 1")
+  skill2_use              자신의 Skill 2 사용 시  ("when using Skill 2")
+  burst_use               자신의 Burst Skill 사용 시 ("when using Burst Skill")
+                          ※ burst_start 와 다름: burst_start 는 Full Burst 타임 개시,
+                            burst_use 는 본인이 버스트 스킬을 발동한 이벤트.
+  burst_start             Full Burst 타임 시작 시 (3인 버스트 합산 직후)
+  burst_end               Full Burst 타임 종료 시
+  burst_active            Full Burst 타임 지속 중
+  on_hit                  명중 시
+  on_kill                 킬 시
+  last_bullet_hit         마지막 탄환 명중 시
+  on_reload               재장전 시
+  full_magazine           탄창 가득 찼을 때
+  low_ammo                탄약 임계치 이하
+  ally_hit                아군이 피격 시
+  ally_kill               아군 킬 시
+  hp_drops_below          HP가 임계치 이하로 감소 시
+  hp_above                HP가 임계치 이상인 동안
+  stack_threshold         버프 스택 수 도달 시 (stack_conditions 분기 내부용)
+  effect_expiry           버프/디버프 만료 시
+
+  ── 카운팅형 (반드시 trigger_count 와 함께) ────────────────────
+  every_n_shots           "after firing N time(s)"   자신이 N회 발사할 때마다
+  every_n_normal_attacks  "after N normal attack(s)" 자신의 N번째 평타마다
+  when_attacked_n_times   "when attacked N time(s)"  자신이 N회 피격 시
+  full_charge_hit         "when hitting ... with Full Charge" 풀차지 명중 시
+
+  ※ "after firing 300 time(s)" 를 on_hit 으로 분류하지 않는다.
+    런타임이 카운터와 히트 루프를 다르게 관리한다.
+
+────────────────────────────────────────────────────────────────────────
+  [condition_on]  ConditionOn  (TriggerBlock 차원)
+────────────────────────────────────────────────────────────────────────
+
+  none                    추가 조건 없음
+
+  ── B3 sub-type conditions ──
+  piercing_attack         관통탄 발사 시
+  hitting_parts           보스 파츠 힛 시
+  dot_instance            DoT 틱 인스턴스 시
+  sequential_hit          순차 대미지 인스턴스 시
+
+  ── B4 sub-type condition ──
+  distribution_attack     분배 대미지 인스턴스 시
+
+  ── Situational ──
+  full_burst              Full Burst Time 활성 중
+  hp_below_pct            자신/대상 HP < condition_threshold_pct
+  hp_above_pct            자신/대상 HP > condition_threshold_pct
+  in_cover                엄폐 중
+  out_of_cover            엄폐 해제 중
+  enemy_debuffed          대상에 디버프 존재 시
+
+────────────────────────────────────────────────────────────────────────
+  [action]  ActionType
+────────────────────────────────────────────────────────────────────────
+
+  buff                    아군 버프
+  debuff                  적 디버프
+  deal_damage             대미지 부여
+  heal                    HP 회복 (stat=heal 일반 / stat=lifesteal 흡혈)
+  grant_shield            실드 부여
+  grant_trait             특성 부여 ("Gains continuous Pierce" 등)
+                          stat=trait_*, value=1.0 flat, duration 으로 on/off.
+  fill_burst_gauge        버스트 게이지 충전
+  reduce_cooldown         쿨다운 감소
+  restore_ammo            탄약 복구
+  grant_immunity          면역 부여
+  dispel                  디스펠(해제)
+
+────────────────────────────────────────────────────────────────────────
+  스택 분기 (stack_conditions + [stack_mode])
+────────────────────────────────────────────────────────────────────────
+
+  "Once / Twice / Three times" 패턴 스킬은 groups[]를 비우고
+  stack_conditions[] 에만 기재된다. 각 원소:
+
+    threshold  이 분기가 활성화되는 스택 수 (1, 2, 3, ...)
+    groups     해당 분기의 TriggeredEffectGroup 목록.
+               각 group 의 trigger.event 는 'stack_threshold' 고정.
+
+  [stack_mode]
+    cumulative   원문에 "Previous effects trigger repeatedly" 문구 있음.
+                 threshold=N 시 branch[1..N] 전부 활성 (런타임에서 합산).
+                 예: 2B Survival — 3번째 발동 시 10.03 + 20.06 + 57.76
+    replace      'repeatedly' 문구 없음.
+                 threshold=N 시 branch[N]만 활성 (최상위 분기 교체).
+    null         stack_conditions 가 null 이면 stack_mode 도 null.
+
+────────────────────────────────────────────────────────────────────────
+  대미지 스킬 계수 표현 규약 (IMPORTANT)
+────────────────────────────────────────────────────────────────────────
+
+  action = deal_damage 인 EffectBlock 은 "스킬 계수"를 나타내며,
+  formula_bracket 은 **항상 null** 이어야 한다.
+
+  이유:
+    대미지 공식의 ... × 계수 자리와 (1 + Σdistrib_dmg) 자리는 서로 다르다.
+    런타임은 formula_bracket 필드가 같은 effect를 합산하므로,
+    계수(예: 2439%)를 브래킷에 넣으면 B4 summation에 섞여 계산이 파괴됨.
+
+  공격 종류 식별은 오직 TriggerBlock.condition_on 으로:
+    distribution_attack  → 분배 공격
+    piercing_attack      → 관통 공격
+    hitting_parts        → 파츠 공격
+    dot_instance         → DoT 틱
+    sequential_hit       → 순차 대미지
+    none                 → 일반 대미지 / true_dmg
+
+  buff / debuff / heal 등 다른 action 에서는 formula_bracket 을 정상 채운다.
+
+────────────────────────────────────────────────────────────────────────
+  무기 변환 기믹 처리 규약 (Pareto + Escape hatch)
+────────────────────────────────────────────────────────────────────────
+
+  대상 캐릭 (현재 ≤ 10명): Laplace (Treasure), Maxwell, Snow White,
+  Red Hood (Step 3), Snow White: Heavy Arms 등. 롱테일이므로 스키마 1급이
+  아닌 플래그 + 하드코딩으로 처리.
+
+  구성 요소 4가지를 각각 어떻게 표현할지:
+
+  (1) 무기 파라미터 덮어쓰기 ("Change the weapon in use")
+      → action=grant_trait, stat=trait_weapon_transformed
+         value=1.0, scale=flat, scale_base=none, duration=지속초
+      → 덮어쓸 수치 (Charge Time, Damage%, Full Charge Damage%,
+         Max Ammo, DoT%) 는 EffectBlock.notes 에 **원문 그대로 보존**.
+      → 실제 weapon 파라미터 대체는 시뮬레이터의 per-character override
+         table 이 담당 (C#).
+
+  (2) 조건부 대미지 타입 변환
+      ("Normal damage is applied as true damage when <조건>")
+      → action=grant_trait, stat=trait_true_dmg_conversion
+      → <조건> 은 별도 group 의 trigger.required_token 에 원문 보존.
+         예: required_token = "Hero Vision fully stacked"
+      → 런타임: 플래그 on 인 동안 normal hit 을 true 계산으로 전환.
+
+  (3) 부가 효과: 관통 등 기존 trait
+      → action=grant_trait, stat=trait_pierce (또는 추후 추가된 trait_*)
+
+  (4) 무기 변환과 동반되는 수치형 대미지
+      ("Initial Damage: 1455.72% of final ATK", "Damage Over Time: 22.2%")
+      → **별도 group 의 deal_damage**.
+         stat=true_dmg (또는 대미지 해석에 따라 조정), action=deal_damage,
+         scale=pct, scale_base=caster_atk, formula_bracket=null.
+      → DoT tick 주기는 현재 스키마에 필드 없음 → notes 보존.
+
+  예: Laplace (Treasure) Burst 는 다섯 개 group 으로 분해됨:
+      [a] trait_weapon_transformed (변환 플래그 + overrides in notes)
+      [b] trait_pierce (Additional Effect 1)
+      [c] trait_true_dmg_conversion + required_token="Hero Vision fully stacked"
+      [d] deal_damage: Initial 1455.72% (caster_atk)
+      [e] deal_damage: Hero Vision 5st 시 추가 11.9% (hit_target)
+
+────────────────────────────────────────────────────────────────────────
+  도메인 불변식 (Invariants) 요약
+────────────────────────────────────────────────────────────────────────
+
+  INV-1   stat ↔ formula_bracket 정합성 (atk_pct 는 b2/b4/b5 금지 등).
+  INV-2   deal_damage 는 formula_bracket = null 강제.
+  INV-3   카운팅형 event 는 trigger_count 필요 (역도 성립).
+  INV-3b  stack_threshold event 는 카운팅형이 아님 (trigger_count 금지).
+  INV-4a  stack_conditions 와 groups 동시 사용 금지 (분기는 stack_conditions 안에만).
+  INV-4b  stack_conditions 의 각 group.trigger.event 는 'stack_threshold' 고정.
+  INV-4c  stack_conditions 의 threshold 는 1부터 1씩 증가.
+  INV-4d  stack_conditions 가 있으면 stack_mode / stack_trigger 필수.
+  INV-5   stack_trigger 자체가 카운팅형이면 stack_trigger_count 필요.
+  INV-6   target_count 는 단일/지정 target 에서만 사용 (all_* 에서는 null).
+  INV-7   value < 0 금지. 감소는 action=debuff 로 표현 (▼ 는 부호가 아닌 의미).
+  INV-8   condition_threshold_pct 는 hp_below_pct / hp_above_pct 와만 사용.
+  INV-9a  action=grant_trait 의 stat 은 trait_* 화이트리스트 에만 허용:
+           {trait_pierce, trait_true_dmg_conversion, trait_weapon_transformed}.
+  INV-9b  grant_trait 은 value=1.0 + scale=flat + scale_base=none 강제.
+  INV-9c  trait_* stat 은 action=grant_trait 전용 (다른 action 사용 금지).
+  INV-10  lifesteal ↔ heal + scale_base=damage_dealt 쌍대성.
+  INV-12  target=self 에서 같은 stat × 같은 caster_base 는 collapse 금지:
+            (atk_pct, caster_atk), (atk_flat, caster_atk),
+            (max_hp_pct, caster_max_hp), (max_hp_flat, caster_max_hp),
+            (charge_speed, caster_charge_speed)
+          → scale_base=none 으로 단순화하라.
+          단, cross-stat (atk_flat × caster_max_hp 등) 은 허용.
+
+  ※ INV-11 (v2 의 pct_of_caster_stat 화이트리스트) 는 v3 에서 폐지됨.
+
+════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,1471 @@
+{
+  "2b": [
+    {
+      "skill_name": "Survival",
+      "skill_slot": "s1",
+      "raw_text": "■ Activates when using Burst Skill. Affects self.Effect changes according to the number of activation time(s). Previous effects trigger repeatedly:Once: Max HP ▲ 10.03% continuously.Twice: Max HP ▲ 20.06% continuously.Three times: Max HP ▲ 57.76% continuously",
+      "groups": [],
+      "stack_conditions": [
+        {
+          "threshold": 1,
+          "groups": [
+            {
+              "trigger": {
+                "event": "stack_threshold",
+                "trigger_count": null,
+                "condition_on": "none",
+                "condition_threshold_pct": null,
+                "required_token": null,
+                "internal_cooldown": null
+              },
+              "target": {
+                "target": "self",
+                "target_count": null,
+                "target_filter": "none",
+                "filter_token": null
+              },
+              "effects": [
+                {
+                  "stat": "max_hp_pct",
+                  "action": "buff",
+                  "value": 10.03,
+                  "scale": "pct",
+                  "scale_base": "none",
+                  "formula_bracket": null,
+                  "duration": null,
+                  "max_stacks": 3,
+                  "stack_increment": null,
+                  "notes": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "threshold": 2,
+          "groups": [
+            {
+              "trigger": {
+                "event": "stack_threshold",
+                "trigger_count": null,
+                "condition_on": "none",
+                "condition_threshold_pct": null,
+                "required_token": null,
+                "internal_cooldown": null
+              },
+              "target": {
+                "target": "self",
+                "target_count": null,
+                "target_filter": "none",
+                "filter_token": null
+              },
+              "effects": [
+                {
+                  "stat": "max_hp_pct",
+                  "action": "buff",
+                  "value": 20.06,
+                  "scale": "pct",
+                  "scale_base": "none",
+                  "formula_bracket": null,
+                  "duration": null,
+                  "max_stacks": 3,
+                  "stack_increment": null,
+                  "notes": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "threshold": 3,
+          "groups": [
+            {
+              "trigger": {
+                "event": "stack_threshold",
+                "trigger_count": null,
+                "condition_on": "none",
+                "condition_threshold_pct": null,
+                "required_token": null,
+                "internal_cooldown": null
+              },
+              "target": {
+                "target": "self",
+                "target_count": null,
+                "target_filter": "none",
+                "filter_token": null
+              },
+              "effects": [
+                {
+                  "stat": "max_hp_pct",
+                  "action": "buff",
+                  "value": 57.76,
+                  "scale": "pct",
+                  "scale_base": "none",
+                  "formula_bracket": null,
+                  "duration": null,
+                  "max_stacks": 3,
+                  "stack_increment": null,
+                  "notes": null
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "stack_mode": "cumulative",
+      "stack_trigger": "burst_use",
+      "stack_trigger_count": null,
+      "parsing_notes": "'Previous effects trigger repeatedly' indicates cumulative mode. The trigger 'when using Burst Skill' is mapped to stack_trigger=burst_use."
+    },
+    {
+      "skill_name": "Cluster Bomb",
+      "skill_slot": "s2",
+      "raw_text": "■ Activates after firing 300 time(s). Affects all enemies.Deals 167.45% of final ATK as damage.■ Activates when entering battle. Affects self.ATK ▲ 6.16% of the caster's final Max HP continuously.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "every_n_shots",
+            "trigger_count": 300,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_enemies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "attack_dmg",
+              "action": "deal_damage",
+              "value": 167.45,
+              "scale": "pct",
+              "scale_base": "caster_atk",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            }
+          ]
+        },
+        {
+          "trigger": {
+            "event": "enter_battle",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "atk_flat",
+              "action": "buff",
+              "value": 6.16,
+              "scale": "pct",
+              "scale_base": "caster_max_hp",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "ATK ratio of caster's Max HP is parsed as atk_flat with caster_max_hp scale_base."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": null
+    },
+    {
+      "skill_name": "Series of Attacks",
+      "skill_slot": "burst",
+      "raw_text": "■ Affects all enemies.Deals 2439.36% of final ATK as Distributed Damage.■ Affects 1 enemy unit(s) with the highest Max HP.Deals 792% of final ATK as additional damage.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "skill_cast",
+            "trigger_count": null,
+            "condition_on": "distribution_attack",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_enemies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "distrib_dmg",
+              "action": "deal_damage",
+              "value": 2439.36,
+              "scale": "pct",
+              "scale_base": "caster_atk",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Distributed Damage skill coefficient. condition_on=distribution_attack used to specify damage type."
+            }
+          ]
+        },
+        {
+          "trigger": {
+            "event": "skill_cast",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "single_enemy",
+            "target_count": 1,
+            "target_filter": "highest_max_hp",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "attack_dmg",
+              "action": "deal_damage",
+              "value": 792.0,
+              "scale": "pct",
+              "scale_base": "caster_atk",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Additional damage to the target with the highest Max HP."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": null
+    }
+  ],
+  "a2": [
+    {
+      "skill_name": "Output Increased",
+      "skill_slot": "s1",
+      "raw_text": "■ Activates when using Burst Skill. Affects self.Charge Damage ▲ 110.44% for 15 sec.Explosion Radius ▲ 100.74% for 15 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "burst_use",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "charge_dmg",
+              "action": "buff",
+              "value": 110.44,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": "coeff_charge_add",
+              "duration": 15.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            },
+            {
+              "stat": "attack_dmg",
+              "action": "buff",
+              "value": 100.74,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": "b3_attack_dmg",
+              "duration": 15.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Explosion Radius is mapped to attack_dmg/B3 as it scales area damage effectiveness in NIKKE logic."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": null
+    },
+    {
+      "skill_name": "Slow Charge Attack",
+      "skill_slot": "s2",
+      "raw_text": "■ Activates when hitting a target with Full Charge. Affects the target.Deals 30.1% of final ATK as additional damage.■ Activates when hitting a target with Full Charge. Affects self.Damage to Parts ▲ 40.88% for 3 sec",
+      "groups": [
+        {
+          "trigger": {
+            "event": "full_charge_hit",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "hit_target",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "attack_dmg",
+              "action": "deal_damage",
+              "value": 30.1,
+              "scale": "pct",
+              "scale_base": "caster_atk",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Full Charge 히트 시 발생하는 추가 대미지 계수."
+            }
+          ]
+        },
+        {
+          "trigger": {
+            "event": "full_charge_hit",
+            "trigger_count": null,
+            "condition_on": "hitting_parts",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "parts_dmg",
+              "action": "buff",
+              "value": 40.88,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": "b3_attack_dmg",
+              "duration": 3.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "B3 가산 브래킷."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": "두 효과 모두 Full Charge 히트 시 발동되나, 대상과 스탯 성격이 달라 별도 그룹으로 분리함."
+    },
+    {
+      "skill_name": "Mode B",
+      "skill_slot": "burst",
+      "raw_text": "■ Affects self.Mode B: Own HP decreases every second while ATK and Charge Speed increase. If own HP dips below 40%, Mode B is deactivated.Effect 1: Current HP ▼ 3.99% every 1 sec.Effect 2: ATK ▲ 15.19% Effect 3: Charge Speed ▲ 35.88%",
+      "groups": [
+        {
+          "trigger": {
+            "event": "burst_active",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": "Mode B",
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "max_hp_pct",
+              "action": "debuff",
+              "value": -3.99,
+              "scale": "pct",
+              "scale_base": "target_current_hp",
+              "formula_bracket": null,
+              "duration": 1.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Effect 1: HP drain every second while Mode B is active."
+            },
+            {
+              "stat": "atk_pct",
+              "action": "buff",
+              "value": 15.19,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Effect 2: ATK increase while Mode B is active."
+            },
+            {
+              "stat": "charge_speed",
+              "action": "buff",
+              "value": 35.88,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Effect 3: Charge Speed increase while Mode B is active."
+            }
+          ]
+        },
+        {
+          "trigger": {
+            "event": "hp_drops_below",
+            "trigger_count": null,
+            "condition_on": "hp_below_pct",
+            "condition_threshold_pct": 40.0,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "immunity",
+              "action": "dispel",
+              "value": 1.0,
+              "scale": "flat",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Deactivates Mode B when HP falls below 40%."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": "Mode B is treated as a toggle/state active during Burst. HP drain is mapped to a 1s duration debuff on current HP. Deactivation at 40% HP is modeled as a dispel trigger."
+    }
+  ],
+  "ada-wong": [
+    {
+      "skill_name": "Covert Support",
+      "skill_slot": "s1",
+      "raw_text": "■ Activates when entering Full Burst. Affects all Burst Stage 3 allies who previously cast their Burst Skill.ATK ▲ 60% of caster's ATK for 10 sec.True Damage ▲ 50% for 10 sec.Recovers 10% of damage as HP for 10 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "burst_start",
+            "trigger_count": null,
+            "condition_on": "full_burst",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_allies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": "Burst Stage 3 allies who previously cast their Burst Skill"
+          },
+          "effects": [
+            {
+              "stat": "atk_flat",
+              "action": "buff",
+              "value": 60.0,
+              "scale": "pct",
+              "scale_base": "caster_atk",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            },
+            {
+              "stat": "true_dmg",
+              "action": "buff",
+              "value": 50.0,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            },
+            {
+              "stat": "lifesteal",
+              "action": "heal",
+              "value": 10.0,
+              "scale": "pct",
+              "scale_base": "damage_dealt",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": "ATK ▲ X% of caster's ATK is parsed as atk_flat with scale_base=caster_atk. 'Recovers X% of damage as HP' is parsed as lifesteal with scale_base=damage_dealt."
+    },
+    {
+      "skill_name": "Flash Grenade",
+      "skill_slot": "s2",
+      "raw_text": "■ Activates during Full Burst. Affects enemies within attack range nearest to the crosshair every 2 sec.Flash Grenade Toss: Deals 420% of final ATK as True Damage.■ Activates when using Burst Skill. Affects self.Flash Grenade Toss activation time condition ▼ 1 sec for 10 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "burst_active",
+            "trigger_count": null,
+            "condition_on": "full_burst",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": 2.0
+          },
+          "target": {
+            "target": "single_enemy",
+            "target_count": null,
+            "target_filter": "nearest_to_crosshair",
+            "filter_token": "within attack range"
+          },
+          "effects": [
+            {
+              "stat": "true_dmg",
+              "action": "deal_damage",
+              "value": 420.0,
+              "scale": "pct",
+              "scale_base": "caster_atk",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "True Damage deals damage based on final ATK ignoring defense."
+            }
+          ]
+        },
+        {
+          "trigger": {
+            "event": "burst_use",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "burst_cooldown",
+              "action": "reduce_cooldown",
+              "value": -1.0,
+              "scale": "seconds",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Reduces the interval (activation time condition) of the Flash Grenade Toss effect."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": null
+    },
+    {
+      "skill_name": "Secret Agent",
+      "skill_slot": "burst",
+      "raw_text": "■ Affects self.ATK ▲ 40% for 10 sec.True Damage ▲ 42% for 10 sec.Special Modification Function: Decreases Charge Speed but increases Charge Damage for 1 round(s).Effect 1: Charge Speed ▼ 300%.Effect 2: Charge Damage ▲ 1500%.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "skill_cast",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "atk_pct",
+              "action": "buff",
+              "value": 40.0,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            },
+            {
+              "stat": "true_dmg",
+              "action": "buff",
+              "value": 42.0,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            },
+            {
+              "stat": "charge_speed",
+              "action": "debuff",
+              "value": -300.0,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "1 round(s) duration usually implies next shot/action."
+            },
+            {
+              "stat": "charge_dmg",
+              "action": "buff",
+              "value": 1500.0,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": "coeff_charge_add",
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": "Special Modification Function is parsed as a single group triggered by skill_cast. Charge Speed ▼ 300% is a massive debuff to force slow charging for the high damage shot."
+    }
+  ],
+  "ade": [
+    {
+      "skill_name": "Cleaning Time",
+      "skill_slot": "s1",
+      "raw_text": "■ Activates when entering battle. Affects all allies.Perfect Maid: Gain debuff immunity to 1 debuff(s) and stacks up to 1 times(s) continuously.■ Activates when own HP falls below 90%. Affects all allies.ATK ▲ 5.19% of caster's ATK for 5 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "enter_battle",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_allies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "immunity",
+              "action": "grant_immunity",
+              "value": 1.0,
+              "scale": "flat",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": 1,
+              "stack_increment": null,
+              "notes": "Perfect Maid: 1 debuff immunity."
+            }
+          ]
+        },
+        {
+          "trigger": {
+            "event": "hp_drops_below",
+            "trigger_count": null,
+            "condition_on": "hp_below_pct",
+            "condition_threshold_pct": 90.0,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_allies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "atk_flat",
+              "action": "buff",
+              "value": 5.19,
+              "scale": "pct",
+              "scale_base": "caster_atk",
+              "formula_bracket": null,
+              "duration": 5.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "ATK ▲ X% of caster's ATK -> atk_flat + caster_atk."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": null
+    },
+    {
+      "skill_name": "Rest Time",
+      "skill_slot": "s2",
+      "raw_text": "■ Activates after 420 normal attack(s). Affects all allies.Perfect Maid: Gain debuff immunity to 1 debuff(s) and stacks up for 1 time continuously.■ Activates after 120 normal attack(s). Affects all allies.Max HP ▲ 15.62% of caster's Max HP without restoring HP, lasts for 5 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "every_n_normal_attacks",
+            "trigger_count": 420,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_allies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "immunity",
+              "action": "grant_immunity",
+              "value": 1.0,
+              "scale": "flat",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": 1,
+              "stack_increment": null,
+              "notes": "Perfect Maid: debuff immunity to 1 debuff(s)."
+            }
+          ]
+        },
+        {
+          "trigger": {
+            "event": "every_n_normal_attacks",
+            "trigger_count": 120,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_allies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "max_hp_flat",
+              "action": "buff",
+              "value": 15.62,
+              "scale": "pct",
+              "scale_base": "caster_max_hp",
+              "formula_bracket": null,
+              "duration": 5.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Max HP ▲ X% of caster's Max HP -> stat=max_hp_flat + scale_base=caster_max_hp. 'without restoring HP' is a standard behavior for Max HP buffs unless specified."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": null
+    },
+    {
+      "skill_name": "Mealtime",
+      "skill_slot": "burst",
+      "raw_text": "■ Affects all allies.Max HP ▲ 25.15% of caster's Max HP without restoring HP, lasts for 10 sec.ATK ▲ 10.15% of caster's ATK for 10 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "skill_cast",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_allies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "max_hp_flat",
+              "action": "buff",
+              "value": 25.15,
+              "scale": "pct",
+              "scale_base": "caster_max_hp",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Max HP ▲ X% of caster's Max HP -> stat=max_hp_flat, scale_base=caster_max_hp. 'without restoring HP' is a standard Max HP buff behavior."
+            },
+            {
+              "stat": "atk_flat",
+              "action": "buff",
+              "value": 10.15,
+              "scale": "pct",
+              "scale_base": "caster_atk",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "ATK ▲ X% of caster's ATK -> stat=atk_flat, scale_base=caster_atk."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": null
+    }
+  ],
+  "ade-agent-bunny": [
+    {
+      "skill_name": "Agent's Gaze",
+      "skill_slot": "s1",
+      "raw_text": "■ Activates when landing Full Charge attacks on targets within the effective range. Affects all allies.ATK ▲ 15.2% of caster's ATK for 5 sec.■ Activates when attacking with Full Charge. Affects self.Spy Lens: Minimum Effective Range ▲ 4.44%, stacks up to 10 time(s) and lasts for 5 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "full_charge_hit",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": "within the effective range",
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_allies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "atk_flat",
+              "action": "buff",
+              "value": 15.2,
+              "scale": "pct",
+              "scale_base": "caster_atk",
+              "formula_bracket": null,
+              "duration": 5.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "ATK ▲ X% of caster's ATK -> atk_flat + caster_atk"
+            }
+          ]
+        },
+        {
+          "trigger": {
+            "event": "full_charge_hit",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "move_speed",
+              "action": "buff",
+              "value": 4.44,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": 5.0,
+              "max_stacks": 10,
+              "stack_increment": 1,
+              "notes": "Effective Range is mapped to move_speed as a proxy for range-related stats in the current schema, or treated as a custom token 'Spy Lens'."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": "Effective Range is not a standard stat in the schema; mapped to move_speed as a placeholder for range/mobility or handled via required_token 'Spy Lens'. First group requires hitting within effective range, second group triggers on any full charge attack."
+    },
+    {
+      "skill_name": "Agent's Movement",
+      "skill_slot": "s2",
+      "raw_text": "■ Activates when landing Full Charge attacks on targets within the effective range. Affects all allies.Pierce Damage ▲ 18.36% for 5 sec.■ Activates only if Spy Lens is fully stacked. Affects self.Gain Pierce continuously.ATK ▲ 16% continuously.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "full_charge_hit",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": "within the effective range",
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_allies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "pierce_dmg",
+              "action": "buff",
+              "value": 18.36,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": "b3_attack_dmg",
+              "duration": 5.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "B3 가산, 관통 대미지 증가."
+            }
+          ]
+        },
+        {
+          "trigger": {
+            "event": "passive",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": "Spy Lens is fully stacked",
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "trait_pierce",
+              "action": "grant_trait",
+              "value": 1.0,
+              "scale": "flat",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            },
+            {
+              "stat": "atk_pct",
+              "action": "buff",
+              "value": 16.0,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": "Spy Lens is a character-specific token/stack. 'within the effective range' is treated as a required condition for the trigger."
+    },
+    {
+      "skill_name": "Cutting-Edge Agent Equipment",
+      "skill_slot": "burst",
+      "raw_text": "■ Affects self.Minimum Effective Range ▲ 55.56% for 10 sec.■ Affects all allies.Attack Damage ▲ 55.04% for 10 sec.Pierce Damage ▲ 10.13% for 10 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "skill_cast",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "move_speed",
+              "action": "buff",
+              "value": 55.56,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "'Minimum Effective Range' is not in schema; mapped to move_speed as a placeholder for range-related mobility stats."
+            }
+          ]
+        },
+        {
+          "trigger": {
+            "event": "skill_cast",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_allies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "attack_dmg",
+              "action": "buff",
+              "value": 55.04,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": "b3_attack_dmg",
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            },
+            {
+              "stat": "pierce_dmg",
+              "action": "buff",
+              "value": 10.13,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": "b3_attack_dmg",
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "B3 additive, applies only to piercing attacks."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": null
+    }
+  ],
+  "admi": [
+    {
+      "skill_name": "Helping Hand",
+      "skill_slot": "s1",
+      "raw_text": "■ Activates when attacked 20 time(s). Affects all allies.Charge Damage Multiplier ▲ 9.59% for 20 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "when_attacked_n_times",
+            "trigger_count": 20,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_allies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "charge_dmg_mult",
+              "action": "buff",
+              "value": 9.59,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": "coeff_charge_mult",
+              "duration": 20.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "원문에 'Multiplier'가 명시되어 있으므로 곱셈 축(coeff_charge_mult)으로 분류."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": null
+    },
+    {
+      "skill_name": "Kitten's Breath",
+      "skill_slot": "s2",
+      "raw_text": "■ Affects 2 allies with the highest ATK.Damage Taken ▼ 28.65% for 10 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "skill_cast",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "single_ally",
+            "target_count": 2,
+            "target_filter": "highest_atk",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "damage_taken",
+              "action": "buff",
+              "value": -28.65,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": "b4_dmg_taken",
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "▼ indicates a reduction in damage taken, which is a buff for allies. Value is negative to represent the reduction."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": "Targeting '2 allies with the highest ATK' is mapped to target='single_ally' with target_count=2 and target_filter='highest_atk' per schema rules."
+    },
+    {
+      "skill_name": "Love Returned",
+      "skill_slot": "burst",
+      "raw_text": "■ Affects all allies. Reloading Speed ▲ 50.91% for 10 sec.Critical Damage ▲ 28.34% for 10 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "skill_cast",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "all_allies",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "reload_speed",
+              "action": "buff",
+              "value": 50.91,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            },
+            {
+              "stat": "crit_dmg",
+              "action": "buff",
+              "value": 28.34,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": "b2_crit_core",
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": null
+    }
+  ],
+  "alice": [
+    {
+      "skill_name": "Energizing Carrot",
+      "skill_slot": "s1",
+      "raw_text": "■ Activates when entering Full Burst. Affects 2 ally units with the highest ATK. Charge Speed ▲ 11.67% of caster's Charge Speed for 10 sec.Charge Damage ▲ 7% for 10 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "burst_start",
+            "trigger_count": null,
+            "condition_on": "full_burst",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "single_ally",
+            "target_count": 2,
+            "target_filter": "highest_atk",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "charge_speed",
+              "action": "buff",
+              "value": 11.67,
+              "scale": "pct",
+              "scale_base": "caster_charge_speed",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "scale_base=caster_charge_speed applies caster's base speed as a flat reduction to target's charge time."
+            },
+            {
+              "stat": "charge_dmg",
+              "action": "buff",
+              "value": 7.0,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": "coeff_charge_add",
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "No 'Multiplier' in text, so it belongs to the additive charge damage bracket."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": "Triggered by entering Full Burst (burst_start). Targets 2 allies with highest ATK. Charge Speed uses caster's base as reference. Charge Damage is additive (B3-independent)."
+    },
+    {
+      "skill_name": "Healthy Carrot",
+      "skill_slot": "s2",
+      "raw_text": "■ Affects self. Activates when above 80% HP.Gains continuous Pierce.■ Affects self. Activates when HP falls below 80%.Continuously recover HP by 8.12% of attack damage.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "hp_above",
+            "trigger_count": null,
+            "condition_on": "hp_above_pct",
+            "condition_threshold_pct": 80.0,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "trait_pierce",
+              "action": "grant_trait",
+              "value": 1.0,
+              "scale": "flat",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Gains continuous Pierce"
+            }
+          ]
+        },
+        {
+          "trigger": {
+            "event": "on_hit",
+            "trigger_count": null,
+            "condition_on": "hp_below_pct",
+            "condition_threshold_pct": 80.0,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "lifesteal",
+              "action": "heal",
+              "value": 8.12,
+              "scale": "pct",
+              "scale_base": "damage_dealt",
+              "formula_bracket": null,
+              "duration": null,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": "Recover HP by X% of attack damage = lifesteal. Continuously + % of damage = on_hit."
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": "Two separate HP threshold conditions. Pierce is a trait grant. HP recovery based on attack damage is parsed as lifesteal with scale_base=damage_dealt."
+    },
+    {
+      "skill_name": "Wonderland",
+      "skill_slot": "burst",
+      "raw_text": "■ Affects self. Charging Speed ▲ 80.15% for 10 sec.ATK ▲ 55.12% for 10 sec.",
+      "groups": [
+        {
+          "trigger": {
+            "event": "skill_cast",
+            "trigger_count": null,
+            "condition_on": "none",
+            "condition_threshold_pct": null,
+            "required_token": null,
+            "internal_cooldown": null
+          },
+          "target": {
+            "target": "self",
+            "target_count": null,
+            "target_filter": "none",
+            "filter_token": null
+          },
+          "effects": [
+            {
+              "stat": "charge_speed",
+              "action": "buff",
+              "value": 80.15,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            },
+            {
+              "stat": "atk_pct",
+              "action": "buff",
+              "value": 55.12,
+              "scale": "pct",
+              "scale_base": "none",
+              "formula_bracket": null,
+              "duration": 10.0,
+              "max_stacks": null,
+              "stack_increment": null,
+              "notes": null
+            }
+          ]
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "stack_trigger_count": null,
+      "parsing_notes": null
+    }
+  ]
+}

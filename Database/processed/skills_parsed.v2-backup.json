@@ -1,0 +1,312 @@
+{
+  "2b": [
+    {
+      "skill_name": "Survival",
+      "skill_slot": "s1",
+      "raw_text": "■ Activates when using Burst Skill. Affects self.Effect changes according to the number of activation time(s). Previous effects trigger repeatedly:Once: Max HP ▲ 10.03% continuously.Twice: Max HP ▲ 20.06% continuously.Three times: Max HP ▲ 57.76% continuously",
+      "effects": [],
+      "stack_conditions": [
+        {
+          "threshold": 1,
+          "effects": [
+            {
+              "stat": "max_hp_pct",
+              "action": "buff",
+              "value": 10.03,
+              "value_basis": "pct",
+              "formula_bracket": null,
+              "target": "self",
+              "trigger": "stack_threshold",
+              "duration": null,
+              "max_stacks": 3,
+              "stack_increment": null,
+              "internal_cooldown": null,
+              "trigger_count": null,
+              "target_count": null,
+              "target_filter": "none",
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "notes": null
+            }
+          ]
+        },
+        {
+          "threshold": 2,
+          "effects": [
+            {
+              "stat": "max_hp_pct",
+              "action": "buff",
+              "value": 20.06,
+              "value_basis": "pct",
+              "formula_bracket": null,
+              "target": "self",
+              "trigger": "stack_threshold",
+              "duration": null,
+              "max_stacks": 3,
+              "stack_increment": null,
+              "internal_cooldown": null,
+              "trigger_count": null,
+              "target_count": null,
+              "target_filter": "none",
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "notes": null
+            }
+          ]
+        },
+        {
+          "threshold": 3,
+          "effects": [
+            {
+              "stat": "max_hp_pct",
+              "action": "buff",
+              "value": 57.76,
+              "value_basis": "pct",
+              "formula_bracket": null,
+              "target": "self",
+              "trigger": "stack_threshold",
+              "duration": null,
+              "max_stacks": 3,
+              "stack_increment": null,
+              "internal_cooldown": null,
+              "trigger_count": null,
+              "target_count": null,
+              "target_filter": "none",
+              "condition_on": "none",
+              "condition_threshold_pct": null,
+              "notes": null
+            }
+          ]
+        }
+      ],
+      "stack_mode": "cumulative",
+      "stack_trigger": "burst_use",
+      "parsing_notes": "'Previous effects trigger repeatedly' indicates cumulative stack mode. Trigger 'when using Burst Skill' is mapped to burst_use. Target is self, so value_basis is pct."
+    },
+    {
+      "skill_name": "Cluster Bomb",
+      "skill_slot": "s2",
+      "raw_text": "■ Activates after firing 300 time(s). Affects all enemies.Deals 167.45% of final ATK as damage.■ Activates when entering battle. Affects self.ATK ▲ 6.16% of the caster's final Max HP continuously.",
+      "effects": [],
+      "stack_conditions": null,
+      "parsing_notes": "[PARSE_ERROR] 1 validation error for SkillParsed\neffects.1\n  Value error, [INV-11] value_basis=pct_of_caster_stat 은 caster 기준 계산이 정의된 stat 에서만 허용 (['charge_speed', 'max_hp_flat', 'max_hp_pct']). got stat=atk_ratio_of_caster. [type=value_error, input_value={'stat': 'atk_ratio_of_ca...atio_of_caster 사용.\"}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/value_error"
+    },
+    {
+      "skill_name": "Series of Attacks",
+      "skill_slot": "burst",
+      "raw_text": "■ Affects all enemies.Deals 2439.36% of final ATK as Distributed Damage.■ Affects 1 enemy unit(s) with the highest Max HP.Deals 792% of final ATK as additional damage.",
+      "effects": [
+        {
+          "stat": "distrib_dmg",
+          "action": "deal_damage",
+          "value": 2439.36,
+          "value_basis": "pct_of_caster_atk",
+          "formula_bracket": null,
+          "target": "all_enemies",
+          "trigger": "skill_cast",
+          "duration": null,
+          "max_stacks": null,
+          "stack_increment": null,
+          "internal_cooldown": null,
+          "trigger_count": null,
+          "target_count": null,
+          "target_filter": "none",
+          "condition_on": "distribution_attack",
+          "condition_threshold_pct": null,
+          "notes": "분배 공격 스킬 계수. formula_bracket은 null — B4의 Σdistrib_dmg 버프 합산과 다른 위치(계수)에 들어감. 공격 종류 식별은 condition_on=distribution_attack 로만 표시."
+        },
+        {
+          "stat": "attack_dmg",
+          "action": "deal_damage",
+          "value": 792.0,
+          "value_basis": "pct_of_caster_atk",
+          "formula_bracket": null,
+          "target": "single_enemy",
+          "trigger": "skill_cast",
+          "duration": null,
+          "max_stacks": null,
+          "stack_increment": null,
+          "internal_cooldown": null,
+          "trigger_count": null,
+          "target_count": 1,
+          "target_filter": "highest_max_hp",
+          "condition_on": "none",
+          "condition_threshold_pct": null,
+          "notes": "'1 enemy unit(s) with the highest Max HP' → target=single_enemy, target_count=1, target_filter=highest_max_hp. deal_damage action은 항상 formula_bracket=null."
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "parsing_notes": null
+    }
+  ],
+  "a2": [
+    {
+      "skill_name": "Output Increased",
+      "skill_slot": "s1",
+      "raw_text": "■ Activates when using Burst Skill. Affects self.Charge Damage ▲ 110.44% for 15 sec.Explosion Radius ▲ 100.74% for 15 sec.",
+      "effects": [
+        {
+          "stat": "charge_dmg",
+          "action": "buff",
+          "value": 110.44,
+          "value_basis": "pct",
+          "formula_bracket": "coeff_charge_add",
+          "target": "self",
+          "trigger": "burst_use",
+          "duration": 15.0,
+          "max_stacks": null,
+          "stack_increment": null,
+          "internal_cooldown": null,
+          "trigger_count": null,
+          "target_count": null,
+          "target_filter": "none",
+          "condition_on": "none",
+          "condition_threshold_pct": null,
+          "notes": "원문에 'Multiplier'가 없으므로 가산 축(coeff_charge_add)으로 분류."
+        },
+        {
+          "stat": "attack_dmg",
+          "action": "buff",
+          "value": 100.74,
+          "value_basis": "pct",
+          "formula_bracket": "b3_attack_dmg",
+          "target": "self",
+          "trigger": "burst_use",
+          "duration": 15.0,
+          "max_stacks": null,
+          "stack_increment": null,
+          "internal_cooldown": null,
+          "trigger_count": null,
+          "target_count": null,
+          "target_filter": "none",
+          "condition_on": "none",
+          "condition_threshold_pct": null,
+          "notes": "Explosion Radius는 스키마에 명시적 스탯이 없으나, 범위 공격의 효율을 높이는 B3 계열 버프로 간주하여 attack_dmg로 매핑하거나 런타임 주의 필요."
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "parsing_notes": "S1 스킬 내에서 'when using Burst Skill' 트리거가 발생하므로 trigger=burst_use를 사용함."
+    },
+    {
+      "skill_name": "Slow Charge Attack",
+      "skill_slot": "s2",
+      "raw_text": "■ Activates when hitting a target with Full Charge. Affects the target.Deals 30.1% of final ATK as additional damage.■ Activates when hitting a target with Full Charge. Affects self.Damage to Parts ▲ 40.88% for 3 sec",
+      "effects": [
+        {
+          "stat": "attack_dmg",
+          "action": "deal_damage",
+          "value": 30.1,
+          "value_basis": "pct_of_caster_atk",
+          "formula_bracket": null,
+          "target": "hit_target",
+          "trigger": "full_charge_hit",
+          "duration": null,
+          "max_stacks": null,
+          "stack_increment": null,
+          "internal_cooldown": null,
+          "trigger_count": null,
+          "target_count": null,
+          "target_filter": "none",
+          "condition_on": "none",
+          "condition_threshold_pct": null,
+          "notes": "추가 대미지 계수. deal_damage action은 formula_bracket=null."
+        },
+        {
+          "stat": "parts_dmg",
+          "action": "buff",
+          "value": 40.88,
+          "value_basis": "pct",
+          "formula_bracket": "b3_attack_dmg",
+          "target": "self",
+          "trigger": "full_charge_hit",
+          "duration": 3.0,
+          "max_stacks": null,
+          "stack_increment": null,
+          "internal_cooldown": null,
+          "trigger_count": null,
+          "target_count": null,
+          "target_filter": "none",
+          "condition_on": "hitting_parts",
+          "condition_threshold_pct": null,
+          "notes": "B3 가산, 보스 파츠 타격 시 적용."
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "parsing_notes": null
+    },
+    {
+      "skill_name": "Mode B",
+      "skill_slot": "burst",
+      "raw_text": "■ Affects self.Mode B: Own HP decreases every second while ATK and Charge Speed increase. If own HP dips below 40%, Mode B is deactivated.Effect 1: Current HP ▼ 3.99% every 1 sec.Effect 2: ATK ▲ 15.19% Effect 3: Charge Speed ▲ 35.88%",
+      "effects": [
+        {
+          "stat": "heal",
+          "action": "debuff",
+          "value": -3.99,
+          "value_basis": "pct_of_current_hp",
+          "formula_bracket": null,
+          "target": "self",
+          "trigger": "skill_cast",
+          "duration": null,
+          "max_stacks": null,
+          "stack_increment": null,
+          "internal_cooldown": null,
+          "trigger_count": null,
+          "target_count": null,
+          "target_filter": "none",
+          "condition_on": "hp_above_pct",
+          "condition_threshold_pct": 40.0,
+          "notes": "Every 1 sec HP reduction. Deactivates below 40% HP."
+        },
+        {
+          "stat": "atk_pct",
+          "action": "buff",
+          "value": 15.19,
+          "value_basis": "pct",
+          "formula_bracket": null,
+          "target": "self",
+          "trigger": "skill_cast",
+          "duration": null,
+          "max_stacks": null,
+          "stack_increment": null,
+          "internal_cooldown": null,
+          "trigger_count": null,
+          "target_count": null,
+          "target_filter": "none",
+          "condition_on": "hp_above_pct",
+          "condition_threshold_pct": 40.0,
+          "notes": null
+        },
+        {
+          "stat": "charge_speed",
+          "action": "buff",
+          "value": 35.88,
+          "value_basis": "pct",
+          "formula_bracket": null,
+          "target": "self",
+          "trigger": "skill_cast",
+          "duration": null,
+          "max_stacks": null,
+          "stack_increment": null,
+          "internal_cooldown": null,
+          "trigger_count": null,
+          "target_count": null,
+          "target_filter": "none",
+          "condition_on": "hp_above_pct",
+          "condition_threshold_pct": 40.0,
+          "notes": null
+        }
+      ],
+      "stack_conditions": null,
+      "stack_mode": null,
+      "stack_trigger": null,
+      "parsing_notes": "Mode B is a toggle/state skill that persists as long as HP is above 40%. HP reduction is treated as a negative heal action on current HP."
+    }
+  ]
+}
