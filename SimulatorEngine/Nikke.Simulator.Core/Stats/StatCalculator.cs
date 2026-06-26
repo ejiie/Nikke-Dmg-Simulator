@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Nikke.Simulator.Core.Stats
@@ -24,6 +22,8 @@ namespace Nikke.Simulator.Core.Stats
         public bool IsPartsHit;        // 부위 타격 여부
         public bool IsDotDamage;       // 도트 대미지 여부
         public bool IsSequentialHit;   // 연속 공격 여부
+        public bool IsDistributionHit; // 분배 공격 여부 (B4 distrib_dmg 게이트)
+        public bool IsTrueDamage;      // [A2] 방어 무시 공격 여부 (FinalDef := 0 로 치환)
 
         // 2-b. [H3] IsCrit 결정용 확률값. 시뮬 루프의 RNG 가 이 값과 비교하여 IsCrit 를 세팅.
         // 기본 15% + OL StatCritical + 버프 합산.
@@ -42,6 +42,7 @@ namespace Nikke.Simulator.Core.Stats
         public double SumPartsDmg;
         public double SumDotDmg;
         public double SumSequentialDmg;
+        public double SumTrueDmgBuff;  // [A2] IsTrueDamage 시에만 B3 에 가산되는 트루 대미지 증가 (큐브 TrueDamageBonus 등)
 
         // 5. [B4] 받뎀증 및 분배/추가 대미지 브래킷
         public double SumDamageTaken;     // 적에게 걸린 디버프 합산
@@ -51,7 +52,7 @@ namespace Nikke.Simulator.Core.Stats
         public double SumStrongElem;      // 0.1(기본 우월) + 오버로드/버프 합산
 
         // 7. 차지 대미지 2축 (Full Charge 전용)
-        public double ChargeDmgBase;      // 무기별 기본 차지 배율 (예: 스나 2.5)
+        public double ChargeDmgBase;      // 차지 기본 배율. JSON basicAttack.chargeDamage per-character (대부분 2.5, 일부 3.5 등). 비차지 무기는 1.0.
         public double SumChargeDmgAdd;    // 가산 축 (Charge Damage ▲)
         public double SumChargeDmgMult;   // 곱산 축 (Charge Damage Multiplier ▲)
 
@@ -72,90 +73,80 @@ namespace Nikke.Simulator.Core.Stats
         }
     }
 
+    /// <summary>
+    /// per-tick 대미지 공식 전담 (B2~B5 + True Damage + 차지 2축).
+    ///
+    /// 책임 분리 (2026-04-23 · Option D 리팩토링):
+    ///   - StatCalculator    : per-tick 대미지 공식 (이 클래스)
+    ///   - OverloadProcessor : pre-combat native stat 조립 (OL 합산)
+    /// 이전까지 OL 합산 로직이 이 클래스에 혼재되어 있었으나 OverloadProcessor 로 이관됨.
+    /// </summary>
     public static class StatCalculator
     {
         /// <summary>
-        /// 니케 오버로드 합산식
-        /// </summary>
-        /// <param name="nativeStat">기초 스탯</param>
-        /// <param name="olPercents">오버로드 퍼센트 옵션 리스트 (예: { 0.1181, 0.1181, 0.089 })</param>
-        /// <param name="decimals">반올림할 소수점 자리수 (공격력/장탄=0, 차지속도=1)</param>
-        /// <returns>최종 오버로드 보너스 수치</returns>
-        private static double CalculateNikkeOverloadBonus(double nativeStat, IEnumerable<double> olPercents, int decimals = 0)
-        {
-            if (olPercents == null || !olPercents.Any())
-                return 0;
-
-            double totalBonus = 0;
-
-            // Rule 2: 수치가 동일한 옵션은 미리 합산한다 (Grouping)
-            var groupedPercents = olPercents.GroupBy(p => p);
-
-            foreach (var group in groupedPercents)
-            {
-                double percentValue = group.Key;
-                int count = group.Count(); // 동일한 수치의 개수
-
-                // 1. 동일 옵션의 퍼센트를 먼저 합산(percentValue * count)하여 기초 스탯에 곱함
-                double groupBonus = nativeStat * (percentValue * count);
-
-                // 2. Rule 1: 그룹 단위로 계산된 값을 지정된 소수점 자리에서 반올림 (MidpointRounding.AwayFromZero가 일반적인 사사오입)
-                totalBonus += Math.Round(groupBonus, decimals, MidpointRounding.AwayFromZero);
-            }
-
-            return totalBonus;
-        }
-
-        /// <summary>
-        /// 기초 스탯(Native)과 오버로드(OL) 옵션을 합산하여 전투 진입 전 최종 기초 스탯을 계산합니다.
-        /// </summary>
-        public static double CalculateFinalBaseStat(double nativeStat, IEnumerable<double> olPercents, double olFlatSum = 0, int decimals = 0)
-        {
-            // 오버로드 보너스를 니케식으로 정밀 계산
-            double olBonus = CalculateNikkeOverloadBonus(nativeStat, olPercents, decimals);
-
-            // 기초 스탯 + 정밀 반올림된 오버로드 보너스 + 고정치 보너스
-            return nativeStat + olBonus + olFlatSum;
-        }
-
-        /// <summary>
-        /// B1 ~ B5 브래킷을 적용하는 최종 대미지 연산기
+        /// 실측 역산으로 확립된 NIKKE per-tick 대미지 공식 (2026-06-27, in-game bit-exact).
+        ///
+        ///   Damage = floor( B2 × (1+ΣB3) × (1+ΣB4) × (1+ΣB5) )
+        ///     B2 = floor(P) + Σ_active floor(P × bracket_i)      ← B2 는 **가산** per-term FLOOR (곱셈 아님!)
+        ///     P  = (FinalAtk − effectiveDef) × W(계수) × C(차지)   ← 계수·차지는 B2 floor *이전* 에 P 에 접힘
+        ///   B3/B4/B5 는 서로 곱해지는 독립 곱셈 브래킷; 마지막에 단일 floor.
+        ///
+        /// [A1] 최소 대미지: effectiveDef >= FinalAtk 이면 배율 무관 즉시 1 (중간 곱 경유 안 함).
+        /// [A2] True Damage: effectiveDef := 0, 그리고 B3 에 SumTrueDmgBuff 조건부 가산.
+        ///
+        /// 검증(bit-exact, 잔차 ≤1e-7 = 계수 표시반올림): 차지 스나 풀차지 1히트 + B2(크리/코어/거리/버스트)
+        ///   + B3(attack_dmg) + B4(damage_taken) + B5(strong_elem).
+        /// 구조 확정(도메인): B3 pierce/parts/dot/seq = attack_dmg 상속+제약; B4 distrib = damage_taken 상속+제약;
+        ///   차지 2-축; 비차지=C1; 스킬계수=W슬롯; true_dmg=DEF0; 최소뎀1.
+        /// 실측 대기: [gap#4] 비차지 무기 W·C 접힘 / [gap#7] nested-vs-single floor 경계.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double CalculateDamage(in AttackContext ctx)
         {
-            // 1. 깡 대미지 (최소 대미지 1 보정)
-            double baseDamage = Math.Max(1.0, ctx.FinalAtk - ctx.FinalDef);
+            // [A2] True Damage 는 방어 무시 — effectiveDef := 0
+            double effectiveDef = ctx.IsTrueDamage ? 0.0 : ctx.FinalDef;
 
-            // 2. [B2] 코어/크리/거리/버스트
-            double b2 = 1.0 + ctx.FullBurstBonus + ctx.ProperDistanceBonus;
-            if (ctx.IsCrit) b2 += ctx.SumCritDmg;
-            if (ctx.IsCoreHit) b2 += (ctx.CoreHitBase + ctx.SumCoreHitBuff);
+            // [A1] 최소 대미지 규칙: DEF ≥ ATK 면 모든 배율 무시하고 최종 1 고정.
+            //      True Damage 경로에서는 effectiveDef=0 이므로 FinalAtk > 0 인 한 이 분기를 타지 않음.
+            if (effectiveDef >= ctx.FinalAtk)
+                return 1.0;
 
-            // 3. [B3] 대미지 증가 버프 (공격 종류에 따라 조건부 활성화!)
+            double baseDamage = ctx.FinalAtk - effectiveDef;
+
+            // 차지 배율 C. 비차지/미차지 = 1. 풀차지 시 2-축: (base + Σadd) × (1 + Σmult).
+            double chargeMult = 1.0;
+            if (ctx.IsFullCharge)
+                chargeMult = (ctx.ChargeDmgBase + ctx.SumChargeDmgAdd) * (1.0 + ctx.SumChargeDmgMult);
+
+            // P: 계수(W=평타/스킬 계수)·차지(C) 를 B2 floor 이전에 접는다.
+            //   [gap#4] 비차지 무기(AR/SMG/MG/SG) W·C 접힘은 실측 검증 대기 (구조 확정).
+            double p = baseDamage * ctx.SkillMultiplier * chargeMult;
+
+            // [B2] 크리/코어/거리/버스트 = 가산 per-term FLOOR ──  B2 = floor(P) + Σ floor(P × bracket_i)
+            //   (보너스 0 → floor(0)=0 이므로 거리/버스트는 무조건 가산해도 안전)
+            double b2 = Math.Floor(p)
+                      + Math.Floor(p * ctx.ProperDistanceBonus)
+                      + Math.Floor(p * ctx.FullBurstBonus);
+            if (ctx.IsCrit) b2 += Math.Floor(p * ctx.SumCritDmg);
+            if (ctx.IsCoreHit) b2 += Math.Floor(p * (ctx.CoreHitBase + ctx.SumCoreHitBuff));
+
+            // [B3] 공격 대미지 곱셈 브래킷. pierce/parts/dot/seq = attack_dmg 상속 + 발동제약(플래그) → 같은 합산.
             double b3 = 1.0 + ctx.SumAttackDmg;
             if (ctx.IsPierceHit) b3 += ctx.SumPierceDmg;
             if (ctx.IsPartsHit) b3 += ctx.SumPartsDmg;
             if (ctx.IsDotDamage) b3 += ctx.SumDotDmg;
             if (ctx.IsSequentialHit) b3 += ctx.SumSequentialDmg;
+            if (ctx.IsTrueDamage) b3 += ctx.SumTrueDmgBuff;   // [A2] 트루 대미지 조건부 증가
 
-            // 4. [B4] & [B5] 받뎀증 및 우월 코드
-            double b4 = 1.0 + ctx.SumDamageTaken + ctx.SumDistribDmg;
+            // [B4] 받는 대미지 곱셈 브래킷. distrib = damage_taken 상속 + 분배공격 제약.
+            double b4 = 1.0 + ctx.SumDamageTaken;
+            if (ctx.IsDistributionHit) b4 += ctx.SumDistribDmg;
+
+            // [B5] 속성 유리 곱셈 브래킷
             double b5 = 1.0 + ctx.SumStrongElem;
 
-            // 5. 차지 대미지 보정 (조건: 풀차지 공격일 때만 연산!)
-            double chargeMultiplier = 1.0;
-            if (ctx.IsFullCharge)
-            {
-                // 2-축 계산 적용
-                chargeMultiplier = (ctx.ChargeDmgBase + ctx.SumChargeDmgAdd) * (1.0 + ctx.SumChargeDmgMult);
-            }
-
-            // 최종 연산: 전부 곱
-            double finalDamage = baseDamage * b2 * b3 * b4 * b5 * ctx.SkillMultiplier * chargeMultiplier;
-
-            // 실제 게임에선 여기서 최종적으로 내림/반올림 처리가 한 번 더 들어가겠지?
-            return Math.Floor(finalDamage);
+            // 브래킷 곱 후 단일 FLOOR. [gap#7] nested-vs-single 중 single 이 전 데이터 일치.
+            return Math.Floor(b2 * b3 * b4 * b5);
         }
     }
 }

@@ -173,23 +173,23 @@ namespace Nikke.Simulator.Core.Entities
             double nativeAmmo = _originDto.StaticInfo.ammoCapacity * (1.0 + collMaxAmmoRate);
 
             // [D] 오버로드 프로세서 적용 (니케식 정밀 소수점 연산)
-            FinalBaseAtk = StatCalculator.CalculateFinalBaseStat(
+            FinalBaseAtk = OverloadProcessor.CalculateFinalBaseStat(
                 effectiveNativeAtk,
                 _overloadStats.Where(o => o.type == "StatAtk").Select(o => o.value),
                 0, 0);
 
-            FinalBaseHP = StatCalculator.CalculateFinalBaseStat(
+            FinalBaseHP = OverloadProcessor.CalculateFinalBaseStat(
                 effectiveNativeHP,
                 _overloadStats.Where(o => o.type == "StatMaxHP").Select(o => o.value),
                 0, 0);
 
-            FinalBaseDef = StatCalculator.CalculateFinalBaseStat(
+            FinalBaseDef = OverloadProcessor.CalculateFinalBaseStat(
                 effectiveNativeDef,
                 _overloadStats.Where(o => o.type == "StatDef").Select(o => o.value),
                 0, 0);
 
             // [H3] OL 장탄수 옵션의 실제 JSON type 은 "StatAmmoLoad" (과거 "StatMaxAmmo" 는 dead code 였음).
-            FinalBaseMaxAmmo = StatCalculator.CalculateFinalBaseStat(
+            FinalBaseMaxAmmo = OverloadProcessor.CalculateFinalBaseStat(
                 nativeAmmo,
                 _overloadStats.Where(o => o.type == "StatAmmoLoad").Select(o => o.value),
                 0, 0);
@@ -224,15 +224,19 @@ namespace Nikke.Simulator.Core.Entities
         ///  - 무기 타입에 따른 ChargeDmgBase 기본 배율
         ///  - [H3] OL 전투축 — StatCritical / StatCriticalDamage /
         ///         StatChargeDamage / IncElementDmg (val_type 정규화 완료)
+        ///  - [A2] 큐브 TrueDamageBonus → ctx.SumTrueDmgBuff (IsTrueDamage 시 B3 조건부 가산)
         ///
         /// 아직 반영하지 않는 것 (TODO):
-        ///  - TrueDamageBonus (방어 무시 축 — AttackContext 필드 미존재)
         ///  - AmmoChargeRate / ReloadTimeReduction (시간 축, 로테이션 시뮬에서 소비)
         ///  - DefIncreaseRate / DamageTakenReduction / CoverHpIncreaseRate (자기 생존 — DPS 스코프 외)
         /// </summary>
         public AttackContext BuildAttackContext()
         {
             var ctx = new AttackContext(FinalBaseAtk, FinalBaseDef);
+
+            // [계수 W] 평타 무기 계수를 P 에 접기 위해 주입 (StatCalculator 가 P=깡뎀×W×C 로 사용).
+            //   기존 공식은 W 를 누락했었음. 스킬 누크 계수는 런타임이 별도 오버라이드 (gap#5).
+            ctx.SkillMultiplier = (BasicAtkMultiplier > 0) ? BasicAtkMultiplier : 1.0;
 
             var cube = CurrentCubeEffect;
             var coll = CurrentCollectionEffect;
@@ -249,6 +253,9 @@ namespace Nikke.Simulator.Core.Entities
             ctx.SumPierceDmg += cube.PierceDamageBonus;
             // Parts/Pierce 는 IsPartsHit/IsPierceHit 플래그가 true 일 때만 B3 에 가산됨 (StatCalculator 참조)
 
+            // [A2] 큐브 트루 대미지 증가 — IsTrueDamage 플래그가 true 일 때만 B3 에 가산됨
+            ctx.SumTrueDmgBuff += cube.TrueDamageBonus;
+
             // [H2] 콜렉션 무기별 고정 효과 — 해당 무기에만 적용
             switch (WeaponType)
             {
@@ -258,8 +265,10 @@ namespace Nikke.Simulator.Core.Entities
                 case "Sniper Rifle":
                 case "Rocket Launcher":
                     ctx.SumChargeDmgMult += coll.ChargeDamageMultiplier;
-                    // 차지 무기 기본 배율 (실측 확인 필요, 잠정 2.5)
-                    ctx.ChargeDmgBase = 2.5;
+                    // 차지 무기 기본 배율은 JSON (basicAttack.chargeDamage) per-character.
+                    // 대부분 2.5 (Full Charge 250%), 일부 3.5 (350%) 등 값이 다양.
+                    // 환각 하드코딩 (2.5) 제거, BasicAtkChargeDamage 로 교체 (2026-04-23).
+                    ctx.ChargeDmgBase = BasicAtkChargeDamage;
                     break;
                 case "Submachine Gun":
                 case "Shotgun":
