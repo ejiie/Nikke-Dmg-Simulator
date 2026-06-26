@@ -159,6 +159,8 @@ class ApiKeyRotator:
       - pick_next()             : 선호 순으로 다음 가용 키 선택. 활성 키가 모두
                                   cooling 중이면 가장 가까운 만료까지 sleep 후 선택.
                                   모두 exhausted 면 False.
+      - prefer_free()           : 유료 키 사용 중 무료 키가 회복됐으면 무료로 복귀.
+                                  매 요청 직전 호출 (유료 키 독점 방지).
       - cool_down_current(secs) : 현재 키를 'secs' 초 동안 cooldown 상태로.
       - exhaust_current()       : 현재 키 영구 폐기.
       - rotate()                : 폐기 + pick_next (후방 호환 alias).
@@ -213,6 +215,28 @@ class ApiKeyRotator:
         if self._idx not in self._clients:
             self._clients[self._idx] = genai.Client(api_key=self._keys[self._idx])
         return self._clients[self._idx]
+
+    def prefer_free(self) -> bool:
+        """
+        유료 키 독점 방지. 현재 '유료' 키를 쓰는 중인데 무료 키가 cooldown 에서
+        풀려 다시 가용해졌으면, 즉시 가장 앞선 무료 키로 복귀한다.
+
+        매 요청 '직전' 에 호출한다. (키 전환은 pick_next() 가 에러 발생 시에만 하므로,
+        유료 키로 넘어간 뒤 호출이 계속 성공하면 무료 키가 회복돼도 영영 복귀하지
+        못하는 독점 버그가 생긴다 — 이 메서드가 그 구멍을 메운다.)
+
+        반환: 무료 키로 전환했으면 True, 아니면(이미 무료거나 회복된 무료 키 없음) False.
+        """
+        if not self._is_paid[self._idx]:
+            return False  # 이미 무료 키 사용 중
+        now = time.time()
+        for i in range(len(self._keys)):
+            if (not self._is_paid[i]
+                    and i not in self._exhausted
+                    and self._cooldown_until[i] <= now):
+                self._idx = i
+                return True
+        return False
 
     def current_label(self) -> str:
         head = self._keys[self._idx][:6]
@@ -383,6 +407,9 @@ def parse_skill(
     max_total_calls  = RETRY_LIMIT * max(1, rotator.total)  # 키 수 × RETRY_LIMIT 까지 허용
 
     for call_no in range(1, max_total_calls + 1):
+        # 유료 키 독점 방지: 무료 키가 회복됐으면 매 요청 직전 무료로 복귀.
+        if rotator.prefer_free() and verbose:
+            print(f"↩️  무료 키 회복 → 복귀 {rotator.current_label()}")
         try:
             response = rotator.current_client().models.generate_content(
                 model=MODEL,
