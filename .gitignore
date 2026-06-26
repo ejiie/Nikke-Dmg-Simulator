@@ -1,6 +1,5 @@
 # API keys & secrets
 .env
-.env.example
 .env.local
 .env.*.local
 
@@ -13,3 +12,26 @@ __pycache__/
 .vscode/
 .idea/
 .claude/
+
+# .NET build output
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Personal game-account data (embeds account UID / roster) — generate locally, never commit
+Database/processed/user_state_clean.json
+Database/processed/nikke_merged_db.json
+Database/processed/nikke_merged_db_returned.json
+Database/raw/nikke_full_scroll_result.json
+
+# Throwaway backups & scratch experiments
+*.backup.json
+/Task.txt
+DataPipeline/schema/_test_*.json
+DataPipeline/schema/_test_inspect_features.py
+DataPipeline/schema/_test_reparse_failed.py
+DataPipeline/schema/_test_reparse_smoke.py
