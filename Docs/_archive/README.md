@@ -18,6 +18,7 @@
 - 코드·수치·경로를 그대로 신뢰하지 말 것. 교차검증 필수.
 
 ## 현재 진실원 (이걸 봐라)
+- **`Docs/DESIGN.md` — 방향·구조·대미지 공식의 단일 권위 (2026-06-28 확정). 최우선.**
 - `DataPipeline/schema/skill_schema_legend.txt` — 스킬 스키마 v3 레전드
 - `Docs/` (상위, `_archive` 제외) — 현행 문서
 - `_dmg_probe.py` / `_dmg_calibrate.py` (repo 루트) — 검증된 대미지 공식 유도/캘리브레이션

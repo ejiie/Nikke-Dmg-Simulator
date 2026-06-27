@@ -332,6 +332,8 @@ JSON `roster[nc].static.weapon` 에 들어오는 정확한 문자열. `Nikke.Bui
 
 ### 6.13 `[formula_bracket]` — 고정 enum
 
+> ⚠️ **`b2_crit_core` 행의 `(1 + ...)` 곱셈 표기는 SUPERSEDED.** B2 는 가산 per-term FLOOR (`floor(P)+Σfloor(P×bracket)`). enum 값/이름은 유효(파서가 씀), 계산식만 폐기. 현행 = `Docs/DESIGN.md` §3.
+
 | 값 | 의미 |
 |---|---|
 | `b2_crit_core` | `(1 + FullBurst + ProperDist + ΣcritDmg + coreHitBase + ΣcoreHitBuff)` |

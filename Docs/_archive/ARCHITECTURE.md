@@ -70,6 +70,8 @@
 
 ## 3. 데미지 공식
 
+> ⚠️ **SUPERSEDED (2026-06-27).** 아래 §3.1 의 multiplicative B2 형식은 **오류** — in-game 실측 역산으로 **B2 는 가산 per-term FLOOR** 임이 18 golden 검증됨. **현행 권위 공식 = `Docs/DESIGN.md` §3.** 이 섹션은 historical 보존용일 뿐 신뢰 금지.
+
 출처: `StatCalculator.CalculateDamage` + `DataPipeline/schema/skill_schema_legend.txt` 공식 섹션.
 
 ### 3.1 최종식 (권위 — legend 기준)

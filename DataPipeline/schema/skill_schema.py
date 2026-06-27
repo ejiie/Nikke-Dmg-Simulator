@@ -18,12 +18,14 @@ v3: 3계층 구조 + scale/scale_base 직교 분해
 ──────────────────────────────────────────────────────────────
 대미지 공식 (런타임 참조)
 ──────────────────────────────────────────────────────────────
-Damage = (FinalAtk - FinalDef)
-       × (1 + fullBurst + properDist + Σcrit_dmg + coreHitBase + Σcore_hit_buff)   [B2]
-       × (1 + Σattack_dmg [+pierce_dmg][+parts_dmg][+dot_dmg][+sequential_dmg])    [B3]
-       × (1 + Σdamage_taken + Σdistrib_dmg)                                        [B4]
-       × (1 + Σstrong_elem)                                                        [B5]
-       × 계수
+Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )   ※ 18 golden 검증; 권위 = Docs/DESIGN.md §3
+  P  = (FinalAtk - FinalDef) × 계수(W) × chargeDmg_final(C)
+  B2 = floor(P) + Σ_active floor(P × bracket)                ← **가산 per-term FLOOR** (곱셈 아님!)
+       bracket ∈ { properDist, fullBurst, (크리)Σcrit_dmg, (코어)coreHitBase+Σcore_hit_buff }
+  B3 = 1 + Σattack_dmg [+pierce_dmg][+parts_dmg][+dot_dmg][+sequential_dmg]
+  B4 = 1 + Σdamage_taken + Σdistrib_dmg
+  B5 = 1 + Σstrong_elem
+  ※ 과거 'B2 도 곱셈' 표기는 폐기. B2 만 가산-per-term-floor, B3~B5 곱셈, 마지막 단일 floor.
 
 Full Charge 계수 (계수 자리의 별도 2-축):
   chargeDmg_final = (chargeDmg_base + Σcharge_dmg) × (1 + Σcharge_dmg_mult)
@@ -1767,12 +1769,14 @@ def build_system_prompt() -> str:
 Parse skill descriptions into structured JSON matching the SkillParsed schema.
 
 ## Damage Formula Reference
-Damage = (FinalAtk - FinalDef)
-       × (1 + Σcrit_dmg + Σcore_hit_buff + ...)                              [B2]
-       × (1 + Σattack_dmg [+pierce_dmg][+parts_dmg][+dot_dmg][+sequential_dmg])  [B3]
-       × (1 + Σdamage_taken + Σdistrib_dmg)                                   [B4]
-       × (1 + Σstrong_elem)                                                   [B5]
-       × coefficient
+Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
+  P  = (FinalAtk - FinalDef) × coefficient(W) × chargeDmg_final(C)
+  B2 = floor(P) + Σ_active floor(P × bracket)    ← ADDITIVE per-term FLOOR (NOT multiplicative)
+       bracket in: properDist, fullBurst, (crit) Σcrit_dmg, (core) coreHitBase + Σcore_hit_buff
+  B3 = 1 + Σattack_dmg [+pierce_dmg][+parts_dmg][+dot_dmg][+sequential_dmg]
+  B4 = 1 + Σdamage_taken + Σdistrib_dmg
+  B5 = 1 + Σstrong_elem
+  (NOTE: bracket taxonomy below is what matters for parsing — which stat → which bracket.)
 
 Full Charge (계수 자리의 별도 2-축):
   chargeDmg_final = (chargeDmg_base + Σcharge_dmg) × (1 + Σcharge_dmg_mult)

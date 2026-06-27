@@ -81,19 +81,20 @@ Docs/                    이 문서들
 | `Stats/` | `WeaponStatTable`, `IRandomSource`/`CritSampler` | 무기 발사 타이밍, 크리 RNG 추상화 |
 | `Entities/` | `Nikke` | 캐릭터 1인스턴스. 최종 기초 스탯 보유 + `BuildAttackContext()` 팩토리 |
 
-대미지 공식 (출처: `StatCalculator.CalculateDamage` + `skill_schema_legend.txt`):
+대미지 공식 (권위: **`Docs/DESIGN.md` §3** + `StatCalculator.CalculateDamage` + 18 golden test):
 
 ```
-Damage = (FinalAtk - FinalDef)
-       × (1 + fullBurst + properDist + Σcrit_dmg + coreHitBase + Σcore_hit_buff)   [B2]
-       × (1 + Σattack_dmg [+pierce][+parts][+dot][+sequential])                    [B3]
-       × (1 + Σdamage_taken + Σdistrib_dmg)                                        [B4]
-       × (1 + Σstrong_elem)                                                        [B5]
-       × 계수(SkillMultiplier)
-   (Full Charge 시) × chargeDmg_final = (ChargeDmgBase + Σcharge_dmg) × (1 + Σcharge_dmg_mult)
+Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
+  P  = (FinalAtk - FinalDef) × 계수(W) × chargeDmg_final(C)
+  B2 = floor(P) + Σ_active floor(P × bracket)   ← 가산 per-term FLOOR (곱셈 아님!)
+       bracket: properDist, fullBurst, (크리)Σcrit_dmg, (코어)coreHitBase+Σcore_hit_buff
+  B3 = 1 + Σattack_dmg [+pierce][+parts][+dot][+sequential]   (곱셈)
+  B4 = 1 + Σdamage_taken + Σdistrib_dmg                        (곱셈)
+  B5 = 1 + Σstrong_elem                                        (곱셈)
+  (Full Charge) C = (ChargeDmgBase + Σcharge_dmg) × (1 + Σcharge_dmg_mult)
 ```
 - `effectiveDef ≥ FinalAtk` 이면 즉시 1 반환. True Damage는 `FinalDef := 0`.
-- 최종 반올림/내림 모드는 미확정 (현재 `Math.Floor` 잠정).
+- 반올림: **단일 final floor 확정** (18-golden 실측 역산). 과거 'B2 도 곱셈' / '반올림 미확정' 표기는 폐기.
 
 ## 5. 실행 방법
 
