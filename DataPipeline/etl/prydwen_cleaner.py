@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 
 # ── 가키짱의 절대 경로 마법 ──
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -42,7 +43,7 @@ def clean_prydwen_data():
     
     if not os.path.exists(RAW_FILE):
         print(f"❌ 야! 원본 파일이 없잖아! ({RAW_FILE})")
-        return
+        sys.exit(1)
 
     with open(RAW_FILE, 'r', encoding='utf-8') as f:
         raw_db = json.load(f)
@@ -56,7 +57,8 @@ def clean_prydwen_data():
             icon_url = char["smallImage"]["localFile"]["childImageSharp"]["gatsbyImageData"]["images"]["fallback"]["src"]
             # 상대경로로 되어있으니 도메인을 붙여준다
             icon_url = f"https://www.prydwen.gg{icon_url}"
-        except:
+        except (KeyError, TypeError):
+            # 아이콘 트리가 없는 캐릭터 — iconUrl 은 선택값이라 빈 문자열로 둔다
             pass
             
         # 2. 평타 계수 파싱

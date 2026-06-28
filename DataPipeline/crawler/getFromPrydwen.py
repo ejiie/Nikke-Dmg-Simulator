@@ -2,11 +2,17 @@ import asyncio
 import httpx
 import json
 import os
+import sys
 
 # 현재 스크립트(getFromPrydwen.py)가 있는 위치를 기준으로 Database/raw/ 경로를 강제로 찾아낸다!
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_DIR = os.path.join(CURRENT_DIR, "..", "..", "Database", "raw")
 os.makedirs(RAW_DIR, exist_ok=True) # 폴더가 없으면 알아서 만들어줌
+
+# ── 종료 코드 (automation 이 성공/실패를 구분할 수 있게 명시) ──
+EXIT_OK = 0
+EXIT_NO_SLUGS = 10    # 메인 캐릭터 목록(slug)을 못 가져옴
+EXIT_NO_DETAILS = 11  # slug 는 있었지만 상세 데이터를 하나도 못 긁음
 
 # ── 탐색기 (DFS 알고리즘) ──
 def find_nikke_core(node):
@@ -92,8 +98,8 @@ async def precision_strike_v3():
         
         if not slugs:
             print("❌ 타겟 리스트(slugs)를 추출하지 못해 중단합니다.")
-            return
-            
+            return EXIT_NO_SLUGS
+
         print(f"🎯 총 {len(slugs)}명의 실시간 타겟 확인!")
 
         # 2단계: 추출한 slug를 바탕으로 상세 페이지 순회 개시
@@ -115,14 +121,19 @@ async def precision_strike_v3():
             print(f"   ⚡ {min(i + len(chunk), len(slugs))}/{len(slugs)}명 타격 완료...")
             await asyncio.sleep(0.5)
 
+    # 0건이면 직전 정상 산출물을 빈 파일로 덮어쓰지 않도록 저장을 건너뛰고 실패 반환.
+    if not all_details:
+        print("❌ 상세 데이터를 하나도 수집하지 못함 → 저장 생략, 실패 종료.")
+        return EXIT_NO_DETAILS
+
     # 3단계: 최종 상세 데이터 저장
     save_path = os.path.join(RAW_DIR, "prydwen_all_details_v3.json")
     with open(save_path, "w", encoding="utf-8") as f:
         json.dump(all_details, f, ensure_ascii=False, indent=2)
 
     print(f"\n✅ [완벽] 총 {len(all_details)}명의 데이터 fetch 완료!")
-    if len(all_details) > 0:
-        print(f"'{save_path}'에 완벽하게 꽂아넣었어")
+    print(f"'{save_path}'에 완벽하게 꽂아넣었어")
+    return EXIT_OK
 
 if __name__ == "__main__":
-    asyncio.run(precision_strike_v3())
+    sys.exit(asyncio.run(precision_strike_v3()))

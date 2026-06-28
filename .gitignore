@@ -2,6 +2,8 @@
 .env
 .env.local
 .env.*.local
+# Playwright 로그인 세션(쿠키+localStorage) — 계정 자격증명에 준함, 절대 커밋 금지
+auth_state.json
 
 # Python
 __pycache__/
@@ -27,6 +29,8 @@ Database/processed/user_state_clean.json
 Database/processed/nikke_merged_db.json
 Database/processed/nikke_merged_db_returned.json
 Database/raw/nikke_full_scroll_result.json
+# probe 요청 덤프 — auth 헤더(redact돼도) + 계정 연계 디버그 산출물, 커밋 금지
+Database/raw/_probe_*.json
 
 # Throwaway backups & scratch experiments
 *.backup.json

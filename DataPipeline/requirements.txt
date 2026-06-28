@@ -1,0 +1,14 @@
+# DataPipeline 의존성 (Python 3.11)
+# 설치:  pip install -r requirements.txt
+#        playwright install chromium   # getFromBlaLink 실행 전 1회 필요
+
+# crawler/
+httpx==0.28.1          # getFromPrydwen — async HTTP 수집
+playwright==1.58.0     # getFromBlaLink  — 브라우저 자동화 + 응답 스니핑
+python-dotenv==1.0.1   # _secrets        — .env 자격증명 로드 (미설치 시 내장 파서로 폴백)
+
+# schema/  (LLM 스킬 파서 트랙)
+pydantic==2.12.5       # skill_schema   — 스키마 검증
+google-genai==1.73.1   # skill_parser_llm — Gemini 호출
+
+# etl/ 는 표준 라이브러리(json/os/re)만 사용 — 추가 의존성 없음

@@ -1,9 +1,10 @@
 import json
 import os
+import sys
 
 # ── 가키짱의 절대 경로 마법 ──
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-DICT_FILE = os.path.join(CURRENT_DIR, "..", "..", "Database", "raw", "real_en_dict_dump.txt")
+DICT_FILE = os.path.join(CURRENT_DIR, "..", "..", "Database", "raw", "real_en_dict_dump.json")
 USER_DB = os.path.join(CURRENT_DIR, "..", "..", "Database", "processed", "user_state_clean.json")
 PRYDWEN_DB = os.path.join(CURRENT_DIR, "..", "..", "Database", "processed", "prydwen_clean.json")
 MAPPING_OUT = os.path.join(CURRENT_DIR, "..", "..", "Database", "processed", "final_mapping.json")
@@ -26,12 +27,11 @@ def gaki_stateful_mapper():
     # 1. 재료 로딩 (사전, 프리드웬, 유저)
     if not os.path.exists(DICT_FILE):
         print(f"❌ 야! 사전 파일이 없잖아! ({DICT_FILE})")
-        return
+        sys.exit(1)
 
+    # 크롤러(getFromBlaLink)가 이미 검증된 JSON 배열로 저장하므로 그대로 로드한다.
     with open(DICT_FILE, "r", encoding="utf-8") as f:
-        raw_text = f.read()
-        json_start = raw_text.find('[')
-        en_dict = json.loads(raw_text[json_start:]) if json_start != -1 else json.loads(raw_text)
+        en_dict = json.load(f)
 
     code_to_en = {str(item.get("name_code")): item.get("name_localkey", {}).get("name", "")
                   for item in en_dict if item.get("name_code") and item.get("name_localkey", {}).get("name", "")}
@@ -53,7 +53,7 @@ def gaki_stateful_mapper():
             try:
                 existing_mapping = json.load(f).get("mapping", {})
                 print(f"💾 든든하다! 기존에 네가 저장해둔 매핑 기록({len(existing_mapping)}명)을 무사히 불러왔어♥")
-            except:
+            except (json.JSONDecodeError, AttributeError):
                 print("⚠️ 기존 매핑 파일이 깨져있네? 백지부터 다시 시작한다!")
 
     mapping_table = {}
