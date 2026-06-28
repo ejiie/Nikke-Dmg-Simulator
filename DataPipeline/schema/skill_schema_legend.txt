@@ -33,12 +33,14 @@
 
 ─── 대미지 공식 (참고) ───────────────────────────────────────────────────
 
-Damage = (FinalAtk - FinalDef)
-       × (1 + fullBurst + properDist + Σcrit_dmg + coreHitBase + Σcore_hit_buff)    [B2]
-       × (1 + Σattack_dmg [+pierce_dmg][+parts_dmg][+dot_dmg][+sequential_dmg])     [B3]
-       × (1 + Σdamage_taken + Σdistrib_dmg)                                         [B4]
-       × (1 + Σstrong_elem)                                                         [B5]
-       × 계수
+Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )      ※ 18 golden 검증; 권위 = Docs/DESIGN.md §3
+  P  = (FinalAtk - FinalDef) × 계수(W) × chargeDmg_final(C)    ← 계수·차지를 B2 floor 이전에 P 에 접음
+  B2 = floor(P) + Σ_active floor(P × bracket)                  ← **가산 per-term FLOOR** (곱셈 아님!)
+       bracket ∈ { properDist, fullBurst, (크리 시)Σcrit_dmg, (코어 시)coreHitBase+Σcore_hit_buff }
+  B3 = 1 + Σattack_dmg [+pierce_dmg][+parts_dmg][+dot_dmg][+sequential_dmg]   ← 곱셈 브래킷
+  B4 = 1 + Σdamage_taken + Σdistrib_dmg                                        ← 곱셈 브래킷
+  B5 = 1 + Σstrong_elem                                                        ← 곱셈 브래킷
+  ※ 과거 'B2 도 × (1+Σ) 곱셈' 표기는 환각/오류 — 폐기. B2 만 가산-per-term-floor.
 
   ─── Full Charge 공격일 때 추가 적용 (2-축 계산) ───
   chargeDmg_final = (chargeDmg_base + Σcharge_dmg) × (1 + Σcharge_dmg_mult)

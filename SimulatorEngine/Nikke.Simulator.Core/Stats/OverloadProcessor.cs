@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Nikke.Simulator.Core.Data.Dto;
@@ -6,62 +6,79 @@ using Nikke.Simulator.Core.Data.Dto;
 namespace Nikke.Simulator.Core.Stats
 {
     /// <summary>
-    /// 오버로드(OL) 장비의 스탯 추출, 합산 및 특수 반올림 처리를 전담하는 프로세서
+    /// 오버로드(OL) + 런타임 %-버프의 니케식 합산 전담 프로세서.
+    ///
+    /// 규칙 정의: ARCHITECTURE.md §4.4 버프 합산 규칙 (동일값 그룹핑 → 그룹별 반올림 → 합산).
+    ///
+    /// 책임 분리 (2026-04-23 · Option D 리팩토링):
+    ///   - OverloadProcessor : pre-combat native stat 조립 (OL 합산) 전담.
+    ///   - StatCalculator    : per-tick 대미지 공식 (B2~B5 + True Damage + 차지 2축) 전담.
+    /// 이전까지 이 로직은 StatCalculator 에 혼재되어 있었음.
     /// </summary>
     public static class OverloadProcessor
     {
         /// <summary>
-        /// 특정 스탯(예: StatAtk)의 '퍼센트(Percent)' 옵션만 추출하여 니케식으로 합산 (동일 옵션 선합산 후 반올림)
+        /// 기초 스탯(Native)과 오버로드(OL) 옵션을 합산하여 전투 진입 전 최종 기초 스탯을 계산합니다.
+        /// 니케식 동일값 선합산 반올림 규칙 (ARCHITECTURE.md §4.4) 적용.
         /// </summary>
-        /// <param name="nativeStat">기초 스탯</param>
-        /// <param name="allOptions">캐릭터가 가진 오버로드 옵션 전체 리스트</param>
-        /// <param name="targetType">필터링할 스탯 타입 (예: "StatAtk")</param>
-        /// <param name="decimals">반올림할 소수점 자리수</param>
-        /// <returns>최종 오버로드 퍼센트 보너스 수치</returns>
-        public static double CalculatePercentBonus(double nativeStat, IEnumerable<OverloadOptionDto> allOptions, string targetType, int decimals = 0)
+        /// <param name="nativeStat">기초 스탯 (Effective Native)</param>
+        /// <param name="olPercents">오버로드 퍼센트 옵션 리스트 (예: { 0.1181, 0.1181, 0.089 })</param>
+        /// <param name="olFlatSum">추가 고정치 합 (현재 호출부 전부 0)</param>
+        /// <param name="decimals">반올림 자릿수 (정수 스탯=0, 차지 시간=2)</param>
+        /// <returns>nativeStat + OL 보너스 + 고정치</returns>
+        public static double CalculateFinalBaseStat(
+            double nativeStat,
+            IEnumerable<double> olPercents,
+            double olFlatSum = 0,
+            int decimals = 0)
         {
-            if (allOptions == null || !allOptions.Any())
-                return 0;
-
-            // 1. 타겟 스탯이면서 "Percent" 타입인 옵션의 수치만 추출
-            var percentValues = allOptions
-                .Where(opt => opt.type == targetType && opt.val_type == "Percent")
-                .Select(opt => opt.value);
-
-            if (!percentValues.Any())
-                return 0;
-
-            double totalBonus = 0;
-
-            // 2. Rule: 수치가 동일한 옵션은 미리 합산 (Grouping)
-            var groupedPercents = percentValues.GroupBy(p => p);
-
-            foreach (var group in groupedPercents)
-            {
-                double percentValue = group.Key;
-                int count = group.Count();
-
-                // 동일 옵션 선합산
-                double groupBonus = nativeStat * (percentValue * count);
-
-                // 소수점 반올림 처리
-                totalBonus += Math.Round(groupBonus, decimals, MidpointRounding.AwayFromZero);
-            }
-
-            return totalBonus;
+            double olBonus = CalculateNikkeOverloadBonus(nativeStat, olPercents, decimals);
+            return nativeStat + olBonus + olFlatSum;
         }
 
         /// <summary>
-        /// 특정 스탯의 '고정치(Integer)' 옵션 총합 계산 (예: 크리티컬 데미지 등)
+        /// 특정 스탯의 '고정치(Integer)' 옵션 총합 계산 (예: 크리티컬 데미지 등).
+        /// /10000 정규화는 소비자 책임 — `val_type` 해석은 `Nikke.InitializeFinalStats` 의 Normalize 람다.
         /// </summary>
         public static double CalculateFlatBonus(IEnumerable<OverloadOptionDto> allOptions, string targetType)
         {
-            if (allOptions == null || !allOptions.Any())
-                return 0;
+            if (allOptions == null) return 0;
 
             return allOptions
                 .Where(opt => opt.type == targetType && opt.val_type == "Integer")
                 .Sum(opt => opt.value);
+        }
+
+        /// <summary>
+        /// 니케식 OL 합산 (내부 헬퍼).
+        /// 알고리즘:
+        ///   1. 동일 value 그룹핑 (GroupBy).
+        ///   2. 그룹별 델타 = Round(native × value × count, decimals, AwayFromZero).
+        ///   3. 그룹 결과 합산.
+        /// </summary>
+        private static double CalculateNikkeOverloadBonus(double nativeStat, IEnumerable<double> olPercents, int decimals = 0)
+        {
+            if (olPercents == null || !olPercents.Any())
+                return 0;
+
+            double totalBonus = 0;
+
+            // Rule: 수치가 동일한 옵션은 미리 합산한다 (Grouping)
+            var groupedPercents = olPercents.GroupBy(p => p);
+
+            foreach (var group in groupedPercents)
+            {
+                double percentValue = group.Key;
+                int count = group.Count(); // 동일한 수치의 개수
+
+                // 1. 동일 옵션의 퍼센트를 먼저 합산(percentValue * count)하여 기초 스탯에 곱함
+                double groupBonus = nativeStat * (percentValue * count);
+
+                // 2. 그룹 단위 반올림 (Korean 사사오입 = MidpointRounding.AwayFromZero)
+                totalBonus += Math.Round(groupBonus, decimals, MidpointRounding.AwayFromZero);
+            }
+
+            return totalBonus;
         }
     }
 }

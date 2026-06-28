@@ -12,6 +12,8 @@ namespace Nikke.Simulator.Core.Data.Dto
 
         public GlobalStateDto global_state { get; set; }
 
+        // roster: key = name_code (numeric string, 예: "1010"). slug 아님.
+        // 실제 캐릭터 slug 는 value.slug 에서 조회.
         public Dictionary<string, CharacterDto> roster { get; set; }
     }
 

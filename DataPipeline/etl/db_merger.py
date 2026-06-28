@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 
 def get_merged_nikke_data(user_db_path: str, prydwen_db_path: str, mapping_path: str) -> dict:
     """
@@ -105,3 +106,4 @@ if __name__ == "__main__":
         
     except Exception as e:
         print(e)
+        sys.exit(1)

@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import sys
 
 # ── 가키짱의 절대 경로 마법 ──
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -11,7 +12,7 @@ def parse_basic_attacks_v3():
 
     if not os.path.exists(PRYDWEN_FILE):
         print(f"❌ 야! 파일이 없잖아! ({PRYDWEN_FILE})")
-        return
+        sys.exit(1)
 
     with open(PRYDWEN_FILE, "r", encoding="utf-8") as f:
         prydwen_data = json.load(f)

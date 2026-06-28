@@ -18,12 +18,14 @@ v3: 3계층 구조 + scale/scale_base 직교 분해
 ──────────────────────────────────────────────────────────────
 대미지 공식 (런타임 참조)
 ──────────────────────────────────────────────────────────────
-Damage = (FinalAtk - FinalDef)
-       × (1 + fullBurst + properDist + Σcrit_dmg + coreHitBase + Σcore_hit_buff)   [B2]
-       × (1 + Σattack_dmg [+pierce_dmg][+parts_dmg][+dot_dmg][+sequential_dmg])    [B3]
-       × (1 + Σdamage_taken + Σdistrib_dmg)                                        [B4]
-       × (1 + Σstrong_elem)                                                        [B5]
-       × 계수
+Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )   ※ 18 golden 검증; 권위 = Docs/DESIGN.md §3
+  P  = (FinalAtk - FinalDef) × 계수(W) × chargeDmg_final(C)
+  B2 = floor(P) + Σ_active floor(P × bracket)                ← **가산 per-term FLOOR** (곱셈 아님!)
+       bracket ∈ { properDist, fullBurst, (크리)Σcrit_dmg, (코어)coreHitBase+Σcore_hit_buff }
+  B3 = 1 + Σattack_dmg [+pierce_dmg][+parts_dmg][+dot_dmg][+sequential_dmg]
+  B4 = 1 + Σdamage_taken + Σdistrib_dmg
+  B5 = 1 + Σstrong_elem
+  ※ 과거 'B2 도 곱셈' 표기는 폐기. B2 만 가산-per-term-floor, B3~B5 곱셈, 마지막 단일 floor.
 
 Full Charge 계수 (계수 자리의 별도 2-축):
   chargeDmg_final = (chargeDmg_base + Σcharge_dmg) × (1 + Σcharge_dmg_mult)
@@ -129,6 +131,12 @@ class StatType(str, Enum):
     CHARGE_SPEED         = "charge_speed"        # 차지 무기 차지 속도 (+% = 차지시간 감소)
     MOVE_SPEED           = "move_speed"
     IMMUNITY             = "immunity"            # CC·디버프 면역
+    HIT_RATE             = "hit_rate"            # 명중률. 대미지 공식 무관(dps_scope=false). crit_rate 와 혼동 금지.
+
+    # ── 미지원 탈출구 (B7) ────────────────────────────────────
+    # 스키마에 정확히 맞는 stat 이 없을 때, 대미지축 칸에 우겨넣지 말고 여기로.
+    # 원문 이름은 stat_token 에 보존. SKILL_MISMAPPING_GUARD.md 참조.
+    UNSUPPORTED          = "unsupported"
 
 
 class FormulaBracket(str, Enum):
@@ -222,7 +230,11 @@ class TriggerType(str, Enum):
     EVERY_N_SHOTS        = "every_n_shots"
     EVERY_N_NORMAL_ATK   = "every_n_normal_attacks"
     WHEN_ATTACKED_N      = "when_attacked_n_times"
-    FULL_CHARGE_HIT      = "full_charge_hit"      # "when hitting a target with Full Charge"
+    EVERY_N_FULL_CHARGE  = "every_n_full_charge"  # "when attacking with Full Charge for N time(s)" (카운팅형)
+    EVERY_N_HITS         = "every_n_hits"         # "when hitting/landing N time(s)" 일반 명중 카운트.
+                                                  # 종류(파츠/펠릿/크리)는 condition_on 또는 required_token 으로.
+    EVERY_N_BURST_USE    = "every_n_burst_use"    # "when using Burst Skill for N time(s)" (카운팅형)
+    FULL_CHARGE_HIT      = "full_charge_hit"      # "when hitting a target with Full Charge" (단발, 비카운팅)
 
 
 class TargetFilter(str, Enum):
@@ -258,7 +270,10 @@ class ActionType(str, Enum):
     DEAL_DAMAGE          = "deal_damage"
     HEAL                 = "heal"
     GRANT_SHIELD         = "grant_shield"
-    GRANT_TRAIT          = "grant_trait"          # 'Gains continuous X' — 특성 플래그 on/off.
+    GRANT_TRAIT          = "grant_trait"          # 'Gains continuous X' — 3종 고정 trait 플래그 on/off.
+    GRANT_STATUS         = "grant_status"         # 'Gains <named status> X' — 캐릭터 고유 상태 부여.
+                                                  # stat=unsupported + stat_token="@<상태명>". 핸들러가 소유.
+                                                  # 그 상태가 내포하는 수치 버프는 별도 effect/group (required_token 게이트).
     FILL_BURST_GAUGE     = "fill_burst_gauge"
     REDUCE_COOLDOWN      = "reduce_cooldown"
     RESTORE_AMMO         = "restore_ammo"
@@ -319,6 +334,8 @@ STAT_BRACKET: dict[StatType, tuple[Optional[FormulaBracket], ConditionOn]] = {
     StatType.CHARGE_SPEED:     (None, ConditionOn.NONE),
     StatType.MOVE_SPEED:       (None, ConditionOn.NONE),
     StatType.IMMUNITY:         (None, ConditionOn.NONE),
+    StatType.HIT_RATE:         (None, ConditionOn.NONE),
+    StatType.UNSUPPORTED:      (None, ConditionOn.NONE),
 }
 
 
@@ -361,6 +378,9 @@ class TriggerBlock(BaseModel):
             TriggerType.EVERY_N_SHOTS,
             TriggerType.EVERY_N_NORMAL_ATK,
             TriggerType.WHEN_ATTACKED_N,
+            TriggerType.EVERY_N_FULL_CHARGE,
+            TriggerType.EVERY_N_HITS,
+            TriggerType.EVERY_N_BURST_USE,
         }
         # INV-3: 카운팅형 → trigger_count 필수
         if self.event in _counter_triggers and self.trigger_count is None:
@@ -437,10 +457,50 @@ class EffectBlock(BaseModel):
     stack_increment: Optional[int] = Field(
         default=None, description="트리거당 획득 스택 수."
     )
+    dps_scope: bool = Field(
+        default=True,
+        description=(
+            "이 효과가 DPS(대미지) 계산에 영향을 주는가. 기본 True. "
+            "명중률/이동속도/면역/엄폐물 등 대미지 무관 효과는 False — "
+            "엔진이 '안다, 그러나 DPS 미반영'으로 분류(커버리지 정직 카운트). "
+            "stat=hit_rate / unsupported / move_speed / immunity 등은 보통 False."
+        )
+    )
+    stat_token: Optional[str] = Field(
+        default=None,
+        description=(
+            "stat=unsupported 일 때 원문 stat 이름을 보존(@접두 권장). "
+            "예: 'Hit Rate'→unsupported+stat_token='@HitRate'(또는 hit_rate enum 사용), "
+            "'Explosion Range'→stat_token='@ExplosionRange', 'Shield Damage'→'@ShieldDamage'. "
+            "대미지축 칸에 우겨넣는 것 금지(SKILL_MISMAPPING_GUARD.md)."
+        )
+    )
+    value_scales_with_token: Optional[str] = Field(
+        default=None,
+        description=(
+            "'Mirrors the stack count of <X>' — value 가 @토큰 스택 수에 비례할 때 "
+            "그 토큰명(@접두). 런타임 실효값 = value × 해당 토큰 현재 스택. "
+            "deal_damage / buff 공통. 없으면 None(=배수 1)."
+        )
+    )
     notes: Optional[str] = Field(default=None, description="파싱 특이사항.")
 
     @model_validator(mode="after")
     def _check_effect_invariants(self) -> "EffectBlock":
+        # INV-13: stat=unsupported ↔ stat_token 쌍대성 (B7 탈출구).
+        if self.stat == StatType.UNSUPPORTED and not self.stat_token:
+            raise ValueError(
+                "[INV-13] stat=unsupported 는 stat_token(원문 이름) 필수. "
+                "대미지축 칸에 우겨넣지 말고 여기로 park (SKILL_MISMAPPING_GUARD.md)."
+            )
+        # INV-14: grant_status 는 캐릭터 고유 '상태 플래그' 부여 전용.
+        # stat=unsupported + stat_token="@<상태명>" 로만. (수치 버프는 grant_status 가 아니라
+        # 별도 buff/debuff effect — required_token=@상태명 으로 게이트.)
+        if self.action == ActionType.GRANT_STATUS and self.stat != StatType.UNSUPPORTED:
+            raise ValueError(
+                f"[INV-14] action=grant_status 는 stat=unsupported + stat_token='@<상태명>' 필수. "
+                f"got stat={self.stat.value}. 상태가 내포하는 수치 버프는 별도 buff effect 로 분리하라."
+            )
         # INV-1: deal_damage → formula_bracket=null
         # (스킬 계수는 공식의 '계수' 자리. B2/B3/B4 버프 합산과 다른 위치.)
         if self.action == ActionType.DEAL_DAMAGE and self.formula_bracket is not None:
@@ -450,12 +510,16 @@ class EffectBlock(BaseModel):
                 f"공격 종류는 TriggerBlock.condition_on (distribution_attack 등) 으로 표시."
             )
 
-        # INV-2: deal_damage → scale_base=caster_atk
-        if self.action == ActionType.DEAL_DAMAGE and self.scale_base != ScaleBase.CASTER_ATK:
+        # INV-2: deal_damage 의 계수 기준. 대부분 caster_atk('Deals X% of final ATK')이지만,
+        # NIKKE 엔 Max HP 비례 누커('X% of ATK calculated from N% of Max HP' — kilo, maiden 등)와
+        # damage_dealt 비례('X% of the damage dealt by self' — emilia)도 실재한다.
+        # 따라서 {caster_atk, caster_max_hp, damage_dealt} 만 허용. (2026-05-29 완화)
+        _dd_allowed = {ScaleBase.CASTER_ATK, ScaleBase.CASTER_MAX_HP, ScaleBase.DAMAGE_DEALT}
+        if self.action == ActionType.DEAL_DAMAGE and self.scale_base not in _dd_allowed:
             raise ValueError(
-                f"[INV-2] action=deal_damage 는 scale_base=caster_atk 필수. "
-                f"got {self.scale_base.value}. "
-                f"'Deals X% of final ATK as ...' 의 X 는 caster_atk 기준 계수."
+                f"[INV-2] action=deal_damage 의 scale_base 는 "
+                f"caster_atk / caster_max_hp / damage_dealt 중 하나여야 한다. "
+                f"got {self.scale_base.value}."
             )
 
         # INV-7: buff/debuff 에서 formula_bracket 은 STAT_BRACKET 과 일치해야 함
@@ -506,11 +570,13 @@ class EffectBlock(BaseModel):
                     f"got {self.scale_base.value}. "
                     f"'Recover HP by X% of attack damage' 해석."
                 )
-        # 역방향: damage_dealt 는 lifesteal 에서만
-        if self.scale_base == ScaleBase.DAMAGE_DEALT and self.stat != StatType.LIFESTEAL:
+        # 역방향: damage_dealt 는 lifesteal(흡혈) 또는 deal_damage(damage_dealt 비례 대미지)에서만.
+        if (self.scale_base == ScaleBase.DAMAGE_DEALT
+                and self.stat != StatType.LIFESTEAL
+                and self.action != ActionType.DEAL_DAMAGE):
             raise ValueError(
-                f"[INV-10c] scale_base=damage_dealt 는 stat=lifesteal 전용. "
-                f"got stat={self.stat.value}."
+                f"[INV-10c] scale_base=damage_dealt 는 stat=lifesteal 또는 action=deal_damage 전용. "
+                f"got stat={self.stat.value}, action={self.action.value}."
             )
 
         return self
@@ -525,9 +591,11 @@ class TriggeredEffectGroup(BaseModel):
     @model_validator(mode="after")
     def _check_group_invariants(self) -> "TriggeredEffectGroup":
         # INV-12: target=self + scale_base 가 '수정 대상과 같은 stat' 을 가리키면 의미 중복.
-        # 본인 기준이 곧 시전자 기준이므로 scale_base=none 으로 써야 한다.
+        # 본인 기준이 곧 시전자 기준(self==caster)이므로 scale_base=none 과 동일.
+        # → 거부하지 않고 **자동정규화**한다 (scale_base=none 으로 silently 교정).
+        #   의미 보존(self 기준=caster 기준)이고, LLM 이 caster_* 를 써도 결과가 같으므로
+        #   파싱 실패로 떨어뜨릴 이유가 없다. (2026-05-29: reject → normalize 전환.)
         _self_collapse = {
-            # (stat, scale_base) 가 이 셋에 있으면 target=self 시 거부.
             (StatType.ATK_PCT,      ScaleBase.CASTER_ATK),
             (StatType.ATK_FLAT,     ScaleBase.CASTER_ATK),
             (StatType.MAX_HP_PCT,   ScaleBase.CASTER_MAX_HP),
@@ -537,13 +605,9 @@ class TriggeredEffectGroup(BaseModel):
         if self.target.target == TargetType.SELF:
             for eff in self.effects:
                 if (eff.stat, eff.scale_base) in _self_collapse:
-                    raise ValueError(
-                        f"[INV-12] target=self + stat={eff.stat.value} + "
-                        f"scale_base={eff.scale_base.value} 은 중복 표현. "
-                        f"본인 기준이 곧 시전자 기준이므로 scale_base=none 으로 쓰라. "
-                        f"(※ 다른 stat 을 caster 스탯으로 스케일하는 경우 — 예: "
-                        f"stat=atk_flat + scale_base=caster_max_hp — 는 허용.)"
-                    )
+                    eff.scale_base = ScaleBase.NONE  # self==caster → 동일 의미로 축약
+        # (cross-stat: stat=atk_flat + scale_base=caster_max_hp 등은 _self_collapse 에
+        #  없으므로 그대로 보존됨 — 다른 stat 을 caster 스탯으로 스케일하는 정상 케이스.)
         return self
 
 
@@ -1589,6 +1653,101 @@ FEW_SHOT_EXAMPLES: list[tuple[str, dict]] = [
             ),
         },
     ),
+
+    # ── 20. 오매핑 방지 — Hit Rate 는 crit_rate 가 아니라 hit_rate + dps_scope=false ──
+    (
+        "■ Activates when number of Golden Chip stacks is 20 and above. Affects self.Hit Rate ▲ 38.91% for 15 sec.",
+        {
+            "skill_name": "Onward (Stage 2)",
+            "skill_slot": "burst",
+            "raw_text": "■ Activates when number of Golden Chip stacks is 20 and above. Affects self.Hit Rate ▲ 38.91% for 15 sec.",
+            "groups": [_group(
+                {"event": "passive", "required_token": "Golden Chip stacks 20+"},
+                {"target": "self"},
+                [{
+                    "stat": "hit_rate", "action": "buff", "value": 38.91,
+                    "scale": "pct", "scale_base": "none",
+                    "formula_bracket": None, "duration": 15.0,
+                    "dps_scope": False,
+                    "notes": "명중률은 대미지 공식과 무관 → dps_scope=false. crit_rate(치명타율)로 매핑 금지.",
+                }],
+            )],
+            "stack_conditions": None,
+        },
+    ),
+
+    # ── 21. 미지원 stat 탈출구 — Shield Damage 를 parts_dmg 로 우겨넣지 말 것 ──
+    (
+        "■ Affects 1 enemy unit(s).Deals 700.5% of final ATK as damage to Shield.",
+        {
+            "skill_name": "Shield Breaker",
+            "skill_slot": "s2",
+            "raw_text": "■ Affects 1 enemy unit(s).Deals 700.5% of final ATK as damage to Shield.",
+            "groups": [_group(
+                {"event": "skill_cast"},
+                {"target": "single_enemy", "target_count": 1},
+                [{
+                    "stat": "unsupported", "action": "deal_damage", "value": 700.5,
+                    "scale": "pct", "scale_base": "caster_atk",
+                    "formula_bracket": None, "duration": None,
+                    "stat_token": "@shield_damage", "dps_scope": False,
+                    "notes": "실드 전용 대미지. parts_dmg/attack_dmg(B3)에 넣으면 본체 대미지 폭발 → unsupported.",
+                }],
+            )],
+            "stack_conditions": None,
+        },
+    ),
+
+    # ── 22. every_n_full_charge — 'Full Charge for N time(s)' 카운팅 ──
+    (
+        "■ Activates when attacking with Full Charge for 8 time(s). Affects all allies.ATK ▲ 5% of the caster's Max HP for 5 sec.",
+        {
+            "skill_name": "Card Throw",
+            "skill_slot": "s1",
+            "raw_text": "■ Activates when attacking with Full Charge for 8 time(s). Affects all allies.ATK ▲ 5% of the caster's Max HP for 5 sec.",
+            "groups": [_group(
+                {"event": "every_n_full_charge", "trigger_count": 8},
+                {"target": "all_allies"},
+                [{
+                    "stat": "atk_flat", "action": "buff", "value": 5.0,
+                    "scale": "pct", "scale_base": "caster_max_hp",
+                    "formula_bracket": None, "duration": 5.0,
+                    "notes": "Full Charge for 8 time(s) → every_n_full_charge + trigger_count=8. cross-stat: caster Max HP 기준 ATK 가산.",
+                }],
+            )],
+            "stack_conditions": None,
+        },
+    ),
+
+    # ── 23. grant_status — 이름 붙은 캐릭터 고유 상태 + 내포 버프 분리 ──
+    (
+        "■ Activates when assigned to the back row in battle. Affects self and 2 allies on both sides.Sword Coin: Attack Damage ▲ 6.65% continuously.",
+        {
+            "skill_name": "Coin Flip",
+            "skill_slot": "s2",
+            "raw_text": "■ Activates when assigned to the back row in battle. Affects self and 2 allies on both sides.Sword Coin: Attack Damage ▲ 6.65% continuously.",
+            "groups": [_group(
+                {"event": "passive", "required_token": "assigned to the back row"},
+                {"target": "single_ally", "target_count": 3},
+                [
+                    {
+                        "stat": "unsupported", "action": "grant_status", "value": 1.0,
+                        "scale": "flat", "scale_base": "none",
+                        "formula_bracket": None, "duration": None,
+                        "stat_token": "@SwordCoin",
+                        "notes": "이름 붙은 상태 'Sword Coin' 부여 = grant_status (grant_trait 아님). 핸들러 소유.",
+                    },
+                    {
+                        "stat": "attack_dmg", "action": "buff", "value": 6.65,
+                        "scale": "pct", "scale_base": "none",
+                        "formula_bracket": "b3_attack_dmg", "duration": None,
+                        "notes": "Sword Coin 이 내포하는 수치 버프 — 별도 effect 로 분리(grant_status 에 안 넣음).",
+                    },
+                ],
+            )],
+            "stack_conditions": None,
+        },
+    ),
 ]
 
 
@@ -1610,12 +1769,14 @@ def build_system_prompt() -> str:
 Parse skill descriptions into structured JSON matching the SkillParsed schema.
 
 ## Damage Formula Reference
-Damage = (FinalAtk - FinalDef)
-       × (1 + Σcrit_dmg + Σcore_hit_buff + ...)                              [B2]
-       × (1 + Σattack_dmg [+pierce_dmg][+parts_dmg][+dot_dmg][+sequential_dmg])  [B3]
-       × (1 + Σdamage_taken + Σdistrib_dmg)                                   [B4]
-       × (1 + Σstrong_elem)                                                   [B5]
-       × coefficient
+Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
+  P  = (FinalAtk - FinalDef) × coefficient(W) × chargeDmg_final(C)
+  B2 = floor(P) + Σ_active floor(P × bracket)    ← ADDITIVE per-term FLOOR (NOT multiplicative)
+       bracket in: properDist, fullBurst, (crit) Σcrit_dmg, (core) coreHitBase + Σcore_hit_buff
+  B3 = 1 + Σattack_dmg [+pierce_dmg][+parts_dmg][+dot_dmg][+sequential_dmg]
+  B4 = 1 + Σdamage_taken + Σdistrib_dmg
+  B5 = 1 + Σstrong_elem
+  (NOTE: bracket taxonomy below is what matters for parsing — which stat → which bracket.)
 
 Full Charge (계수 자리의 별도 2-축):
   chargeDmg_final = (chargeDmg_base + Σcharge_dmg) × (1 + Σcharge_dmg_mult)
@@ -1675,7 +1836,11 @@ SkillParsed
 
 6. **scale / scale_base 규칙 (CRITICAL).**
    - 'ATK ▲ 10%' (plain)               → scale=pct, scale_base=none
-   - 'Deals 500% of final ATK'         → scale=pct, scale_base=caster_atk (deal_damage 전용)
+   - 'Deals 500% of final ATK'         → scale=pct, scale_base=caster_atk (deal_damage 표준)
+   - 'Deals X% of ATK calculated from N% of Max HP' (HP스케일 누커: kilo/maiden 등)
+                                       → deal_damage, scale_base=**caster_max_hp** (Max HP 기반)
+   - 'Deals X% of the damage dealt by self' (emilia 등)
+                                       → deal_damage, scale_base=**damage_dealt**
    - 'ATK ▲ X% of caster's ATK'        → stat=atk_flat, scale_base=caster_atk (v2 atk_ratio_of_caster 대체)
    - 'ATK ▲ X% of caster's Max HP'     → stat=atk_flat, scale_base=caster_max_hp (서로 다른 stat 이라도 OK)
    - 'Charge Speed ▲ X% of caster's Charge Speed' → scale_base=caster_charge_speed
@@ -1775,6 +1940,47 @@ SkillParsed
         → deal_damage group 만 생성. 'Attract for 2 sec' 부분은 effects 에 넣지 말고,
           parsing_notes 에 "CC ignored for sim: 'Attract for 2 sec'" 기록.
     (향후 PvP/엘리트 몹 확장이 필요해지면 apply_cc 액션 신설로 승급. 현재는 YAGNI.)
+
+18. **오매핑 방지 (CRITICAL — 빈칸을 억지로 채우지 마라).**
+    스키마에 정확히 맞는 stat 이 없을 때, **비슷한 대미지축 칸에 우겨넣는 것을 절대 금지**한다.
+    대미지축(crit_rate/crit_dmg/core_hit_buff/attack_dmg/pierce_dmg/parts_dmg/dot_dmg/
+    sequential_dmg/damage_taken/distrib_dmg/strong_elem/charge_dmg*/atk_pct/atk_flat/true_dmg)에
+    엉뚱한 효과를 넣으면 시뮬레이터가 **없는 대미지를 만들어낸다.**
+    - 대미지 무관 효과 (명중률 / 공격속도 / 이동속도 / 면역 / 엄폐물 / Full Burst Time 연장 등):
+        · 해당 stat 이 enum 에 있으면 그 이름 + formula_bracket=null + **dps_scope=false**.
+          예: 'Hit Rate ▲ X%' → stat=**hit_rate**, dps_scope=false. (절대 crit_rate 아님!)
+        · enum 에 없으면 stat=**unsupported** + **stat_token="@<원문이름>"** + dps_scope=false.
+          예: 'ATK Speed' → stat=unsupported, stat_token="@atk_speed".
+              'Shield Damage' → unsupported, stat_token="@shield_damage". (parts_dmg/attack_dmg 금지)
+              'Explosion Range' → unsupported, stat_token="@explosion_range". (atk_pct 금지)
+    - **명시적 금지 사례**: Hit Rate→crit_rate, ATK Speed→attack_dmg, Shield Damage→parts_dmg,
+      Explosion Range→atk_pct. ("closest proxy / placeholder" 라는 생각이 들면 곧 하면 안 되는 신호.)
+    - **명중률(Hit Rate) ≠ 치명타율(Critical Rate)**. 완전히 다른 스탯. 절대 혼동 금지.
+    - 확신이 안 서면 매핑하지 말고 stat=unsupported 로 park. 틀린 매핑보다 '미지원'이 안전.
+
+19. **카운팅 trigger ('... for N time(s)' / '... N time(s)').** 비카운팅 event(on_hit, burst_use 등)에
+    trigger_count 를 붙이지 말고(INV-3b), 카운팅 전용 event 를 쓴다 + trigger_count=N:
+    - 'when attacking with Full Charge for N time(s)' → **every_n_full_charge**
+    - 'when hitting ... N time(s)' / 'when crit attack hits N time(s)' / 'when N pellets hit'
+      → **every_n_hits** (파츠면 condition_on=hitting_parts; 크리·펠릿 등 종류는 required_token 보존)
+    - 'when using Burst Skill for N time(s)' → **every_n_burst_use**
+    - 'after firing N time(s)' → every_n_shots / 'after N normal attack(s)' → every_n_normal_attacks /
+      'when attacked N time(s)' → when_attacked_n_times.
+
+20. **value 가 스택 수에 비례 ('Mirrors the stack count of X').**
+    → 그 effect 에 **value_scales_with_token="@<토큰>"** 설정. 런타임 실효값 = value × 토큰 스택.
+    deal_damage / buff 공통. 예: 'Deals 28.9% ... Mirrors the stack count of Beautiful'
+    → deal_damage, value=28.9, value_scales_with_token="@Beautiful".
+
+21. **캐릭터 고유 '상태(named status)' 부여 → grant_status (grant_trait 아님!).**
+    'Gains <상태명> ...' / '<상태명>: <효과>' 처럼 **이름 붙은 캐릭터 고유 상태**를 부여할 때:
+    - 상태 플래그 자체 = action=**grant_status**, stat=**unsupported**, stat_token=**"@<상태명>"**,
+      value=1.0, scale=flat. (예: 'Mute: Gains immunity...' → grant_status @Mute /
+      'Sword Coin: Attack Damage ▲6.65%' → grant_status @SwordCoin)
+    - 그 상태가 **내포하는 수치 버프**(위 Attack Damage ▲6.65% 등)는 **별도 buff effect** 로 분리
+      (같은 group 의 effects[] 에 나란히, 또는 required_token=@상태명 으로 게이트되는 다른 group).
+    - **grant_trait 는 오직 3종**(trait_pierce / trait_true_dmg_conversion / trait_weapon_transformed)
+      전용. 그 외 상태/버프를 grant_trait + unsupported 로 넣지 말 것(INV-9a 위반). 상태면 grant_status.
 
 ## JSON Schema
 {schema_json}

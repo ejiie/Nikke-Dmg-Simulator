@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 
 # ── 가키짱의 절대 경로 마법 ──
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -30,7 +31,7 @@ def merge_blabla_data_v4():
 
     if not os.path.exists(RAW_FILE):
         print(f"❌ 야! 원본 파일이 없잖아! ({RAW_FILE})")
-        return
+        sys.exit(1)
 
     with open(RAW_FILE, "r", encoding="utf-8") as f:
         raw_data = json.load(f)
