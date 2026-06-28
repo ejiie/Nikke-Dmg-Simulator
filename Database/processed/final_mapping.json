@@ -163,6 +163,7 @@
     "5144": "sora",
     "5145": "dorothy-serendipity",
     "5146": "elegg-boom-and-shock",
+    "5147": "emma-tactical-upgrade",
     "5149": "eunhwa-tactical-upgrade",
     "5150": "milk-blooming-bunny",
     "5151": "ade-agent-bunny",
@@ -184,7 +185,8 @@
     "5169": "anis-star",
     "5170": "neon-vision-eye",
     "5171": "avistar",
-    "5172": "mint"
+    "5172": "mint",
+    "5173": "prika"
   },
   "manual_review_needed": [],
   "_AVAILABLE_SLUGS": [
@@ -204,6 +206,7 @@
     "arcana",
     "arcana-fortune-mate",
     "aria",
+    "ark-ranger-black",
     "asuka-shikinami-langley",
     "asuka-shikinami-langley-wille",
     "avistar",
@@ -331,6 +334,7 @@
     "poli",
     "poli-treasure",
     "power",
+    "prika",
     "privaty",
     "privaty-treasure",
     "privaty-unkind-maid",
