@@ -87,6 +87,8 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 2. **팀 버프 전파** — 5인 교차버프(static/runtime 2축, §5) → 매 발사 tick `AttackContext` 합산. NIKKE 대미지의 8할.
 3. **스킬 런타임 breadth** — `skills_parsed.json` 134 완성분 + stack/조건/required_token/filter_token dispatch 전수.
 
+> 상세 구현 가이드(컴포넌트 계약 · 마일스톤 M0~M5 · 결정포인트): [`Docs/ENGINE_GUIDE.md`](ENGINE_GUIDE.md).
+
 ---
 
 ## 5. 스킬 적용 2축 (static / runtime)
@@ -113,6 +115,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 | 영역 | 권위 |
 |---|---|
 | 방향·구조 | **이 문서** (`Docs/DESIGN.md`) |
+| 엔진 구현 (how/순서) | `Docs/ENGINE_GUIDE.md` |
 | 대미지 공식 | 이 문서 §3 + `Stats/StatCalculator.cs` + golden test + `_dmg_probe.py`/`_dmg_calibrate.py` |
 | 스킬 스키마 | `DataPipeline/schema/skill_schema_legend.txt` + `skill_schema.py` (Pydantic) |
 | 데이터 shape | C# `Data/Dto/*.cs` + 실제 JSON |
