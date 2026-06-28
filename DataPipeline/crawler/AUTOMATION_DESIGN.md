@@ -23,12 +23,14 @@
 - [x] probe 계측 + 실행 — `--probe` 로 `GetUserCharacterDetails` body 확보(§3.2.1).
       배치 키=`name_codes` 리스트, 서명 헤더 없음(cookie+x-common-params 인증).
       덤프 `Database/raw/_probe_*.json`(gitignore), auth 헤더값 redact.
-- [~] replay 루프 + 완결성 가드 — **코드 완료, 라이브 검증 대기**
+- [x] replay 루프 + 완결성 가드 — **라이브 검증됨 (185/185 수집, 스크롤 0)**
       GetUserCharacters→roster+요청템플릿(헤더/area_id) 확보 → `context.request.post` 로
       name_codes 를 `--batch-size`(기본10) 단위 직접 호출(쿠키 자동, x-common-params 재사용).
       `EXIT_INCOMPLETE=12`(detail<roster 시 저장 생략).
 - [x] 토글/25× 스크롤 제거(normal run) — `--probe` 시에만 UI 경로 유지(디버그)
-- [ ] **라이브 수집 검증 (detail==roster) → 통과 시 커밋**  ← 다음
+- [x] 라이브 end-to-end 검증 + 커밋 — replay 185/185 → `blabla_merger` 185명(오버로드/콘솔/synchro 보존). commit `4594d96`.
+
+**✅ BlaBlaLink 완전 자동화 완료 (2026-06-28).** login(쿠키/region/id-pw) + API replay, 수동 단계 0.
 
 ---
 
