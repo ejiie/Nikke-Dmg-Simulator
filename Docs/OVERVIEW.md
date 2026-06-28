@@ -19,6 +19,7 @@ NIKKE(가챠 게임) 캐릭터의 대미지를 계산/시뮬레이션하는 도�
 
 ```
 DataPipeline/            Python: 크롤러 + ETL + LLM 스킬 파서
+  run_pipeline.py        전체 파이프라인 오케스트레이터 (crawl 2종 → etl 5단계)
   crawler/               웹/게임 API 수집 → Database/raw/
   etl/                   raw 가공/병합 → Database/processed/
   schema/                LLM 스킬 파싱 (Pydantic 스키마 + Gemini 호출기)
@@ -102,15 +103,29 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 ```bash
 cd DataPipeline
 pip install -r requirements.txt
-# ETL (순서대로)
-python etl/blabla_merger.py
+playwright install chromium            # blabla 크롤러용 (1회)
+cp .env.example .env                   # 자격증명 채우기 (NIKKE_BLABLA_ID/PW/UID)
+
+# ── 권장: 오케스트레이터 한 방 (crawl 2종 → etl 5단계 순서대로) ──
+python run_pipeline.py                 # 전체
+python run_pipeline.py --stage etl     # 가공만 (수집 생략)
+python run_pipeline.py --dry-run       # 실행 계획만 확인
+
+# ── 또는 수동 단계별 실행 ──
+python crawler/getFromPrydwen.py       # 정적 캐릭터 데이터 → raw/
+python crawler/getFromBlaLink.py       # 유저 데이터 + 영문 사전 → raw/ (.env 로그인 자동)
+python etl/blabla_merger.py            # 이하 ETL 은 이 순서 의존
 python etl/prydwen_cleaner.py
 python etl/atk_parser.py
 python etl/auto_mapper.py
 python etl/db_merger.py
-# LLM 스킬 파싱 (GEMINI_API_KEY 필요)
+
+# LLM 스킬 파싱 (별도 트랙, GEMINI_API_KEY 필요)
 python schema/skill_parser_llm.py
 ```
+
+> `run_pipeline.py` 는 각 단계를 subprocess 로 돌려 종료 코드를 존중한다(실패 시 중단).
+> `getFromBlaLink.py` 는 로그인·수집 완전 자동(쿠키/region/id-pw + API replay) — `DataPipeline/crawler/AUTOMATION_DESIGN.md` 참조.
 
 ### SimulatorEngine
 ```bash
