@@ -32,6 +32,20 @@ public partial class App : Application
                 StatTable.InitializeEquipment(equipPath);
             }
             catch (System.Exception) { /* 장비 표 없으면 스킵(0) */ }
+
+            // 큐브/소장품 공식 특수효과 표 (enum/dict). 없으면 해당 효과 0.
+            try
+            {
+                Nikke.Simulator.Core.Data.Constants.EffectTable.InitializeCube(
+                    JsonProvider.GetSmartDatabasePath("cube_effect_table.json"));
+            }
+            catch (System.Exception) { }
+            try
+            {
+                Nikke.Simulator.Core.Data.Constants.EffectTable.InitializeCollection(
+                    JsonProvider.GetSmartDatabasePath("collection_effect_table.json"));
+            }
+            catch (System.Exception) { }
         }
         catch (System.Exception ex)
         {
