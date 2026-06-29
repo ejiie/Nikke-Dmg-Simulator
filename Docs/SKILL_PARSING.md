@@ -1,5 +1,9 @@
 # SKILL_PARSING — 문제 분석 + v4 스키마
 
+> ⚠ **2026-06-29 중대 변경 후보**: blablalink 공식 CDN 이 **레벨별 exact 값 + skill_type 코드**가 든
+> 구조화 스킬 데이터(`roledata`)를 제공함이 발견됨 → 이 LLM 파싱 트랙(prydwen 산문 → Gemini)을
+> **대체/스킵** 가능. 상세 [SKILL_DATA_BLABLALINK.md](SKILL_DATA_BLABLALINK.md). 아래 §1~6 은 그 이전 설계.
+
 > 스킬 파싱이 "꼬인" 이유(§1~2)와, 그 위에서 **확정한 v4 스키마 형태(§3)**,
 > 그리고 아직 안 한 일(§4~6)을 적는다.
 > §3는 2026-05-26 task 루프(diesel/soda/2b/cinderella/rouge 실데이터 검증)로 합의된 **확정 형태**다.

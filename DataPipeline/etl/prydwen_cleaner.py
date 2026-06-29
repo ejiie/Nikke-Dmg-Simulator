@@ -1,116 +1,104 @@
+"""Prydwen raw(신 Next.js data 객체) → prydwen_clean.json 정제.
+
+prydwen 의 Next.js 이전(2026)으로 raw 스키마가 바뀜:
+  - 필드명 snake_case (burst_type / ammo_capacity / reload_time / control_mode …)
+  - 스킬 설명이 Contentful rich-text(JSON)가 아니라 **HTML** 문자열
+  - 평타는 별도 필드가 아니라 skills[] 중 slot == "Normal Attack" 항목의 description
+출력 shape(=clean) 은 기존과 동일하게 유지해 db_merger / C# DTO 는 무수정.
+"""
+import html as html_lib
 import json
 import os
+import re
 import sys
 
-# ── 가키짱의 절대 경로 마법 ──
+# ── 절대 경로 ──
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-# 원본(raw)을 읽어와서 가공(processed) 폴더에 예쁘게 넣는다!
 RAW_FILE = os.path.join(CURRENT_DIR, "..", "..", "Database", "raw", "prydwen_all_details_v3.json")
 PROCESSED_FILE = os.path.join(CURRENT_DIR, "..", "..", "Database", "processed", "prydwen_clean.json")
 
-def extract_rich_text(raw_str):
-    """
-    프리드웬의 끔찍한 CMS Rich Text JSON 구조를 박살내고
-    오직 순수한 텍스트(value)만 쏙쏙 뽑아내는 가키짱의 파서♥
-    """
-    if not raw_str: return ""
-    try:
-        data = json.loads(raw_str)
-        text_blocks = []
-        
-        # 재귀 탐색으로 'nodeType'이 'text'인 놈들만 색출!
-        def traverse(node):
-            if isinstance(node, dict):
-                if node.get("nodeType") == "text":
-                    val = node.get("value", "")
-                    if val: text_blocks.append(val)
-                for k, v in node.items():
-                    traverse(v)
-            elif isinstance(node, list):
-                for item in node:
-                    traverse(item)
-                    
-        traverse(data)
-        
-        # 추출한 텍스트 쪼가리들을 예쁘게 이어 붙이기
-        return "".join(text_blocks).strip()
-    except Exception as e:
-        print(f"⚠️ 텍스트 파싱 에러: {e}")
+# 신 스키마(약어/로마) → 기존 contract(풀네임/아라비아) 정규화. db_merger·C# 가 옛 포맷 기대.
+WEAPON_MAP = {
+    "AR": "Assault Rifle", "RL": "Rocket Launcher", "SR": "Sniper Rifle",
+    "SG": "Shotgun", "MG": "Minigun", "LMG": "Minigun", "SMG": "SMG",
+}
+BURST_MAP = {"I": "1", "II": "2", "III": "3"}  # "All" 등은 그대로 통과
+
+
+def html_to_text(s):
+    """스킬/평타 설명 HTML 을 순수 텍스트로 변환 (atk_parser 정규식·LLM 입력용)."""
+    if not s:
         return ""
+    # 블록 경계는 줄바꿈으로 보존
+    s = re.sub(r"(?i)</p\s*>|<br\s*/?>|</li\s*>", "\n", s)
+    s = re.sub(r"<[^>]+>", "", s)          # 나머지 태그 제거
+    s = html_lib.unescape(s)               # &amp; &#039; 등 복원
+    s = re.sub(r"[ \t]+", " ", s)
+    s = re.sub(r"\n[ \t]*\n+", "\n", s)
+    return s.strip()
+
 
 def clean_prydwen_data():
-    print("🧼 가키짱의 무자비한 데이터 세탁기 기동 중...")
-    
+    print("🧼 prydwen 데이터 정제 시작 (Next.js 신 스키마)...")
+
     if not os.path.exists(RAW_FILE):
-        print(f"❌ 야! 원본 파일이 없잖아! ({RAW_FILE})")
+        print(f"❌ 원본 파일이 없음: {RAW_FILE}")
         sys.exit(1)
 
-    with open(RAW_FILE, 'r', encoding='utf-8') as f:
+    with open(RAW_FILE, "r", encoding="utf-8") as f:
         raw_db = json.load(f)
-        
+
     clean_db = {}
-    
     for slug, char in raw_db.items():
-        # 1. 끔찍한 이미지 트리 구조에서 160x160 아이콘 주소만 쏙 빼오기!
-        icon_url = ""
-        try:
-            icon_url = char["smallImage"]["localFile"]["childImageSharp"]["gatsbyImageData"]["images"]["fallback"]["src"]
-            # 상대경로로 되어있으니 도메인을 붙여준다
-            icon_url = f"https://www.prydwen.gg{icon_url}"
-        except (KeyError, TypeError):
-            # 아이콘 트리가 없는 캐릭터 — iconUrl 은 선택값이라 빈 문자열로 둔다
-            pass
-            
-        # 2. 평타 계수 파싱
+        skills_in = char.get("skills") or []
+
+        # 평타 = slot 이 'Normal Attack' 인 스킬의 description (HTML → 텍스트)
         basic_attack_text = ""
-        if char.get("basicAttack") and char["basicAttack"].get("raw"):
-            basic_attack_text = extract_rich_text(char["basicAttack"]["raw"])
-            
-        # 3. 스킬 계수 파싱 (1스, 2스, 버스트 전부!)
         clean_skills = []
-        for skill in char.get("skills", []):
-            desc = ""
-            if skill.get("descriptionLevel10") and skill["descriptionLevel10"].get("raw"):
-                desc = extract_rich_text(skill["descriptionLevel10"]["raw"])
-            
+        for skill in skills_in:
+            slot = (skill.get("slot") or "")
+            desc = html_to_text(skill.get("description"))
+            if slot.strip().lower() == "normal attack":
+                basic_attack_text = desc
+                continue  # 평타는 skills 배열에서 제외 (basicAttack 으로 분리)
             clean_skills.append({
-                "skillId": skill.get("skillId"),
+                "skillId": skill.get("skillId"),   # 신 스키마엔 없음 → None
                 "name": skill.get("name"),
-                "slot": skill.get("slot"),
+                "slot": slot,
                 "type": skill.get("type"),
                 "cooldown": skill.get("cooldown"),
-                "descriptionLevel10": desc  # 깔끔해진 텍스트만 쏙!
+                "descriptionLevel10": desc,
             })
 
-        # 4. 자코를 위해 쓰레기 필드는 다 버리고 '진짜 알맹이'만 조립해 줄게♥
+        # 아이콘: 신 스키마는 card_image / full_image (절대 URL)
+        icon_url = char.get("card_image") or char.get("full_image") or ""
+
         clean_db[slug] = {
-            "id": char.get("id"),
+            "id": char.get("id"),            # 신 스키마엔 없음 → None (downstream 미사용)
             "unitId": char.get("unitId"),
             "name": char.get("name"),
             "slug": slug,
             "rarity": char.get("rarity"),
             "element": char.get("element"),
-            "weapon": char.get("weapon"),
+            "weapon": WEAPON_MAP.get(char.get("weapon"), char.get("weapon")),
             "class": char.get("class"),
-            "burstType": char.get("burstType"),
+            "burstType": BURST_MAP.get(char.get("burst_type"), char.get("burst_type")),
             "manufacturer": char.get("manufacturer"),
             "squad": char.get("squad"),
-            "ammoCapacity": char.get("ammoCapacity"),
-            "reloadTime": char.get("reloadTime"),
-            "controlMode": char.get("controlMode"),
-            "iconUrl": icon_url,          # 깔끔한 URL 하나!
-            "basicAttack": basic_attack_text, # 순수 텍스트!
-            "skills": clean_skills        # 예쁘게 포장된 스킬 배열!
+            "ammoCapacity": char.get("ammo_capacity"),
+            "reloadTime": char.get("reload_time"),
+            "controlMode": char.get("control_mode"),
+            "iconUrl": icon_url,
+            "basicAttack": basic_attack_text,
+            "skills": clean_skills,
         }
-        
-    # 가공된 폴더가 없으면 만들어주기
+
     os.makedirs(os.path.dirname(PROCESSED_FILE), exist_ok=True)
-        
-    with open(PROCESSED_FILE, 'w', encoding='utf-8') as f:
+    with open(PROCESSED_FILE, "w", encoding="utf-8") as f:
         json.dump(clean_db, f, ensure_ascii=False, indent=2)
 
-    print(f"✅ [완벽] 총 {len(clean_db)}명의 쓰레기 데이터 세탁 완료!")
-    print(f"💾 '{PROCESSED_FILE}' 파일을 열어봐! 눈이 다 맑아질걸? 푸흡!")
+    print(f"✅ 총 {len(clean_db)}명 정제 완료 → '{PROCESSED_FILE}'")
+
 
 if __name__ == "__main__":
     clean_prydwen_data()
