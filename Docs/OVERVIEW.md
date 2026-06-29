@@ -42,9 +42,10 @@ Docs/                    이 문서들
 | `nikke_full_scroll_result.json` | 유저 계정 데이터 (레벨/등급/코어/장비/오버로드/콘솔). blabla 계열 크롤러 |
 | `prydwen_all_details_v3.json` | 정적 캐릭터 데이터 (스탯/스킬 텍스트/평타). Prydwen 크롤러 |
 | `real_en_dict_dump.json` | name_code → 영문 이름 사전 (매핑용). blabla 크롤러가 응답 스니핑 후 검증된 JSON 으로 저장 |
+| `blabla_static_tables.json` | 장비(class×tier×slot base) + 하모니 큐브(레벨별) + 소장품(레벨별). `getFromBlaLinkStatic.py` 가 공개 CDN 에서 수집(로그인 불필요). 가끔만 갱신 |
 
-> 수집은 `getFromBlaLink.py`(유저 데이터 + 영문 사전), `getFromPrydwen.py`(정적 캐릭터 데이터)
-> 두 크롤러가 담당. (이전 문서가 언급하던 `nikke_data_crawler.py` / `static_fetcher.py` 는 존재하지 않음.)
+> 수집은 `getFromBlaLink.py`(유저 데이터 + 영문 사전), `getFromPrydwen.py`(정적 캐릭터 데이터),
+> `getFromBlaLinkStatic.py`(장비/큐브/소장품 정적표, 공개 CDN·로그인 불필요·가끔만) 세 크롤러가 담당.
 
 ### 3.2 ETL → `Database/processed/`
 실행 순서대로:

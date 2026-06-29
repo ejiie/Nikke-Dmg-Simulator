@@ -91,11 +91,18 @@ class GakiSniffer:
         self.batch_size = 10
         self._roster_name_codes = []
         self._api_template = None   # {"intl_open_id","nikke_area_id","headers"}
+        # CDN 디스커버리: sg-tools-cdn 의 정적 데이터 JSON(manifest/테이블) URL 수집
+        self.discover_cdn = False
+        self.cdn_dump = []
 
     def encode_uid(self, uid: str) -> str:
         return base64.b64encode(f"29080-{uid}".encode()).decode()
 
     async def intercept_response(self, response):
+        # ── [0] CDN 디스커버리: sg-tools-cdn 정적 데이터 JSON 전부 기록 ──
+        if self.discover_cdn and "sg-tools-cdn.blablalink.com" in response.url:
+            await self._capture_cdn(response)
+
         # ── [1] 🌍 캐릭터 사전(영문 로케일) 심해 스니핑 ──
         # URL 이름은 못 믿는다. 응답 본문을 직접 갈라서 사전인지 확인한다.
         # (한 번만 확보하면 충분 — 이미 잡았으면 건너뜀)
@@ -172,6 +179,38 @@ class GakiSniffer:
             "post_data": req.post_data,   # body 원본 (name_codes/서명필드 파악용)
         })
         print(f"🔬 [probe] {endpoint} 요청 캡처")
+
+    async def _capture_cdn(self, response):
+        """sg-tools-cdn JSON 1건의 URL + 형태(키/길이/preview)를 기록 (manifest/테이블 식별용)."""
+        try:
+            if "json" not in response.headers.get("content-type", ""):
+                return
+            if any(e["url"] == response.url for e in self.cdn_dump):
+                return
+            text = await response.text()
+            payload = _extract_json_payload(text)
+            entry = {"url": response.url, "bytes": len(text)}
+            if isinstance(payload, dict):
+                entry["kind"] = "dict"
+                entry["keys"] = list(payload.keys())[:40]
+            elif isinstance(payload, list):
+                entry["kind"] = "list"
+                entry["len"] = len(payload)
+                if payload and isinstance(payload[0], dict):
+                    entry["item_keys"] = list(payload[0].keys())[:25]
+            else:
+                entry["kind"] = "other"
+                entry["preview"] = text[:200]
+            self.cdn_dump.append(entry)
+            print(f"🛰️ [cdn] {entry['kind']:5} {entry['bytes']:>8}B  …/{response.url.split('/')[-1]}")
+        except Exception:
+            pass
+
+    def _write_cdn_dump(self):
+        path = os.path.join(RAW_DIR, "_probe_cdn_dump.json")
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(self.cdn_dump, f, ensure_ascii=False, indent=2)
+        print(f"🛰️ [cdn] {len(self.cdn_dump)}개 CDN JSON 기록 → '{path}'")
 
     def _write_probe_dump(self):
         """모은 요청 shape 을 gitignore 된 파일로 기록한다(auth 헤더값 redact 됨)."""
@@ -308,9 +347,11 @@ class GakiSniffer:
 
     async def run_scenario(self, uid: str, login_id: str, password: str,
                            region: str, login_timeout: float = 120.0,
-                           probe: bool = False, batch_size: int = 10) -> int:
+                           probe: bool = False, batch_size: int = 10,
+                           discover_cdn: bool = False) -> int:
         self.probe = probe
         self.batch_size = batch_size
+        self.discover_cdn = discover_cdn
         target_url = f"{BASE_DOMAIN}/shiftyspad/nikke-list?uid={self.encode_uid(uid)}&openid={self.encode_uid(uid)}"
         login_url = f"{BASE_DOMAIN}/login?to={target_url}&back_to={target_url}"
 
@@ -349,7 +390,11 @@ class GakiSniffer:
                 # 여기서 GetUserCharacters 발생 → roster + 요청 템플릿 확보됨.
                 self.current_phase = 2
 
-                if self.probe:
+                if self.discover_cdn:
+                    # CDN 정적 데이터(manifest/테이블)가 로드되도록 잠시 대기하며 캡처.
+                    print("🛰️ [cdn] CDN 정적 데이터 로드 대기 (15초)...")
+                    await page.wait_for_timeout(15000)
+                elif self.probe:
                     # probe: UI 가 실제 디테일 요청을 쏘게 토글+스크롤 (요청 shape 캡처용).
                     print("\n👉 [probe] '리스트 뷰 토글'(파란 버튼) 클릭해줘! 20초 대기...")
                     await page.wait_for_timeout(20000)
@@ -364,6 +409,14 @@ class GakiSniffer:
                     print(f"✅ [replay] 디테일 {got}/{len(self._roster_name_codes)} 수집 완료.")
 
             await browser.close()
+
+        # CDN 디스커버리 모드: 수집한 CDN JSON 목록만 남기고 종료(유저데이터 저장 안 함).
+        if self.discover_cdn:
+            if self.cdn_dump:
+                self._write_cdn_dump()
+            else:
+                print("⚠️ [cdn] sg-tools-cdn JSON 을 하나도 못 잡음 (페이지가 다르게 로드?).")
+            return EXIT_OK if logged_in else EXIT_LOGIN_TIMEOUT
 
         # probe 덤프는 로그인만 되면(데이터 수집 성패 무관) 남긴다.
         if self.probe and self.probe_requests:
@@ -432,6 +485,10 @@ def main():
         "--batch-size", type=int, default=10,
         help="replay 시 GetUserCharacterDetails 배치당 name_codes 수. 기본 10(관측치)"
     )
+    parser.add_argument(
+        "--discover-cdn", action="store_true",
+        help="로그인 후 sg-tools-cdn 정적 데이터 JSON(manifest/테이블) URL 을 _probe_cdn_dump.json 에 수집"
+    )
     args = parser.parse_args()
 
     if not args.uid:
@@ -454,6 +511,7 @@ def main():
             args.uid, login_id, password, region,
             login_timeout=args.login_timeout,
             probe=args.probe, batch_size=args.batch_size,
+            discover_cdn=args.discover_cdn,
         )
     )
 
