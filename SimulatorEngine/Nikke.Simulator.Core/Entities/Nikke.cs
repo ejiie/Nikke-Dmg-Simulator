@@ -57,6 +57,14 @@ namespace Nikke.Simulator.Core.Entities
 
         public CubeStatDto EquippedCube { get; private set; }
 
+        // 큐브/소장품 공식 특수효과 (enum/dict, 값=분수). EquipCube / InitializeFinalStats 에서 채움.
+        private Dictionary<EffectType, double> _cubeEffects = new();
+        private Dictionary<EffectType, double> _collectionEffects = new();
+
+        private double EffSum(EffectType t)
+            => (_cubeEffects.TryGetValue(t, out var a) ? a : 0.0)
+             + (_collectionEffects.TryGetValue(t, out var b) ? b : 0.0);
+
         public Nikke(CharacterDto dto, GlobalStateDto globalState)
         {
             _originDto = dto ?? throw new ArgumentNullException(nameof(dto));
@@ -108,69 +116,54 @@ namespace Nikke.Simulator.Core.Entities
                 BasicAtkChargeDamage = dto.StaticInfo.basicAttack.chargeDamage;
             }
 
-            // [5] 스탯 초기화 (큐브 미장착 상태)
-            InitializeFinalStats();
+            // [5] 큐브 자동 장착 (유저데이터에 cube tid 있으면) — 내부에서 InitializeFinalStats 호출.
+            //     없으면 큐브 미장착 상태로 초기화.
+            if (dto.user.cube != null && dto.user.cube.tid > 0)
+                EquipCube(dto.user.cube.tid, dto.user.cube.level);
+            else
+                InitializeFinalStats();
         }
 
-        // [추가] 전투 연산 시점(AttackContext)에 참조될 큐브 특수 효과 (장착 시 갱신)
-        public CubeEffectDto CurrentCubeEffect { get; private set; }
-
         /// <summary>
-        /// [장착] 큐브를 교체하고 스탯 + 특수 전투 효과를 동시에 캐싱한다.
+        /// [장착] 큐브 base 스탯 + 공식 특수효과를 캐싱하고 최종 스탯을 재계산한다.
         /// </summary>
-        /// <param name="cubeTid">장착할 큐브의 고유 ID (예: 1000313)</param>
+        /// <param name="cubeTid">큐브 고유 ID (예: 1000308=Vigor)</param>
         /// <param name="levelOverride">큐브 레벨 (기본값 15)</param>
         public void EquipCube(int cubeTid, int levelOverride = 15)
         {
-            // 1. 큐브의 스탯을 가져옴 (내부에 1스킬 레벨 포함)
-            EquippedCube = StatTable.GetCubeStat(levelOverride);
-
-            // 2. 큐브 TID + 스킬 레벨로 '전투 연산 구조체' 가져옴
-            CurrentCubeEffect = CubeSkillTable.GetSkillEffect(cubeTid, EquippedCube.SkillLevel);
-
-            // 3. 재장전/탄약/피해증가 관련 효과는 AttackContext 단계에서 합산되지만,
-            //    "체력 증가율(MaxHpBonusRate)"만은 전투 이전의 최종 기초 스탯
-            //    (EffectiveNativeHP)에 반영되어야 하므로 여기서 전체 재계산을 트리거한다.
+            EquippedCube = StatTable.GetCubeStat(levelOverride);              // base ATK/HP/DEF
+            _cubeEffects = EffectTable.GetCubeEffects(cubeTid, levelOverride); // 공식 특수효과 (enum/dict)
             InitializeFinalStats();
         }
 
-        // [추가] 애용품의 특수 스킬 계수들을 담는 불변 객체
-        public CollectionEffectDto CurrentCollectionEffect { get; private set; }
-
         private void InitializeFinalStats()
         {
-            // [추가] 애용품/보물품 레벨 기반으로 O(1) 효과 객체 로드
-            CurrentCollectionEffect = CollectionEffectTable.GetEffect(FavoriteItemLv);
-
-
             // [A] Core 보정까지 적용된 기초 스탯 (레벨 + 등급 + 콘솔 + 호감도 + 코어)
             var (coreHP, coreAtk, coreDef) = StatTable.GetCoreAppliedStats(
                 Class, WeaponType, Manufacturer, Level, Grade, Core, BondLevel, _globalState.consoles);
 
             // [B] Consts 요소들 가져오기 (애용품, 장비, 큐브)
             var (collHP, collAtk, collDef) = StatTable.GetCollectionStats(FavoriteItemLv);
-            var (equipHP, equipAtk, equipDef) = StatTable.GetEquipmentStats(_equipments);
+            var (equipHP, equipAtk, equipDef) = StatTable.GetEquipmentStats(Class, Manufacturer, _equipments);
 
             double cubeHP = EquippedCube?.HP ?? 0;
             double cubeAtk = EquippedCube?.Atk ?? 0;
             double cubeDef = EquippedCube?.Def ?? 0;
 
-            // [H1] 큐브 효과 중 % 증가치는 별도 버킷. 미장착 시 struct 기본값 0으로 안전.
-            //  - MaxHpBonusRate (Vigor): EffectiveNativeHP에 곱산으로 반영
-            //    → OL의 StatMaxHP 퍼센트는 이 증가된 native 위에 올라탄다.
-            //  (AmmoChargeRate, PartsDamageBonus 등 전투 중 효과는 AttackContext 단계에서 소비)
-            double cubeHpRate = CurrentCubeEffect.MaxHpBonusRate;
-
-            // [H2] 콜렉션 MG 전용 MaxAmmoIncreaseRate — MG 캐만 native ammo에 곱산.
-            // 그 외 무기는 0.
-            double collMaxAmmoRate = (WeaponType == "Machine Gun")
-                ? CurrentCollectionEffect.MaxAmmoIncreaseRate : 0.0;
+            // [H1] 큐브/소장품 공식 특수효과 중 **기초스탯 rate 버프**: stat × (1 + Σrate).
+            //  - MaxHp(Vigor), Def(Endurance), MaxAmmo(Wingman/콜렉션) — 큐브+콜렉션 합산.
+            //  (ElemAdv/Charge/Parts 등 대미지 효과는 BuildAttackContext 에서 소비.
+            //   ReloadSpeed/DamageTaken 등 타이밍·생존 효과는 미소비.)
+            _collectionEffects = EffectTable.GetCollectionEffects(WeaponType, FavoriteItemLv);
+            double hpRate = EffSum(EffectType.MaxHp);
+            double defRate = EffSum(EffectType.Def);
+            double ammoRate = EffSum(EffectType.MaxAmmo);
 
             // [C] Consts 합산 (Effective Native Stat: baseAtk = atk_core + consts)
-            double effectiveNativeHP = (coreHP + collHP + equipHP + cubeHP) * (1.0 + cubeHpRate);
+            double effectiveNativeHP = (coreHP + collHP + equipHP + cubeHP) * (1.0 + hpRate);
             double effectiveNativeAtk = coreAtk + collAtk + equipAtk + cubeAtk;
-            double effectiveNativeDef = coreDef + collDef + equipDef + cubeDef;
-            double nativeAmmo = _originDto.StaticInfo.ammoCapacity * (1.0 + collMaxAmmoRate);
+            double effectiveNativeDef = (coreDef + collDef + equipDef + cubeDef) * (1.0 + defRate);
+            double nativeAmmo = _originDto.StaticInfo.ammoCapacity * (1.0 + ammoRate);
 
             // [D] 오버로드 프로세서 적용 (니케식 정밀 소수점 연산)
             FinalBaseAtk = OverloadProcessor.CalculateFinalBaseStat(
@@ -238,49 +231,43 @@ namespace Nikke.Simulator.Core.Entities
             //   기존 공식은 W 를 누락했었음. 스킬 누크 계수는 런타임이 별도 오버라이드 (gap#5).
             ctx.SkillMultiplier = (BasicAtkMultiplier > 0) ? BasicAtkMultiplier : 1.0;
 
-            var cube = CurrentCubeEffect;
-            var coll = CurrentCollectionEffect;
-
-            // [H3] OL 전투축 주입 — BaseCritRate/SumCritDmg/SumChargeDmgAdd/SumStrongElem
-            // InitializeFinalStats 에서 val_type 정규화까지 끝난 값을 그대로 가산한다.
+            // [H3] OL 전투축 주입 — InitializeFinalStats 에서 val_type 정규화까지 끝난 값을 가산.
             ctx.BaseCritRate += _olCritRateBonus;
             ctx.SumCritDmg += _olCritDmgBonus;
             ctx.SumChargeDmgAdd += _olChargeDmgAdd;
             ctx.SumStrongElem += _olElementDmgBonus;
 
-            // [H2] 큐브 고정 전투 효과
-            ctx.SumPartsDmg += cube.PartsDamageBonus;
-            ctx.SumPierceDmg += cube.PierceDamageBonus;
-            // Parts/Pierce 는 IsPartsHit/IsPierceHit 플래그가 true 일 때만 B3 에 가산됨 (StatCalculator 참조)
+            // 차지 기본 배율 (per-character JSON; 비차지 무기 = 1.0)
+            ctx.ChargeDmgBase = BasicAtkChargeDamage;
 
-            // [A2] 큐브 트루 대미지 증가 — IsTrueDamage 플래그가 true 일 때만 B3 에 가산됨
-            ctx.SumTrueDmgBuff += cube.TrueDamageBonus;
-
-            // [H2] 콜렉션 무기별 고정 효과 — 해당 무기에만 적용
-            switch (WeaponType)
-            {
-                case "Assault Rifle":
-                    ctx.SumCoreHitBuff += coll.CoreDamageBonus;
-                    break;
-                case "Sniper Rifle":
-                case "Rocket Launcher":
-                    ctx.SumChargeDmgMult += coll.ChargeDamageMultiplier;
-                    // 차지 무기 기본 배율은 JSON (basicAttack.chargeDamage) per-character.
-                    // 대부분 2.5 (Full Charge 250%), 일부 3.5 (350%) 등 값이 다양.
-                    // 환각 하드코딩 (2.5) 제거, BasicAtkChargeDamage 로 교체 (2026-04-23).
-                    ctx.ChargeDmgBase = BasicAtkChargeDamage;
-                    break;
-                case "Submachine Gun":
-                case "Shotgun":
-                    ctx.SumAttackDmg += coll.NormalAttackMultiplier;
-                    break;
-                case "Machine Gun":
-                    // MaxAmmo는 InitializeFinalStats 에서 FinalBaseMaxAmmo 로 이미 반영됨
-                    break;
-                // default: 알 수 없는 무기 → 기본값 유지 (ChargeDmgBase=1.0)
-            }
+            // 큐브 + 소장품 공식 특수효과(enum/dict) → 대미지 브래킷.
+            // 기초스탯(MaxHp/Def/MaxAmmo)은 InitializeFinalStats 에서, 타이밍·생존 효과는 미소비.
+            RouteEffects(ref ctx, _cubeEffects);
+            RouteEffects(ref ctx, _collectionEffects);
 
             return ctx;
+        }
+
+        /// <summary>특수효과(분수) → AttackContext 대미지 버킷. 의미 규칙: Docs/SKILL_DATA_BLABLALINK §4.1.
+        /// Parts/Pierce/True 는 StatCalculator 가 IsPartsHit/IsPierceHit/IsTrueDamage 플래그로 게이트.</summary>
+        private static void RouteEffects(ref AttackContext ctx, Dictionary<EffectType, double> eff)
+        {
+            foreach (var kv in eff)
+            {
+                double v = kv.Value;
+                switch (kv.Key)
+                {
+                    case EffectType.ElementAdvantageDamage: ctx.SumStrongElem += v; break;   // B5
+                    case EffectType.CoreDamage: ctx.SumCoreHitBuff += v; break;              // B2
+                    case EffectType.PartsDamage: ctx.SumPartsDmg += v; break;                // B3
+                    case EffectType.PierceDamage: ctx.SumPierceDmg += v; break;              // B3
+                    case EffectType.TrueDamage: ctx.SumTrueDmgBuff += v; break;              // B3
+                    case EffectType.ChargeDamage: ctx.SumChargeDmgAdd += v; break;           // charge add
+                    case EffectType.ChargeDamageMultiplier: ctx.SumChargeDmgMult += v; break; // charge mult
+                    case EffectType.NormalAttackMultiplier: ctx.SkillMultiplier *= (1.0 + v); break; // W
+                    // MaxHp/Def/MaxAmmo → 기초스탯(InitializeFinalStats), 그 외 타이밍/생존 → 미소비
+                }
+            }
         }
     }
 }

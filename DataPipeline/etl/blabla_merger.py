@@ -80,12 +80,13 @@ def merge_blabla_data_v4():
                         "favorite_item_lv": 0,
                         "skills": {"skill1": 1, "skill2": 1, "burst": 1},
                         "equipments": {
-                            "head": {"tier": 0, "level": 0},
-                            "torso": {"tier": 0, "level": 0},
-                            "arm": {"tier": 0, "level": 0},
-                            "leg": {"tier": 0, "level": 0}
+                            "head": {"tier": 0, "level": 0, "corp": 0},
+                            "torso": {"tier": 0, "level": 0, "corp": 0},
+                            "arm": {"tier": 0, "level": 0, "corp": 0},
+                            "leg": {"tier": 0, "level": 0, "corp": 0}
                         },
-                        "overload_stats": [] 
+                        "cube": {"tid": 0, "level": 0},
+                        "overload_stats": []
                     }
 
     # ── [2] 전 구간(Phase 1 & 2) 오버로드 옵션 딕셔너리 빌드 ──
@@ -125,12 +126,18 @@ def merge_blabla_data_v4():
                     merged_characters[nc]["skills"]["skill2"] = char.get("skill2_lv", 1)
                     merged_characters[nc]["skills"]["burst"] = char.get("ulti_skill_lv", 1)
 
+                    # 장착 하모니 큐브 (C# EquipCube 자동 호출용)
+                    merged_characters[nc]["cube"]["tid"] = char.get("harmony_cube_tid", 0)
+                    merged_characters[nc]["cube"]["level"] = char.get("harmony_cube_lv", 0)
+
                     overloads = []
                     parts = ["head", "torso", "arm", "leg"]
                     
                     for part in parts:
                         merged_characters[nc]["equipments"][part]["tier"] = char.get(f"{part}_equip_tier", 0)
                         merged_characters[nc]["equipments"][part]["level"] = char.get(f"{part}_equip_lv", 0)
+                        # 제조사 보너스(+30%)용 장비 corporation_type (0=없음, 1~7=기업)
+                        merged_characters[nc]["equipments"][part]["corp"] = char.get(f"{part}_equip_corporation_type", 0)
 
                         for i in range(1, 4):
                             opt_id = str(char.get(f"{part}_equip_option{i}_id", 0))

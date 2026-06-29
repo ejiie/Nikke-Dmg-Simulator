@@ -24,6 +24,28 @@ public partial class App : Application
             // Database/processed/stat_table.csv — worktree 루트에서 스마트 탐색
             string csvPath = JsonProvider.GetSmartDatabasePath("stat_table.csv");
             StatTable.Initialize(csvPath);
+
+            // 장비/큐브/소장품 base 표 (blablalink 공식 JSON). 없으면 해당 스탯 0.
+            try { StatTable.InitializeEquipment(JsonProvider.GetSmartDatabasePath("equip_stat_table.json")); }
+            catch (System.Exception) { }
+            try { StatTable.InitializeCubeBase(JsonProvider.GetSmartDatabasePath("cube_base_table.json")); }
+            catch (System.Exception) { }
+            try { StatTable.InitializeCollectionBase(JsonProvider.GetSmartDatabasePath("collection_base_table.json")); }
+            catch (System.Exception) { }
+
+            // 큐브/소장품 공식 특수효과 표 (enum/dict). 없으면 해당 효과 0.
+            try
+            {
+                Nikke.Simulator.Core.Data.Constants.EffectTable.InitializeCube(
+                    JsonProvider.GetSmartDatabasePath("cube_effect_table.json"));
+            }
+            catch (System.Exception) { }
+            try
+            {
+                Nikke.Simulator.Core.Data.Constants.EffectTable.InitializeCollection(
+                    JsonProvider.GetSmartDatabasePath("collection_effect_table.json"));
+            }
+            catch (System.Exception) { }
         }
         catch (System.Exception ex)
         {

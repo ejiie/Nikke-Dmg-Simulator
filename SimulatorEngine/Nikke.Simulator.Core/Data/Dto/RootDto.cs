@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Nikke.Simulator.Core.Data.Dto
@@ -8,7 +9,8 @@ namespace Nikke.Simulator.Core.Data.Dto
     /// </summary>
     public class RootDto
     {
-        public ulong uid { get; set; }
+        // uid 는 거대 숫자 식별자라 JSON 에 문자열로 저장됨. 산술 안 하므로 string.
+        public string uid { get; set; }
 
         public GlobalStateDto global_state { get; set; }
 
@@ -50,7 +52,10 @@ namespace Nikke.Simulator.Core.Data.Dto
         public double reloadTime { get; set; }
 
         public BasicAttackDto basicAttack { get; set; }
-        public List<SkillDto> skills { get; set; }
+
+        // 스킬은 blablalink roledata 구조(skill1/skill2/burst dict). 스킬 런타임 미구현이라
+        // 지금은 원본 JSON 그대로 보관(역직렬화 안 깨지게). 추후 전용 DTO 로 구조화.
+        public JsonElement? skills { get; set; }
     }
 
     public class BasicAttackDto
@@ -83,9 +88,17 @@ namespace Nikke.Simulator.Core.Data.Dto
 
         public SkillLevelsDto skills { get; set; }
         public EquipmentPartsDto equipments { get; set; }
+        public CubeUserDto cube { get; set; }
 
         // 오버로드 DTO 재활용
         public List<OverloadOptionDto> overload_stats { get; set; }
+    }
+
+    // 장착 하모니 큐브 (Nikke 생성 시 자동 EquipCube).
+    public class CubeUserDto
+    {
+        public int tid { get; set; }
+        public int level { get; set; }
     }
 
     // [추가] 장비 DTO 클래스들
@@ -101,6 +114,8 @@ namespace Nikke.Simulator.Core.Data.Dto
     {
         public int tier { get; set; }
         public int level { get; set; }
+        // 장비 제조사(0=없음, 1~7=기업). 캐릭 manufacturer 와 일치 시 +30% 보너스.
+        public int corp { get; set; }
     }
 
     public class SkillLevelsDto

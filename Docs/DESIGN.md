@@ -132,6 +132,12 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 - **팀 합 분포**: 팀별 분포의 합 = convolution(팀간 독립 가정) — 가정 타당성 검증 필요.
 - **UI/컴퓨트 위치**: 보류 — M1 단일 sim 속도 측정 후 (client Blazor vs 서버 오프로드). 엔진은 무관하게 진행.
 - **데이터 실측 필요**: 장비표(`GetEquipmentStats`=0 stub), 큐브 TID 1000318–1000321 "예시 수치", ProperDistance 0.3(RL=0 외 미검증).
+- **엔진**: event-driven 확정. (구현 세부 — 이벤트 큐 자료구조 등 — 슬라이스 1에서.)
+- **코드 구조**: Runtime 층을 새 프로젝트(`Nikke.Simulator.Engine`)로 분리할지 Core 내 `Runtime/` namespace 로 둘지 — 미정.
+- **`DamageCalculator`/`AttackContext` 위치**: 현재 master 는 `Stats/`. 별도 worktree 에 `Combat/` 이동안 존재 — 채택 여부 미정 (cosmetic).
+- **파서 prerequisite**: 70 bailout 슬롯(57명) 선완료 vs 런타임 먼저+결손 no-op+파서 병행 (lean: 후자).
+- **출력 지표**: 총대미지 / 시간축 DPS 곡선 / 캐릭별 기여 / 브래킷 분해 — 미정.
+- **데이터 실측**: 장비표·큐브·소장품 → **확보+C# 연동 완료** (`blabla_static_tables.json`; 장비 `round(base×(1+0.3·corp+0.1·level))` + 큐브/소장품 base·특수효과 = `GetEquipmentStats`/base JSON/`EffectTable` 배선). 타이밍/조건부 효과만 sim 루프 대기. ProperDistance 0.3(RL=0 외 미검증)은 여전히 열림.
 
 ---
 
