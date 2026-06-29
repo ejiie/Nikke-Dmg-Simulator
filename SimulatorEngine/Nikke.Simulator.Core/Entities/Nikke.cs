@@ -272,7 +272,8 @@ namespace Nikke.Simulator.Core.Entities
                     break;
                 case "Submachine Gun":
                 case "Shotgun":
-                    ctx.SumAttackDmg += coll.NormalAttackMultiplier;
+                    // 평타 배율 증가 = 무기 계수 W 에 곱: W × (1 + 배율). (B3 attack_dmg 아님 — 2026-06-30 교정)
+                    ctx.SkillMultiplier *= (1.0 + coll.NormalAttackMultiplier);
                     break;
                 case "Machine Gun":
                     // MaxAmmo는 InitializeFinalStats 에서 FinalBaseMaxAmmo 로 이미 반영됨

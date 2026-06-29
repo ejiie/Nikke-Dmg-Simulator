@@ -68,6 +68,23 @@ skill1/2 는 `skill_table:"StateEffect"` — 패시브 효과도 StateEffect 함
 > + `skill_type`(효과 종류 코드) 조합이면 스킬을 충분히 모델링 가능. prydwen 산문보다 훨씬 깨끗해 규칙기반
 > 파싱이 현실적이고, LLM 다듬기는 스킵. (function 정의는 후순위 nice-to-have.)
 
+## 4.1 특수효과 → 엔진 버킷 / 의미 규칙 (큐브·소장품·스킬 공통)
+
+효과 종류는 description 키워드로 식별(StateEffect 함수정의 미노출). 각 효과의 **적용 위치·방향**:
+
+| effect | 적용 | 비고 |
+|---|---|---|
+| ElementAdvantageDamage | B5 `SumStrongElem` | 우월코드 |
+| CoreDamage | B2 `SumCoreHitBuff` | |
+| PartsDamage / PierceDamage / TrueDamage | B3 (플래그 조건) | |
+| **NormalAttackMultiplier** | **W × (1 + 배율)** | ⚠ B3 아님! 무기 계수에 곱. (기존 코드 오류였음) |
+| ChargeDamage / ChargeDamageMultiplier | charge add / mult | |
+| **MaxHp / Def** | **stat × (1 + Σrate)** | ⚠ 전투 유지 rate 버프. 큐브0.1 + 버프0.2 → ×1.3 (합산 후 곱) |
+| **DamageTaken(받피감)** | **생존(비대미지)** | ⚠ "캐릭이 적에게서 받는 뎀 감소". B4 `damage_taken`(적 취약=내 출력↑)과 **방향 반대·별개** |
+| ReloadSpeed/MaxAmmo/ChargeSpeed/BurstGauge/ReloadRounds | 무기타이밍(sim루프) | 파싱만 |
+| HealPotency / CoverHp / 조건부 | 생존 | 파싱만 |
+| HitRate | 제외 | DESIGN: 명중률만 제외 |
+
 ## 5. 열린 항목
 
 - [x] roledata 크롤러 — `getFromBlaLinkRoledata.py` (메타+무기+스킬, 공유 `_bbl_cdn.py`, 로그인 불필요).
