@@ -6,9 +6,25 @@
 
 ---
 
-## 0. 한 줄
+## 0. 한 줄 (궁극 목적)
 
-보유 NIKKE 로스터로 **팀 단위 풀 tick 정밀 로테이션 시뮬레이터**를 만들어, 시간축 위에서 실제 전투를 재현하고 DPS/총대미지를 산출한다.
+보유 NIKKE 로스터로 **최고 고점 덱 조합을 찾아주는 (배포 가능한) 도구.**
+풀 tick 정밀 로테이션 sim 은 **최종 목적이 아니라 optimizer 의 inner loop**: 팀 1개의 대미지 **분포** 산출(sim) → 덱별 파워 평가(고점×확률) → 로스터를 K팀으로 분할한 **합딜 고점 최대 조합** 탐색 → 웹 UI/배포.
+
+---
+
+## 0.5 목표 계층 (tiers)
+
+| Tier | 내용 | 상태 |
+|---|---|---|
+| 1 **Core** | stat 조립 + per-hit 대미지 공식 | 🟡 거의 (공식 ✅ 검증) |
+| 2 **Sim Engine** | event-driven 풀 tick 로테이션 → 팀 1개 1회 run 의 총대미지 (RNG 표본 1개) | ❌ THE GAP (§4) |
+| 3 **Evaluator** | 팀별 N회 run → **분포 저장**(샘플/분위수; 평균+편차로 부족 — tail 필요). = "덱 파워" | ❌ 신규 |
+| 4 **Optimizer** | 로스터 → K팀(3 or 5) 분할(캐릭 1회), **고점×확률 목적** 최대 조합 탐색 | ❌ 신규 |
+| 5 **Web App** | 로스터 입력 · 결과 · 차트 | ❌ 신규 (UI 스택 보류) |
+| 6 **배포** | 공개 · 멀티유저 | ❌ 신규 |
+
+> Tier 2 가 3 의 inner loop, 3 이 4 의 inner loop. 따라서 **성능 1급** + **팀조합→파워 memoize/cache 필수** (고유 5인조 1회만 sim).
 
 ---
 
@@ -23,6 +39,10 @@
 | **로테이션 제어** | **2모드** — `IRotationController` ← `AutoController` / `ScriptedController` | 단순덱=자동, 기믹덱=수동 |
 | **대미지 대상** | `ITarget` 추상화 ← `DummyTarget`(먼저) / `BossTarget`(나중) | |
 | **빌드 순서** | 수직 슬라이스 ①단일캐릭 → ②팀버프 → ③스킬 breadth | §4 |
+| **Optimizer 목적** | **고점 × 확률** (상위 tail; 예: `P(합딜 ≥ X)` 또는 고분위수). Σ평균 아님 | Evaluator 가 **분포 전체** 보관 |
+| **최적화 문제** | 로스터 → K팀(3/5) 분할, 캐릭 1회, tail 목적 최대 | NP-hard → 후보풀+휴리스틱+팀파워 cache |
+| **UI/컴퓨트** | **보류** (M1 단일 sim 속도 측정 후 결정) | → 엔진 = **UI·compute 무지 순수 라이브러리** 강제 (WPF/Blazor/서버 무엇이든 참조만) |
+| **배포** | 공개·멀티유저 지향 | 하드코딩 개인데이터 X (유저별 로스터 입력), 개인데이터 client-side |
 
 ---
 
@@ -63,7 +83,8 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
   B5 = 1 + Σstrong_elem                                        ← 곱셈 브래킷
 ```
 
-- **W** = 평타/스킬 계수 (`basicAttack.multiplier`; deal_damage 스킬 계수도 W 슬롯).
+- **W** = 평타/스킬 계수 — **fraction** (golden 리그 4.995 = 499.5%/100). deal_damage 스킬 계수도 W 슬롯.
+  - ⚠️ 데이터 `basicAttack.multiplier` 는 **percent**(예 8.73 = "8.73% ATK"), `chargeDamage` 는 fraction(2.5) — **단위 불일치.** W 주입 시 `multiplier/100` 정규화 필수 (안 하면 100× 버그). 정규화 위치 1곳 확정해 문서화 (ENGINE_GUIDE P1).
 - **C** = 차지 배율. 비차지 = 1. 풀차지: `C = (ChargeDmgBase + Σcharge_dmg) × (1 + Σcharge_dmg_mult)`.
   - `ChargeDmgBase` = per-character `basicAttack.chargeDamage` (대부분 2.5, 일부 3.5).
 - **[A1] 최소 대미지**: `effectiveDef ≥ FinalAtk` → 배율 무관 즉시 **1** (중간 곱 미경유).
@@ -101,11 +122,15 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 
 ## 6. 열린 항목 (착수하며 확정)
 
-- **엔진**: event-driven 확정. (구현 세부 — 이벤트 큐 자료구조 등 — 슬라이스 1에서.)
-- **코드 구조**: Runtime 층을 새 프로젝트(`Nikke.Simulator.Engine`)로 분리할지 Core 내 `Runtime/` namespace 로 둘지 — 미정.
-- **`DamageCalculator`/`AttackContext` 위치**: 현재 master 는 `Stats/`. 별도 worktree 에 `Combat/` 이동안 존재 — 채택 여부 미정 (cosmetic).
-- **파서 prerequisite**: 70 bailout 슬롯(57명) 선완료 vs 런타임 먼저+결손 no-op+파서 병행 (lean: 후자).
-- **출력 지표**: 총대미지 / 시간축 DPS 곡선 / 캐릭별 기여 / 브래킷 분해 — 미정.
+- **코드 구조**: **권장 = `Nikke.Simulator.Engine` 지금 분리** (tier 3/4/5·배포가 엔진을 라이브러리로 재사용 → 프로젝트 벽이 결합부채 차단; 컴파일러가 Core→Engine 참조 금지). 조건: Core 는 UI/compute 무지 유지. (확정 대기.)
+- **`DamageCalculator`/`AttackContext` 위치**: 현재 master `Stats/`. worktree 에 `Combat/` 이동안 존재 — cosmetic, 채택 미정.
+- **파서 prerequisite**: 런타임 먼저 + 결손(bailout/PARSE_ERROR) no-op + 파서 병행 (lean). skills_parsed v3 동결.
+- **W 단위 정규화 위치**: `multiplier/100` 을 `atk_parser.py`(저장 시) vs `Nikke`(주입 시) 중 어디서 — 1곳 확정 (§3 ⚠️).
+- **출력/Evaluator**: sim 1 run = **총대미지 표본 1개** 기록 → Evaluator 가 N run 으로 **분포** 구성(샘플/분위수; tail 필요). 부가: 시간축 DPS·캐릭별·브래킷 분해.
+- **Optimizer 지표 정확형**: `P(합딜 ≥ X)` vs 고분위수(예 P90) — 그리고 X/분위수 설정 방식 (UI 입력?). 미정.
+- **Optimizer 알고리즘**: 후보풀 선정 + greedy / beam / branch&bound / ILP 중 — 미정. 팀파워 memoize 전제.
+- **팀 합 분포**: 팀별 분포의 합 = convolution(팀간 독립 가정) — 가정 타당성 검증 필요.
+- **UI/컴퓨트 위치**: 보류 — M1 단일 sim 속도 측정 후 (client Blazor vs 서버 오프로드). 엔진은 무관하게 진행.
 - **데이터 실측 필요**: 장비표(`GetEquipmentStats`=0 stub), 큐브 TID 1000318–1000321 "예시 수치", ProperDistance 0.3(RL=0 외 미검증).
 
 ---

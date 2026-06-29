@@ -9,8 +9,10 @@
 
 ## 0. 범위
 
-엔진 = `skills_parsed.json` + 검증된 대미지/스탯 코어를 **시간축 위에서 굴려** 팀 DPS/총대미지를 내는 Runtime 층.
+엔진 = `skills_parsed.json` + 검증된 대미지/스탯 코어를 **시간축 위에서 굴려** 팀 1회 run 의 총대미지(RNG 표본)를 내는 Runtime 층 = **Tier 2** (DESIGN §0.5).
 목표 형태(DESIGN §1): **event-driven 풀 tick 로테이션 sim**, 2모드 제어, 타겟 추상화.
+
+> ⚠️ 엔진은 **Tier 3(Evaluator)·4(Optimizer)·5(Web)·6(배포) 의 재사용 대상.** → **UI·compute·직렬화 무지 순수 라이브러리** 로 짓는다. 출력은 run 1회당 **총대미지 표본 1개**(Evaluator 가 N run → 분포). 절대 UI/서버 타입을 엔진에 끌어들이지 말 것.
 
 **이미 있음(재사용, §2) → 없음(이 가이드가 짓는 것, §3) → 순서(§4) → 계약(§5) → 결정(§6) → 불변식(§7).**
 
@@ -24,6 +26,8 @@
 - **MUST**: 히트 1회 = `CalculateDamage` 1회. 관통 본체+파츠, 멀티히트는 **인스턴스 분해** (런타임이 히트 생성, 공식은 1발만).
 - **MUST**: `deal_damage` 스킬 계수는 W 슬롯(`SkillMultiplier`). `formula_bracket=null` — 브래킷 합산(B2~B5)에 **절대 더하지 말 것** (INV-2).
 - **MUST**: %-버프 합산 = 니케식 **group-then-round** (값별 그룹 → 그룹별 반올림 → 합; DESIGN/archive §4.4). 합 먼저 반올림과 결과 다름.
+- **MUST**: 엔진 = **UI/compute/직렬화 무지 순수 라이브러리.** UI·서버·JSON-API 타입 의존 0 (Tier 3/4/5 가 재사용).
+- **MUST**: sim 1 run 출력 = **총대미지 표본 1개** (Evaluator 가 N run → 분포; **고점×확률 목적**이라 tail 추정 위해 N 충분히 — 평균만 보는 N 보다 커야).
 - **MUST NOT**: `weapon_type` override. `trait_weapon_transformed` = granular 파라미터(fire_rate/charge_time/…)만 (DESIGN, archive §5.4).
 - **MUST NOT**: 파서 bailout `groups: []` 에서 throw. **no-op** 처리.
 
@@ -124,7 +128,7 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 
 | # | 결정 | 권장 | 비고 |
 |---|---|---|---|
-| D1 | 엔진 코드 위치 | **Core 내 `Runtime/` namespace** | Core 타입 깊게 씀, 프로젝트참조 최소. 후에 `Nikke.Simulator.Engine` 분리 쉬움 |
+| D1 | 엔진 코드 위치 | **`Nikke.Simulator.Engine` 프로젝트 지금 분리** (권장 수정) | tier 3/4/5(evaluator/optimizer/web)+배포가 엔진을 라이브러리로 재사용 → 프로젝트 벽이 결합부채 차단(컴파일러가 Core→Engine 금지). 선비용 작음. 조건: Core/Engine UI·compute 무지 |
 | D2 | W 단위 | M0에서 실측 확인 후 고정 | `BasicAtkMultiplier` percent면 `/100`. golden 리그는 W=4.995(fraction) |
 | D3 | 파서 prerequisite | **런타임 먼저, 134 완성분 + 결손 no-op, 파서 병행** | 닭달걀 차단 |
 | D4 | 출력 지표 | record-every-instance MetricsCollector | 총/DPS곡선/캐릭별/브래킷 전부 사후 집계 |
