@@ -70,6 +70,7 @@ skill1/2 는 `skill_table:"StateEffect"` — 패시브 효과도 StateEffect 함
 
 ## 5. 열린 항목
 
-- 엔진 연동: roledata → C# 스킬 런타임 입력 포맷 설계 (`skill_type` → dispatch, 레벨별 값 주입).
-- roledata 스킬 크롤러 작성 (nikke_list resource_id 순회 → 스킬 detail 추출/정규화).
-- (후순위) 게임 datamine 에서 StateEffect 정의 확보 — 완전 기계화 시.
+- [x] roledata 스킬 크롤러 — `getFromBlaLinkSkills.py` (공유 `_bbl_cdn.py` 사용, 로그인 불필요).
+      nikke_list resource_id 순회 → roledata → 스킬 detail 추출. 192/192 → `Database/raw/blabla_skills.json`(name_code 키).
+- [ ] 엔진/ETL 연동: `blabla_skills.json` → C# 스킬 런타임 입력 (`skill_type` → dispatch, placeholder↔레벨값 주입).
+- [ ] (후순위) 게임 datamine 에서 StateEffect 정의 확보 — 완전 기계화 시.

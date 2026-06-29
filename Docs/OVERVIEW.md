@@ -43,9 +43,11 @@ Docs/                    이 문서들
 | `prydwen_all_details_v3.json` | 정적 캐릭터 데이터 (스탯/스킬 텍스트/평타). Prydwen 크롤러 |
 | `real_en_dict_dump.json` | name_code → 영문 이름 사전 (매핑용). blabla 크롤러가 응답 스니핑 후 검증된 JSON 으로 저장 |
 | `blabla_static_tables.json` | 장비(class×tier×slot base) + 하모니 큐브(레벨별) + 소장품(레벨별). `getFromBlaLinkStatic.py` 가 공개 CDN 에서 수집(로그인 불필요). 가끔만 갱신 |
+| `blabla_skills.json` | 공식 구조화 스킬(레벨별 값 + skill_type 코드, name_code 키). `getFromBlaLinkSkills.py` 가 공개 CDN roledata 에서 수집. prydwen+LLM 대체 후보 → `SKILL_DATA_BLABLALINK.md` |
 
 > 수집은 `getFromBlaLink.py`(유저 데이터 + 영문 사전), `getFromPrydwen.py`(정적 캐릭터 데이터),
-> `getFromBlaLinkStatic.py`(장비/큐브/소장품 정적표, 공개 CDN·로그인 불필요·가끔만) 세 크롤러가 담당.
+> `getFromBlaLinkStatic.py`(장비/큐브/소장품), `getFromBlaLinkSkills.py`(공식 스킬) 가 담당.
+> 뒤 두 개는 blablalink 공개 CDN(로그인 불필요·가끔만)에서 받으며 URL 계산은 공유 모듈 `_bbl_cdn.py`.
 
 ### 3.2 ETL → `Database/processed/`
 실행 순서대로:
