@@ -17,8 +17,8 @@ namespace Nikke.Simulator.Core.Stats
         // 2. 호감도 보너스 (BondLevel -> Class -> Stats)
         private static Dictionary<int, ClassStats> _bondStats = new Dictionary<int, ClassStats>();
 
-        // 3. 소장품(SR) 보너스 (CollLevel -> Stats)
-        private static Dictionary<int, FlatStats> _srCollectionStats = new Dictionary<int, FlatStats>();
+        // 3. 소장품 base 스탯 (CollLevel -> ATK/HP/DEF). blablalink collection_base_table.json.
+        private static Dictionary<int, (double atk, double hp, double def)> _collBase = new();
 
         public class ClassStats
         {
@@ -35,10 +35,10 @@ namespace Nikke.Simulator.Core.Stats
             public Dictionary<string, double> DEF { get; set; } = new Dictionary<string, double>();
         }
 
-        /// <summary>
-        /// 복잡한 CSV 구조를 파싱해서 메모리에 적재한다!
-        /// </summary>
-        private static Dictionary<int, CubeStatDto> _cubeTable = new Dictionary<int, CubeStatDto>();
+        // 4. 큐브 base 스탯 (CubeLevel -> ATK/HP/DEF). blablalink cube_base_table.json.
+        private static Dictionary<int, (double atk, double hp, double def)> _cubeBase = new();
+
+        /// <summary>레벨/호감도 테이블을 stat_table.csv 에서 로드 (큐브/소장품 base 는 별도 JSON).</summary>
         public static void Initialize(string csvPath)
         {
             if (!File.Exists(csvPath)) throw new FileNotFoundException("CSV 파일이 없어, 허접군!");
@@ -71,91 +71,43 @@ namespace Nikke.Simulator.Core.Stats
                 };
             }
 
-            // --- [3. 소장품(SR) 테이블 파싱 (Row 49-64) 및 특수 효과 등록] ---
-            FlatStats lastValid = null;
-            for (int i = 49; i <= 64; i++)
-            {
-                var cols = SplitCsvLine(lines[i]);
-
-                // Index 48(AW)까지 접근해야 하므로 컬럼 갯수 방어 코드 삽입
-                if (cols.Length <= 48) continue;
-
-                int collLv = ParseInt(cols[26]);
-
-                // [3-A] 깡스탯 추출 (Forward Fill 유지)
-                if (!string.IsNullOrWhiteSpace(cols[28]))
-                {
-                    lastValid = new FlatStats
-                    {
-                        HP = ParseDouble(cols[28]),
-                        ATK = ParseDouble(cols[30]),
-                        DEF = { ["ALL"] = ParseDouble(cols[32]) }
-                    };
-                }
-                _srCollectionStats[collLv] = lastValid;
-
-                // [3-B] 특수 스킬(배율/기믹) 데이터 추출 및 분리 저장 (요구사항 B 반영)
-                // SMG(38)와 SG(40)는 둘 다 평타 배율이므로 구조체의 단일 파라미터로 병합 (어차피 동시 적용 불가)
-                double smgAtk = ParseDouble(cols[38]);
-                double sgAtk = ParseDouble(cols[40]);
-
-                var effectDto = new CollectionEffectDto(
-                    coreDmg: ParseDouble(cols[34]),         // AI: AR 코어 대미지 증가
-                    chargeDmg: ParseDouble(cols[36]),       // AK, AQ: SR, RL 차징 배율 증가
-                    normalAtk: Math.Max(smgAtk, sgAtk),     // AM, AO: SMG, SG 평타딜 배율 증가
-                    maxAmmo: ParseDouble(cols[44]),         // AS: MG 장탄수 증가
-                    defInc: ParseDouble(cols[46]),          // AU: 공통 방어력 증가
-                    dmgTakenRed: ParseDouble(cols[47]),     // AV: 공통 받는 대미지 감소
-                    coverHp: ParseDouble(cols[48])          // AW: 공통 엄폐물 체력 증가
-                );
-
-                // 정적 배율 저장소에 주입 (StatTable과 로직 완전 분리)
-                CollectionEffectTable.RegisterEffect(collLv, effectDto);
-            }
-
-            // --- [4. 하모니 큐브 테이블 파싱 (Row 4~23, Col 38~42 기준)] ---
-            foreach (var line in lines.Skip(4)) // 헤더 건너뛰기
-            {
-                var cols = line.Split(',');
-                if (cols.Length < 43 || string.IsNullOrWhiteSpace(cols[38])) continue;
-
-                int lv = ParseInt(cols[38]);
-                if (lv == 0) continue;
-
-                _cubeTable[lv] = new CubeStatDto
-                {
-                    Level = lv,
-                    Atk = ParseDouble(cols[39]),
-                    Def = ParseDouble(cols[40]),
-                    HP = ParseDouble(cols[41]),
-                    SuperiorCodeDmg = ParseDouble(cols[42]),
-                    SkillLevel = ParseInt(cols[43]) // 1슬롯 레벨
-                };
-
-                if (lv >= 20) break; // 큐브 데이터 끝부분
-            }
+            // 큐브/소장품 base 스탯 + 특수효과는 stat_table.csv 가 아니라 blablalink 공식 JSON 으로 이전됨
+            // (cube_base_table / collection_base_table / cube_effect_table / collection_effect_table).
+            // Initialize 는 레벨/호감도(섹션 1~2)만 CSV 에서 읽는다. base 표는 InitializeCubeBase/
+            // InitializeCollectionBase 가 별도 로드.
         }
 
-        /// <summary>
-        /// 특정 레벨의 큐브 스탯을 가져오기(없으면 15레벨을 디폴트로)
-        /// </summary>
+        // 큐브/소장품 base 표 JSON 로더 ({"<level>": {"ATK","HP","DEF"}}).
+        private static Dictionary<int, (double atk, double hp, double def)> LoadBase(string jsonPath)
+        {
+            var result = new Dictionary<int, (double, double, double)>();
+            if (string.IsNullOrEmpty(jsonPath) || !File.Exists(jsonPath)) return result;
+            var raw = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, double>>>(File.ReadAllText(jsonPath));
+            if (raw == null) return result;
+            foreach (var kv in raw)
+                if (int.TryParse(kv.Key, out int lv))
+                {
+                    var s = kv.Value;
+                    result[lv] = (s.GetValueOrDefault("ATK"), s.GetValueOrDefault("HP"), s.GetValueOrDefault("DEF"));
+                }
+            return result;
+        }
+
+        public static void InitializeCubeBase(string jsonPath) => _cubeBase = LoadBase(jsonPath);
+        public static void InitializeCollectionBase(string jsonPath) => _collBase = LoadBase(jsonPath);
+
+        /// <summary>큐브 레벨의 base 스탯 (없으면 15레벨 폴백, 그래도 없으면 0).</summary>
         public static CubeStatDto GetCubeStat(int level = 15)
         {
-            if (_cubeTable.TryGetValue(level, out var stat)) return stat;
-            return _cubeTable.ContainsKey(15) ? _cubeTable[15] : new CubeStatDto();
+            if (!_cubeBase.TryGetValue(level, out var b) && !_cubeBase.TryGetValue(15, out b))
+                return new CubeStatDto();
+            return new CubeStatDto { Level = level, Atk = b.atk, HP = b.hp, Def = b.def };
         }
 
-
-        /// <summary>
-        /// [신설] 소장품(애장품) 스탯은 consts 그룹이므로 코어 계산에서 제외하고 별도로 추출합니다.
-        /// </summary>
+        /// <summary>소장품(generic 컬렉션) 레벨의 base 스탯 (HP, ATK, DEF).</summary>
         public static (double HP, double ATK, double DEF) GetCollectionStats(int collLv)
         {
-            if (_srCollectionStats.TryGetValue(collLv, out var collStat) && collStat != null)
-            {
-                return (collStat.HP, collStat.ATK, collStat.DEF["ALL"]);
-            }
-            return (0, 0, 0);
+            return _collBase.TryGetValue(collLv, out var b) ? (b.hp, b.atk, b.def) : (0, 0, 0);
         }
 
         /// <summary>

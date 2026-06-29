@@ -44,11 +44,11 @@
 - **크리 RNG 추상화** (`IRandomSource`/`CritSampler`): 고정 시드 금지 정책. (API만 준비, 소비처 없음.)
 
 ### 3.2 스텁/플레이스홀더 (값이 임시이거나 0 반환)
-- ~~**장비 스탯**~~ → **연동 완료**: `StatTable.GetEquipmentStats(class, manufacturer, equips)` 가 `equip_stat_table.json`(ETL) 로드 + 공식 `round(base×(1+0.3·corp일치+0.1·level))` 적용. 부위별 corp(제조사) 는 `blabla_merger` 가 추출. xUnit 3 케이스 검증.
-- **큐브 효과 수치**: `CubeSkillTable` 값이 코드 주석상 "예시 수치". **실측 확보됨**(`blabla_static_tables.json` cubes = 레벨별 atk/hp/def). C# 연동 대기(특수효과 — 재장전속도/충전/받피감 — 파악 후 배선).
+- ~~**장비 스탯**~~ → **연동 완료**: `StatTable.GetEquipmentStats(class, manufacturer, equips)` 가 `equip_stat_table.json`(ETL) 로드 + 공식 `round(base×(1+0.3·corp일치+0.1·level))` 적용. 부위별 corp(제조사) 는 `blabla_merger` 가 추출. xUnit 4 케이스 검증.
+- ~~**큐브/소장품 효과**~~ → **연동 완료**: `EffectType` enum + `EffectTable`(공식 `cube_effect_table`/`collection_effect_table.json`). `Nikke.RouteEffects` 가 기초스탯(MaxHp/Def/MaxAmmo rate)+대미지브래킷 라우팅(교정의미: NormalAtk=W곱, 받피감=생존, MaxHp/Def=rate버프). base atk/hp/def 는 `cube_base_table`/`collection_base_table.json`. 큐브 tid 는 merged DB→자동 `EquipCube`. 타이밍/조건부/생존 효과는 **파싱만**(sim 루프 대기, [SKILL_DATA_BLABLALINK](SKILL_DATA_BLABLALINK.md) §4.2).
 - **최종 반올림 모드**: `Math.Floor` 잠정. 게임 실측으로 확정 필요.
 - **WPF**: `MainWindow` 가 DB 로드 + 오버로드 계산 스모크 테스트만 수행. 실제 UI 없음.
-- **Tests**: `Nikke.Simulator.Tests/UnitTest1.cs` 가 빈 `Test1()`. 회귀 테스트 없음.
+- **Tests**: 골든(대미지공식)·장비·EffectTable·Nikke빌드 통합 = **34 케이스 통과**. (`UnitTest1.cs` 만 빈 스텁.)
 
 ### 3.3 미구현 — 단계 1↔2 사이의 공백
 C# 엔진은 `skills_parsed.json` 을 **읽지 않는다** (`.cs` 전수 검색 결과 주석 1줄만 언급). 따라서 다음이 통째로 없다:

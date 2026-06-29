@@ -6,7 +6,6 @@ namespace Nikke.Simulator.Core.Data.Dto
         public double Atk { get; set; }
         public double Def { get; set; }
         public double HP { get; set; }
-        public double SuperiorCodeDmg { get; set; } // 우월코드 대미지
-        public int SkillLevel { get; set; }        // 스킬 1슬롯 레벨
+        // 우월코드 대미지(ElementAdvantage)·스킬은 cube_effect_table 로 이전됨 — 여기는 base 만.
     }
 }

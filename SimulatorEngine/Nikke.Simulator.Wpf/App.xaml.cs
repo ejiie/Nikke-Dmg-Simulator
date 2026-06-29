@@ -25,13 +25,13 @@ public partial class App : Application
             string csvPath = JsonProvider.GetSmartDatabasePath("stat_table.csv");
             StatTable.Initialize(csvPath);
 
-            // 장비 base 표 (blablalink ItemEquipTable). 없으면 장비 스탯 0으로 동작.
-            try
-            {
-                string equipPath = JsonProvider.GetSmartDatabasePath("equip_stat_table.json");
-                StatTable.InitializeEquipment(equipPath);
-            }
-            catch (System.Exception) { /* 장비 표 없으면 스킵(0) */ }
+            // 장비/큐브/소장품 base 표 (blablalink 공식 JSON). 없으면 해당 스탯 0.
+            try { StatTable.InitializeEquipment(JsonProvider.GetSmartDatabasePath("equip_stat_table.json")); }
+            catch (System.Exception) { }
+            try { StatTable.InitializeCubeBase(JsonProvider.GetSmartDatabasePath("cube_base_table.json")); }
+            catch (System.Exception) { }
+            try { StatTable.InitializeCollectionBase(JsonProvider.GetSmartDatabasePath("collection_base_table.json")); }
+            catch (System.Exception) { }
 
             // 큐브/소장품 공식 특수효과 표 (enum/dict). 없으면 해당 효과 0.
             try

@@ -85,6 +85,30 @@ skill1/2 는 `skill_table:"StateEffect"` — 패시브 효과도 StateEffect 함
 | HealPotency / CoverHp / 조건부 | 생존 | 파싱만 |
 | HitRate | 제외 | DESIGN: 명중률만 제외 |
 
+## 4.2 ⏸ 미소비 효과 — 추후 구현 (잊지 말 것)
+
+아래 효과들은 effect 표에 **파싱돼 저장**돼 있으나 엔진이 **아직 소비 안 함**. EffectType enum
+에는 존재. `Nikke.RouteEffects` 의 switch 에 case 추가 + 소비처 구현하면 됨.
+
+**무기 타이밍 (로테이션 sim 루프 생기면 소비)** — 발사/재장전/버스트 사이클:
+- `ReloadSpeed` (Resilience 큐브): 재장전 시간 단축 → 재장전 틱 계산
+- `ReloadRounds` (Bastion 큐브, **조건부**: N발 발사마다 M발 재장전)
+- `ChargeSpeed` (Adjutant 큐브): 차지 완료 시간 단축
+- `BurstGauge` (Quantum 큐브): 버스트 게이지 충전속도 → 풀버스트 주기
+- (`MaxAmmo` 는 base stat 으로 이미 소비)
+
+**조건부 효과 (sim 런타임의 트리거/조건 시스템 필요)**:
+- Bastion: "N발 발사 → M발 재장전" (발사 카운트 트리거)
+- Assist: "HP < X% → MaxHP +Y% Z초" (HP 임계 트리거 + 지속시간)
+- effect 표의 `conditional: true` + `desc` 로 식별. placeholder 다중값(임계/효과/지속) 별도 해석 필요.
+
+**생존 (DPS 스코프 밖, 우선순위 낮음)**:
+- `DamageTaken` (Tempering 큐브 / 소장품): **캐릭이 적에게서 받는 뎀 감소** (B4 아님!)
+- `HealPotency` (Healing 큐브): 받는 회복량 증가
+- `CoverHp` (Stealth 큐브 / 소장품): 엄폐물 HP 증가
+
+**제외**: `HitRate` (Assault 큐브) — DESIGN: 명중률(StatAccuracyCircle)만 제외.
+
 ## 5. 열린 항목
 
 - [x] roledata 크롤러 — `getFromBlaLinkRoledata.py` (메타+무기+스킬, 공유 `_bbl_cdn.py`, 로그인 불필요).

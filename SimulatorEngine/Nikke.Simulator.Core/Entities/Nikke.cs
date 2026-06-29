@@ -116,41 +116,28 @@ namespace Nikke.Simulator.Core.Entities
                 BasicAtkChargeDamage = dto.StaticInfo.basicAttack.chargeDamage;
             }
 
-            // [5] 스탯 초기화 (큐브 미장착 상태)
-            InitializeFinalStats();
+            // [5] 큐브 자동 장착 (유저데이터에 cube tid 있으면) — 내부에서 InitializeFinalStats 호출.
+            //     없으면 큐브 미장착 상태로 초기화.
+            if (dto.user.cube != null && dto.user.cube.tid > 0)
+                EquipCube(dto.user.cube.tid, dto.user.cube.level);
+            else
+                InitializeFinalStats();
         }
 
-        // [추가] 전투 연산 시점(AttackContext)에 참조될 큐브 특수 효과 (장착 시 갱신)
-        public CubeEffectDto CurrentCubeEffect { get; private set; }
-
         /// <summary>
-        /// [장착] 큐브를 교체하고 스탯 + 특수 전투 효과를 동시에 캐싱한다.
+        /// [장착] 큐브 base 스탯 + 공식 특수효과를 캐싱하고 최종 스탯을 재계산한다.
         /// </summary>
-        /// <param name="cubeTid">장착할 큐브의 고유 ID (예: 1000313)</param>
+        /// <param name="cubeTid">큐브 고유 ID (예: 1000308=Vigor)</param>
         /// <param name="levelOverride">큐브 레벨 (기본값 15)</param>
         public void EquipCube(int cubeTid, int levelOverride = 15)
         {
-            // 1. 큐브의 스탯을 가져옴 (내부에 1스킬 레벨 포함)
-            EquippedCube = StatTable.GetCubeStat(levelOverride);
-
-            // 2. 큐브 공식 특수효과 (enum/dict) — cube tid + 큐브 레벨
-            _cubeEffects = EffectTable.GetCubeEffects(cubeTid, levelOverride);
-
-            // 3. 재장전/탄약/피해증가 관련 효과는 AttackContext 단계에서 합산되지만,
-            //    "체력 증가율(MaxHpBonusRate)"만은 전투 이전의 최종 기초 스탯
-            //    (EffectiveNativeHP)에 반영되어야 하므로 여기서 전체 재계산을 트리거한다.
+            EquippedCube = StatTable.GetCubeStat(levelOverride);              // base ATK/HP/DEF
+            _cubeEffects = EffectTable.GetCubeEffects(cubeTid, levelOverride); // 공식 특수효과 (enum/dict)
             InitializeFinalStats();
         }
 
-        // [추가] 애용품의 특수 스킬 계수들을 담는 불변 객체
-        public CollectionEffectDto CurrentCollectionEffect { get; private set; }
-
         private void InitializeFinalStats()
         {
-            // [추가] 애용품/보물품 레벨 기반으로 O(1) 효과 객체 로드
-            CurrentCollectionEffect = CollectionEffectTable.GetEffect(FavoriteItemLv);
-
-
             // [A] Core 보정까지 적용된 기초 스탯 (레벨 + 등급 + 콘솔 + 호감도 + 코어)
             var (coreHP, coreAtk, coreDef) = StatTable.GetCoreAppliedStats(
                 Class, WeaponType, Manufacturer, Level, Grade, Core, BondLevel, _globalState.consoles);

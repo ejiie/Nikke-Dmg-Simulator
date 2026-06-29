@@ -104,7 +104,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 - **`DamageCalculator`/`AttackContext` 위치**: 현재 master 는 `Stats/`. 별도 worktree 에 `Combat/` 이동안 존재 — 채택 여부 미정 (cosmetic).
 - **파서 prerequisite**: 70 bailout 슬롯(57명) 선완료 vs 런타임 먼저+결손 no-op+파서 병행 (lean: 후자).
 - **출력 지표**: 총대미지 / 시간축 DPS 곡선 / 캐릭별 기여 / 브래킷 분해 — 미정.
-- **데이터 실측**: 장비표·큐브 → **확보 완료** (`blabla_static_tables.json` + 장비 레벨 공식 `round(base×(1+0.3·corp+0.1·level))`; `GetEquipmentStats`/`CubeSkillTable` C# 연동만 남음). ProperDistance 0.3(RL=0 외 미검증)은 여전히 열림.
+- **데이터 실측**: 장비표·큐브·소장품 → **확보+C# 연동 완료** (`blabla_static_tables.json`; 장비 `round(base×(1+0.3·corp+0.1·level))` + 큐브/소장품 base·특수효과 = `GetEquipmentStats`/base JSON/`EffectTable` 배선). 타이밍/조건부 효과만 sim 루프 대기. ProperDistance 0.3(RL=0 외 미검증)은 여전히 열림.
 
 ---
 
