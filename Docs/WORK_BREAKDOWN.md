@@ -128,7 +128,7 @@
 - 70 bailout(57명)+완전실패 2명 재파싱, trait_weapon_transformed granular(20), filter(62)/required(184) token enum화, distrib/sequential 브래킷, julia/ein 재분류. 산출: skills_parsed.json 품질↑(스키마 v3 동결 유지). K4 가 무중단 흡수.
 
 ### KP2 — 데이터 실측 (사용자, ∥)
-- 장비표(tier×lv→HP/ATK/DEF), 큐브 TID 1000318–1000321 실측, ProperDistance. 산출: Core stub 교체.
+- ✅ 장비표·큐브·소장품(base+특수효과): 공식 blablalink JSON 으로 **연동 완료** (Core stub 해소). 잔여 = ProperDistance, 그리고 타이밍/조건부 큐브효과(sim 루프 대기).
 
 ---
 
