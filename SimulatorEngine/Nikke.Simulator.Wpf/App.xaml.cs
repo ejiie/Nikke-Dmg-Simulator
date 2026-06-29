@@ -24,6 +24,14 @@ public partial class App : Application
             // Database/processed/stat_table.csv — worktree 루트에서 스마트 탐색
             string csvPath = JsonProvider.GetSmartDatabasePath("stat_table.csv");
             StatTable.Initialize(csvPath);
+
+            // 장비 base 표 (blablalink ItemEquipTable). 없으면 장비 스탯 0으로 동작.
+            try
+            {
+                string equipPath = JsonProvider.GetSmartDatabasePath("equip_stat_table.json");
+                StatTable.InitializeEquipment(equipPath);
+            }
+            catch (System.Exception) { /* 장비 표 없으면 스킵(0) */ }
         }
         catch (System.Exception ex)
         {

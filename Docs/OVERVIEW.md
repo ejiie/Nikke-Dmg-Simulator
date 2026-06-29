@@ -59,6 +59,7 @@ Docs/                    이 문서들
 
 > **2026-06-30 마이그레이션**: 정적 캐릭터 데이터를 prydwen → blablalink **roledata(공식)** 로 이전.
 > prydwen 일체(`getFromPrydwen`/`prydwen_cleaner`/`atk_parser`/`auto_mapper` + `prydwen_clean`/`final_mapping`/`prydwen_all_details_v3`)는 **제거됨**. roledata 가 평타/무기/element/burst/스킬을 공식·구조화로 제공해 LLM 파싱·slug 매핑 모두 불필요. 검증: 45캐릭 prydwen 교차검증 일치.
+> `etl/equip_table_cleaner.py`(별도, static tables 갱신 시) = `blabla_static_tables.json` → `equip_stat_table.json`(class×tier×slot base). C# `StatTable.GetEquipmentStats` 가 읽어 레벨/제조사 공식 적용.
 > `Database/processed/stat_table.csv` 는 **스크립트 산출물이 아니라 사용자가 직접 수집한 표**다. C# `StatTable` 이 직접 읽는다.
 
 ### 3.3 LLM 스킬 파싱 (별도 트랙) → `skills_parsed.json`

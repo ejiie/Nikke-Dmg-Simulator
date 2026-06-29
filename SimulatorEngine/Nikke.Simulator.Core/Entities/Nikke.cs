@@ -149,7 +149,7 @@ namespace Nikke.Simulator.Core.Entities
 
             // [B] Consts 요소들 가져오기 (애용품, 장비, 큐브)
             var (collHP, collAtk, collDef) = StatTable.GetCollectionStats(FavoriteItemLv);
-            var (equipHP, equipAtk, equipDef) = StatTable.GetEquipmentStats(_equipments);
+            var (equipHP, equipAtk, equipDef) = StatTable.GetEquipmentStats(Class, Manufacturer, _equipments);
 
             double cubeHP = EquippedCube?.HP ?? 0;
             double cubeAtk = EquippedCube?.Atk ?? 0;

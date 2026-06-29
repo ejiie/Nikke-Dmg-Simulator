@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace Nikke.Simulator.Core.Stats
 {
@@ -285,18 +286,74 @@ namespace Nikke.Simulator.Core.Stats
             return (hp, atk, def);
         }
 
+        // ── 장비 base 스탯 표 (class → tier(str) → slot → {ATK,HP,DEF}) ──
+        // equip_stat_table.json (blablalink ItemEquipTable 에서 ETL). 레벨 스탯은 별도표가
+        // 아니라 공식(아래)으로 계산하므로 여기엔 level 0 base 만 담는다.
+        public class EquipBaseStat
+        {
+            public double ATK { get; set; }
+            public double HP { get; set; }
+            public double DEF { get; set; }
+        }
+
+        private static Dictionary<string, Dictionary<string, Dictionary<string, EquipBaseStat>>> _equipTable
+            = new Dictionary<string, Dictionary<string, Dictionary<string, EquipBaseStat>>>();
+
+        private const double EquipLevelRate = 0.1;   // settings_equip_increase_bouns (레벨당 +10%)
+        private const double EquipCorpBonus = 0.3;   // settings_equip_corp_bounus (제조사 일치 +30%)
+
+        /// <summary>equip_stat_table.json 로드. 없으면 빈 표(장비 스탯 0).</summary>
+        public static void InitializeEquipment(string jsonPath)
+        {
+            if (string.IsNullOrEmpty(jsonPath) || !File.Exists(jsonPath)) return;
+            var parsed = JsonSerializer.Deserialize<
+                Dictionary<string, Dictionary<string, Dictionary<string, EquipBaseStat>>>>(
+                File.ReadAllText(jsonPath));
+            if (parsed != null) _equipTable = parsed;
+        }
+
+        // 장비 corporation_type(int) → 기업명. 캐릭 manufacturer 와 비교용.
+        private static string EquipCorpName(int corp) => corp switch
+        {
+            1 => "Elysion",
+            2 => "Missilis",
+            3 => "Tetra",
+            4 => "Pilgrim",
+            7 => "Abnormal",
+            _ => null
+        };
+
         /// <summary>
-        /// 장비 객체를 기반으로 부위별/티어별/레벨별 장비 고정 스탯을 합산합니다.
+        /// 장비 4부위의 고정 스탯 합산. 공식(blablalink getEquipAttr):
+        ///   stat = round( base × (1 + 0.3·제조사일치 + 0.1·level) )  per (부위, 스탯타입)
         /// </summary>
-        public static (double HP, double ATK, double DEF) GetEquipmentStats(EquipmentPartsDto equips)
+        public static (double HP, double ATK, double DEF) GetEquipmentStats(
+            string className, string manufacturer, EquipmentPartsDto equips)
         {
             double hp = 0, atk = 0, def = 0;
-            if (equips == null) return (hp, atk, def);
+            if (equips == null || className == null
+                || !_equipTable.TryGetValue(className, out var tierMap))
+                return (hp, atk, def);
 
-            // TODO: 실제 장비 스탯 CSV 테이블 연동 필요! (Tier, Level 기준)
-            // 예: hp += HeadTable[equips.head.tier][equips.head.level].HP;
-            // 예: atk += ArmTable[equips.arm.tier][equips.arm.level].ATK;
+            var parts = new (string slot, EquipmentInfoDto info)[]
+            {
+                ("head", equips.head), ("torso", equips.torso),
+                ("arm", equips.arm), ("leg", equips.leg)
+            };
 
+            foreach (var (slot, info) in parts)
+            {
+                if (info == null || info.tier <= 0) continue;
+                if (!tierMap.TryGetValue(info.tier.ToString(), out var slotMap)) continue;
+                if (!slotMap.TryGetValue(slot, out var b)) continue;
+
+                bool corpMatch = EquipCorpName(info.corp) == manufacturer;
+                double mult = 1.0 + (corpMatch ? EquipCorpBonus : 0.0) + EquipLevelRate * info.level;
+
+                hp += Math.Round(b.HP * mult, MidpointRounding.AwayFromZero);
+                atk += Math.Round(b.ATK * mult, MidpointRounding.AwayFromZero);
+                def += Math.Round(b.DEF * mult, MidpointRounding.AwayFromZero);
+            }
             return (hp, atk, def);
         }
     }

@@ -44,8 +44,8 @@
 - **크리 RNG 추상화** (`IRandomSource`/`CritSampler`): 고정 시드 금지 정책. (API만 준비, 소비처 없음.)
 
 ### 3.2 스텁/플레이스홀더 (값이 임시이거나 0 반환)
-- **장비 스탯**: `StatTable.GetEquipmentStats` 가 사실상 0 반환. **데이터는 확보됨**(`blabla_static_tables.json` 장비 base = class×tier×slot, +공식 레벨 공식 `round(base×(1+0.3·corp일치+0.1·level))`, blablalink JS 추출). **C# 연동만 미완.**
-- **큐브 효과 수치**: `CubeSkillTable` 값이 코드 주석상 "예시 수치". **실측 확보됨**(`blabla_static_tables.json` cubes = 레벨별 atk/hp/def). C# 연동만 미완.
+- ~~**장비 스탯**~~ → **연동 완료**: `StatTable.GetEquipmentStats(class, manufacturer, equips)` 가 `equip_stat_table.json`(ETL) 로드 + 공식 `round(base×(1+0.3·corp일치+0.1·level))` 적용. 부위별 corp(제조사) 는 `blabla_merger` 가 추출. xUnit 3 케이스 검증.
+- **큐브 효과 수치**: `CubeSkillTable` 값이 코드 주석상 "예시 수치". **실측 확보됨**(`blabla_static_tables.json` cubes = 레벨별 atk/hp/def). C# 연동 대기(특수효과 — 재장전속도/충전/받피감 — 파악 후 배선).
 - **최종 반올림 모드**: `Math.Floor` 잠정. 게임 실측으로 확정 필요.
 - **WPF**: `MainWindow` 가 DB 로드 + 오버로드 계산 스모크 테스트만 수행. 실제 UI 없음.
 - **Tests**: `Nikke.Simulator.Tests/UnitTest1.cs` 가 빈 `Test1()`. 회귀 테스트 없음.
