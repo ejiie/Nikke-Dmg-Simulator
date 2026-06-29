@@ -40,14 +40,13 @@ Docs/                    이 문서들
 | 산출물 | 내용 |
 |---|---|
 | `nikke_full_scroll_result.json` | 유저 계정 데이터 (레벨/등급/코어/장비/오버로드/콘솔). blabla 계열 크롤러 |
-| `prydwen_all_details_v3.json` | 정적 캐릭터 데이터 (스탯/스킬 텍스트/평타). Prydwen 크롤러 |
+| `blabla_roledata.json` | **공식 정적 캐릭터 데이터** (메타/무기 shot_detail/구조화 스킬, name_code 키). `getFromBlaLinkRoledata.py`. prydwen 대체 |
 | `real_en_dict_dump.json` | name_code → 영문 이름 사전 (매핑용). blabla 크롤러가 응답 스니핑 후 검증된 JSON 으로 저장 |
-| `blabla_static_tables.json` | 장비(class×tier×slot base) + 하모니 큐브(레벨별) + 소장품(레벨별). `getFromBlaLinkStatic.py` 가 공개 CDN 에서 수집(로그인 불필요). 가끔만 갱신 |
-| `blabla_skills.json` | 공식 구조화 스킬(레벨별 값 + skill_type 코드, name_code 키). `getFromBlaLinkSkills.py` 가 공개 CDN roledata 에서 수집. prydwen+LLM 대체 후보 → `SKILL_DATA_BLABLALINK.md` |
+| `blabla_static_tables.json` | 장비(class×tier×slot **base**; 레벨 스탯은 공식 `round(base×(1+0.3·corp일치+0.1·level))`) + 하모니 큐브(레벨별) + 소장품(레벨별). `getFromBlaLinkStatic.py` 가 공개 CDN 에서 수집(로그인 불필요). 가끔만 갱신 |
 
-> 수집은 `getFromBlaLink.py`(유저 데이터 + 영문 사전), `getFromPrydwen.py`(정적 캐릭터 데이터),
-> `getFromBlaLinkStatic.py`(장비/큐브/소장품), `getFromBlaLinkSkills.py`(공식 스킬) 가 담당.
-> 뒤 두 개는 blablalink 공개 CDN(로그인 불필요·가끔만)에서 받으며 URL 계산은 공유 모듈 `_bbl_cdn.py`.
+> 수집: `getFromBlaLink.py`(유저 데이터 + 영문 사전), `getFromBlaLinkRoledata.py`(공식 정적 캐릭터 데이터),
+> `getFromBlaLinkStatic.py`(장비/큐브/소장품), `getFromBlaLinkPortraits.py`(초상화 → `Database/raw/portraits/`, gitignore).
+> 뒤 셋은 blablalink 공개 CDN(로그인 불필요·가끔만), URL 계산은 공유 모듈 `_bbl_cdn.py`.
 
 ### 3.2 ETL → `Database/processed/`
 실행 순서대로:
@@ -55,13 +54,13 @@ Docs/                    이 문서들
 | 스크립트 | 입력 → 출력 | 핵심 동작 |
 |---|---|---|
 | `etl/blabla_merger.py` | raw 유저데이터 → `user_state_clean.json` | 유저 동적 데이터 추출. **`val_type == "Percent"` 인 오버로드 값만 `/10000` 스케일링** (의미 해석은 안 함) |
-| `etl/prydwen_cleaner.py` | `prydwen_all_details_v3.json` → `prydwen_clean.json` | Prydwen의 Rich-Text JSON에서 순수 텍스트만 추출, 아이콘 URL 정리 |
-| `etl/atk_parser.py` | `prydwen_clean.json` (in-place) | 평타 텍스트를 정규식으로 파싱 → `multiplier / coreHitBonus / chargeTime / chargeDamage` |
-| `etl/auto_mapper.py` | 사전 + clean 2종 → `final_mapping.json` | name_code → slug 매핑. 기존 매핑 보존(stateful), `-treasure` 우선 승격 |
-| `etl/db_merger.py` | user_clean + prydwen_clean + mapping → **`nikke_merged_db_returned.json`** | 최종 마스터 DB. roster를 **name_code 키**로 조립 (static + user 결합) |
+| `etl/roledata_cleaner.py` | `blabla_roledata.json` → `roledata_clean.json` | 공식 roledata 정제. basicAttack 단위변환(damage/100 등) + element/weapon/manufacturer/burst 정규화. **name_code 키** |
+| `etl/db_merger.py` | user_clean + roledata_clean → **`nikke_merged_db_returned.json`** | 최종 마스터 DB. **name_code 직접 조인**(매핑 불필요), static(공식) + user 결합 |
 
-> `Database/processed/stat_table.csv` 는 **스크립트 산출물이 아니라 사용자가 직접 수집한 표**다.
-> C# `StatTable` 이 직접 읽는다.
+> **2026-06-30 마이그레이션**: 정적 캐릭터 데이터를 prydwen → blablalink **roledata(공식)** 로 이전.
+> prydwen 일체(`getFromPrydwen`/`prydwen_cleaner`/`atk_parser`/`auto_mapper` + `prydwen_clean`/`final_mapping`/`prydwen_all_details_v3`)는 **제거됨**. roledata 가 평타/무기/element/burst/스킬을 공식·구조화로 제공해 LLM 파싱·slug 매핑 모두 불필요. 검증: 45캐릭 prydwen 교차검증 일치.
+> `etl/equip_table_cleaner.py`(별도, static tables 갱신 시) = `blabla_static_tables.json` → `equip_stat_table.json`(class×tier×slot base). C# `StatTable.GetEquipmentStats` 가 읽어 레벨/제조사 공식 적용.
+> `Database/processed/stat_table.csv` 는 **스크립트 산출물이 아니라 사용자가 직접 수집한 표**다. C# `StatTable` 이 직접 읽는다.
 
 ### 3.3 LLM 스킬 파싱 (별도 트랙) → `skills_parsed.json`
 - `schema/skill_schema.py` — Pydantic v3 스키마 + few-shot 예시 (대미지 공식 B2~B5 브래킷 구조).

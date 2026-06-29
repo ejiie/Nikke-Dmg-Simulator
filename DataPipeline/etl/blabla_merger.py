@@ -80,10 +80,10 @@ def merge_blabla_data_v4():
                         "favorite_item_lv": 0,
                         "skills": {"skill1": 1, "skill2": 1, "burst": 1},
                         "equipments": {
-                            "head": {"tier": 0, "level": 0},
-                            "torso": {"tier": 0, "level": 0},
-                            "arm": {"tier": 0, "level": 0},
-                            "leg": {"tier": 0, "level": 0}
+                            "head": {"tier": 0, "level": 0, "corp": 0},
+                            "torso": {"tier": 0, "level": 0, "corp": 0},
+                            "arm": {"tier": 0, "level": 0, "corp": 0},
+                            "leg": {"tier": 0, "level": 0, "corp": 0}
                         },
                         "overload_stats": [] 
                     }
@@ -131,6 +131,8 @@ def merge_blabla_data_v4():
                     for part in parts:
                         merged_characters[nc]["equipments"][part]["tier"] = char.get(f"{part}_equip_tier", 0)
                         merged_characters[nc]["equipments"][part]["level"] = char.get(f"{part}_equip_lv", 0)
+                        # 제조사 보너스(+30%)용 장비 corporation_type (0=없음, 1~7=기업)
+                        merged_characters[nc]["equipments"][part]["corp"] = char.get(f"{part}_equip_corporation_type", 0)
 
                         for i in range(1, 4):
                             opt_id = str(char.get(f"{part}_equip_option{i}_id", 0))

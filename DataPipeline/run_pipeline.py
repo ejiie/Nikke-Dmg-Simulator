@@ -26,17 +26,16 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.join(CURRENT_DIR, "..")
 
 # (label, 스크립트 상대경로, 기대 산출물 상대경로[정보용])
+# 정적 캐릭터 데이터는 prydwen → blablalink roledata(공식)로 이전됨.
 CRAWL_STAGES = [
-    ("crawl:prydwen", "crawler/getFromPrydwen.py", "Database/raw/prydwen_all_details_v3.json"),
-    ("crawl:blabla",  "crawler/getFromBlaLink.py", "Database/raw/nikke_full_scroll_result.json"),
+    ("crawl:roledata", "crawler/getFromBlaLinkRoledata.py", "Database/raw/blabla_roledata.json"),
+    ("crawl:blabla",   "crawler/getFromBlaLink.py", "Database/raw/nikke_full_scroll_result.json"),
 ]
 # ETL 은 순서 의존 — 이 순서를 바꾸지 말 것.
 ETL_STAGES = [
-    ("etl:blabla_merger",   "etl/blabla_merger.py",   "Database/processed/user_state_clean.json"),
-    ("etl:prydwen_cleaner", "etl/prydwen_cleaner.py", "Database/processed/prydwen_clean.json"),
-    ("etl:atk_parser",      "etl/atk_parser.py",      "Database/processed/prydwen_clean.json"),
-    ("etl:auto_mapper",     "etl/auto_mapper.py",     "Database/processed/final_mapping.json"),
-    ("etl:db_merger",       "etl/db_merger.py",       "Database/processed/nikke_merged_db_returned.json"),
+    ("etl:blabla_merger",    "etl/blabla_merger.py",    "Database/processed/user_state_clean.json"),
+    ("etl:roledata_cleaner", "etl/roledata_cleaner.py", "Database/processed/roledata_clean.json"),
+    ("etl:db_merger",        "etl/db_merger.py",        "Database/processed/nikke_merged_db_returned.json"),
 ]
 
 
@@ -63,7 +62,7 @@ def build_plan(args):
         for label, path, expected in CRAWL_STAGES:
             if args.skip_blabla and "blabla" in label:
                 continue
-            if args.skip_prydwen and "prydwen" in label:
+            if args.skip_roledata and "roledata" in label:
                 continue
             plan.append((label, path, expected))
     if args.stage in ("all", "etl"):
@@ -73,14 +72,14 @@ def build_plan(args):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="DataPipeline 오케스트레이터 (crawl 2종 → etl 5단계)"
+        description="DataPipeline 오케스트레이터 (crawl 2종 → etl 3단계)"
     )
     parser.add_argument("--stage", choices=["all", "crawl", "etl"], default="all",
                         help="실행 범위. all=수집+가공(기본), crawl=수집만, etl=가공만")
     parser.add_argument("--skip-blabla", action="store_true",
-                        help="blabla 크롤 제외 (로그인/브라우저 불필요할 때)")
-    parser.add_argument("--skip-prydwen", action="store_true",
-                        help="prydwen 크롤 제외")
+                        help="유저 데이터 크롤(getFromBlaLink) 제외 (로그인/브라우저 불필요할 때)")
+    parser.add_argument("--skip-roledata", action="store_true",
+                        help="roledata 정적 크롤 제외 (공식 캐릭터 데이터 재수집 안 할 때)")
     parser.add_argument("--keep-going", action="store_true",
                         help="단계가 실패해도 중단하지 않고 계속")
     parser.add_argument("--dry-run", action="store_true",
