@@ -3,7 +3,7 @@
 #        playwright install chromium   # getFromBlaLink 실행 전 1회 필요
 
 # crawler/
-httpx==0.28.1          # getFromPrydwen — async HTTP 수집
+curl_cffi==0.15.0      # getFromPrydwen — Chrome TLS 임퍼소네이트(Cloudflare 우회) HTTP
 playwright==1.58.0     # getFromBlaLink  — 브라우저 자동화 + 응답 스니핑
 python-dotenv==1.0.1   # _secrets        — .env 자격증명 로드 (미설치 시 내장 파서로 폴백)
 
