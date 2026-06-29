@@ -46,8 +46,9 @@ Docs/                    이 문서들
 | `blabla_skills.json` | 공식 구조화 스킬(레벨별 값 + skill_type 코드, name_code 키). `getFromBlaLinkSkills.py` 가 공개 CDN roledata 에서 수집. prydwen+LLM 대체 후보 → `SKILL_DATA_BLABLALINK.md` |
 
 > 수집은 `getFromBlaLink.py`(유저 데이터 + 영문 사전), `getFromPrydwen.py`(정적 캐릭터 데이터),
-> `getFromBlaLinkStatic.py`(장비/큐브/소장품), `getFromBlaLinkSkills.py`(공식 스킬) 가 담당.
-> 뒤 두 개는 blablalink 공개 CDN(로그인 불필요·가끔만)에서 받으며 URL 계산은 공유 모듈 `_bbl_cdn.py`.
+> `getFromBlaLinkStatic.py`(장비/큐브/소장품), `getFromBlaLinkSkills.py`(공식 스킬),
+> `getFromBlaLinkPortraits.py`(초상화 si/mi/full webp → `Database/raw/portraits/`, gitignore) 가 담당.
+> 뒤 셋은 blablalink 공개 CDN(로그인 불필요·가끔만)에서 받으며 URL 계산은 공유 모듈 `_bbl_cdn.py`.
 
 ### 3.2 ETL → `Database/processed/`
 실행 순서대로:

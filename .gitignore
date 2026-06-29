@@ -32,6 +32,9 @@ Database/raw/nikke_full_scroll_result.json
 # probe 요청 덤프 — auth 헤더(redact돼도) + 계정 연계 디버그 산출물, 커밋 금지
 Database/raw/_probe_*.json
 
+# 캐릭터 초상화 (대용량 바이너리 ~24MB, getFromBlaLinkPortraits.py 로 재생성 가능)
+Database/raw/portraits/
+
 # Throwaway backups & scratch experiments
 *.backup.json
 /Task.txt
