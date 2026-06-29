@@ -44,8 +44,8 @@
 - **크리 RNG 추상화** (`IRandomSource`/`CritSampler`): 고정 시드 금지 정책. (API만 준비, 소비처 없음.)
 
 ### 3.2 스텁/플레이스홀더 (값이 임시이거나 0 반환)
-- **장비 스탯**: `StatTable.GetEquipmentStats` 가 사실상 0 반환. tier×level → HP/ATK/DEF 표 미확보.
-- **큐브 효과 수치**: `CubeSkillTable` TID 1000318–1000321 (Parts/Pierce/True/Vigor) 값이 코드 주석상 "예시 수치", 실측 미확보.
+- **장비 스탯**: `StatTable.GetEquipmentStats` 가 사실상 0 반환. **데이터는 확보됨**(`blabla_static_tables.json` 장비 base = class×tier×slot, +공식 레벨 공식 `round(base×(1+0.3·corp일치+0.1·level))`, blablalink JS 추출). **C# 연동만 미완.**
+- **큐브 효과 수치**: `CubeSkillTable` 값이 코드 주석상 "예시 수치". **실측 확보됨**(`blabla_static_tables.json` cubes = 레벨별 atk/hp/def). C# 연동만 미완.
 - **최종 반올림 모드**: `Math.Floor` 잠정. 게임 실측으로 확정 필요.
 - **WPF**: `MainWindow` 가 DB 로드 + 오버로드 계산 스모크 테스트만 수행. 실제 UI 없음.
 - **Tests**: `Nikke.Simulator.Tests/UnitTest1.cs` 가 빈 `Test1()`. 회귀 테스트 없음.
@@ -65,7 +65,7 @@ C# 엔진은 `skills_parsed.json` 을 **읽지 않는다** (`.cs` 전수 검색 
 
 ## 5. 열린 질문 / 미확정 (실측·결정 대기)
 - 최종 대미지 반올림/내림/올림 모드.
-- 장비 tier×level 스탯 표.
-- 큐브 TID 1000318–1000321 실측 수치.
+- ~~장비 tier×level 스탯 표~~ → **해결**: base 표(blabla_static_tables) + 공식 `round(base×(1+0.3·corp+0.1·level))`. C# 연동만 남음.
+- ~~큐브 TID 실측 수치~~ → **해결**: blabla_static_tables cubes(레벨별). C# 연동만 남음.
 - ProperDistance 보너스 0.3의 무기별 정확한 적용 조건 (RL은 0 확정).
 - `skills_parsed.json` 의 free-form 토큰 195+64종을 런타임에서 어떻게 처리할지 (→ [SKILL_PARSING.md](SKILL_PARSING.md)).
