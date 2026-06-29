@@ -70,7 +70,7 @@ skill1/2 는 `skill_table:"StateEffect"` — 패시브 효과도 StateEffect 함
 
 ## 5. 열린 항목
 
-- [x] roledata 스킬 크롤러 — `getFromBlaLinkSkills.py` (공유 `_bbl_cdn.py` 사용, 로그인 불필요).
-      nikke_list resource_id 순회 → roledata → 스킬 detail 추출. 192/192 → `Database/raw/blabla_skills.json`(name_code 키).
-- [ ] 엔진/ETL 연동: `blabla_skills.json` → C# 스킬 런타임 입력 (`skill_type` → dispatch, placeholder↔레벨값 주입).
+- [x] roledata 크롤러 — `getFromBlaLinkRoledata.py` (메타+무기+스킬, 공유 `_bbl_cdn.py`, 로그인 불필요).
+      192/192 → `Database/raw/blabla_roledata.json`(name_code 키). `etl/roledata_cleaner.py` 가 정제(prydwen 대체).
+- [ ] 엔진/ETL 연동: 스킬(`skills.skill1/2/burst`) → C# 스킬 런타임 (`skill_type` → dispatch, placeholder↔레벨값 주입).
 - [ ] (후순위) 게임 datamine 에서 StateEffect 정의 확보 — 완전 기계화 시.
