@@ -146,6 +146,7 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 ---
 
 ## 8. 참조
+- 병렬 작업 청킹·순서(멀티 에이전트): [`Docs/WORK_BREAKDOWN.md`](WORK_BREAKDOWN.md)
 - 방향·공식 권위: [`Docs/DESIGN.md`](DESIGN.md)
 - 스킬 스키마/enum: `DataPipeline/schema/skill_schema_legend.txt` + `skill_schema.py`
 - 공식 유도: 루트 `_dmg_probe.py` / `_dmg_calibrate.py`, golden: `Nikke.Simulator.Tests/DamageFormulaGoldenTests.cs`
