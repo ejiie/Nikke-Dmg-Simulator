@@ -85,7 +85,8 @@ def merge_blabla_data_v4():
                             "arm": {"tier": 0, "level": 0, "corp": 0},
                             "leg": {"tier": 0, "level": 0, "corp": 0}
                         },
-                        "overload_stats": [] 
+                        "cube": {"tid": 0, "level": 0},
+                        "overload_stats": []
                     }
 
     # ── [2] 전 구간(Phase 1 & 2) 오버로드 옵션 딕셔너리 빌드 ──
@@ -124,6 +125,10 @@ def merge_blabla_data_v4():
                     merged_characters[nc]["skills"]["skill1"] = char.get("skill1_lv", 1)
                     merged_characters[nc]["skills"]["skill2"] = char.get("skill2_lv", 1)
                     merged_characters[nc]["skills"]["burst"] = char.get("ulti_skill_lv", 1)
+
+                    # 장착 하모니 큐브 (C# EquipCube 자동 호출용)
+                    merged_characters[nc]["cube"]["tid"] = char.get("harmony_cube_tid", 0)
+                    merged_characters[nc]["cube"]["level"] = char.get("harmony_cube_lv", 0)
 
                     overloads = []
                     parts = ["head", "torso", "arm", "leg"]

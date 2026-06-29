@@ -88,9 +88,17 @@ namespace Nikke.Simulator.Core.Data.Dto
 
         public SkillLevelsDto skills { get; set; }
         public EquipmentPartsDto equipments { get; set; }
+        public CubeUserDto cube { get; set; }
 
         // 오버로드 DTO 재활용
         public List<OverloadOptionDto> overload_stats { get; set; }
+    }
+
+    // 장착 하모니 큐브 (Nikke 생성 시 자동 EquipCube).
+    public class CubeUserDto
+    {
+        public int tid { get; set; }
+        public int level { get; set; }
     }
 
     // [추가] 장비 DTO 클래스들

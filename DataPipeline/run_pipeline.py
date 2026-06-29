@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """DataPipeline 오케스트레이터.
 
-crawler 2종으로 원본을 수집(Database/raw/)하고, etl 5단계로 가공(Database/processed/)
-하는 전체 파이프라인을 순서대로 실행한다.
+crawler 3종(roledata·static=로그인불필요, blabla=유저데이터)으로 원본을 수집(Database/raw/)
+하고, etl 7단계(정적표 4 + 유저병합 3)로 가공(Database/processed/)하는 전체 파이프라인을 실행한다.
 
 각 단계는 별도 프로세스(subprocess)로 돌려 해당 스크립트의 종료 코드를 그대로 존중한다.
 어떤 단계가 실패(exit != 0)하면 기본적으로 파이프라인을 중단한다(--keep-going 으로 무시).
@@ -27,15 +27,23 @@ ROOT_DIR = os.path.join(CURRENT_DIR, "..")
 
 # (label, 스크립트 상대경로, 기대 산출물 상대경로[정보용])
 # 정적 캐릭터 데이터는 prydwen → blablalink roledata(공식)로 이전됨.
+# roledata/static 은 공개 CDN(로그인 불필요), blabla(유저데이터)만 로그인 필요.
 CRAWL_STAGES = [
     ("crawl:roledata", "crawler/getFromBlaLinkRoledata.py", "Database/raw/blabla_roledata.json"),
-    ("crawl:blabla",   "crawler/getFromBlaLink.py", "Database/raw/nikke_full_scroll_result.json"),
+    ("crawl:static",   "crawler/getFromBlaLinkStatic.py",   "Database/raw/blabla_static_tables.json"),
+    ("crawl:blabla",   "crawler/getFromBlaLink.py",         "Database/raw/nikke_full_scroll_result.json"),
 ]
-# ETL 은 순서 의존 — 이 순서를 바꾸지 말 것.
+# ETL — 정적표 가공(유저데이터 무관, 순서 자유) + 유저 병합 체인(순서 의존). 순서 바꾸지 말 것.
 ETL_STAGES = [
-    ("etl:blabla_merger",    "etl/blabla_merger.py",    "Database/processed/user_state_clean.json"),
-    ("etl:roledata_cleaner", "etl/roledata_cleaner.py", "Database/processed/roledata_clean.json"),
-    ("etl:db_merger",        "etl/db_merger.py",        "Database/processed/nikke_merged_db_returned.json"),
+    # 정적표(blabla_static_tables) → C# base/effect 표
+    ("etl:equip_table",       "etl/equip_table_cleaner.py",       "Database/processed/equip_stat_table.json"),
+    ("etl:static_base",       "etl/static_base_cleaner.py",       "Database/processed/cube_base_table.json"),
+    ("etl:cube_effect",       "etl/cube_effect_cleaner.py",       "Database/processed/cube_effect_table.json"),
+    ("etl:collection_effect", "etl/collection_effect_cleaner.py", "Database/processed/collection_effect_table.json"),
+    # 유저데이터 병합 체인 (순서 의존)
+    ("etl:blabla_merger",     "etl/blabla_merger.py",    "Database/processed/user_state_clean.json"),
+    ("etl:roledata_cleaner",  "etl/roledata_cleaner.py", "Database/processed/roledata_clean.json"),
+    ("etl:db_merger",         "etl/db_merger.py",        "Database/processed/nikke_merged_db_returned.json"),
 ]
 
 
@@ -72,7 +80,7 @@ def build_plan(args):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="DataPipeline 오케스트레이터 (crawl 2종 → etl 3단계)"
+        description="DataPipeline 오케스트레이터 (crawl 3종 → etl 7단계)"
     )
     parser.add_argument("--stage", choices=["all", "crawl", "etl"], default="all",
                         help="실행 범위. all=수집+가공(기본), crawl=수집만, etl=가공만")

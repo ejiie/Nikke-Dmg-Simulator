@@ -19,7 +19,7 @@ NIKKE(가챠 게임) 캐릭터의 대미지를 계산/시뮬레이션하는 도�
 
 ```
 DataPipeline/            Python: 크롤러 + ETL + LLM 스킬 파서
-  run_pipeline.py        전체 파이프라인 오케스트레이터 (crawl 2종 → etl 5단계)
+  run_pipeline.py        전체 파이프라인 오케스트레이터 (crawl 3종 → etl 7단계)
   crawler/               웹/게임 API 수집 → Database/raw/
   etl/                   raw 가공/병합 → Database/processed/
   schema/                LLM 스킬 파싱 (Pydantic 스키마 + Gemini 호출기)
@@ -59,8 +59,11 @@ Docs/                    이 문서들
 
 > **2026-06-30 마이그레이션**: 정적 캐릭터 데이터를 prydwen → blablalink **roledata(공식)** 로 이전.
 > prydwen 일체(`getFromPrydwen`/`prydwen_cleaner`/`atk_parser`/`auto_mapper` + `prydwen_clean`/`final_mapping`/`prydwen_all_details_v3`)는 **제거됨**. roledata 가 평타/무기/element/burst/스킬을 공식·구조화로 제공해 LLM 파싱·slug 매핑 모두 불필요. 검증: 45캐릭 prydwen 교차검증 일치.
-> `etl/equip_table_cleaner.py`(별도, static tables 갱신 시) = `blabla_static_tables.json` → `equip_stat_table.json`(class×tier×slot base). C# `StatTable.GetEquipmentStats` 가 읽어 레벨/제조사 공식 적용.
-> `Database/processed/stat_table.csv` 는 **스크립트 산출물이 아니라 사용자가 직접 수집한 표**다. C# `StatTable` 이 직접 읽는다.
+> **정적표 ETL (4종, run_pipeline 에 포함)**: `blabla_static_tables.json`(static 크롤러, 로그인불필요) →
+> `equip_table_cleaner`→`equip_stat_table.json`(class×tier×slot base, `GetEquipmentStats` 레벨/제조사 공식),
+> `static_base_cleaner`→`cube_base_table.json`/`collection_base_table.json`(레벨별 ATK/HP/DEF base),
+> `cube_effect_cleaner`/`collection_effect_cleaner`→`*_effect_table.json`(특수효과, C# `EffectType`/`EffectTable`).
+> `Database/processed/stat_table.csv`(레벨/등급/호감도/콘솔/코어)만 **사용자 직접 수집표**로 C# `StatTable.Initialize` 가 직접 읽는다.
 
 ### 3.3 LLM 스킬 파싱 (별도 트랙) → `skills_parsed.json`
 - `schema/skill_schema.py` — Pydantic v3 스키마 + few-shot 예시 (대미지 공식 B2~B5 브래킷 구조).
@@ -77,8 +80,8 @@ Docs/                    이 문서들
 |---|---|---|
 | `Data/` | `JsonProvider` | JSON I/O 단일 진입점. `GetSmartDatabasePath`(루트 자동 탐색) + `LoadJson<T>` |
 | `Data/Dto/` | `RootDto` 외 | `nikke_merged_db_returned.json` 1:1 매핑 POCO. roster 키 = name_code |
-| `Data/Constants/` | `CubeSkillTable`, `CollectionEffectTable`, 효과 struct | 하모니 큐브/소장품 효과 (불변 readonly struct) |
-| `Stats/` | `StatTable` | `stat_table.csv` 로더. 레벨/호감도/콘솔/코어 적용 기초 스탯 |
+| `Data/Constants/` | `EffectType`(enum), `EffectTable` | 하모니 큐브/소장품 **특수효과** 공식표(`*_effect_table.json`) → `EffectType→값` dict. `Nikke.RouteEffects` 가 버킷 라우팅 |
+| `Stats/` | `StatTable` | `stat_table.csv`(레벨/호감도/콘솔/코어) + `equip`/`cube`/`collection` base JSON 로더. base 스탯 산출 |
 | `Stats/` | `OverloadProcessor` | 전투 전(pre-combat) 오버로드 합산 → 최종 기초 스탯 |
 | `Stats/` | `StatCalculator` + `AttackContext` | per-tick 대미지 공식 (B2~B5 + 차지 2축 + True Damage) |
 | `Stats/` | `WeaponStatTable`, `IRandomSource`/`CritSampler` | 무기 발사 타이밍, 크리 RNG 추상화 |
@@ -108,7 +111,7 @@ pip install -r requirements.txt
 playwright install chromium            # blabla 크롤러용 (1회)
 cp .env.example .env                   # 자격증명 채우기 (NIKKE_BLABLA_ID/PW/UID)
 
-# ── 권장: 오케스트레이터 한 방 (crawl 2종 → etl 5단계 순서대로) ──
+# ── 권장: 오케스트레이터 한 방 (crawl 3종 → etl 7단계 순서대로) ──
 python run_pipeline.py                 # 전체
 python run_pipeline.py --stage etl     # 가공만 (수집 생략)
 python run_pipeline.py --dry-run       # 실행 계획만 확인

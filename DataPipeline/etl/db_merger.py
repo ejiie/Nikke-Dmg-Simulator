@@ -60,6 +60,7 @@ def get_merged_nikke_data(user_db_path: str, roledata_clean_path: str) -> dict:
                 "favorite_item_lv": u_char.get("favorite_item_lv"),
                 "skills": u_char.get("skills"),
                 "equipments": u_char.get("equipments", {}),
+                "cube": u_char.get("cube", {"tid": 0, "level": 0}),
                 "overload_stats": u_char.get("overload_stats", []),
             },
         }
