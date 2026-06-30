@@ -1,7 +1,8 @@
-# CURRENT_STATE — 사실 스냅샷 (2026-05-26)
+# CURRENT_STATE — 사실 스냅샷 (2026-06-30 갱신)
 
 > 코드/데이터를 직접 읽어 검증한 현재 상태. "잘 됨/안 됨"을 추측 없이 기록한다.
 > 수치는 이 날짜 기준 실측이며, 데이터 재생성 시 달라진다.
+> 방향/공식 권위 = `DESIGN.md`. 엔진 빌드 분담 = `WORK_BREAKDOWN.md`.
 
 ## 1. 한눈에 보기
 
@@ -18,9 +19,10 @@
 ## 2. DataPipeline 현황
 
 ### 2.1 ETL — 동작 확인됨
+- **정적 캐릭터 데이터 = blablalink roledata(공식)** 로 이전 완료 (구 Prydwen 크롤러/`prydwen_cleaner`/`atk_parser`/`auto_mapper` 폐기). roledata 는 name_code 네이티브라 slug 퍼지매핑 불필요.
+- 파이프라인 오케스트레이터 `run_pipeline.py`: 크롤 3종(roledata·static = 로그인불필요 / blabla = 유저데이터) → ETL 7단(정적표 4: equip/static_base/cube_effect/collection_effect + 유저병합 3: blabla_merger → roledata_cleaner → db_merger).
 - `nikke_merged_db_returned.json`: **roster 178명** (name_code 키, static+user 결합).
-- 오버로드 `Percent` 값은 `blabla_merger.py:138` 에서 `/10000` 스케일됨. `Integer`(예: `StatCriticalDamage=1644`)는 원시값 유지 → 해석은 C# 책임.
-- `db_merger.py` 는 Prydwen에 없는 신캐는 건너뜀(skip).
+- 오버로드 `Percent` 값은 `blabla_merger.py` 에서 `/10000` 스케일됨. `Integer`(예: `StatCriticalDamage=1644`)는 원시값 유지 → 해석은 C# 책임.
 
 ### 2.2 LLM 스킬 파싱 — 부분 완료 (`skills_parsed.json`)
 실측 (2026-05-26):
@@ -46,7 +48,7 @@
 ### 3.2 스텁/플레이스홀더 (값이 임시이거나 0 반환)
 - ~~**장비 스탯**~~ → **연동 완료**: `StatTable.GetEquipmentStats(class, manufacturer, equips)` 가 `equip_stat_table.json`(ETL) 로드 + 공식 `round(base×(1+0.3·corp일치+0.1·level))` 적용. 부위별 corp(제조사) 는 `blabla_merger` 가 추출. xUnit 4 케이스 검증.
 - ~~**큐브/소장품 효과**~~ → **연동 완료**: `EffectType` enum + `EffectTable`(공식 `cube_effect_table`/`collection_effect_table.json`). `Nikke.RouteEffects` 가 기초스탯(MaxHp/Def/MaxAmmo rate)+대미지브래킷 라우팅(교정의미: NormalAtk=W곱, 받피감=생존, MaxHp/Def=rate버프). base atk/hp/def 는 `cube_base_table`/`collection_base_table.json`. 큐브 tid 는 merged DB→자동 `EquipCube`. 타이밍/조건부/생존 효과는 **파싱만**(sim 루프 대기, [SKILL_DATA_BLABLALINK](SKILL_DATA_BLABLALINK.md) §4.2).
-- **최종 반올림 모드**: `Math.Floor` 잠정. 게임 실측으로 확정 필요.
+- ~~**최종 반올림 모드**~~ → **해결**: 단일 final `floor` 확정 (실측 역산 18-golden, DESIGN §3). B2 = 가산 per-term-floor.
 - **WPF**: `MainWindow` 가 DB 로드 + 오버로드 계산 스모크 테스트만 수행. 실제 UI 없음.
 - **Tests**: 골든(대미지공식)·장비·EffectTable·Nikke빌드 통합 = **34 케이스 통과**. (`UnitTest1.cs` 만 빈 스텁.)
 
@@ -59,12 +61,12 @@ C# 엔진은 `skills_parsed.json` 을 **읽지 않는다** (`.cs` 전수 검색 
 즉 **현재는 "한 발(tick)의 대미지"는 계산 가능하지만, "시간에 걸친 전투 DPS"는 계산할 수 없다.**
 
 ## 4. 코드베이스 정리 필요 항목 (관측된 것)
-- `SimulatorEngine/Core/` (레거시 `NikkeDmgSimulator.Core` 콘솔 앱)은 `Nikke.Simulator.Core` 로 대체된 구버전으로 보임. 하드코딩 절대경로(`Program.cs:133`) 사용. 정리 여부 결정 필요.
-- 빌드 산출물(`obj/`, `bin/`, `.vs/`)이 git에 추적되고 있음 (git status에 다수 노출).
-- 이전 설계 문서(ARCHITECTURE/DATA_SCHEMA/DEVLOG)는 main에서 삭제됨. `claude/magical-benz` 워크트리에 옛 버전이 남아 있으나 **일부 환각 포함**으로 신뢰하지 말 것 — 검증 참고용으로만.
+- `SimulatorEngine/Core/` (레거시 `NikkeDmgSimulator.Core` 콘솔 앱)은 `Nikke.Simulator.Core` 로 대체된 구버전. 하드코딩 절대경로(`Program.cs:133`) 사용. 정리 여부 결정 필요.
+- ~~빌드 산출물 git 추적~~ → **해결**: `bin/obj/.vs` untrack + `.gitignore` 등록 (2026-06-27).
+- ~~이전 설계 문서 main 삭제 / magical-benz 워크트리~~ → **해결**: ARCHITECTURE/DATA_SCHEMA/DEVLOG 는 `Docs/_archive/` 로 이동(historical, 공식 섹션 SUPERSEDED 배너). magical-benz 워크트리 제거됨. 현행 권위 = `Docs/DESIGN.md`.
 
 ## 5. 열린 질문 / 미확정 (실측·결정 대기)
-- 최종 대미지 반올림/내림/올림 모드.
+- ~~최종 대미지 반올림/내림/올림~~ → **해결**: 단일 `floor` (18-golden, DESIGN §3).
 - ~~장비 tier×level 스탯 표~~ → **해결**: base 표(blabla_static_tables) + 공식 `round(base×(1+0.3·corp+0.1·level))`. C# 연동만 남음.
 - ~~큐브 TID 실측 수치~~ → **해결**: blabla_static_tables cubes(레벨별). C# 연동만 남음.
 - ProperDistance 보너스 0.3의 무기별 정확한 적용 조건 (RL은 0 확정).

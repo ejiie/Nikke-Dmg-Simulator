@@ -116,13 +116,18 @@ python run_pipeline.py                 # 전체
 python run_pipeline.py --stage etl     # 가공만 (수집 생략)
 python run_pipeline.py --dry-run       # 실행 계획만 확인
 
-# ── 또는 수동 단계별 실행 ──
-python crawler/getFromPrydwen.py       # 정적 캐릭터 데이터 → raw/
-python crawler/getFromBlaLink.py       # 유저 데이터 + 영문 사전 → raw/ (.env 로그인 자동)
-python etl/blabla_merger.py            # 이하 ETL 은 이 순서 의존
-python etl/prydwen_cleaner.py
-python etl/atk_parser.py
-python etl/auto_mapper.py
+# ── 또는 수동 단계별 (run_pipeline.py 와 동일 순서) ──
+# 크롤 (roledata·static = 로그인불필요 / blabla = 유저데이터)
+python crawler/getFromBlaLinkRoledata.py   # 공식 정적 캐릭터 데이터 → raw/
+python crawler/getFromBlaLinkStatic.py     # 장비/큐브/소장품 정적표 → raw/
+python crawler/getFromBlaLink.py           # 유저 데이터 → raw/ (.env 로그인 자동)
+# ETL: 정적표 4 + 유저병합 3 (순서 의존)
+python etl/equip_table_cleaner.py
+python etl/static_base_cleaner.py
+python etl/cube_effect_cleaner.py
+python etl/collection_effect_cleaner.py
+python etl/blabla_merger.py
+python etl/roledata_cleaner.py
 python etl/db_merger.py
 
 # LLM 스킬 파싱 (별도 트랙, GEMINI_API_KEY 필요)
