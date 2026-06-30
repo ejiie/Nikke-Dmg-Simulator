@@ -27,7 +27,7 @@ public class EquipmentStatsTests
     [Fact]
     public void Attacker_T10_head_L5_noCorp()
     {
-        var (hp, atk, def) = StatTable.GetEquipmentStats("Attacker", "Pilgrim", HeadOnly(10, 5, 0));
+        var (hp, atk, def) = StatCalculator.GetEquipmentStats("Attacker", "Pilgrim", HeadOnly(10, 5, 0));
         Assert.Equal(9021, atk);    // round(6014 × 1.5)
         Assert.Equal(73772, hp);    // round(49181 × 1.5)
         Assert.Equal(0, def);
@@ -37,7 +37,7 @@ public class EquipmentStatsTests
     public void Attacker_T10_head_L5_corpMatch_adds30pct()
     {
         // corp=4 (Pilgrim) == manufacturer "Pilgrim" → ×1.8
-        var (hp, atk, def) = StatTable.GetEquipmentStats("Attacker", "Pilgrim", HeadOnly(10, 5, 4));
+        var (hp, atk, def) = StatCalculator.GetEquipmentStats("Attacker", "Pilgrim", HeadOnly(10, 5, 4));
         Assert.Equal(10825, atk);   // round(6014 × 1.8)
         Assert.Equal(88526, hp);    // round(49181 × 1.8)
     }
@@ -45,7 +45,7 @@ public class EquipmentStatsTests
     [Fact]
     public void EmptyGear_returnsZero()
     {
-        var (hp, atk, def) = StatTable.GetEquipmentStats("Attacker", "Pilgrim", HeadOnly(0, 0, 0));
+        var (hp, atk, def) = StatCalculator.GetEquipmentStats("Attacker", "Pilgrim", HeadOnly(0, 0, 0));
         Assert.Equal((0, 0, 0), (hp, atk, def));
     }
 

@@ -20,7 +20,7 @@
 
 ## 1. MUST / MUST NOT (엔진 전역 규칙)
 
-- **MUST**: 대미지는 오직 `StatCalculator.CalculateDamage(in AttackContext)` 로 계산. **공식 재구현 금지** (DESIGN §3 = 단일 권위, golden test 로 잠김).
+- **MUST**: 대미지는 오직 `DamageCalculator.CalculateDamage(in AttackContext)` (`Core.Combat`) 로 계산. **공식 재구현 금지** (DESIGN §3 = 단일 권위, golden test 로 잠김).
 - **MUST**: 크리/확률은 `IRandomSource` + `CritSampler.RollCrit`. **고정 시드 금지** — 검증은 N회 반복 기댓값 수렴(±ε).
 - **MUST**: `StatTable.Initialize(csv)` 를 **Nikke 생성 전 1회** 호출 (안 하면 레벨/큐브 테이블 빈 채 0 반환).
 - **MUST**: 히트 1회 = `CalculateDamage` 1회. 관통 본체+파츠, 멀티히트는 **인스턴스 분해** (런타임이 히트 생성, 공식은 1발만).
@@ -37,8 +37,9 @@
 
 | 컴포넌트 | 위치 | 핵심 API (실제) |
 |---|---|---|
-| 대미지 공식 | `Stats/StatCalculator.cs` | `double CalculateDamage(in AttackContext)` ; `struct AttackContext`(FinalAtk/FinalDef/SkillMultiplier/Is*플래그/Sum*브래킷/ChargeDmgBase…) |
-| 스탯 조립 | `Stats/StatTable.cs` | `Initialize(csvPath)`(레벨/호감도) + `InitializeEquipment/InitializeCubeBase/InitializeCollectionBase(jsonPath)` ; `GetCoreAppliedStats(class,weapon,mfr,lv,grade,core,bond,consoles)→(HP,ATK,DEF)` ; `GetCubeStat(lv)`·`GetCollectionStats(lv)`·`GetEquipmentStats(class,mfr,equips)` **(전부 공식 JSON 연동 완료, stub 아님)** |
+| 대미지 공식 | `Combat/DamageCalculator.cs` | `double CalculateDamage(in AttackContext)` ; `struct AttackContext`(FinalAtk/FinalDef/SkillMultiplier/Is*플래그/Sum*브래킷/ChargeDmgBase…) |
+| 스탯 조립 | `Stats/StatCalculator.cs` | `GetCoreAppliedStats(class,weapon,mfr,lv,grade,core,bond,consoles)` · `GetEquipmentStats` · `GetConsoleStats` (DESIGN §3.5) |
+| 자료 로딩 | `Stats/StatTable.cs` | (로딩) `Initialize(csvPath)`(레벨/호감도) + `InitializeEquipment/InitializeCubeBase/InitializeCollectionBase(jsonPath)` ; (raw 접근) `GetLevelClassStat`·`GetBondClassStat`·`TryGetEquipBase`·`GetCubeStat(lv)`·`GetCollectionStats(lv)` **(전부 공식 JSON 연동 완료, stub 아님)** |
 | OL 합산 | `Stats/OverloadProcessor.cs` | `CalculateFinalBaseStat(native, olPercents, olFlatSum, decimals)` ; `CalculateFlatBonus(opts,type)` |
 | 무기 타이밍 | `Stats/WeaponStatTable.cs` | `GetBaseFireRate(weapon)→발/sec` (AR12/MG60/SMG24/SG 5÷3; SR·RL 호출=throw) ; `GetChargeTiming(weapon)→ChargeTiming{MotionDelaySec .03, FullChargeSec 1.0, TapIntervalSec .215}` ; `IsChargeWeapon` ; weapon 문자열 상수 |
 | 크리 RNG | `Stats/IRandomSource.cs` | `IRandomSource.NextDouble()` ; `SystemRandomSource.Instance` ; `CritSampler.RollCrit(rng, baseCritRate)→bool` |
@@ -71,8 +72,8 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 ### M0 — Smoke wire (foundation 증명)
 - **목표**: `StatTable.Initialize` → `new Nikke` → `BuildAttackContext` → `CalculateDamage` 를 **콘솔에서 1발** 굴려 숫자 1개.
 - **하는 것**: 진입점(테스트 콘솔/유닛테스트)에서 캐릭 1명 로드, 평타 컨텍스트 1개 만들어 호출.
-- **여기서 확정**: **W 단위** — `BasicAtkMultiplier` 가 percent(예 11.07)인지 fraction(0.1107)인지 실데이터로 확인 → `SkillMultiplier` 주입 시 정규화 규칙 고정. (현재 `BuildAttackContext` 는 W 미주입 = TODO.)
-- **Acceptance**: 0 아닌 합리적 대미지 출력 + W 단위 문서화(이 파일 §6).
+- **확정됨(2026-06-30)**: **W 단위** — 데이터 `multiplier` 는 percent-number(예 13.65); `Nikke` 생성자에서 `/100` 정규화 → `BasicAtkMultiplier`(엔티티)=fraction. `BuildAttackContext` 가 `SkillMultiplier` 에 주입(더는 TODO 아님). 회귀 가드 = `WUnitFoundationTests`.
+- **Acceptance**: ✅ W 정규화+주입 동작(fraction-scale 가드 통과) + 문서화(§6 D2). ⏸ **in-game FinalAtk 대조 대기** — 커밋 `stat_table.csv` 파싱 결함(cp949+비-quote-aware split)으로 실 FinalAtk 산출 막힘 + 사용자 제공 in-game 수치 필요. **이 게이트 통과 전 Wave1+ 착수 금지(ENGINE_WAVE0 K1).**
 
 ### M1 — 단일 캐릭 발사 루프 (시간축 등장)
 - **목표**: SimClock + FiringModel 로 캐릭 1명이 N초 동안 쏘는 시간축 + 누적 대미지/DPS. 스킬·팀버프 없음.
@@ -128,8 +129,8 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 
 | # | 결정 | 권장 | 비고 |
 |---|---|---|---|
-| D1 | 엔진 코드 위치 | **`Nikke.Simulator.Engine` 프로젝트 지금 분리** (권장 수정) | tier 3/4/5(evaluator/optimizer/web)+배포가 엔진을 라이브러리로 재사용 → 프로젝트 벽이 결합부채 차단(컴파일러가 Core→Engine 금지). 선비용 작음. 조건: Core/Engine UI·compute 무지 |
-| D2 | W 단위 | M0에서 실측 확인 후 고정 | `BasicAtkMultiplier` percent면 `/100`. golden 리그는 W=4.995(fraction) |
+| D1 | 엔진 코드 위치 | ✅ **`Nikke.Simulator.Engine` 분리 완료**(2026-06-30, K0) | Engine→Core 단방향(컴파일러가 Core→Engine 금지). 계약 스텁 동결. 조건: Core/Engine UI·compute 무지 유지 |
+| D2 | W 단위 | ✅ **확정 = `Nikke` 생성자 `/100`**(2026-06-30) | 데이터 `multiplier`=percent-number → 엔티티 `BasicAtkMultiplier`=fraction. golden 리그 W=4.995(fraction)와 정합. ETL 무수정 |
 | D3 | 파서 prerequisite | **런타임 먼저, 134 완성분 + 결손 no-op, 파서 병행** | 닭달걀 차단 |
 | D4 | 출력 지표 | record-every-instance MetricsCollector | 총/DPS곡선/캐릭별/브래킷 전부 사후 집계 |
 | D5 | SimClock 자료구조 | min-heap 우선순위큐 | 동시각 삽입순 tie-break |

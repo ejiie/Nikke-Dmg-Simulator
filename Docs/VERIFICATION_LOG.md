@@ -5,6 +5,65 @@
 
 ---
 
+## 2026-06-30 — 엔진 Wave 0 (K0 계약 스텁 + K1 W 단위 픽스)
+
+**범위**: `Nikke.Simulator.Engine` 프로젝트 신설(K0) + 공유 계약 컴파일 스텁 동결, 평타 계수 W 단위
+100× 버그 픽스(K1, `Nikke` 생성자 `/100`). 기준 = `SimulatorEngine/ENGINE_WAVE0.md`,
+권위 `DESIGN.md`/`ENGINE_GUIDE.md`.
+
+### 1. 빌드 — 0 errors (4 프로젝트)
+```
+dotnet build SimulatorEngine/NikkeSimulator.sln
+→ 오류 0개. Core / Engine / Tests / Wpf 전부 dll 산출.
+  신규: Nikke.Simulator.Engine.dll (Engine→Core 단방향, Core 역참조 0).
+```
+
+### 2. 테스트 — 39/39 통과 (기존 34 + K1 신규 5)
+```
+dotnet test SimulatorEngine/Nikke.Simulator.Tests/Nikke.Simulator.Tests.csproj
+→ 실패: 0, 통과: 39, 건너뜀: 0.
+```
+신규 5 = W 불변식 ×3 + 파서 셀 락(`StatTable_Parses_KnownCells`) + foundation smoke(엔드투엔드).
+- `WUnitFoundationTests.BasicAtkMultiplier_IsNormalizedToFraction` (Theory ×3: 13.65/5.57/214.3)
+  — multiplier(percent-number) → `BasicAtkMultiplier`(fraction) `/100` 정규화 + fraction-scale 가드.
+  **100× 버그 회귀 락.**
+- `…FinalAtk_And_UnbuffedBasicShot_AreReported` — Initialize→Nikke→BuildAttackContext→CalculateDamage
+  엔드투엔드. 견고 파서로 정본 csv 로드 → Privaty FinalBaseAtk 산출, bareShot==floor(FinalAtk×W) 통과(§4).
+- 골든 18점 포함 기존 34 불변 — W 픽스는 `Nikke` 주입측만 건드려 대미지 공식 무영향.
+
+### 3. K0 계약 스텁 (동결 대기)
+`Engine/{Clock/ISimClock, Rotation/IRotationController(+SimState/RotationAction), Targets/ITarget,
+Combat/Combatant, Skills/SkillParsedDto 패밀리, Buffs/BuffInstance, Metrics/IMetricsSink·RunResult,
+SimulationRunner.RunOnce}`. 임플 = `throw NotImplementedException`(데이터 DTO 는 throw 없음).
+enum 슬롯 = string(roledata audit/KP1 흡수 전 선잠금 회피).
+
+### 4. K1 게이트 — ✅ 통과 (블로커 해소)
+- **csv 파싱**: `StatTable.Initialize` 를 **견고 파서**로 교체 — cp949/UTF-8(Latin1 바이트디코딩) + 따옴표 +
+  **셀 내부 줄바꿈**(Excel Alt+Enter 헤더 6개가 원래 crasher) + 천단위 콤마 내성, **행 위치 내용기반 탐지**
+  (레벨표=col0 "1"부터, 호감도표=col26 "1"부터 → 헤더 행수 변동 무관). 옛 하드코딩 행번호(레벨 6~1005,
+  bond 3~42) 제거. 사용자도 정본 csv master 업로드(`d4899ff`). WPF 시작 로딩도 정상화. 셀 락 테스트
+  `WUnitFoundationTests.StatTable_Parses_KnownCells`(lv1=13500/600/90, lv1000 ATK 1005385, bond40=52650/2340/351).
+- **in-game 일치**: stat 조립 0-error(§5) + 비차지 평타 W·C 실측(gap#4, 사용자) + 공식 golden 18 +
+  엔드투엔드 wiring 테스트(`FinalAtk_And_UnbuffedBasicShot_AreReported`: Privaty FinalBaseAtk 로드 → bareShot
+  == floor(FinalAtk×W) 통과). → **게이트 통과, Wave 1(K2~K6) 착수 가능.**
+
+### 5b. Stats/Combat 3-way split 리팩토링 (2026-06-30)
+파일명-역할 괴리 정정: `Stats/StatCalculator`(실은 대미지) → `Combat/DamageCalculator` 개명·이동(namespace
+`Core.Combat`, `AttackContext` 동반). 스탯 조립(`GetCoreAppliedStats`/`GetEquipmentStats`/`GetConsoleStats`)
+은 `StatTable`→`StatCalculator`(스탯 계산 전용) 이관. `StatTable`=로딩+raw(`GetLevelClassStat`/`GetBondClassStat`/
+`TryGetEquipBase`) 전용. **순수 code-motion** — 빌드 0에러, 38/38 그린(골든 18=DamageCalculator, 장비 4=StatCalculator
+경유로 거동 보존 확인). 참조 갱신: Nikke/WPF/Engine/테스트 + 문서(DESIGN §2·§3·§3.5·§6·§7, ENGINE_GUIDE §1·§2).
+
+### 5. 스탯 조립(FinalBaseStat) 불변식 — 사용자 검증 (2026-06-30 보고)
+실제 crawl 데이터 주입 후 검증: **서로 다른 여러 캐릭터에서 스탯 오차 0** (in-game 스탯창 대조).
+**돌파(grade/limit-break)를 임의로 올리거나 내려도 오차 0.** → `StatTable.GetCoreAppliedStats`
+(+`OverloadProcessor` OL group-then-round + 장비/큐브/소장품 base·rate) 조립이 in-game 과 **bit 일치하는
+불변식**으로 확립. (per-hit 대미지 공식 §3 와 별개의 Core 축.)
+> ✅ 재현: 견고 파서 + 정본 csv(`d4899ff`)로 CI 로드 가능 — 셀 락 테스트로 파서 회귀 가드(§4). 스탯 조립
+> 공식은 **DESIGN §3.5** 로 문서화 완료. (모델: `Final = base × (1+Σbuff)`; OL·큐브/소장품 rate·런타임 스킬 = buff.)
+
+---
+
 ## 2026-06-30 — 장비/큐브/소장품 데이터 연동 + 문서 정합
 
 **범위**: 장비 스탯 + 하모니 큐브·소장품 (base ATK/HP/DEF + 특수효과) 를 공식 blablalink JSON

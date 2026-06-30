@@ -64,16 +64,16 @@
 > 각 청크: **목표 / 스코프(파일) / 입력 / 산출(계약) / 의존 / 수용기준.** 상세 컴포넌트 계약 = ENGINE_GUIDE §5.
 > **즉시 착수 2 task (상세, 도메인 로컬)**: 엔진 Wave0(K0+K1) = `SimulatorEngine/ENGINE_WAVE0.md` · roledata 스킬 audit(K4 소스 결정, KP1 운명) = `DataPipeline/ROLEDATA_SKILL_AUDIT.md`.
 
-### K0 — Engine 프로젝트 + 계약 스텁 ★blocks all
+### K0 — Engine 프로젝트 + 계약 스텁 ★blocks all  — 🟢 빌드 완료, 리뷰 동결 대기
 - 목표: `Nikke.Simulator.Engine` 프로젝트(ref Core) 생성 + **모든 공유 계약을 컴파일되는 스텁으로** 박고 동결.
 - 스코프: 새 csproj + sln 등록. `ISimClock`, `IRotationController`, `ITarget`, `Combatant`, `SkillParsedDto` 패밀리, `BuffInstance`, `IMetricsSink`, 엔트리 `SimulationRunner.RunOnce(teams, target, rng) → RunResult{ TotalDamage, … }`.
 - 산출: 0-에러 빌드 + 동결된 계약. **이게 W1 전체를 푼다.**
-- 의존: 없음. 수용: 빌드 통과, 계약 시그니처 리뷰 승인.
+- 의존: 없음. 수용: ✅ 빌드 통과(2026-06-30, 4 프로젝트 0 에러) · [~] 계약 시그니처 리뷰 승인(사용자 리뷰 후 read-only 동결).
 
-### K1 — W단위 픽스 + foundation 검증 (M0) ★정확성 게이트
-- 목표: `multiplier`(percent) → fraction `/100` 정규화 1곳 확정 + `Initialize→Nikke→BuildAttackContext→CalculateDamage` 1발 굴려 **in-game 1캐릭과 FinalAtk·무버프 평타뎀 일치**.
-- 스코프: `Nikke.cs`(W주입) 또는 `atk_parser.py`(저장) 중 1곳 + 검증 콘솔/테스트.
-- 의존: 없음(Core). 수용: 알려진 빌드의 in-game 수치와 일치(±표시반올림). **불일치면 W2+ 착수 금지.**
+### K1 — W단위 픽스 + foundation 검증 (M0) ★정확성 게이트  — 🟢 통과 (Wave1 착수 가능)
+- 목표: `multiplier`(percent-number) → fraction `/100` 정규화 1곳 확정 + `Initialize→Nikke→BuildAttackContext→CalculateDamage` 1발 굴려 **in-game 1캐릭과 FinalAtk·무버프 평타뎀 일치**.
+- 스코프: ✅ `Nikke.cs`(W주입측 `/100`) + `StatTable.Initialize` 견고 파서(cp949/멀티라인/콤마 내성, 내용기반 행탐지) + `WUnitFoundationTests`(5).
+- 의존: 없음(Core). 수용: ✅ W 정규화 확정·문서화 · ✅ in-game 일치 = stat 0-error(사용자) + gap#4 평타 실측(사용자) + golden 18 + wiring 테스트. **게이트 통과 → Wave1(K2~K6) 착수 가능.**
 
 ### K2 — SimClock (이벤트 큐)
 - 목표: 이산이벤트 클럭. `Schedule(atSec, ev)` / `Run(untilSec)`, min-heap, 동시각 삽입순.

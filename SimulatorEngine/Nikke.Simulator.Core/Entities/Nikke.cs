@@ -1,3 +1,4 @@
+using Nikke.Simulator.Core.Combat;
 using Nikke.Simulator.Core.Data.Constants;
 using Nikke.Simulator.Core.Data.Dto;
 using Nikke.Simulator.Core.Stats;
@@ -110,7 +111,14 @@ namespace Nikke.Simulator.Core.Entities
             // [4] 평타(BasicAttack) 스테이터스 로드
             if (dto.StaticInfo.basicAttack != null)
             {
-                BasicAtkMultiplier = dto.StaticInfo.basicAttack.multiplier;
+                // [W 단위 정규화 — 단일 지점] 데이터 multiplier 는 **percent-number**
+                // (roledata_cleaner.py: damage/100 → 예 13.65 = "13.65% ATK").
+                // 공식 W 는 **fraction** (DESIGN §3, golden 4.995 = 499.5%/100) 이므로
+                // 데이터→엔티티 경계에서 /100 정규화한다. 이 한 곳이 W 단위 정규화의 단일 지점.
+                //   (정규화 위치 결정 2026-06-30: roledata_cleaner(저장) 대신 여기(주입측) — 엔진 로컬,
+                //    ETL 재실행/merged DB 재생성 불필요, 데이터 DTO 는 raw 유지. DESIGN §6 항목 확정.)
+                // ※ chargeDamage 는 이미 fraction(cleaner /10000)이라 변환 안 함.
+                BasicAtkMultiplier = dto.StaticInfo.basicAttack.multiplier / 100.0;
                 BasicAtkCoreHitBonus = dto.StaticInfo.basicAttack.coreHitBonus;
                 BasicAtkChargeTime = dto.StaticInfo.basicAttack.chargeTime;
                 BasicAtkChargeDamage = dto.StaticInfo.basicAttack.chargeDamage;
@@ -139,12 +147,12 @@ namespace Nikke.Simulator.Core.Entities
         private void InitializeFinalStats()
         {
             // [A] Core 보정까지 적용된 기초 스탯 (레벨 + 등급 + 콘솔 + 호감도 + 코어)
-            var (coreHP, coreAtk, coreDef) = StatTable.GetCoreAppliedStats(
+            var (coreHP, coreAtk, coreDef) = StatCalculator.GetCoreAppliedStats(
                 Class, WeaponType, Manufacturer, Level, Grade, Core, BondLevel, _globalState.consoles);
 
             // [B] Consts 요소들 가져오기 (애용품, 장비, 큐브)
             var (collHP, collAtk, collDef) = StatTable.GetCollectionStats(FavoriteItemLv);
-            var (equipHP, equipAtk, equipDef) = StatTable.GetEquipmentStats(Class, Manufacturer, _equipments);
+            var (equipHP, equipAtk, equipDef) = StatCalculator.GetEquipmentStats(Class, Manufacturer, _equipments);
 
             double cubeHP = EquippedCube?.HP ?? 0;
             double cubeAtk = EquippedCube?.Atk ?? 0;
@@ -208,7 +216,7 @@ namespace Nikke.Simulator.Core.Entities
         /// <summary>
         /// [H2] 캐릭터 고정 modifier(큐브 + 콜렉션 무기별 효과)가 미리 주입된
         /// AttackContext 를 반환한다. 시뮬레이터 루프는 이 struct 에 매 tick
-        /// 가변 버프/디버프/크리 여부 등을 추가하여 StatCalculator.CalculateDamage 에 넘긴다.
+        /// 가변 버프/디버프/크리 여부 등을 추가하여 DamageCalculator.CalculateDamage 에 넘긴다.
         ///
         /// 여기서 주입되는 것:
         ///  - FinalBaseAtk / FinalBaseDef
@@ -227,8 +235,9 @@ namespace Nikke.Simulator.Core.Entities
         {
             var ctx = new AttackContext(FinalBaseAtk, FinalBaseDef);
 
-            // [계수 W] 평타 무기 계수를 P 에 접기 위해 주입 (StatCalculator 가 P=깡뎀×W×C 로 사용).
-            //   기존 공식은 W 를 누락했었음. 스킬 누크 계수는 런타임이 별도 오버라이드 (gap#5).
+            // [계수 W] 평타 무기 계수를 P 에 접기 위해 주입 (DamageCalculator 가 P=깡뎀×W×C 로 사용).
+            //   BasicAtkMultiplier 은 생성자 [4] 에서 이미 /100 정규화된 **fraction** (예 0.1365).
+            //   스킬 누크 계수는 런타임이 별도 오버라이드 (gap#5).
             ctx.SkillMultiplier = (BasicAtkMultiplier > 0) ? BasicAtkMultiplier : 1.0;
 
             // [H3] OL 전투축 주입 — InitializeFinalStats 에서 val_type 정규화까지 끝난 값을 가산.
@@ -249,7 +258,7 @@ namespace Nikke.Simulator.Core.Entities
         }
 
         /// <summary>특수효과(분수) → AttackContext 대미지 버킷. 의미 규칙: Docs/SKILL_DATA_BLABLALINK §4.1.
-        /// Parts/Pierce/True 는 StatCalculator 가 IsPartsHit/IsPierceHit/IsTrueDamage 플래그로 게이트.</summary>
+        /// Parts/Pierce/True 는 DamageCalculator 가 IsPartsHit/IsPierceHit/IsTrueDamage 플래그로 게이트.</summary>
         private static void RouteEffects(ref AttackContext ctx, Dictionary<EffectType, double> eff)
         {
             foreach (var kv in eff)
