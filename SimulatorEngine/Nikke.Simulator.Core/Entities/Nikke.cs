@@ -19,6 +19,11 @@ namespace Nikke.Simulator.Core.Entities
         public string WeaponType { get; private set; }
         public string Class { get; private set; }
 
+        // 스쿼드(동일 스쿼드 아군 조건 버프용). 적정거리 범위(per-char; sim 사거리 판정용, 미소비).
+        public string Squad { get; private set; }
+        public int ProperRangeMin { get; private set; }
+        public int ProperRangeMax { get; private set; }
+
         // --- [레벨/등급 정보] ---
         public int Level { get; private set; }
         public int Grade { get; private set; }
@@ -95,6 +100,9 @@ namespace Nikke.Simulator.Core.Entities
             Element = dto.StaticInfo.element;
             WeaponType = dto.StaticInfo.weapon;
             Class = dto.StaticInfo.character_class;
+            Squad = dto.StaticInfo.squad;
+            ProperRangeMin = dto.StaticInfo.properRange?.min ?? 0;
+            ProperRangeMax = dto.StaticInfo.properRange?.max ?? 0;
 
             // [2] 레벨 정보 세팅
             Level = dto.user.level;

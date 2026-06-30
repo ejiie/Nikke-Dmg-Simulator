@@ -45,5 +45,7 @@ public class NikkeBuildIntegrationTests
         Assert.True(nikke.EquippedCube.HP > 0);    // 큐브 base 스탯(JSON) 로드됨
         Assert.True(nikke.FinalBaseAtk > 0);       // 기초 ATK 산출
         Assert.True(nikke.FinalBaseHP > 0);
+        Assert.False(string.IsNullOrEmpty(nikke.Squad));   // roledata squad 배선
+        Assert.True(nikke.ProperRangeMax >= nikke.ProperRangeMin); // 적정거리 범위 배선
     }
 }
