@@ -75,9 +75,10 @@
 - 스코프: ✅ `Nikke.cs`(W주입측 `/100`) + `StatTable.Initialize` 견고 파서(cp949/멀티라인/콤마 내성, 내용기반 행탐지) + `WUnitFoundationTests`(5).
 - 의존: 없음(Core). 수용: ✅ W 정규화 확정·문서화 · ✅ in-game 일치 = stat 0-error(사용자) + gap#4 평타 실측(사용자) + golden 18 + wiring 테스트. **게이트 통과 → Wave1(K2~K6) 착수 가능.**
 
-### K2 — SimClock (이벤트 큐)
+### K2 — SimClock (이벤트 큐)  — ✅ 완료 (2026-07-01, 10 단위테스트 통과)
 - 목표: 이산이벤트 클럭. `Schedule(atSec, ev)` / `Run(untilSec)`, min-heap, 동시각 삽입순.
-- 스코프: `Engine/SimClock.cs`. 의존: K0. 수용: 단위테스트(순서/동시각/재귀예약).
+- 스코프: `Engine/Clock/SimClock.cs`(인터페이스 옆). 의존: K0. 수용: ✅ `SimClockTests.cs` 10(순서/동시각 FIFO/재귀예약 2종/과거예약 throw/분할Run/NowSec 단조·종료=untilSec/빈큐/창밖/경계포함).
+- 임플: `PriorityQueue<Action,(double,long)>` + 단조증가 seq 로 동시각 삽입순 결정적 고정(.NET PQ 동순위 불안정 보정). `Run(untilSec)` = untilSec 포함·종료 시 `NowSec=untilSec` 클램프(resumable). 계약 무수정.
 
 ### K3 — FiringModel
 - 목표: Combatant+무기 → 발사 이벤트. 비차지 `1/GetBaseFireRate`, 차지 `Motion+FullCharge`/`Tap`, 탄창→재장전, `IsFullCharge` 세팅.

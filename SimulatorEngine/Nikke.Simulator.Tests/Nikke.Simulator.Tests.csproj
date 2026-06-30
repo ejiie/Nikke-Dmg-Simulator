@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Nikke.Simulator.Core\Nikke.Simulator.Core.csproj" />
+    <ProjectReference Include="..\Nikke.Simulator.Engine\Nikke.Simulator.Engine.csproj" />
   </ItemGroup>
 
 </Project>
