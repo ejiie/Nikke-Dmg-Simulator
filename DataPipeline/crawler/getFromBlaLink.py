@@ -355,10 +355,9 @@ class GakiSniffer:
         target_url = f"{BASE_DOMAIN}/shiftyspad/nikke-list?uid={self.encode_uid(uid)}&openid={self.encode_uid(uid)}"
         login_url = f"{BASE_DOMAIN}/login?to={target_url}&back_to={target_url}"
 
-        print("🕵️‍♀️ [가키짱의 듀얼-코어 크롤러] API & 언어팩 동시 강탈 기동 중...")
         logged_in = False
         async with async_playwright() as p:
-            # 언어팩을 '영어'로 강제 호출하기 위해 브라우저의 기본 언어(locale)를 영어(en-US)로 세팅한다! ♥
+            # 언어팩을 '영어'로 강제 호출하기 위해 브라우저의 기본 언어(locale)를 영어(en-US)로 세팅
             browser = await p.chromium.launch(headless=False)
             context = await browser.new_context(locale="en-US")
             page = await context.new_page()
