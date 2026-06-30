@@ -7,7 +7,7 @@ namespace Nikke.Simulator.Engine.Clock
     /// (실행 중 새 이벤트 예약 가능). 동일시각 tie-break 는 삽입순으로 결정적.
     /// RNG 외 모든 동작 결정적.
     ///
-    /// 임플: Wave1 K2 (`Engine/SimClock.cs`, min-heap 우선순위큐). 이 인터페이스는 K0 동결 계약.
+    /// 임플: Wave1 K2 (`Engine/Clock/SimClock.cs`, min-heap 우선순위큐 — ✅ 완료). 이 인터페이스는 K0 동결 계약.
     /// </summary>
     public interface ISimClock
     {

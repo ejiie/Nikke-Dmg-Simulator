@@ -5,6 +5,34 @@
 
 ---
 
+## 2026-07-01 — 엔진 Wave 1 K2 (SimClock 이벤트 큐)
+
+**범위**: K0 동결 계약 `ISimClock` 구현 — 이산이벤트 클럭(min-heap). 기준 = `WORK_BREAKDOWN.md` K2,
+권위 `ENGINE_GUIDE.md` §5(SimClock)·§6 D5(min-heap 자료구조).
+
+### 1. 빌드 — 0 errors
+```
+dotnet build SimulatorEngine/NikkeSimulator.sln
+→ 오류 0개 (4 프로젝트). Tests.csproj 에 Engine ProjectReference 추가(Wave1 공유; 먼저 닿는 청크가 추가).
+```
+
+### 2. 테스트 — 49/49 통과 (기존 39 + K2 신규 10)
+```
+dotnet test SimulatorEngine/Nikke.Simulator.Tests/Nikke.Simulator.Tests.csproj
+→ 실패: 0, 통과: 49, 건너뜀: 0.
+```
+신규 10 = `SimClockTests.cs`:
+- 시각순 실행(예약순 무관) / 동시각 FIFO tie-break(seq) / 재귀예약 2종(미래·동시각) /
+  과거예약(`atSec<NowSec`) `ArgumentOutOfRangeException` / 분할 Run(창 밖 이벤트 지연) /
+  `NowSec` 단조증가·종료값=untilSec / 빈큐 no-op / 창밖만 no-op / 경계(==untilSec 포함, > 제외).
+
+### 3. 구현 메모
+`Engine/Clock/SimClock.cs` — `PriorityQueue<Action,(double AtSec,long Seq)>` + 단조증가 seq 로 동시각
+삽입순(FIFO) 결정적 고정(.NET `PriorityQueue` 는 동순위 **불안정** → 복합키로 보정). `Run(untilSec)` =
+untilSec **포함**, 종료 시 `NowSec=untilSec` 클램프(분할 Run resumable). 계약 시그니처(`ISimClock`) 무수정.
+
+---
+
 ## 2026-06-30 — 엔진 Wave 0 (K0 계약 스텁 + K1 W 단위 픽스)
 
 **범위**: `Nikke.Simulator.Engine` 프로젝트 신설(K0) + 공유 계약 컴파일 스텁 동결, 평타 계수 W 단위
