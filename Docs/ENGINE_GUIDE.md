@@ -140,7 +140,7 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 
 ## 7. 데이터/검증 의존 (블로커 아닌 항목 — 병행)
 - ✅ 장비표·큐브·소장품 base/특수효과: **공식 blablalink JSON 연동 완료** (`GetEquipmentStats` + cube/collection base JSON + `EffectType`/`EffectTable`). 옛 "stub/예시 수치" 는 해소됨. 잔여 = 타이밍/조건부 효과(sim 루프 대기, `SKILL_DATA_BLABLALINK.md` §4.2).
-- ProperDistance 0.3 (RL=0 외 무기마다 적용되는 거리 설정 필요).
+- ProperDistance: ✅ 무기별 **범위** 확보(`proper_distance_table.json`; roledata bonusrange → MG 35-55·AR 25-45·SMG 15-35·SG 0-25·RL 0-0·SR 45-100). 보너스 **크기**(0.3?)만 미검증. (per-char `properRange` 도 merged DB 에 있어 SR 예외 보존.)
 - 검증 전략: 슬라이스별 in-game 대조 + RNG 는 N회 수렴.
 
 ---

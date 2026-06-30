@@ -169,7 +169,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 - **팀 합 분포**: 팀별 분포의 합 = convolution(팀간 독립 가정) — 가정 타당성 검증 필요.
 - **UI/컴퓨트 위치**: 보류 — M1 단일 sim 속도 측정 후 (client Blazor vs 서버 오프로드). 엔진은 무관하게 진행.
 - **엔진**: event-driven 확정. (구현 세부 — 이벤트 큐 자료구조 등 — 슬라이스 1에서.)
-- **데이터 실측**: 장비표·큐브·소장품 → **확보+C# 연동 완료** (`blabla_static_tables.json`; 장비 `round(base×(1+0.3·corp+0.1·level))` + 큐브/소장품 base·특수효과 = `GetEquipmentStats`/base JSON/`EffectTable` 배선, 34/34 테스트). 타이밍/조건부 효과만 sim 루프 대기. ProperDistance 0.3(RL=0 외 미검증)은 여전히 열림.
+- **데이터 실측**: 장비표·큐브·소장품 → **확보+C# 연동 완료** (`blabla_static_tables.json`; 장비 `round(base×(1+0.3·corp+0.1·level))` + 큐브/소장품 base·특수효과 = `GetEquipmentStats`/base JSON/`EffectTable` 배선, 34/34 테스트). 타이밍/조건부 효과만 sim 루프 대기. ProperDistance: 무기별 **범위** 확보(roledata bonusrange → `proper_distance_table.json`; MG 35-55·AR 25-45·SMG 15-35·SG 0-25·RL 0-0·SR 45-100, **RL=0 확증**) — 보너스 **크기**(0.3?)만 미검증.
 
 ---
 
