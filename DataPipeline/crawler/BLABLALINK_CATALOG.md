@@ -27,6 +27,18 @@
 | `equip/equip_option_table_v2-{locale}.json` | **OL 옵션 9종**(ATK/DEF/MaxAmmo/ChargeDmg/ChargeSpeed/CritRate/CritDmg/ElementDmg/HitRate)×3티어. **HP 없음** | ❌ | 중(카탈로그; 롤 **값**은 state_effect 표 필요, 유저데이터가 이미 resolve) |
 | `attractscene/{id}-{locale}.json` | 호감도 스토리 씬 | ❌ | 시뮬 무관 |
 
+### 2.1 roledata 풀 raw 채굴 결과 (2026-07-01)
+`blabla_roledata_full.json`(캐릭당 ~6500줄) 검사 — 큐레이트 subset 이 버리던 고가치 필드:
+
+| 필드 | 내용 | 처리 |
+|---|---|---|
+| `character_level_{attack,hp,defence}_list[1200]` | **캐릭별 레벨별 base HP/ATK/DEF** (ATK/HP=class×rare, **DEF=per-char 변동**) | ⭐ 공식 stat 소스 = 수기 `stat_table.csv` 대체 후보(사용자 Y). 미배선(후속) |
+| `stat_enhance_detail` | grade/core 상수(`grade_attack=20 grade_hp=3000 grade_defence=100 ratio=0.02`, core) — **전캐릭 동일** | DESIGN §3.5 하드코딩 **공식 확증**. 하드코딩 유지(글로벌 무예외) |
+| `bonusrange_min/max` | 적정거리 보너스 **범위**(무기별 결정) | ✅ 추출 → `proper_distance_table.json`(무기별) + per-char `properRange`(merged DB) |
+| `squad` | 스쿼드(62종) — 동일 스쿼드 아군 조건 버프 스킬용 | ✅ 추출 → merged DB `static.squad` |
+| `skill*_table='StateEffect'`·`category_type`·`teammate_list` | 스킬 효과 테이블 타입·태그·팀메이트 | 미사용(후속 후보) |
+| `piece/costume/dialog/cv/attractive_scenario` | 가챠·코스튬·대사·성우·호감도씬 | 시뮬 무관 |
+
 ## 3. 유저 데이터 API (`api.blablalink.com`, 로그인 필요)
 `GetUserCharacters` · `GetUserCharacterDetails` · `GetUserProfileBasicInfo` · `GetUserProfileOutpostInfo` · `GetUserGamePlayerInfo`. → `getFromBlaLink.py` (API replay). ✅ 수집 중.
 

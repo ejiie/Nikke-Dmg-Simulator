@@ -13,10 +13,13 @@ basicAttack 단위 변환(45캐릭 prydwen 교차검증 일치):
 """
 import json
 import os
+from collections import Counter
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_FILE = os.path.join(CURRENT_DIR, "..", "..", "Database", "raw", "blabla_roledata.json")
-PROCESSED_FILE = os.path.join(CURRENT_DIR, "..", "..", "Database", "processed", "roledata_clean.json")
+PROCESSED_DIR = os.path.join(CURRENT_DIR, "..", "..", "Database", "processed")
+PROCESSED_FILE = os.path.join(PROCESSED_DIR, "roledata_clean.json")
+PROPER_DIST_FILE = os.path.join(PROCESSED_DIR, "proper_distance_table.json")
 
 # roledata → 기존 contract 정규화 (prydwen_cleaner 와 동일 타깃 포맷)
 WEAPON_MAP = {
@@ -65,13 +68,35 @@ def clean_roledata():
             "reloadTime": (shot.get("reload_time") or 0) / 100.0,
             "iconUrl": f"portraits/si/{nc}.webp",   # 로컬 초상화(getFromBlaLinkPortraits), name_code 키
             "basicAttack": _basic_attack(shot),
+            "squad": c.get("squad"),                # 동일 스쿼드 아군 조건 버프용
+            # 적정거리 보너스 범위(per-char; 무기별 결정, SR 1명 예외 보존)
+            "properRange": {"min": c.get("bonusrange_min"), "max": c.get("bonusrange_max")},
             "skills": c.get("skills"),              # 공식 구조화 스킬(skill1/skill2/burst)
         }
 
-    os.makedirs(os.path.dirname(PROCESSED_FILE), exist_ok=True)
+    os.makedirs(PROCESSED_DIR, exist_ok=True)
     with open(PROCESSED_FILE, "w", encoding="utf-8") as f:
         json.dump(clean, f, ensure_ascii=False, indent=2)
     print(f"✅ 총 {len(clean)}명 정제 완료 → '{PROCESSED_FILE}'")
+
+    # 적정거리(proper distance) 보너스 범위 — 무기별 1개 (최빈값). 엔진 ProperDistanceTable 소스.
+    per_weapon = {}
+    counts = {}
+    for ch in clean.values():
+        w = ch.get("weapon")
+        pr = ch.get("properRange") or {}
+        if w is None or pr.get("min") is None:
+            continue
+        counts.setdefault(w, Counter())[(pr["min"], pr["max"])] += 1
+    for w, cnt in counts.items():
+        (mn, mx), _ = cnt.most_common(1)[0]
+        per_weapon[w] = {"min": mn, "max": mx}
+    with open(PROPER_DIST_FILE, "w", encoding="utf-8") as f:
+        json.dump(per_weapon, f, ensure_ascii=False, indent=2)
+    outliers = {w: dict(cnt) for w, cnt in counts.items() if len(cnt) > 1}
+    print(f"🎯 적정거리 무기별표 → '{PROPER_DIST_FILE}' ({per_weapon})")
+    if outliers:
+        print(f"   ⚠️ 무기 내 범위 불일치(최빈값 채택): {outliers}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,26 @@
+{
+  "Minigun": {
+    "min": 35,
+    "max": 55
+  },
+  "Assault Rifle": {
+    "min": 25,
+    "max": 45
+  },
+  "SMG": {
+    "min": 15,
+    "max": 35
+  },
+  "Shotgun": {
+    "min": 0,
+    "max": 25
+  },
+  "Rocket Launcher": {
+    "min": 0,
+    "max": 0
+  },
+  "Sniper Rifle": {
+    "min": 45,
+    "max": 100
+  }
+}

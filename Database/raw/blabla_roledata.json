@@ -16,6 +16,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Absolute",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1009001,
         "name_localkey": "Machine Gun",
@@ -313,6 +316,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Triangle",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1017001,
         "name_localkey": "Assault Rifle",
@@ -636,6 +642,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Scouting",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1002201,
         "name_localkey": "Submachine Gun",
@@ -972,6 +981,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ACPU",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1003001,
         "name_localkey": "Shotgun",
@@ -1308,6 +1320,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ACPU",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1003201,
         "name_localkey": "Submachine Gun",
@@ -1670,6 +1685,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "InfinityRail",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1007001,
         "name_localkey": "Assault Rifle",
@@ -1941,6 +1959,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "InfinityRail",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1007101,
         "name_localkey": "Submachine Gun",
@@ -2225,6 +2246,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "InfinityRail",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1007201,
         "name_localkey": "Machine Gun",
@@ -2561,6 +2585,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 500,
+      "squad": "Absolute",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1009101,
         "name_localkey": "Rocket Launcher",
@@ -2913,6 +2940,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Absolute",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1009201,
         "name_localkey": "Sniper Rifle",
@@ -3262,6 +3292,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "External",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1018001,
         "name_localkey": "Machine Gun",
@@ -3624,6 +3657,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "External",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1018101,
         "name_localkey": "Shotgun",
@@ -3921,6 +3957,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "SiegePerilous",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1004001,
         "name_localkey": "Submachine Gun",
@@ -4309,6 +4348,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Aegis",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1035201,
         "name_localkey": "Sniper Rifle",
@@ -4632,6 +4674,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Counters",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1001401,
         "name_localkey": "Machine Gun",
@@ -5020,6 +5065,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Aegis",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1035001,
         "name_localkey": "Submachine Gun",
@@ -5435,6 +5483,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Aegis",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1035301,
         "name_localkey": "Assault Rifle",
@@ -5784,6 +5835,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Akademeia",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1032101,
         "name_localkey": "Shotgun",
@@ -6108,6 +6162,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ACPU",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1003301,
         "name_localkey": "Rocket Launcher",
@@ -6445,6 +6502,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "MaidForYou",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1031301,
         "name_localkey": "Shotgun",
@@ -6847,6 +6907,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "SiegePerilous",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1004301,
         "name_localkey": "Sniper Rifle",
@@ -7209,6 +7272,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "SchoolCircle",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1039001,
         "name_localkey": "Shotgun",
@@ -7558,6 +7624,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "BestSeller",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1058001,
         "name_localkey": "Assault Rifle",
@@ -7959,6 +8028,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "External",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1018301,
         "name_localkey": "Rocket Launcher",
@@ -8413,6 +8485,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "External",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1018201,
         "name_localkey": "Assault Rifle",
@@ -8854,6 +8929,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Counters",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1001601,
         "name_localkey": "Machine Gun",
@@ -9352,6 +9430,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Aegis",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1035401,
         "name_localkey": "Machine Gun",
@@ -9744,6 +9825,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Aegis",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1035501,
         "name_localkey": "Rocket Launcher",
@@ -10174,6 +10258,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "BestSeller",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1058101,
         "name_localkey": "Rocket Launcher",
@@ -10628,6 +10715,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "SiegePerilous",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1004101,
         "name_localkey": "Submachine Gun",
@@ -11017,6 +11107,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "OverTheHorizon",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1053201,
         "name_localkey": "Rocket Launcher",
@@ -11316,6 +11409,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Absolute",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1009301,
         "name_localkey": "Machine Gun",
@@ -11680,6 +11776,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Absolute",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1009401,
         "name_localkey": "Rocket Launcher",
@@ -12059,6 +12158,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Absolute",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1009501,
         "name_localkey": "Sniper Rifle",
@@ -12395,6 +12497,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Scouting",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1002301,
         "name_localkey": "Machine Gun",
@@ -12917,6 +13022,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "InfinityRail",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1007401,
         "name_localkey": "Shotgun",
@@ -13214,6 +13322,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "InfinityRail",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1007501,
         "name_localkey": "Rocket Launcher",
@@ -13708,6 +13819,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "InfinityRail",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1007301,
         "name_localkey": "Shotgun",
@@ -14083,6 +14197,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "BestSeller",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1058201,
         "name_localkey": "Assault Rifle",
@@ -14447,6 +14564,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Exotic",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1011301,
         "name_localkey": "Submachine Gun",
@@ -14825,6 +14945,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "BestSeller",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1058301,
         "name_localkey": "Shotgun",
@@ -15215,6 +15338,9 @@
       "change_burst_step": "Step1",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Overseer",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1044101,
         "name_localkey": "Machine Gun",
@@ -15525,6 +15651,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Matis",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1010201,
         "name_localkey": "Sniper Rifle",
@@ -15835,6 +15964,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Wardress",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1016001,
         "name_localkey": "Rocket Launcher",
@@ -16159,6 +16291,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "MightyTools",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1008201,
         "name_localkey": "Submachine Gun",
@@ -16521,6 +16656,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "MasterHand",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1015001,
         "name_localkey": "Assault Rifle",
@@ -16818,6 +16956,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "MightyTools",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1008001,
         "name_localkey": "Rocket Launcher",
@@ -17103,6 +17244,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Matis",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1010101,
         "name_localkey": "Shotgun",
@@ -17426,6 +17570,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Exotic",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1011001,
         "name_localkey": "Submachine Gun",
@@ -17697,6 +17844,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Seraphim",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1013101,
         "name_localkey": "Shotgun",
@@ -18060,6 +18210,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Triangle",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1017201,
         "name_localkey": "Sniper Rifle",
@@ -18370,6 +18523,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Exotic",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1011101,
         "name_localkey": "Rocket Launcher",
@@ -18747,6 +18903,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Matis",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1010001,
         "name_localkey": "Rocket Launcher",
@@ -19058,6 +19217,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "RealKindness",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1040001,
         "name_localkey": "Shotgun",
@@ -19420,6 +19582,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "RealKindness",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1040101,
         "name_localkey": "Assault Rifle",
@@ -19808,6 +19973,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "RealKindness",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1040201,
         "name_localkey": "Submachine Gun",
@@ -20145,6 +20313,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "RecallRelease",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1012101,
         "name_localkey": "Rocket Launcher",
@@ -20508,6 +20679,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "LifeTonic",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1024101,
         "name_localkey": "Submachine Gun",
@@ -20818,6 +20992,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "DazzlingPearl",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1045001,
         "name_localkey": "Shotgun",
@@ -21221,6 +21398,9 @@
       "change_burst_step": "Step1",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "DazzlingPearl",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1045101,
         "name_localkey": "Rocket Launcher",
@@ -21623,6 +21803,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Unlimited",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1019201,
         "name_localkey": "Assault Rifle",
@@ -21986,6 +22169,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ElectricShock",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1050001,
         "name_localkey": "Machine Gun",
@@ -22348,6 +22534,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "HeavyGram",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1036101,
         "name_localkey": "Machine Gun",
@@ -22684,6 +22873,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ElectricShock",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1050101,
         "name_localkey": "Sniper Rifle",
@@ -23060,6 +23252,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "SchoolCircle",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1039101,
         "name_localkey": "Sniper Rifle",
@@ -23416,6 +23611,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "RealKindness",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1040301,
         "name_localkey": "Submachine Gun",
@@ -23806,6 +24004,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "BotanicGarden",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1041101,
         "name_localkey": "Machine Gun",
@@ -24182,6 +24383,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "MMR",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1029001,
         "name_localkey": "Assault Rifle",
@@ -24597,6 +24801,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "BotanicGarden",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1041201,
         "name_localkey": "Rocket Launcher",
@@ -25121,6 +25328,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Wardress",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1059001,
         "name_localkey": "Machine Gun",
@@ -25471,6 +25681,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Incubator",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1016201,
         "name_localkey": "Assault Rifle",
@@ -25874,6 +26087,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ElectricShock",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1050201,
         "name_localkey": "Machine Gun",
@@ -26278,6 +26494,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "VeiledOrder",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1062001,
         "name_localkey": "Sniper Rifle",
@@ -26602,6 +26821,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Counters",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1001801,
         "name_localkey": "Rocket Launcher",
@@ -27178,6 +27400,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CafeSweety",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1014001,
         "name_localkey": "Shotgun",
@@ -27540,6 +27765,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Protocol",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1021001,
         "name_localkey": "Sniper Rifle",
@@ -27890,6 +28118,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Unlimited",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1019101,
         "name_localkey": "Sniper Rifle",
@@ -28240,6 +28471,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "777",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1027001,
         "name_localkey": "Assault Rifle",
@@ -28617,6 +28851,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "777",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1027101,
         "name_localkey": "Shotgun",
@@ -28995,6 +29232,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CafeSweety",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1014201,
         "name_localkey": "Sniper Rifle",
@@ -29331,6 +29571,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Seraphim",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1013001,
         "name_localkey": "Shotgun",
@@ -29628,6 +29871,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CafeSweety",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1014101,
         "name_localkey": "Sniper Rifle",
@@ -29899,6 +30145,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Triangle",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1017101,
         "name_localkey": "Sniper Rifle",
@@ -30196,6 +30445,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Unlimited",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1019001,
         "name_localkey": "Submachine Gun",
@@ -30545,6 +30797,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Talentum",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1020001,
         "name_localkey": "Assault Rifle",
@@ -30881,6 +31136,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Talentum",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1020101,
         "name_localkey": "Rocket Launcher",
@@ -31179,6 +31437,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Talentum",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1020201,
         "name_localkey": "Sniper Rifle",
@@ -31541,6 +31802,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Protocol",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1021201,
         "name_localkey": "Submachine Gun",
@@ -31903,6 +32167,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "LifeTonic",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1024201,
         "name_localkey": "Assault Rifle",
@@ -32239,6 +32506,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "UnderworldQueen",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1028201,
         "name_localkey": "Sniper Rifle",
@@ -32603,6 +32873,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Exotic",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1011201,
         "name_localkey": "Shotgun",
@@ -32939,6 +33212,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "MaidForYou",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1031101,
         "name_localkey": "Sniper Rifle",
@@ -33250,6 +33526,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "MaidForYou",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1031201,
         "name_localkey": "Machine Gun",
@@ -33573,6 +33852,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "HappyZoo",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1038101,
         "name_localkey": "Rocket Launcher",
@@ -33963,6 +34245,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "SchoolCircle",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1039201,
         "name_localkey": "Submachine Gun",
@@ -34288,6 +34573,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "PrimaDonna",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1043201,
         "name_localkey": "Machine Gun",
@@ -34585,6 +34873,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "PrimaDonna",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1043001,
         "name_localkey": "Rocket Launcher",
@@ -34910,6 +35201,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "PrimaDonna",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1043101,
         "name_localkey": "Submachine Gun",
@@ -35272,6 +35566,9 @@
       "change_burst_step": "Step1",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Talentum",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1020301,
         "name_localkey": "Assault Rifle",
@@ -35622,6 +35919,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "UnderworldQueen",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1028001,
         "name_localkey": "Machine Gun",
@@ -36023,6 +36323,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Seraphim",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1013201,
         "name_localkey": "Sniper Rifle",
@@ -36425,6 +36728,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "HappyZoo",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1038001,
         "name_localkey": "Submachine Gun",
@@ -36827,6 +37133,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Counters",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1001501,
         "name_localkey": "Shotgun",
@@ -37204,6 +37513,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Unlimited",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1019401,
         "name_localkey": "Machine Gun",
@@ -37580,6 +37892,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "LittleCannon",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1006201,
         "name_localkey": "Submachine Gun",
@@ -37917,6 +38232,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "HappyZoo",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1038201,
         "name_localkey": "Shotgun",
@@ -38319,6 +38637,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "UnderworldQueen",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1028101,
         "name_localkey": "Assault Rifle",
@@ -38776,6 +39097,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "MaidForYou",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1031001,
         "name_localkey": "Assault Rifle",
@@ -39165,6 +39489,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Rewind",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1055001,
         "name_localkey": "Rocket Launcher",
@@ -39450,6 +39777,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "MaidForYou",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1031401,
         "name_localkey": "Shotgun",
@@ -39931,6 +40261,9 @@
       "change_burst_step": "Step1",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Unlimited",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1019501,
         "name_localkey": "Submachine Gun",
@@ -40320,6 +40653,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Rewind",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1055101,
         "name_localkey": "Submachine Gun",
@@ -40670,6 +41006,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "UnderworldQueen",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1028301,
         "name_localkey": "Assault Rifle",
@@ -41033,6 +41372,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "UnderworldQueen",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1028401,
         "name_localkey": "Assault Rifle",
@@ -41395,6 +41737,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "777",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1027201,
         "name_localkey": "Sniper Rifle",
@@ -41815,6 +42160,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "LifeTonic",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1024001,
         "name_localkey": "Rocket Launcher",
@@ -42180,6 +42528,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CookingOil",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1052001,
         "name_localkey": "Sniper Rifle",
@@ -42635,6 +42986,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CookingOil",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1052101,
         "name_localkey": "Rocket Launcher",
@@ -43169,6 +43523,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CafeSweety",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1014301,
         "name_localkey": "Sniper Rifle",
@@ -43546,6 +43903,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "MaidForYou",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1031501,
         "name_localkey": "Sniper Rifle",
@@ -43923,6 +44283,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "MaidForYou",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1031601,
         "name_localkey": "Sniper Rifle",
@@ -44402,6 +44765,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Counters",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1001701,
         "name_localkey": "Rocket Launcher",
@@ -44874,6 +45240,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "T.T.STAR",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1060001,
         "name_localkey": "Rocket Launcher",
@@ -45282,6 +45651,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "T.T.STAR",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1060101,
         "name_localkey": "Sniper Rifle",
@@ -45697,6 +46069,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ArkRanger",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1057001,
         "name_localkey": "Assault Rifle",
@@ -46126,6 +46501,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Pioneer",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1022001,
         "name_localkey": "Assault Rifle",
@@ -46449,6 +46827,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 500,
+      "squad": "Inherit",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1023101,
         "name_localkey": "Shotgun",
@@ -46813,6 +47194,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Pioneer",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1022101,
         "name_localkey": "Rocket Launcher",
@@ -47164,6 +47548,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Pioneer",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1022201,
         "name_localkey": "Assault Rifle",
@@ -47539,6 +47926,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Inherit",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1023001,
         "name_localkey": "Sniper Rifle",
@@ -47862,6 +48252,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Inherit",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1023201,
         "name_localkey": "Rocket Launcher",
@@ -48200,6 +48593,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1500,
+      "squad": "Heretic",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1026001,
         "name_localkey": "Machine Gun",
@@ -48588,6 +48984,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Heretic",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1026101,
         "name_localkey": "Sniper Rifle",
@@ -48911,6 +49310,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Inherit",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1023301,
         "name_localkey": "Assault Rifle",
@@ -49225,6 +49627,9 @@
       "change_burst_step": "NextStep",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Goddess",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1047001,
         "name_localkey": "Sniper Rifle",
@@ -49680,6 +50085,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Goddess",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1022401,
         "name_localkey": "Assault Rifle",
@@ -50071,6 +50479,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Goddess",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1022501,
         "name_localkey": "Rocket Launcher",
@@ -50439,6 +50850,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Weissritter",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1033001,
         "name_localkey": "Machine Gun",
@@ -50892,6 +51306,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Goddess",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1022601,
         "name_localkey": "Sniper Rifle",
@@ -51242,6 +51659,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "OldTales",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1051101,
         "name_localkey": "Rocket Launcher",
@@ -51580,6 +52000,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "OldTales",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1051401,
         "name_localkey": "Assault Rifle",
@@ -52001,6 +52424,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "OldTales",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1051301,
         "name_localkey": "Submachine Gun",
@@ -52443,6 +52869,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Inherit",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1023401,
         "name_localkey": "Shotgun",
@@ -52848,6 +53277,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Pioneer",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1022301,
         "name_localkey": "Submachine Gun",
@@ -53379,6 +53811,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Heretic",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1026201,
         "name_localkey": "Sniper Rifle",
@@ -53742,6 +54177,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Weissritter",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1033101,
         "name_localkey": "Submachine Gun",
@@ -54027,6 +54465,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Goddess",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1047101,
         "name_localkey": "Sniper Rifle",
@@ -54552,6 +54993,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ce_01",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1080001,
         "name_localkey": "Submachine Gun",
@@ -54942,6 +55386,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ce_01",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1080101,
         "name_localkey": "Rocket Launcher",
@@ -55279,6 +55726,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ce002_01",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1081001,
         "name_localkey": "Assault Rifle",
@@ -55589,6 +56039,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ce002_01",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1081101,
         "name_localkey": "Rocket Launcher",
@@ -55929,6 +56382,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE003",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1082001,
         "name_localkey": "Machine Gun",
@@ -56293,6 +56749,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE003",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1082101,
         "name_localkey": "Rocket Launcher",
@@ -56659,6 +57118,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE004",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1083001,
         "name_localkey": "Assault Rifle",
@@ -57037,6 +57499,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE004",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1083101,
         "name_localkey": "Machine Gun",
@@ -57413,6 +57878,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE004",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1083201,
         "name_localkey": "Sniper Rifle",
@@ -57762,6 +58230,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE005",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1083501,
         "name_localkey": "Machine Gun",
@@ -58298,6 +58769,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE004",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1083401,
         "name_localkey": "Assault Rifle",
@@ -58753,6 +59227,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE006_01",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1085001,
         "name_localkey": "Assault Rifle",
@@ -59117,6 +59594,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE006_02",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1085101,
         "name_localkey": "Rocket Launcher",
@@ -59480,6 +59960,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE007",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1084001,
         "name_localkey": "Rocket Launcher",
@@ -59911,6 +60394,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE007",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1084101,
         "name_localkey": "Assault Rifle",
@@ -60317,6 +60803,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE008",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1086001,
         "name_localkey": "Submachine Gun",
@@ -60734,6 +61223,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE008",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1086101,
         "name_localkey": "Sniper Rifle",
@@ -61109,6 +61601,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Counters",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1001001,
         "name_localkey": "Assault Rifle",
@@ -61432,6 +61927,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Counters",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1001101,
         "name_localkey": "Shotgun",
@@ -61742,6 +62240,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Scouting",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1002001,
         "name_localkey": "Sniper Rifle",
@@ -62026,6 +62527,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Aegis",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1035101,
         "name_localkey": "Rocket Launcher",
@@ -62285,6 +62789,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 500,
+      "squad": "Wardress",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1016101,
         "name_localkey": "Assault Rifle",
@@ -62582,6 +63089,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "RecallRelease",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1012001,
         "name_localkey": "Rocket Launcher",
@@ -62906,6 +63416,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "MMR",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1029101,
         "name_localkey": "Shotgun",
@@ -63229,6 +63742,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Counters",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1001201,
         "name_localkey": "Rocket Launcher",
@@ -63540,6 +64056,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "LittleCannon",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1006001,
         "name_localkey": "Rocket Launcher",
@@ -63851,6 +64370,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "LittleCannon",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1006101,
         "name_localkey": "Rocket Launcher",
@@ -64175,6 +64697,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Unlimited",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1019301,
         "name_localkey": "Shotgun",
@@ -64485,6 +65010,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ce_01",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1080201,
         "name_localkey": "Sniper Rifle",
@@ -64822,6 +65350,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "ce002_02",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1081201,
         "name_localkey": "Rocket Launcher",
@@ -65120,6 +65651,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE003",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1082201,
         "name_localkey": "Sniper Rifle",
@@ -65456,6 +65990,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE004",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1083301,
         "name_localkey": "Submachine Gun",
@@ -65792,6 +66329,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE005",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1083601,
         "name_localkey": "Submachine Gun",
@@ -66167,6 +66707,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE006_03",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1085201,
         "name_localkey": "Submachine Gun",
@@ -66465,6 +67008,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE007",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1084201,
         "name_localkey": "Rocket Launcher",
@@ -66751,6 +67297,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "CE008",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1086201,
         "name_localkey": "Assault Rifle",
@@ -67035,6 +67584,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Replace",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1030001,
         "name_localkey": "Assault Rifle",
@@ -67319,6 +67871,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Replace",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1030101,
         "name_localkey": "Shotgun",
@@ -67603,6 +68158,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Replace",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1030601,
         "name_localkey": "Submachine Gun",
@@ -67887,6 +68445,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Replace",
+      "bonusrange_min": 45,
+      "bonusrange_max": 100,
       "shot": {
         "id": 1030201,
         "name_localkey": "Sniper Rifle",
@@ -68197,6 +68758,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Replace",
+      "bonusrange_min": 35,
+      "bonusrange_max": 55,
       "shot": {
         "id": 1030301,
         "name_localkey": "Machine Gun",
@@ -68481,6 +69045,9 @@
       "change_burst_step": "Step3",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Replace",
+      "bonusrange_min": 0,
+      "bonusrange_max": 25,
       "shot": {
         "id": 1030701,
         "name_localkey": "Shotgun",
@@ -68765,6 +69332,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Replace",
+      "bonusrange_min": 0,
+      "bonusrange_max": 0,
       "shot": {
         "id": 1030401,
         "name_localkey": "Rocket Launcher",
@@ -69063,6 +69633,9 @@
       "change_burst_step": "Step2",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Replace",
+      "bonusrange_min": 15,
+      "bonusrange_max": 35,
       "shot": {
         "id": 1030501,
         "name_localkey": "Submachine Gun",
@@ -69334,6 +69907,9 @@
       "change_burst_step": "StepFull",
       "burst_apply_delay": 1,
       "burst_duration": 1000,
+      "squad": "Replace",
+      "bonusrange_min": 25,
+      "bonusrange_max": 45,
       "shot": {
         "id": 1030801,
         "name_localkey": "Assault Rifle",

@@ -73,6 +73,10 @@ def extract_char(rd):
         "change_burst_step": rd.get("change_burst_step"),
         "burst_apply_delay": rd.get("burst_apply_delay"),
         "burst_duration": rd.get("burst_duration"),
+        "squad": rd.get("squad"),               # 동일 스쿼드 아군 조건 버프 스킬용
+        # 적정거리(proper distance) 보너스 범위 — 무기별 결정(SR 1명 예외). cleaner 가 무기별표로 집계.
+        "bonusrange_min": rd.get("bonusrange_min"),
+        "bonusrange_max": rd.get("bonusrange_max"),
         "shot": rd.get("shot_detail"),          # 무기/평타 원본 (cleaner 가 basicAttack 으로 변환)
         "skills": {
             "skill1": extract_skill(rd.get("skill1_detail")),
