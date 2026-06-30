@@ -145,6 +145,4 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 | 병렬 작업 분담 (chunk·DAG·순서) | `Docs/WORK_BREAKDOWN.md` |
 | 빌드/테스트/데이터 정합 증거 | `Docs/VERIFICATION_LOG.md` |
 | 대미지 공식 | 이 문서 §3 + `Stats/StatCalculator.cs` + golden test + `_dmg_probe.py`/`_dmg_calibrate.py` |
-| 스킬 스키마 | `DataPipeline/schema/skill_schema_legend.txt` + `skill_schema.py` (Pydantic) |
 | 데이터 shape | C# `Data/Dto/*.cs` + 실제 JSON |
-| historical (참고만) | `Docs/_archive/*` — 2026-04, 일부 superseded |
