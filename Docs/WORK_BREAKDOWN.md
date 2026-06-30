@@ -62,6 +62,7 @@
 ## 4. 청크 스펙 (핸드오프용)
 
 > 각 청크: **목표 / 스코프(파일) / 입력 / 산출(계약) / 의존 / 수용기준.** 상세 컴포넌트 계약 = ENGINE_GUIDE §5.
+> **즉시 착수 2 task (상세, 도메인 로컬)**: 엔진 Wave0(K0+K1) = `SimulatorEngine/ENGINE_WAVE0.md` · roledata 스킬 audit(K4 소스 결정, KP1 운명) = `DataPipeline/ROLEDATA_SKILL_AUDIT.md`.
 
 ### K0 — Engine 프로젝트 + 계약 스텁 ★blocks all
 - 목표: `Nikke.Simulator.Engine` 프로젝트(ref Core) 생성 + **모든 공유 계약을 컴파일되는 스텁으로** 박고 동결.
