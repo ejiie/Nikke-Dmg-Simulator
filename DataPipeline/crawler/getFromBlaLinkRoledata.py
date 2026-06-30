@@ -6,7 +6,9 @@ prydwen 정적 캐릭터 데이터를 **대체**하는 공식 소스. `roledata/
 prydwen_clean 호환 형태(name_code 키)로 정제/변환한다.
 
 공개 CDN(로그인 불필요, 공유 `_bbl_cdn`). 게임 업데이트 때만 가끔.
-출력: Database/raw/blabla_roledata.json  (name_code 키)
+출력:
+  - Database/raw/blabla_roledata.json       (name_code 키, 큐레이트 subset — ETL 계약)
+  - Database/raw/blabla_roledata_full.json  (name_code 키, 풀 raw — 미래 채굴용 아카이브)
 """
 import json
 import os
@@ -100,13 +102,15 @@ def fetch_roledata():
             targets.append(rid)
     print(f"🎯 대상 {len(targets)}명 (resource_id). roledata 순회 시작...")
 
-    roster, fail = {}, []
+    roster, roster_full, fail = {}, {}, []
     for n, rid in enumerate(targets, 1):
         rd = cdn.fetch_json(f"roledata/{rid}-v2-{LOCALE}.json", required=False)
         if not rd or rd.get("name_code") is None:
             fail.append(rid)
         else:
-            roster[str(rd["name_code"])] = extract_char(rd)
+            nc = str(rd["name_code"])
+            roster[nc] = extract_char(rd)       # 큐레이트 subset (기존 ETL 계약)
+            roster_full[nc] = rd                # 풀 raw (function_id_list·스킬값·성장 등 미래 채굴)
         if n % 25 == 0 or n == len(targets):
             print(f"   ⚡ {n}/{len(targets)} (수집 {len(roster)}, 실패 {len(fail)})")
         time.sleep(0.1)
@@ -123,7 +127,14 @@ def fetch_roledata():
     save_path = os.path.join(RAW_DIR, "blabla_roledata.json")
     with open(save_path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
-    print(f"\n✅ {len(roster)}/{len(targets)}명 저장: '{save_path}'")
+    print(f"\n✅ {len(roster)}/{len(targets)}명 저장(curate): '{save_path}'")
+
+    # 풀 raw 아카이브 (subset 으로 버려지는 필드 전수 보존 — 스킬 런타임/성장 채굴용)
+    full_path = os.path.join(RAW_DIR, "blabla_roledata_full.json")
+    with open(full_path, "w", encoding="utf-8") as f:
+        json.dump({"_source": out["_source"], "locale": LOCALE, "roster": roster_full},
+                  f, ensure_ascii=False, indent=2)
+    print(f"📦 {len(roster_full)}명 풀 raw 저장: '{full_path}'")
     if fail:
         print(f"⚠️ roledata 없음 {len(fail)}명: {str(fail[:12])[1:-1]}")
     return EXIT_OK
