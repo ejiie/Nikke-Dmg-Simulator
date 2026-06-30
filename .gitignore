@@ -39,6 +39,9 @@ Database/raw/portraits/
 # blabla_roledata.json(2MB)만 커밋 — 풀 raw 는 미래 채굴용 로컬 아카이브, 게임 업데이트마다 증가)
 Database/raw/blabla_roledata_full.json
 
+# 복호된 게임 StaticData (저작권 — 재배포 금지, 로컬 분석만. STATICDATA_PREP.md §3 참조)
+Database/raw/staticdata/
+
 # Throwaway backups & scratch experiments
 *.backup.json
 /Task.txt

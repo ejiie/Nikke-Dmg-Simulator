@@ -36,8 +36,25 @@
 2. **monster / stage / boss 테이블** — HP/파츠/DEF/속성/거리 → `BossTarget`(K11).
 3. (보조) CharacterStatTable 등으로 stat 조립 교차검증.
 
-## 5. 다음 (시도 단계 — go-ahead 후)
-`getFromNikkeStaticData.py` 작성(§2) → 1회 fetch → StaticData.zip 내부 포맷 검사(§1.4) → 테이블 인벤토리 → FunctionTable/monster 추출 ETL 설계. 전부 `.gitignore` 로컬.
+## 5. 시도 결과 (2026-07-01 — 사용자 go-ahead, 실행 완료)
+`getFromNikkeStaticData.py` 작성 → **fetch+복호 1회 성공**(Python 이식 §2 그대로, 1트). StaticData.zip
+16.3MB, 버전 `qa-260611-06b/536334`. **`Database/raw/staticdata/` (gitignore, 재배포 금지).**
+
+**인벤토리**: 9084 엔트리(9072 `.mpk` + 12 csv), 1047 고유 테이블. **프로젝트 갭 전부 존재**:
+- 스킬 런타임(THE GAP): `FunctionTable`(19111 함수, 6.5MB) · `StateEffectTable`(5113) · `SkillInfoTable`(2.1MB) · `CharacterSkillTable` · `SkillLevelPointTable`.
+- BossTarget(K11): `MonsterTable`(2035) · `MonsterStatEnhanceTable` · `MonsterSkillTable` · `MonsterPartsTable`(668, 파츠) · `CampaignStageTable`/`LostSectorStageTable`.
+- stat 교차검증: `CharacterStatTable`(64800) · `CharacterStatEnhanceTable` · `CharacterLevelTable` · `CharacterShotTable` · `CoverStatEnhanceTable`.
+
+**⚠️ 포맷 = 커스텀 바이너리, msgpack 아님**: 확장자만 `.mpk`. head `28 00 00 00`(=root offset/count) 후 레코드.
+naive int32 디코드 불일치(staticdata 277 ≠ blablalink id 1) → **FlatBuffers 또는 커스텀 packed, 테이블별
+스키마 의존.** 정밀 디코드엔 **proto/.fbs 스키마** 필요(필드명·타입·순서).
+
+## 6. 다음 (디코드 단계 — 더 깊은 RE)
+테이블 레코드 정밀 파싱 = 스키마 확보 필요. 옵션:
+1. `NikkeTools/Protobuf`(il2cpp 덤프 → `Nikke.proto`) — **게임 클라 설치 + Il2CppDumper 필요**(무거움).
+2. 커뮤니티 proto/스키마 덤프 탐색.
+3. 표별 바이너리 역공학(고정표=수치 정렬 추정 가능, String 표는 난해).
+우선 = FunctionTable/StateEffect 스키마(스킬 런타임 직결). 산출도 원본 대량복제면 커밋 신중(§3).
 
 ## Sources
 [Hiro420/NikkeTools](https://github.com/Hiro420/NikkeTools) — `StaticData/NikkeStaticData/Program.cs` · `ResStaticDataPackInfo.cs` 정독.
