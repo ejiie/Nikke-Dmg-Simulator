@@ -49,12 +49,25 @@
 naive int32 디코드 불일치(staticdata 277 ≠ blablalink id 1) → **FlatBuffers 또는 커스텀 packed, 테이블별
 스키마 의존.** 정밀 디코드엔 **proto/.fbs 스키마** 필요(필드명·타입·순서).
 
-## 6. 다음 (디코드 단계 — 더 깊은 RE)
-테이블 레코드 정밀 파싱 = 스키마 확보 필요. 옵션:
-1. `NikkeTools/Protobuf`(il2cpp 덤프 → `Nikke.proto`) — **게임 클라 설치 + Il2CppDumper 필요**(무거움).
-2. 커뮤니티 proto/스키마 덤프 탐색.
-3. 표별 바이너리 역공학(고정표=수치 정렬 추정 가능, String 표는 난해).
-우선 = FunctionTable/StateEffect 스키마(스킬 런타임 직결). 산출도 원본 대량복제면 커밋 신중(§3).
+## 6. 디코드 단계 — 진행 결과 (2026-07-01)
+
+**옵션 A (커뮤니티 스키마/디코더) = 실패**: 공개 repo 에 전투표(FunctionTable/SkillInfo/StateEffect)
+디코더·`.proto`·디코드 JSON 없음. NikkeTools 가 유일 디코더지만 il2cpp 필요(=B). nikke-db 는
+combat 표를 비공개 API 로 서빙(번들=프로필/UI JSON 뿐).
+
+**포맷 부분 역공학 (C)**: 레코드 = `[u32 count]` + 레코드마다 `[u8 nFields][필드…]`.
+- **수치 전용 표 = 해독됨**: `AttractiveLevelTable` 완벽 일치(rec0 nf=21 → id1/lv1/point150, blablalink 동일).
+  `CharacterStatTable` rec0 = (…, lv1, **HP 13500, ATK 600, DEF 90**) = class base 일치.
+- **String 포함 표(FunctionTable 등) = 스키마 의존**: 필드가 혼합타입(int32 + 인라인 문자열
+  `[u32 len][utf8]`, 예 `"Locale_Skill:20111_name"`), **per-field 타입태그 없음** → 필드 타입/순서를
+  알아야 세그먼트 가능. 표별 정렬도 미묘차(CharacterStat stride). → 스키마(proto) 필수.
+
+**옵션 B (il2cpp proto 덤프)**: `Nikke.proto` = 정밀 디코드 키. 단 `NikkeTools/{MetadataDumper,Protobuf}`
+는 **NIKKE 게임 클라 설치 머신**에서 Il2CppDumper 로 실행해야 함 — **이 자동화 환경엔 게임 미설치라 불가.**
+→ 사용자 PC(게임 설치)에서 1회 덤프 → `Nikke.proto` 확보 → Python 디코더 포팅 + 스킬 ETL.
+
+**현 상태**: raw StaticData 확보·재현 가능(자산 확보). 수치표는 지금도 디코드 가능(stat 교차검증용).
+**FunctionTable(스킬 런타임=THE GAP) = B 필요(사용자 PC).** 대안 = roledata desc+값 유지(현 방식).
 
 ## Sources
 [Hiro420/NikkeTools](https://github.com/Hiro420/NikkeTools) — `StaticData/NikkeStaticData/Program.cs` · `ResStaticDataPackInfo.cs` 정독.
