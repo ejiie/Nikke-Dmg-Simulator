@@ -1,4 +1,4 @@
-using Nikke.Simulator.Core.Stats;
+using Nikke.Simulator.Core.Combat;
 
 namespace Nikke.Simulator.Tests;
 
@@ -60,26 +60,26 @@ public class DamageFormulaGoldenTests
     [InlineData(false, true,  false, true,  120234168)]
     [InlineData(false, true,  true,  true,  177208522)]
     public void B2_MatchesInGame(bool dist, bool burst, bool crit, bool core, long measured)
-        => AssertWithin(measured, StatCalculator.CalculateDamage(Rig(dist, burst, crit, core)));
+        => AssertWithin(measured, DamageCalculator.CalculateDamage(Rig(dist, burst, crit, core)));
 
     // ── 크로스-브래킷 B3/B4/B5 (곱셈) — in-game 골든 포인트 ──
-    [Fact] public void DistB5()       => AssertWithin(142192292, StatCalculator.CalculateDamage(Rig(dist: true, b5: 1.4293)));
-    [Fact] public void CritB5()       => AssertWithin(247786478, StatCalculator.CalculateDamage(Rig(crit: true, b5: 1.4293)));
-    [Fact] public void DistCritB5()   => AssertWithin(280600080, StatCalculator.CalculateDamage(Rig(dist: true, crit: true, b5: 1.4293)));
-    [Fact] public void DistCoreB5()   => AssertWithin(270209101, StatCalculator.CalculateDamage(Rig(dist: true, core: true, b5: 1.4293)));
-    [Fact] public void FullB5()       => AssertWithin(463306234, StatCalculator.CalculateDamage(Rig(dist: true, burst: true, crit: true, core: true, b5: 1.4293)));
-    [Fact] public void DistB3()       => AssertWithin(86861800,  StatCalculator.CalculateDamage(Rig(dist: true, b3: 0.484)));
-    [Fact] public void DistB3B5()     => AssertWithin(211013357, StatCalculator.CalculateDamage(Rig(dist: true, b3: 0.484, b5: 1.4293)));
-    [Fact] public void DistB3B4B5()   => AssertWithin(219875918, StatCalculator.CalculateDamage(Rig(dist: true, b3: 0.484, b4: 0.042, b5: 1.4293)));
+    [Fact] public void DistB5()       => AssertWithin(142192292, DamageCalculator.CalculateDamage(Rig(dist: true, b5: 1.4293)));
+    [Fact] public void CritB5()       => AssertWithin(247786478, DamageCalculator.CalculateDamage(Rig(crit: true, b5: 1.4293)));
+    [Fact] public void DistCritB5()   => AssertWithin(280600080, DamageCalculator.CalculateDamage(Rig(dist: true, crit: true, b5: 1.4293)));
+    [Fact] public void DistCoreB5()   => AssertWithin(270209101, DamageCalculator.CalculateDamage(Rig(dist: true, core: true, b5: 1.4293)));
+    [Fact] public void FullB5()       => AssertWithin(463306234, DamageCalculator.CalculateDamage(Rig(dist: true, burst: true, crit: true, core: true, b5: 1.4293)));
+    [Fact] public void DistB3()       => AssertWithin(86861800,  DamageCalculator.CalculateDamage(Rig(dist: true, b3: 0.484)));
+    [Fact] public void DistB3B5()     => AssertWithin(211013357, DamageCalculator.CalculateDamage(Rig(dist: true, b3: 0.484, b5: 1.4293)));
+    [Fact] public void DistB3B4B5()   => AssertWithin(219875918, DamageCalculator.CalculateDamage(Rig(dist: true, b3: 0.484, b4: 0.042, b5: 1.4293)));
 
     // ── 구조 불변식: B2 는 가산 per-term (정수 정확) ──
     [Fact]
     public void B2_IsAdditivePerTerm()
     {
-        double none = StatCalculator.CalculateDamage(Rig());
-        double dist = StatCalculator.CalculateDamage(Rig(dist: true));
-        double burst = StatCalculator.CalculateDamage(Rig(burst: true));
-        double distBurst = StatCalculator.CalculateDamage(Rig(dist: true, burst: true));
+        double none = DamageCalculator.CalculateDamage(Rig());
+        double dist = DamageCalculator.CalculateDamage(Rig(dist: true));
+        double burst = DamageCalculator.CalculateDamage(Rig(burst: true));
+        double distBurst = DamageCalculator.CalculateDamage(Rig(dist: true, burst: true));
         // burst 증가분이 컨텍스트 무관하게 동일 ⟺ 가산 구조
         Assert.Equal(burst - none, distBurst - dist);
     }
@@ -88,8 +88,8 @@ public class DamageFormulaGoldenTests
     [Fact]
     public void B5_IsMultiplicativeWrap()
     {
-        double dist = StatCalculator.CalculateDamage(Rig(dist: true));
-        double distB5 = StatCalculator.CalculateDamage(Rig(dist: true, b5: 1.4293));
+        double dist = DamageCalculator.CalculateDamage(Rig(dist: true));
+        double distB5 = DamageCalculator.CalculateDamage(Rig(dist: true, b5: 1.4293));
         Assert.Equal(Math.Floor(dist * (1.0 + 1.4293)), distB5);
     }
 
@@ -97,8 +97,8 @@ public class DamageFormulaGoldenTests
     [Fact]
     public void B3_B5_MultiplyEachOther()
     {
-        double dist = StatCalculator.CalculateDamage(Rig(dist: true));
-        double distB3B5 = StatCalculator.CalculateDamage(Rig(dist: true, b3: 0.484, b5: 1.4293));
+        double dist = DamageCalculator.CalculateDamage(Rig(dist: true));
+        double distB3B5 = DamageCalculator.CalculateDamage(Rig(dist: true, b3: 0.484, b5: 1.4293));
         double multiply = Math.Floor(dist * (1.0 + 0.484) * (1.0 + 1.4293));
         double shareSum = Math.Floor(dist * (1.0 + 0.484 + 1.4293));
         Assert.Equal(multiply, distB3B5);
@@ -115,18 +115,18 @@ public class DamageFormulaGoldenTests
             IsCrit = true, IsCoreHit = true, SumCritDmg = 1.2654, SumCoreHitBuff = 0.1704,
             ProperDistanceBonus = 0.3, FullBurstBonus = 0.5, SumStrongElem = 1.4293,
         };
-        Assert.Equal(1.0, StatCalculator.CalculateDamage(ctx));
+        Assert.Equal(1.0, DamageCalculator.CalculateDamage(ctx));
     }
 
     // ── #6 true_dmg: DEF 무시 (DEF=0 으로 계산) — DEF 값과 무관, 비-true DEF=0 과 동일 ──
     [Fact]
     public void TrueDamage_IgnoresDef()
     {
-        double trueHi = StatCalculator.CalculateDamage(new AttackContext(901497, 5000)
+        double trueHi = DamageCalculator.CalculateDamage(new AttackContext(901497, 5000)
             { SkillMultiplier = 4.995, IsFullCharge = true, ChargeDmgBase = 10.0, IsTrueDamage = true });
-        double trueZero = StatCalculator.CalculateDamage(new AttackContext(901497, 0)
+        double trueZero = DamageCalculator.CalculateDamage(new AttackContext(901497, 0)
             { SkillMultiplier = 4.995, IsFullCharge = true, ChargeDmgBase = 10.0, IsTrueDamage = true });
-        double normalZeroDef = StatCalculator.CalculateDamage(new AttackContext(901497, 0)
+        double normalZeroDef = DamageCalculator.CalculateDamage(new AttackContext(901497, 0)
             { SkillMultiplier = 4.995, IsFullCharge = true, ChargeDmgBase = 10.0 });
         Assert.Equal(trueZero, trueHi);          // DEF 무관
         Assert.Equal(normalZeroDef, trueHi);     // = 일반 DEF0
@@ -141,9 +141,9 @@ public class DamageFormulaGoldenTests
             SkillMultiplier = 4.995, IsFullCharge = true, ChargeDmgBase = 10.0,
             ProperDistanceBonus = 0.3, SumDistribDmg = dval, IsDistributionHit = distrib,
         };
-        double off = StatCalculator.CalculateDamage(Mk(false, 0.5));
-        double on = StatCalculator.CalculateDamage(Mk(true, 0.5));
-        double noBuff = StatCalculator.CalculateDamage(Mk(false, 0.0));
+        double off = DamageCalculator.CalculateDamage(Mk(false, 0.5));
+        double on = DamageCalculator.CalculateDamage(Mk(true, 0.5));
+        double noBuff = DamageCalculator.CalculateDamage(Mk(false, 0.0));
         Assert.True(on > off);            // 분배 공격일 때만 증가
         Assert.Equal(noBuff, off);        // 미발동 시 distrib 값 무시
     }

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- 단방향 의존: Engine → Core. Core 는 Engine 을 절대 역참조하지 않는다
+       (DESIGN §6 / ENGINE_GUIDE §1 MUST: 컴파일러가 결합부채 차단). -->
+  <ItemGroup>
+    <ProjectReference Include="..\Nikke.Simulator.Core\Nikke.Simulator.Core.csproj" />
+  </ItemGroup>
+
+</Project>

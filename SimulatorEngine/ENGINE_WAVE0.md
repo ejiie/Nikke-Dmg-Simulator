@@ -28,8 +28,10 @@
 - `Nikke.Simulator.Core` 에 Engine 타입 역참조 **금지** (단방향 Engine→Core).
 
 ### 수용 기준
-- [ ] `dotnet build NikkeSimulator.sln` 0 에러 (스텁 throw 허용).
-- [ ] 계약 시그니처 리뷰·동결. 이후 계약 파일 read-only (변경 시 §coordination).
+- [x] `dotnet build NikkeSimulator.sln` 0 에러 (스텁 throw 허용). — 2026-06-30, Engine.dll 산출, 4 프로젝트 전부 빌드.
+- [~] 계약 시그니처 리뷰·동결. — 스텁 작성 완료(`SimulatorEngine/Nikke.Simulator.Engine/`); **사용자 리뷰 후** read-only 동결.
+
+> **구현 메모**: enum 슬롯(event/stat/action/…)은 `SkillParsedDto` 패밀리에서 **string** 으로 둠 (roledata audit + KP1 흡수 전 enum 값 선잠금 회피; ENGINE_GUIDE §5 "string + 검증"). K4 Loader 가 검증/매핑.
 
 ---
 
@@ -41,19 +43,19 @@
 ### 핵심 버그 (확인됨, 반드시 픽스)
 - 데이터 `basicAttack.multiplier` = **percent**(예 8.73 = "8.73% ATK", SG 214.3), 그런데 공식 W 는 **fraction**(golden 4.995=499.5%/100). `chargeDamage` 는 fraction(2.5)로 저장 → **단위 불일치.**
 - 현 `Entities/Nikke.cs:~239` `ctx.SkillMultiplier = BasicAtkMultiplier` 는 **raw percent 주입 = 100× 버그.**
-- **정규화 1곳 확정**: `etl/roledata_cleaner.py`(저장 시 `/100`, chargeDamage 와 통일) **vs** `Nikke`(주입 시 `/100`). 결정 후 문서화(DESIGN §3 ⚠️ 갱신).
-  - ※ 구 `atk_parser.py` 는 폐기됨 — 현재 `multiplier` 생산처 = `roledata_cleaner`.
+- **정규화 1곳 확정**: ✅ **`Nikke` 생성자(주입측) `/100`** (2026-06-30 확정). 엔진 로컬 — ETL 재실행/merged DB 재생성 불필요, 데이터 DTO 는 raw(percent-number) 유지. 문서화: DESIGN §3·§6, ENGINE_GUIDE §6 D2.
+  - ※ 구 `atk_parser.py` 는 폐기됨 — 현재 `multiplier` 생산처 = `roledata_cleaner`(이미 `damage/100`=percent-number 저장; 추가 변환 없음).
 
 ### 작업
-1. multiplier 단위 정규화 1곳 적용.
-2. 검증 콘솔/유닛테스트: 1캐릭 로드 → FinalAtk 출력 → 게임 스탯창 대조. 무버프 평타 1발 대미지 → in-game 대조.
-3. WPF `App.OnStartup` 의 `StatTable.Initialize` 경로 정상 확인(이미 호출됨).
+1. ✅ multiplier 단위 정규화 1곳 적용 — `Nikke.cs` [4] `/100`.
+2. ✅ 검증 유닛테스트 배선 — `WUnitFoundationTests`(W 불변식 3 + 파서 셀 락 1 + foundation smoke 1, 엔드투엔드 동작).
+3. ✅ `StatTable.Initialize` 견고 파서 교체 — cp949/UTF-8 + 따옴표 + **셀 내부 줄바꿈** + 천단위 콤마 내성, 행위치 내용기반 탐지. WPF `App.OnStartup` 경로도 이제 정상 로드. (사용자가 정본 csv 도 master 업로드: `d4899ff`.)
 
-### 수용 기준
-- [ ] FinalAtk 가 알려진 빌드 in-game 수치와 일치(±표시반올림).
-- [ ] 무버프 평타 1발 대미지 in-game 일치.
-- [ ] W 정규화 위치 확정·문서화.
-- [ ] ❗ **불일치 시 Wave 1+ 착수 금지** (전 damage 가 이 위에 얹힘).
+### 수용 기준 — ✅ 게이트 통과 (2026-06-30)
+- [x] W 정규화 위치 확정·문서화. — `Nikke` 생성자 `/100`; CI 가드 `…BasicAtkMultiplier_IsNormalizedToFraction`.
+- [x] FinalAtk 가 알려진 빌드 in-game 수치와 일치. — **stat 조립 0-error**(사용자: 다캐릭·다레벨·돌파불변 in-game, VERIFICATION_LOG §5) + 견고 파서로 정본 csv 로드 + 셀 락 테스트(`StatTable_Parses_KnownCells`: lv1/lv1000/bond40 일치).
+- [x] 무버프 평타 1발 대미지 in-game 일치. — 비차지 무기 W·C 접힘 **in-game 실측 완료**(gap#4, 사용자) + 공식 golden 18(≤1.3e-7) + 엔드투엔드 wiring 테스트(`FinalAtk_And_UnbuffedBasicShot_AreReported`: bareShot==floor(FinalAtk×W), 실 로드값으로 통과). 검증 근거 = (stat 0-error) ∘ (formula golden) ∘ (gap#4) ∘ (wiring).
+- [x] ❗ 정확성 게이트 **통과** → **Wave 1(K2~K6) 착수 가능.**
 
 ---
 

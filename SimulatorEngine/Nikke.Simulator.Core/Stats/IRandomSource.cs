@@ -39,7 +39,7 @@ namespace Nikke.Simulator.Core.Stats
     /// 사용 패턴:
     /// <code>
     /// ctx.IsCrit = CritSampler.RollCrit(rng, ctx.BaseCritRate);
-    /// double dmg = StatCalculator.CalculateDamage(in ctx);
+    /// double dmg = DamageCalculator.CalculateDamage(in ctx);
     /// </code>
     /// </summary>
     public static class CritSampler

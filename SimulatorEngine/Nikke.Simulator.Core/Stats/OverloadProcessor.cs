@@ -8,12 +8,14 @@ namespace Nikke.Simulator.Core.Stats
     /// <summary>
     /// 오버로드(OL) + 런타임 %-버프의 니케식 합산 전담 프로세서.
     ///
-    /// 규칙 정의: ARCHITECTURE.md §4.4 버프 합산 규칙 (동일값 그룹핑 → 그룹별 반올림 → 합산).
+    /// 규칙 정의: 니케식 group-then-round (동일값 그룹핑 → 그룹별 반올림 → 합산). 권위 = Docs/DESIGN.md §3
+    /// (구 ARCHITECTURE.md §4.4 는 Docs/_archive/ 로 이동).
     ///
-    /// 책임 분리 (2026-04-23 · Option D 리팩토링):
-    ///   - OverloadProcessor : pre-combat native stat 조립 (OL 합산) 전담.
-    ///   - StatCalculator    : per-tick 대미지 공식 (B2~B5 + True Damage + 차지 2축) 전담.
-    /// 이전까지 이 로직은 StatCalculator 에 혼재되어 있었음.
+    /// 책임 분리 (2026-06-30 · 3-way split):
+    ///   - OverloadProcessor       : OL %-버프 니케식 합산 (이 클래스).
+    ///   - Stats.StatCalculator    : 최종 기초스탯 조립 (레벨/돌파/코어/콘솔/장비).
+    ///   - Combat.DamageCalculator : per-tick 대미지 공식 (B2~B5 + True Damage + 차지 2축).
+    ///   - Stats.StatTable         : 원천 자료 로딩 + raw 테이블 접근.
     /// </summary>
     public static class OverloadProcessor
     {
