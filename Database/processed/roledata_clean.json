@@ -16,6 +16,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Absolute",
+    "properRange": {
+      "min": 35,
+      "max": 55
+    },
     "skills": {
       "skill1": {
         "id": 2090101,
@@ -253,6 +258,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Triangle",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -517,6 +527,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Scouting",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -795,6 +810,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "ACPU",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2030101,
@@ -1071,6 +1091,11 @@
       "coreHitBonus": 1.5,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "ACPU",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -1375,6 +1400,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "InfinityRail",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2070101,
@@ -1586,6 +1616,11 @@
       "coreHitBonus": 1.5,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "InfinityRail",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -1811,6 +1846,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "InfinityRail",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -2088,6 +2128,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "Absolute",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -2381,6 +2426,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Absolute",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2092101,
@@ -2670,6 +2720,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "External",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -2974,6 +3029,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "External",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2181101,
@@ -3211,6 +3271,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "SiegePerilous",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -3541,6 +3606,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Aegis",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2352101,
@@ -3804,6 +3874,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Counters",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -4133,6 +4208,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Aegis",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -4490,6 +4570,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Aegis",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2353101,
@@ -4780,6 +4865,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Akademeia",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2321101,
@@ -5044,6 +5134,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "ACPU",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -5321,6 +5416,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "MaidForYou",
+    "properRange": {
+      "min": 0,
+      "max": 25
     },
     "skills": {
       "skill1": {
@@ -5665,6 +5765,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "SiegePerilous",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2043101,
@@ -5968,6 +6073,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "SchoolCircle",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2390101,
@@ -6257,6 +6367,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "BestSeller",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -6599,6 +6714,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "External",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -6994,6 +7114,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "External",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2182101,
@@ -7375,6 +7500,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Counters",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -7814,6 +7944,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Aegis",
+    "properRange": {
+      "min": 35,
+      "max": 55
+    },
     "skills": {
       "skill1": {
         "id": 2354101,
@@ -8146,6 +8281,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "Aegis",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -8516,6 +8656,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "BestSeller",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -8911,6 +9056,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "SiegePerilous",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2041101,
@@ -9241,6 +9391,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "OverTheHorizon",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2532101,
@@ -9479,6 +9634,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Absolute",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -9784,6 +9944,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 2.0,
       "chargeDamage": 2.0
+    },
+    "squad": "Absolute",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -10104,6 +10269,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Absolute",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2095101,
@@ -10380,6 +10550,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Scouting",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -10844,6 +11019,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "InfinityRail",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2074101,
@@ -11081,6 +11261,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "InfinityRail",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -11516,6 +11701,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "InfinityRail",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2073101,
@@ -11832,6 +12022,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "BestSeller",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2582101,
@@ -12136,6 +12331,11 @@
       "coreHitBonus": 1.5,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Exotic",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -12455,6 +12655,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "BestSeller",
+    "properRange": {
+      "min": 0,
+      "max": 25
     },
     "skills": {
       "skill1": {
@@ -12787,6 +12992,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Overseer",
+    "properRange": {
+      "min": 35,
+      "max": 55
+    },
     "skills": {
       "skill1": {
         "id": 2441101,
@@ -13038,6 +13248,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Matis",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2102101,
@@ -13288,6 +13503,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.5,
       "chargeDamage": 3.5
+    },
+    "squad": "Wardress",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -13552,6 +13772,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "MightyTools",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -13856,6 +14081,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "MasterHand",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 1150101,
@@ -14094,6 +14324,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "MightyTools",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2080101,
@@ -14318,6 +14553,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Matis",
+    "properRange": {
+      "min": 0,
+      "max": 25
     },
     "skills": {
       "skill1": {
@@ -14583,6 +14823,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Exotic",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2110101,
@@ -14794,6 +15039,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Seraphim",
+    "properRange": {
+      "min": 0,
+      "max": 25
     },
     "skills": {
       "skill1": {
@@ -15099,6 +15349,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Triangle",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2172101,
@@ -15349,6 +15604,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "Exotic",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -15667,6 +15927,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Matis",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2100101,
@@ -15917,6 +16182,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "RealKindness",
+    "properRange": {
+      "min": 0,
+      "max": 25
     },
     "skills": {
       "skill1": {
@@ -16220,6 +16490,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "RealKindness",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -16550,6 +16825,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "RealKindness",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2402101,
@@ -16827,6 +17107,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "RecallRelease",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -17131,6 +17416,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "LifeTonic",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2241101,
@@ -17381,6 +17671,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "DazzlingPearl",
+    "properRange": {
+      "min": 0,
+      "max": 25
     },
     "skills": {
       "skill1": {
@@ -17726,6 +18021,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "DazzlingPearl",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2451101,
@@ -18068,6 +18368,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Unlimited",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2192101,
@@ -18372,6 +18677,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "ElectricShock",
+    "properRange": {
+      "min": 35,
+      "max": 55
+    },
     "skills": {
       "skill1": {
         "id": 2500101,
@@ -18675,6 +18985,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "HeavyGram",
+    "properRange": {
+      "min": 35,
+      "max": 55
+    },
     "skills": {
       "skill1": {
         "id": 2361101,
@@ -18951,6 +19266,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "ElectricShock",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -19269,6 +19589,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "SchoolCircle",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2391101,
@@ -19565,6 +19890,11 @@
       "coreHitBonus": 1.5,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "RealKindness",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -19897,6 +20227,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "BotanicGarden",
+    "properRange": {
+      "min": 35,
+      "max": 55
+    },
     "skills": {
       "skill1": {
         "id": 2411101,
@@ -20213,6 +20548,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "MMR",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -20569,6 +20909,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "BotanicGarden",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -21034,6 +21379,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Wardress",
+    "properRange": {
+      "min": 35,
+      "max": 55
+    },
     "skills": {
       "skill1": {
         "id": 2162101,
@@ -21324,6 +21674,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Incubator",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -21668,6 +22023,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "ElectricShock",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -22014,6 +22374,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "VeiledOrder",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2620101,
@@ -22278,6 +22643,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "Counters",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -22794,6 +23164,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "CafeSweety",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2140101,
@@ -23097,6 +23472,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Protocol",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2210101,
@@ -23388,6 +23768,11 @@
       "chargeTime": 1.5,
       "chargeDamage": 3.5
     },
+    "squad": "Unlimited",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2191101,
@@ -23678,6 +24063,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "777",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -23996,6 +24386,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "777",
+    "properRange": {
+      "min": 0,
+      "max": 25
     },
     "skills": {
       "skill1": {
@@ -24316,6 +24711,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "CafeSweety",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2142101,
@@ -24593,6 +24993,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Seraphim",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2130101,
@@ -24831,6 +25236,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "CafeSweety",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 1141101,
@@ -25042,6 +25452,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "Triangle",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -25280,6 +25695,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Unlimited",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -25571,6 +25991,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Talentum",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2200101,
@@ -25848,6 +26273,11 @@
       "chargeTime": 1.5,
       "chargeDamage": 3.5
     },
+    "squad": "Talentum",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2201101,
@@ -26085,6 +26515,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "Talentum",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -26389,6 +26824,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Protocol",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 1212101,
@@ -26692,6 +27132,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "LifeTonic",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 1242101,
@@ -26968,6 +27413,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "UnderworldQueen",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -27274,6 +27724,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Exotic",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2112101,
@@ -27551,6 +28006,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "MaidForYou",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 1311101,
@@ -27802,6 +28262,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "MaidForYou",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -28066,6 +28531,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "HappyZoo",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -28397,6 +28867,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "SchoolCircle",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2392101,
@@ -28663,6 +29138,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "PrimaDonna",
+    "properRange": {
+      "min": 35,
+      "max": 55
+    },
     "skills": {
       "skill1": {
         "id": 2432101,
@@ -28900,6 +29380,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "PrimaDonna",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -29165,6 +29650,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "PrimaDonna",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -29469,6 +29959,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Talentum",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2203101,
@@ -29759,6 +30254,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "UnderworldQueen",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -30101,6 +30601,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "Seraphim",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -30445,6 +30950,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "HappyZoo",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2380101,
@@ -30788,6 +31298,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Counters",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2015101,
@@ -31106,6 +31621,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Unlimited",
+    "properRange": {
+      "min": 35,
+      "max": 55
+    },
     "skills": {
       "skill1": {
         "id": 2194101,
@@ -31423,6 +31943,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "LittleCannon",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2062101,
@@ -31700,6 +32225,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "HappyZoo",
+    "properRange": {
+      "min": 0,
+      "max": 25
     },
     "skills": {
       "skill1": {
@@ -32043,6 +32573,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "UnderworldQueen",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -32442,6 +32977,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "MaidForYou",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2310101,
@@ -32772,6 +33312,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Rewind",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2550101,
@@ -32996,6 +33541,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "MaidForYou",
+    "properRange": {
+      "min": 0,
+      "max": 25
     },
     "skills": {
       "skill1": {
@@ -33419,6 +33969,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Unlimited",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2195101,
@@ -33749,6 +34304,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Rewind",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2551101,
@@ -34039,6 +34599,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "UnderworldQueen",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -34344,6 +34909,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "UnderworldQueen",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2284101,
@@ -34646,6 +35216,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "777",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -35008,6 +35583,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "LifeTonic",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2240101,
@@ -35312,6 +35892,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "CookingOil",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -35708,6 +36293,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "CookingOil",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -36183,6 +36773,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "CafeSweety",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2143101,
@@ -36501,6 +37096,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "MaidForYou",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2315101,
@@ -36818,6 +37418,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "MaidForYou",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -37239,6 +37844,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Counters",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2017101,
@@ -37650,6 +38260,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "T.T.STAR",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2600101,
@@ -37997,6 +38612,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "T.T.STAR",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -38353,6 +38973,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "ArkRanger",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -38724,6 +39349,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Pioneer",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2220101,
@@ -38987,6 +39617,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Inherit",
+    "properRange": {
+      "min": 0,
+      "max": 25
     },
     "skills": {
       "skill1": {
@@ -39293,6 +39928,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Pioneer",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2221101,
@@ -39583,6 +40223,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Pioneer",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -39900,6 +40545,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Inherit",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2230101,
@@ -40163,6 +40813,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "Inherit",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -40441,6 +41096,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Heretic",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -40771,6 +41431,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Heretic",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2261101,
@@ -41035,6 +41700,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Inherit",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2233101,
@@ -41289,6 +41959,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "Goddess",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -41686,6 +42361,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Goddess",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2224101,
@@ -42018,6 +42698,11 @@
       "chargeTime": 0.3,
       "chargeDamage": 1.5
     },
+    "squad": "Goddess",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2225101,
@@ -42325,6 +43010,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Weissritter",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -42720,6 +43410,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Goddess",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2226101,
@@ -43011,6 +43706,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.0
     },
+    "squad": "OldTales",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2511101,
@@ -43287,6 +43987,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "OldTales",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -43649,6 +44354,11 @@
       "coreHitBonus": 1.5,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "OldTales",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -44033,6 +44743,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Inherit",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2234101,
@@ -44377,6 +45092,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Pioneer",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -44850,6 +45570,11 @@
       "chargeTime": 1.5,
       "chargeDamage": 2.5
     },
+    "squad": "Heretic",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2262101,
@@ -45153,6 +45878,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Weissritter",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2331101,
@@ -45378,6 +46108,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.2,
       "chargeDamage": 2.5
+    },
+    "squad": "Goddess",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -45844,6 +46579,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "ce_01",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2800101,
@@ -46175,6 +46915,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "ce_01",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2801101,
@@ -46452,6 +47197,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "ce002_01",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2810101,
@@ -46702,6 +47452,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "ce002_01",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -46982,6 +47737,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "CE003",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -47288,6 +48048,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "CE003",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2821101,
@@ -47593,6 +48358,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "CE004",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -47913,6 +48683,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "CE004",
+    "properRange": {
+      "min": 35,
+      "max": 55
+    },
     "skills": {
       "skill1": {
         "id": 2831101,
@@ -48230,6 +49005,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "CE004",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2832101,
@@ -48519,6 +49299,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "CE005",
+    "properRange": {
+      "min": 35,
+      "max": 55
     },
     "skills": {
       "skill1": {
@@ -48997,6 +49782,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "CE004",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2834101,
@@ -49393,6 +50183,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "CE006_01",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2850101,
@@ -49698,6 +50493,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "CE006_02",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2851101,
@@ -50000,6 +50800,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "CE007",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -50372,6 +51177,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "CE007",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2841101,
@@ -50718,6 +51528,11 @@
       "coreHitBonus": 1.5,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "CE008",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -51077,6 +51892,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "CE008",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2861101,
@@ -51393,6 +52213,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Counters",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2010101,
@@ -51657,6 +52482,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Counters",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2011101,
@@ -51908,6 +52738,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Scouting",
+    "properRange": {
+      "min": 45,
+      "max": 100
+    },
     "skills": {
       "skill1": {
         "id": 2020101,
@@ -52133,6 +52968,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Aegis",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2351101,
@@ -52331,6 +53171,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Wardress",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -52569,6 +53414,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.5,
       "chargeDamage": 3.5
+    },
+    "squad": "RecallRelease",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -52834,6 +53684,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "MMR",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 1291101,
@@ -53098,6 +53953,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "Counters",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2012101,
@@ -53349,6 +54209,11 @@
       "chargeTime": 1.5,
       "chargeDamage": 3.5
     },
+    "squad": "LittleCannon",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2060101,
@@ -53599,6 +54464,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "LittleCannon",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -53864,6 +54734,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Unlimited",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 1193101,
@@ -54114,6 +54989,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "ce_01",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -54393,6 +55273,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "ce002_02",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2812101,
@@ -54630,6 +55515,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "CE003",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -54908,6 +55798,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "CE004",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2833101,
@@ -55184,6 +56079,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "CE005",
+    "properRange": {
+      "min": 15,
+      "max": 35
     },
     "skills": {
       "skill1": {
@@ -55501,6 +56401,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "CE006_03",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 1852101,
@@ -55740,6 +56645,11 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "squad": "CE007",
+    "properRange": {
+      "min": 0,
+      "max": 0
+    },
     "skills": {
       "skill1": {
         "id": 2842101,
@@ -55966,6 +56876,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "CE008",
+    "properRange": {
+      "min": 25,
+      "max": 45
+    },
     "skills": {
       "skill1": {
         "id": 2862101,
@@ -56190,6 +57105,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Replace",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {
@@ -56416,6 +57336,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Replace",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2301101,
@@ -56641,6 +57566,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Replace",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2306101,
@@ -56865,6 +57795,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "Replace",
+    "properRange": {
+      "min": 45,
+      "max": 100
     },
     "skills": {
       "skill1": {
@@ -57117,6 +58052,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Replace",
+    "properRange": {
+      "min": 35,
+      "max": 55
+    },
     "skills": {
       "skill1": {
         "id": 2303101,
@@ -57342,6 +58282,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Replace",
+    "properRange": {
+      "min": 0,
+      "max": 25
+    },
     "skills": {
       "skill1": {
         "id": 2307101,
@@ -57566,6 +58511,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "squad": "Replace",
+    "properRange": {
+      "min": 0,
+      "max": 0
     },
     "skills": {
       "skill1": {
@@ -57805,6 +58755,11 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "squad": "Replace",
+    "properRange": {
+      "min": 15,
+      "max": 35
+    },
     "skills": {
       "skill1": {
         "id": 2305101,
@@ -58016,6 +58971,11 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "squad": "Replace",
+    "properRange": {
+      "min": 25,
+      "max": 45
     },
     "skills": {
       "skill1": {

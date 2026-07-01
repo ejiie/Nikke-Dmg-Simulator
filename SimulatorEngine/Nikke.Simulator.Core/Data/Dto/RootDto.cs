@@ -56,6 +56,17 @@ namespace Nikke.Simulator.Core.Data.Dto
         // 스킬은 blablalink roledata 구조(skill1/skill2/burst dict). 스킬 런타임 미구현이라
         // 지금은 원본 JSON 그대로 보관(역직렬화 안 깨지게). 추후 전용 DTO 로 구조화.
         public JsonElement? skills { get; set; }
+
+        // 스쿼드(동일 스쿼드 아군 조건 버프 스킬용). roledata squad.
+        public string squad { get; set; }
+        // 적정거리 보너스 범위(per-char). 사거리 안일 때 ProperDistanceBonus 적용 판정용(sim).
+        public ProperRangeDto properRange { get; set; }
+    }
+
+    public class ProperRangeDto
+    {
+        public int? min { get; set; }
+        public int? max { get; set; }
     }
 
     public class BasicAttackDto

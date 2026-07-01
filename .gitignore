@@ -35,6 +35,13 @@ Database/raw/_probe_*.json
 # 캐릭터 초상화 (대용량 바이너리 ~24MB, getFromBlaLinkPortraits.py 로 재생성 가능)
 Database/raw/portraits/
 
+# roledata 풀 raw 아카이브 (~30MB, getFromBlaLinkRoledata.py 로 재생성. 큐레이트
+# blabla_roledata.json(2MB)만 커밋 — 풀 raw 는 미래 채굴용 로컬 아카이브, 게임 업데이트마다 증가)
+Database/raw/blabla_roledata_full.json
+
+# 복호된 게임 StaticData (저작권 — 재배포 금지, 로컬 분석만. STATICDATA_PREP.md §3 참조)
+Database/raw/staticdata/
+
 # Throwaway backups & scratch experiments
 *.backup.json
 /Task.txt

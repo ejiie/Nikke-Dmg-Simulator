@@ -48,6 +48,8 @@ def get_merged_nikke_data(user_db_path: str, roledata_clean_path: str) -> dict:
                 "reloadTime": s_char.get("reloadTime"),
                 "iconUrl": s_char.get("iconUrl"),
                 "basicAttack": s_char.get("basicAttack"),
+                "squad": s_char.get("squad"),               # 동일 스쿼드 버프 조건용
+                "properRange": s_char.get("properRange"),   # 적정거리 보너스 범위(per-char)
                 "skills": s_char.get("skills"),
             },
             # [Dynamic] 유저의 레벨/장비/오버로드 등
