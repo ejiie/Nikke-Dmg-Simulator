@@ -29,8 +29,27 @@ StaticData **fetch/복호 자체**(`getFromNikkeStaticData.py`)는 주입 없음
 4. 추출: `adb shell su -c 'cp -r /data/data/<pkg>/files /sdcard/nikkedump'` → `adb pull /sdcard/nikkedump`.
 5. (선택) dump 바이너리 + `script.json` → PC `Il2CppDumper` → DummyDll → `NikkeProtoDumper` → `Nikke.proto`.
 
-> Magisk 싫으면: `frida-il2cpp-bridge` + `frida-server`(root) 스크립트로 런타임 덤프도 가능.
-> x86 에뮬은 arm64 라이브러리 번역 이슈 가능 → **물리 arm64 기기가 안정적**.
+## 에뮬레이터 경로 (LDPlayer/MuMu + frida — Magisk 불필요, 권장)
+루팅 토글 + `frida-il2cpp-bridge`의 `Il2Cpp.dump()`가 dump.cs 를 바로 생성. 벽돌·계정 무관.
+
+1. **LDPlayer 9** or **MuMu 12** 설치 → 설정에서 **Root ON** + ADB ON → 재시작.
+2. PC: `pip install frida-tools`, Node.js. `adb connect 127.0.0.1:5555`(LDPlayer 기본) → `adb devices` 확인.
+3. abi 확인: `adb shell getprop ro.product.cpu.abi` (보통 `x86_64`).
+4. **frida-server**(= frida-tools 와 **같은 버전**, 위 abi) 다운 → push+실행:
+   `adb push frida-server /data/local/tmp/` → `adb shell su -c 'chmod 755 /data/local/tmp/frida-server; /data/local/tmp/frida-server &'` → `frida-ps -U` 로 확인.
+5. NIKKE 설치(에뮬 플스토어 or APK+OBB). 패키지: `adb shell pm list packages | grep -i nikke`.
+6. agent 준비: `npm i frida-il2cpp-bridge && npm i -g frida-compile`. `agent.ts`:
+   ```ts
+   import "frida-il2cpp-bridge";
+   Il2Cpp.perform(() => { Il2Cpp.dump("/sdcard/nikke_dump.cs"); console.log("DUMPED"); });
+   ```
+   `frida-compile agent.ts -o agent.js`
+7. 실행: `frida -U -f <pkg> -l agent.js` → NIKKE 스폰 → 스플래시서 il2cpp init → `DUMPED` 로그 + `/sdcard/nikke_dump.cs`. (로그인 불필요.)
+8. 추출: `adb pull /sdcard/nikke_dump.cs`.
+
+> **번역 이슈**: x86 에뮬이 NIKKE arm64 를 번역 실행 → frida(x86) 가 libil2cpp 를 못 찾을 수 있음.
+> 그럴 때: MuMu 로 바꿔보거나, 안 되면 **arm64 시스템 이미지**(AVD arm64 / 물리 arm64 기기 = 네이티브).
+> **버전 정합 필수**: `frida-server` == `frida-tools`(=agent 의 frida) 버전. 안 맞으면 attach 실패.
 
 ## 나에게 전달 (모바일·PC 공통)
 `dump.cs`(핵심) + `Nikke.proto`(있으면). 큰 파일이면 표 레코드 클래스만 발췌해도 됨.
