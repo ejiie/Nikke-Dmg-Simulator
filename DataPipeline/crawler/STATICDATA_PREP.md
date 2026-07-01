@@ -86,10 +86,14 @@ Field:
 `[11200101, 0,1,100001,112001,1, "…_name","…_appearance_name","…_description", 2560000,2560000,2560000,
 0,0, 2560000, 32000, 35840, …]` (HP/ATK/DEF 수치 보임).
 
-**✅ 스키마로 해결**: `metadata_fields.py` 가 필드명·순서 제공 → 표별 디코더 = 필드 선언순으로 파싱,
-문자열=마커 자기검증, **int64=고정 stride excess 로 자동감지**, float=이름 추론(_ratio/_rate). 혼합표
-(Function/Monster/Shot)의 `*_list` 배열 인코딩만 확정하면 100%. AttractiveLevel/CharacterStat/
-MonsterStatEnhance 완전 디코드 검증 완료.
+**부분 해결 (스키마+포맷)**: `metadata_fields.py`(필드명·순서) + 디코더(`staticdata_decode.py`):
+- **✅ 완전 디코드**(스칼라+단순): CharacterStat(64800)·MonsterStatEnhance(30671, Lv1200 HP 1105억 int64)·
+  AttractiveLevel·Element·RecycleResearch·SkillInfo(9130). **monster 수치·캐릭 레벨스탯·속성상성 확보.**
+- **list 인코딩 확정** = `[i32 count] + count×중첩레코드`(재귀 `[u8 nf][fields]`). 문자열=마커+printable 검증.
+- **⚠️ 미해결 = 필드 타입**: `int32 vs int64 vs float vs List<int> vs List<struct> vs struct` 구분이
+  게임 바이너리의 il2cpp **type array** 에만 있음(보호됨, LDPlayer arm번역이 frida·dd 차단). 이름추론이
+  혼합 복잡표(**FunctionTable**/MonsterTable-base/CharacterShot/CharacterSkill)에서 한계 → 그 표들은 미완.
+- **완전 디코드 = arm64 네이티브 frida-il2cpp-bridge**(런타임 전체 타입, 보호·번역 면역). 그 환경 생기면 끝.
 
 ## Sources
 [Hiro420/NikkeTools](https://github.com/Hiro420/NikkeTools) — `StaticData/NikkeStaticData/Program.cs` · `ResStaticDataPackInfo.cs` 정독.
