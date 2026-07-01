@@ -69,5 +69,22 @@ combat 표를 비공개 API 로 서빙(번들=프로필/UI JSON 뿐).
 **현 상태**: raw StaticData 확보·재현 가능(자산 확보). 수치표는 지금도 디코드 가능(stat 교차검증용).
 **FunctionTable(스킬 런타임=THE GAP) = B 필요(사용자 PC).** 대안 = roledata desc+값 유지(현 방식).
 
+## 7. 표 바이너리 포맷 스펙 (역공학 완료분, 2026-07-01)
+```
+Table = [u32 count] + count × Record
+Record = [u8 nFields] + nFields × Field   (선언순, per-field 타입태그 없음)
+Field:
+  int32  = 4B LE            (스키마상 int/enum/bool; float 도 4B 라 정렬엔 무해)
+  string = [i32 -(len+1)] [u32 len] [utf8 len바이트]   ← marker 가 -(len+1) 로 자기검증
+```
+**검증**: `AttractiveLevelTable` 100% clean(순수 int, rec0=id1/lv1/point150). `MonsterTable` rec0 =
+`[11200101, 0,1,100001,112001,1, "…_name","…_appearance_name","…_description", 2560000,2560000,2560000,
+0,0, 2560000, 32000, 35840, …]` (HP/ATK/DEF 수치 보임).
+
+**한계 (스키마 없이 미해결)**: 혼합표(Monster*/Function/Skill/StateEffect)는 float↔int 구분 불가 +
+드문 우연(어떤 int 필드가 마침 `-(다음u32+1)` + 후속 printable) → 대형표 전량 정합 실패(MonsterTable
+2035중 ~일부에서 derail). **순수 수치표만 신뢰 디코드.** 완전 디코드 = 필드 타입/순서(=proto 스키마) 필요.
+→ 스키마 오면 이 스펙에 타입 입혀 즉시 표별 디코더 완성.
+
 ## Sources
 [Hiro420/NikkeTools](https://github.com/Hiro420/NikkeTools) — `StaticData/NikkeStaticData/Program.cs` · `ResStaticDataPackInfo.cs` 정독.
