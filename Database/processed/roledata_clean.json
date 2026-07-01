@@ -16,6 +16,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
+    },
     "squad": "Absolute",
     "properRange": {
       "min": 35,
@@ -258,6 +274,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "Triangle",
     "properRange": {
@@ -527,6 +559,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
     },
     "squad": "Scouting",
     "properRange": {
@@ -810,6 +858,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "ACPU",
     "properRange": {
       "min": 0,
@@ -1091,6 +1155,22 @@
       "coreHitBonus": 1.5,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
     },
     "squad": "ACPU",
     "properRange": {
@@ -1400,6 +1480,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "InfinityRail",
     "properRange": {
       "min": 25,
@@ -1616,6 +1712,22 @@
       "coreHitBonus": 1.5,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 2,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
     },
     "squad": "InfinityRail",
     "properRange": {
@@ -1846,6 +1958,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "InfinityRail",
     "properRange": {
@@ -2128,6 +2256,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "Absolute",
     "properRange": {
@@ -2426,6 +2570,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 29000,
+      "targetBurstEnergyPerShot": 58000
+    },
     "squad": "Absolute",
     "properRange": {
       "min": 45,
@@ -2720,6 +2880,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "External",
     "properRange": {
@@ -3029,6 +3205,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 4500,
+      "targetBurstEnergyPerShot": 9000
+    },
     "squad": "External",
     "properRange": {
       "min": 0,
@@ -3271,6 +3463,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
     },
     "squad": "SiegePerilous",
     "properRange": {
@@ -3606,6 +3814,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "Aegis",
     "properRange": {
       "min": 45,
@@ -3874,6 +4098,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "Counters",
     "properRange": {
@@ -4208,6 +4448,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
     },
     "squad": "Aegis",
     "properRange": {
@@ -4570,6 +4826,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "Aegis",
     "properRange": {
       "min": 25,
@@ -4865,6 +5137,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "Akademeia",
     "properRange": {
       "min": 0,
@@ -5134,6 +5422,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "ACPU",
     "properRange": {
@@ -5416,6 +5720,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 18,
+      "accuracyChangeSpeed": 105,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "MaidForYou",
     "properRange": {
@@ -5765,6 +6085,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "SiegePerilous",
     "properRange": {
       "min": 45,
@@ -6073,6 +6409,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 5,
+      "muzzleCount": 2,
+      "burstEnergyPerShot": 3500,
+      "targetBurstEnergyPerShot": 7000
+    },
     "squad": "SchoolCircle",
     "properRange": {
       "min": 0,
@@ -6367,6 +6719,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2500,
+      "targetBurstEnergyPerShot": 5000
     },
     "squad": "BestSeller",
     "properRange": {
@@ -6714,6 +7082,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 18200,
+      "targetBurstEnergyPerShot": 36400
     },
     "squad": "External",
     "properRange": {
@@ -7114,6 +7498,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "External",
     "properRange": {
       "min": 25,
@@ -7500,6 +7900,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "Counters",
     "properRange": {
@@ -7944,6 +8360,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
+    },
     "squad": "Aegis",
     "properRange": {
       "min": 35,
@@ -8281,6 +8713,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "Aegis",
     "properRange": {
@@ -8656,6 +9104,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 15000,
+      "targetBurstEnergyPerShot": 30000
     },
     "squad": "BestSeller",
     "properRange": {
@@ -9056,6 +9520,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 2,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "SiegePerilous",
     "properRange": {
       "min": 15,
@@ -9391,6 +9871,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
+    },
     "squad": "OverTheHorizon",
     "properRange": {
       "min": 0,
@@ -9634,6 +10130,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "Absolute",
     "properRange": {
@@ -9944,6 +10456,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 2.0,
       "chargeDamage": 2.0
+    },
+    "weaponData": {
+      "rateOfFire": 180,
+      "endRateOfFire": 180,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 6500,
+      "targetBurstEnergyPerShot": 13000
     },
     "squad": "Absolute",
     "properRange": {
@@ -10269,6 +10797,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "Absolute",
     "properRange": {
       "min": 45,
@@ -10550,6 +11094,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "Scouting",
     "properRange": {
@@ -11019,6 +11579,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "InfinityRail",
     "properRange": {
       "min": 0,
@@ -11261,6 +11837,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "InfinityRail",
     "properRange": {
@@ -11701,6 +12293,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "InfinityRail",
     "properRange": {
       "min": 0,
@@ -12022,6 +12630,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "BestSeller",
     "properRange": {
       "min": 25,
@@ -12331,6 +12955,22 @@
       "coreHitBonus": 1.5,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
     },
     "squad": "Exotic",
     "properRange": {
@@ -12655,6 +13295,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "BestSeller",
     "properRange": {
@@ -12992,6 +13648,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
+    },
     "squad": "Overseer",
     "properRange": {
       "min": 35,
@@ -13248,6 +13920,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "Matis",
     "properRange": {
       "min": 45,
@@ -13503,6 +14191,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.5,
       "chargeDamage": 3.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "Wardress",
     "properRange": {
@@ -13772,6 +14476,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
     },
     "squad": "MightyTools",
     "properRange": {
@@ -14081,6 +14801,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "MasterHand",
     "properRange": {
       "min": 25,
@@ -14324,6 +15060,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 34500,
+      "targetBurstEnergyPerShot": 69000
+    },
     "squad": "MightyTools",
     "properRange": {
       "min": 0,
@@ -14553,6 +15305,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 4500,
+      "targetBurstEnergyPerShot": 9000
     },
     "squad": "Matis",
     "properRange": {
@@ -14823,6 +15591,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 2,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "Exotic",
     "properRange": {
       "min": 15,
@@ -15039,6 +15823,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 4500,
+      "targetBurstEnergyPerShot": 9000
     },
     "squad": "Seraphim",
     "properRange": {
@@ -15349,6 +16149,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 27000,
+      "targetBurstEnergyPerShot": 54000
+    },
     "squad": "Triangle",
     "properRange": {
       "min": 45,
@@ -15604,6 +16420,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 35500,
+      "targetBurstEnergyPerShot": 71000
     },
     "squad": "Exotic",
     "properRange": {
@@ -15927,6 +16759,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14500,
+      "targetBurstEnergyPerShot": 29000
+    },
     "squad": "Matis",
     "properRange": {
       "min": 0,
@@ -16182,6 +17030,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "RealKindness",
     "properRange": {
@@ -16490,6 +17354,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "RealKindness",
     "properRange": {
@@ -16825,6 +17705,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 2,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "RealKindness",
     "properRange": {
       "min": 15,
@@ -17107,6 +18003,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "RecallRelease",
     "properRange": {
@@ -17416,6 +18328,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "LifeTonic",
     "properRange": {
       "min": 15,
@@ -17671,6 +18599,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "DazzlingPearl",
     "properRange": {
@@ -18021,6 +18965,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
+    },
     "squad": "DazzlingPearl",
     "properRange": {
       "min": 0,
@@ -18368,6 +19328,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 33,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "Unlimited",
     "properRange": {
       "min": 25,
@@ -18677,6 +19653,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
+    },
     "squad": "ElectricShock",
     "properRange": {
       "min": 35,
@@ -18985,6 +19977,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
+    },
     "squad": "HeavyGram",
     "properRange": {
       "min": 35,
@@ -19266,6 +20274,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
     },
     "squad": "ElectricShock",
     "properRange": {
@@ -19589,6 +20613,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "SchoolCircle",
     "properRange": {
       "min": 45,
@@ -19890,6 +20930,22 @@
       "coreHitBonus": 1.5,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 2,
+      "burstEnergyPerShot": 740,
+      "targetBurstEnergyPerShot": 1480
     },
     "squad": "RealKindness",
     "properRange": {
@@ -20227,6 +21283,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
+    },
     "squad": "BotanicGarden",
     "properRange": {
       "min": 35,
@@ -20548,6 +21620,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2500,
+      "targetBurstEnergyPerShot": 5000
     },
     "squad": "MMR",
     "properRange": {
@@ -20909,6 +21997,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 36000,
+      "targetBurstEnergyPerShot": 72000
     },
     "squad": "BotanicGarden",
     "properRange": {
@@ -21379,6 +22483,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
+    },
     "squad": "Wardress",
     "properRange": {
       "min": 35,
@@ -21674,6 +22794,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "Incubator",
     "properRange": {
@@ -22023,6 +23159,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "ElectricShock",
     "properRange": {
@@ -22374,6 +23526,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "VeiledOrder",
     "properRange": {
       "min": 45,
@@ -22643,6 +23811,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 300,
+      "endRateOfFire": 300,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 7500,
+      "targetBurstEnergyPerShot": 15000
     },
     "squad": "Counters",
     "properRange": {
@@ -23164,6 +24348,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 4500,
+      "targetBurstEnergyPerShot": 9000
+    },
     "squad": "CafeSweety",
     "properRange": {
       "min": 0,
@@ -23472,6 +24672,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "Protocol",
     "properRange": {
       "min": 45,
@@ -23768,6 +24984,22 @@
       "chargeTime": 1.5,
       "chargeDamage": 3.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "Unlimited",
     "properRange": {
       "min": 45,
@@ -24063,6 +25295,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "777",
     "properRange": {
@@ -24386,6 +25634,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 4500,
+      "targetBurstEnergyPerShot": 9000
     },
     "squad": "777",
     "properRange": {
@@ -24711,6 +25975,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 26500,
+      "targetBurstEnergyPerShot": 53000
+    },
     "squad": "CafeSweety",
     "properRange": {
       "min": 45,
@@ -24993,6 +26273,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "Seraphim",
     "properRange": {
       "min": 0,
@@ -25236,6 +26532,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "CafeSweety",
     "properRange": {
       "min": 45,
@@ -25452,6 +26764,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 27500,
+      "targetBurstEnergyPerShot": 55000
     },
     "squad": "Triangle",
     "properRange": {
@@ -25695,6 +27023,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1500,
+      "targetBurstEnergyPerShot": 3000
     },
     "squad": "Unlimited",
     "properRange": {
@@ -25991,6 +27335,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "Talentum",
     "properRange": {
       "min": 25,
@@ -26273,6 +27633,22 @@
       "chargeTime": 1.5,
       "chargeDamage": 3.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
+    },
     "squad": "Talentum",
     "properRange": {
       "min": 0,
@@ -26515,6 +27891,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
     },
     "squad": "Talentum",
     "properRange": {
@@ -26824,6 +28216,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "Protocol",
     "properRange": {
       "min": 15,
@@ -27132,6 +28540,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "LifeTonic",
     "properRange": {
       "min": 25,
@@ -27413,6 +28837,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 27000,
+      "targetBurstEnergyPerShot": 54000
     },
     "squad": "UnderworldQueen",
     "properRange": {
@@ -27724,6 +29164,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 4500,
+      "targetBurstEnergyPerShot": 9000
+    },
     "squad": "Exotic",
     "properRange": {
       "min": 0,
@@ -28006,6 +29462,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "MaidForYou",
     "properRange": {
       "min": 45,
@@ -28262,6 +29734,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "MaidForYou",
     "properRange": {
@@ -28531,6 +30019,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "HappyZoo",
     "properRange": {
@@ -28867,6 +30371,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "SchoolCircle",
     "properRange": {
       "min": 15,
@@ -29138,6 +30658,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
+    },
     "squad": "PrimaDonna",
     "properRange": {
       "min": 35,
@@ -29380,6 +30916,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "PrimaDonna",
     "properRange": {
@@ -29650,6 +31202,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
     },
     "squad": "PrimaDonna",
     "properRange": {
@@ -29959,6 +31527,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "Talentum",
     "properRange": {
       "min": 25,
@@ -30254,6 +31838,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "UnderworldQueen",
     "properRange": {
@@ -30601,6 +32201,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 26500,
+      "targetBurstEnergyPerShot": 53000
     },
     "squad": "Seraphim",
     "properRange": {
@@ -30950,6 +32566,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 13,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "HappyZoo",
     "properRange": {
       "min": 15,
@@ -31298,6 +32930,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2500,
+      "targetBurstEnergyPerShot": 5000
+    },
     "squad": "Counters",
     "properRange": {
       "min": 0,
@@ -31621,6 +33269,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
+    },
     "squad": "Unlimited",
     "properRange": {
       "min": 35,
@@ -31943,6 +33607,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "LittleCannon",
     "properRange": {
       "min": 15,
@@ -32225,6 +33905,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "HappyZoo",
     "properRange": {
@@ -32573,6 +34269,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2500,
+      "targetBurstEnergyPerShot": 5000
     },
     "squad": "UnderworldQueen",
     "properRange": {
@@ -32977,6 +34689,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2500,
+      "targetBurstEnergyPerShot": 5000
+    },
     "squad": "MaidForYou",
     "properRange": {
       "min": 25,
@@ -33312,6 +35040,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
+    },
     "squad": "Rewind",
     "properRange": {
       "min": 0,
@@ -33541,6 +35285,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 4500,
+      "targetBurstEnergyPerShot": 9000
     },
     "squad": "MaidForYou",
     "properRange": {
@@ -33969,6 +35729,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "Unlimited",
     "properRange": {
       "min": 15,
@@ -34304,6 +36080,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "Rewind",
     "properRange": {
       "min": 15,
@@ -34599,6 +36391,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "UnderworldQueen",
     "properRange": {
@@ -34909,6 +36717,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "UnderworldQueen",
     "properRange": {
       "min": 25,
@@ -35216,6 +37040,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 29000,
+      "targetBurstEnergyPerShot": 58000
     },
     "squad": "777",
     "properRange": {
@@ -35583,6 +37423,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 32500,
+      "targetBurstEnergyPerShot": 65000
+    },
     "squad": "LifeTonic",
     "properRange": {
       "min": 0,
@@ -35892,6 +37748,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
     },
     "squad": "CookingOil",
     "properRange": {
@@ -36293,6 +38165,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "CookingOil",
     "properRange": {
@@ -36773,6 +38661,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "CafeSweety",
     "properRange": {
       "min": 45,
@@ -37096,6 +39000,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "MaidForYou",
     "properRange": {
       "min": 45,
@@ -37418,6 +39338,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
     },
     "squad": "MaidForYou",
     "properRange": {
@@ -37844,6 +39780,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 120,
+      "endRateOfFire": 120,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
+    },
     "squad": "Counters",
     "properRange": {
       "min": 0,
@@ -38260,6 +40212,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
+    },
     "squad": "T.T.STAR",
     "properRange": {
       "min": 0,
@@ -38612,6 +40580,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
     },
     "squad": "T.T.STAR",
     "properRange": {
@@ -38973,6 +40957,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "ArkRanger",
     "properRange": {
@@ -39349,6 +41349,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2500,
+      "targetBurstEnergyPerShot": 5000
+    },
     "squad": "Pioneer",
     "properRange": {
       "min": 25,
@@ -39617,6 +41633,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "Inherit",
     "properRange": {
@@ -39928,6 +41960,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14500,
+      "targetBurstEnergyPerShot": 29000
+    },
     "squad": "Pioneer",
     "properRange": {
       "min": 0,
@@ -40223,6 +42271,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 4500,
+      "targetBurstEnergyPerShot": 9000
     },
     "squad": "Pioneer",
     "properRange": {
@@ -40545,6 +42609,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 29000,
+      "targetBurstEnergyPerShot": 58000
+    },
     "squad": "Inherit",
     "properRange": {
       "min": 25,
@@ -40813,6 +42893,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 2,
+      "burstEnergyPerShot": 15000,
+      "targetBurstEnergyPerShot": 30000
     },
     "squad": "Inherit",
     "properRange": {
@@ -41096,6 +43192,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "Heretic",
     "properRange": {
@@ -41431,6 +43543,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "Heretic",
     "properRange": {
       "min": 45,
@@ -41700,6 +43828,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "Inherit",
     "properRange": {
       "min": 25,
@@ -41959,6 +44103,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
     },
     "squad": "Goddess",
     "properRange": {
@@ -42361,6 +44521,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
+    },
     "squad": "Goddess",
     "properRange": {
       "min": 25,
@@ -42698,6 +44874,22 @@
       "chargeTime": 0.3,
       "chargeDamage": 1.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 12500,
+      "targetBurstEnergyPerShot": 25000
+    },
     "squad": "Goddess",
     "properRange": {
       "min": 0,
@@ -43010,6 +45202,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "Weissritter",
     "properRange": {
@@ -43410,6 +45618,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "Goddess",
     "properRange": {
       "min": 45,
@@ -43706,6 +45930,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.0
     },
+    "weaponData": {
+      "rateOfFire": 180,
+      "endRateOfFire": 180,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2250,
+      "targetBurstEnergyPerShot": 4500
+    },
     "squad": "OldTales",
     "properRange": {
       "min": 0,
@@ -43987,6 +46227,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 4500,
+      "targetBurstEnergyPerShot": 9000
     },
     "squad": "OldTales",
     "properRange": {
@@ -44354,6 +46610,22 @@
       "coreHitBonus": 1.5,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
     },
     "squad": "OldTales",
     "properRange": {
@@ -44743,6 +47015,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "Inherit",
     "properRange": {
       "min": 0,
@@ -45092,6 +47380,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
     },
     "squad": "Pioneer",
     "properRange": {
@@ -45570,6 +47874,22 @@
       "chargeTime": 1.5,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 200,
+      "endRateOfFire": 200,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "Heretic",
     "properRange": {
       "min": 45,
@@ -45878,6 +48198,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "Weissritter",
     "properRange": {
       "min": 15,
@@ -46108,6 +48444,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.2,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
     },
     "squad": "Goddess",
     "properRange": {
@@ -46579,6 +48931,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "ce_01",
     "properRange": {
       "min": 15,
@@ -46915,6 +49283,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
+    },
     "squad": "ce_01",
     "properRange": {
       "min": 0,
@@ -47197,6 +49581,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "ce002_01",
     "properRange": {
       "min": 25,
@@ -47452,6 +49852,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 13000,
+      "targetBurstEnergyPerShot": 26000
     },
     "squad": "ce002_01",
     "properRange": {
@@ -47737,6 +50153,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "CE003",
     "properRange": {
@@ -48048,6 +50480,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
+    },
     "squad": "CE003",
     "properRange": {
       "min": 0,
@@ -48358,6 +50806,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 3000,
+      "targetBurstEnergyPerShot": 6000
     },
     "squad": "CE004",
     "properRange": {
@@ -48683,6 +51147,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
+    },
     "squad": "CE004",
     "properRange": {
       "min": 35,
@@ -49005,6 +51485,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "CE004",
     "properRange": {
       "min": 45,
@@ -49299,6 +51795,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
     },
     "squad": "CE005",
     "properRange": {
@@ -49782,6 +52294,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2500,
+      "targetBurstEnergyPerShot": 5000
+    },
     "squad": "CE004",
     "properRange": {
       "min": 25,
@@ -50183,6 +52711,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "CE006_01",
     "properRange": {
       "min": 25,
@@ -50493,6 +53037,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
+    },
     "squad": "CE006_02",
     "properRange": {
       "min": 0,
@@ -50800,6 +53360,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "CE007",
     "properRange": {
@@ -51177,6 +53753,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 150,
+      "endRateOfFire": 150,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 11000,
+      "targetBurstEnergyPerShot": 22000
+    },
     "squad": "CE007",
     "properRange": {
       "min": 25,
@@ -51528,6 +54120,22 @@
       "coreHitBonus": 1.5,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
     },
     "squad": "CE008",
     "properRange": {
@@ -51892,6 +54500,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
+    },
     "squad": "CE008",
     "properRange": {
       "min": 45,
@@ -52213,6 +54837,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "Counters",
     "properRange": {
       "min": 25,
@@ -52482,6 +55122,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 4500,
+      "targetBurstEnergyPerShot": 9000
+    },
     "squad": "Counters",
     "properRange": {
       "min": 0,
@@ -52738,6 +55394,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 26500,
+      "targetBurstEnergyPerShot": 53000
+    },
     "squad": "Scouting",
     "properRange": {
       "min": 45,
@@ -52968,6 +55640,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
+    },
     "squad": "Aegis",
     "properRange": {
       "min": 0,
@@ -53171,6 +55859,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2500,
+      "targetBurstEnergyPerShot": 5000
     },
     "squad": "Wardress",
     "properRange": {
@@ -53414,6 +56118,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.5,
       "chargeDamage": 3.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "RecallRelease",
     "properRange": {
@@ -53684,6 +56404,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "MMR",
     "properRange": {
       "min": 0,
@@ -53953,6 +56689,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 35500,
+      "targetBurstEnergyPerShot": 71000
+    },
     "squad": "Counters",
     "properRange": {
       "min": 0,
@@ -54209,6 +56961,22 @@
       "chargeTime": 1.5,
       "chargeDamage": 3.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
+    },
     "squad": "LittleCannon",
     "properRange": {
       "min": 0,
@@ -54464,6 +57232,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "LittleCannon",
     "properRange": {
@@ -54734,6 +57518,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "Unlimited",
     "properRange": {
       "min": 0,
@@ -54989,6 +57789,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 29000,
+      "targetBurstEnergyPerShot": 58000
     },
     "squad": "ce_01",
     "properRange": {
@@ -55273,6 +58089,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 11500,
+      "targetBurstEnergyPerShot": 23000
+    },
     "squad": "ce002_02",
     "properRange": {
       "min": 0,
@@ -55515,6 +58347,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
     },
     "squad": "CE003",
     "properRange": {
@@ -55798,6 +58646,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "CE004",
     "properRange": {
       "min": 15,
@@ -56079,6 +58943,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
     },
     "squad": "CE005",
     "properRange": {
@@ -56401,6 +59281,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "CE006_03",
     "properRange": {
       "min": 15,
@@ -56645,6 +59541,22 @@
       "chargeTime": 1.0,
       "chargeDamage": 2.5
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
+    },
     "squad": "CE007",
     "properRange": {
       "min": 0,
@@ -56876,6 +59788,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "CE008",
     "properRange": {
       "min": 25,
@@ -57105,6 +60033,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
     },
     "squad": "Replace",
     "properRange": {
@@ -57336,6 +60280,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2000,
+      "targetBurstEnergyPerShot": 4000
+    },
     "squad": "Replace",
     "properRange": {
       "min": 0,
@@ -57566,6 +60526,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "Replace",
     "properRange": {
       "min": 15,
@@ -57795,6 +60771,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 28000,
+      "targetBurstEnergyPerShot": 56000
     },
     "squad": "Replace",
     "properRange": {
@@ -58052,6 +61044,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 4200,
+      "rateOfFireChangePerShot": 100,
+      "rateOfFireResetTime": 100,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 7,
+      "accuracyChangeSpeed": 150,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 500,
+      "targetBurstEnergyPerShot": 1000
+    },
     "squad": "Replace",
     "properRange": {
       "min": 35,
@@ -58282,6 +61290,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 90,
+      "endRateOfFire": 90,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 250,
+      "endAccuracyCircleScale": 250,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 10,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 4500,
+      "targetBurstEnergyPerShot": 9000
+    },
     "squad": "Replace",
     "properRange": {
       "min": 0,
@@ -58511,6 +61535,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 1.0,
       "chargeDamage": 2.5
+    },
+    "weaponData": {
+      "rateOfFire": 60,
+      "endRateOfFire": 60,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 10,
+      "endAccuracyCircleScale": 10,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 14000,
+      "targetBurstEnergyPerShot": 28000
     },
     "squad": "Replace",
     "properRange": {
@@ -58755,6 +61795,22 @@
       "chargeTime": 0.0,
       "chargeDamage": 1.0
     },
+    "weaponData": {
+      "rateOfFire": 1440,
+      "endRateOfFire": 1440,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 110,
+      "endAccuracyCircleScale": 110,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 1000,
+      "targetBurstEnergyPerShot": 2000
+    },
     "squad": "Replace",
     "properRange": {
       "min": 15,
@@ -58971,6 +62027,22 @@
       "coreHitBonus": 1.0,
       "chargeTime": 0.0,
       "chargeDamage": 1.0
+    },
+    "weaponData": {
+      "rateOfFire": 720,
+      "endRateOfFire": 720,
+      "rateOfFireChangePerShot": 0,
+      "rateOfFireResetTime": 0,
+      "spotFirstDelay": 20,
+      "spotLastDelay": 20,
+      "startAccuracyCircleScale": 75,
+      "endAccuracyCircleScale": 75,
+      "accuracyChangePerShot": 0,
+      "accuracyChangeSpeed": 0,
+      "shotCount": 1,
+      "muzzleCount": 1,
+      "burstEnergyPerShot": 2500,
+      "targetBurstEnergyPerShot": 5000
     },
     "squad": "Replace",
     "properRange": {

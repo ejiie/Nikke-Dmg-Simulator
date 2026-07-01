@@ -5,6 +5,37 @@
 
 ---
 
+## 2026-07-02 — 무기 타이밍 데이터 레이어 1단계 (ETL weaponData → DTO)
+
+**범위**: roledata `shot` 블록의 발사 ramp/명중원/모션딜레이/펠릿/버스트게이지 14필드를
+ETL 이 추출(`roledata_cleaner._weapon_data` → clean/merged `weaponData` 키) → C# `WeaponDataDto`
+→ `Nikke.WeaponData` (raw 보존, 정규화=소비측 단일 지점). 소비처 K3 FiringModel 은 다음 단계.
+※ 동일 스코프 선행 구현(WeaponProfile/AccuracyModel 등, 2026-07-01)이 **미머지 유실**되어 재구현.
+
+### 1. 빌드 — 0 errors / 테스트 — 53/53 통과 (기존 49 + 신규 4)
+```
+dotnet test SimulatorEngine
+→ 실패: 0, 통과: 53, 건너뜀: 0.
+```
+신규 4 = `WeaponDataTests.cs` (소스 = 커밋된 `roledata_clean.json`, 192캐릭 전수):
+- 전원 weaponData 보유 + rateOfFire/spot delay/shotCount 유효.
+- **MG ramp = MG 전용**: 60→4200 발/분(발당 +100, 리셋 100=1.0s), 명중원 250→10 수축; 그 외 무기 start==end·변화 0.
+- 단위 앵커(발/분): AR 720(=12/s) 존재·SMG 전원 1440(=24/s)·SG 전원 90(=1.5/s).
+- SG 펠릿 = per-char 5 또는 10 (무기타입 상수로 대체 불가 증거).
+
+### 2. 데이터 불변식 (2026-07-02 전수 조사, 192명)
+```
+weaponData 누락 = 0 / ramp(start≠end) = MG 24명 전원, 그 외 0명
+per-char 편차: AR rate 720|150 · RL 60~300 · SR 60|200 · SG shotCount 5|10 · spotFirstDelay 20(190)|33|13
+```
+
+### 3. 잔여 (의도적 미구현)
+- `WeaponStatTable` 하드코딩(MG 60/s 고정 = ramp 누락, SG 5/3 vs 데이터 1.5/s)은 **미교체** — 2단계에서 weaponData 기반으로 대체.
+- merged DB(`nikke_merged_db_returned.json`, gitignore)는 **파이프라인 재실행 필요** — 구 파일엔 weaponData 없음(DTO null-safe).
+- spot_first_delay 단위(1/100초 추정 = 0.2s) vs 구 실측 모션딜레이 0.03s 모순 — in-game 캘리브레이션 대기.
+
+---
+
 ## 2026-07-01 — 엔진 Wave 1 K2 (SimClock 이벤트 큐)
 
 **범위**: K0 동결 계약 `ISimClock` 구현 — 이산이벤트 클럭(min-heap). 기준 = `WORK_BREAKDOWN.md` K2,

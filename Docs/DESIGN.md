@@ -170,6 +170,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 - **UI/컴퓨트 위치**: 보류 — M1 단일 sim 속도 측정 후 (client Blazor vs 서버 오프로드). 엔진은 무관하게 진행.
 - **엔진**: event-driven 확정. (구현 세부 — 이벤트 큐 자료구조 등 — 슬라이스 1에서.)
 - **데이터 실측**: 장비표·큐브·소장품 → **확보+C# 연동 완료** (`blabla_static_tables.json`; 장비 `round(base×(1+0.3·corp+0.1·level))` + 큐브/소장품 base·특수효과 = `GetEquipmentStats`/base JSON/`EffectTable` 배선, 34/34 테스트). 타이밍/조건부 효과만 sim 루프 대기. ProperDistance: 무기별 **범위** 확보(roledata bonusrange → `proper_distance_table.json`; MG 35-55·AR 25-45·SMG 15-35·SG 0-25·RL 0-0·SR 45-100, **RL=0 확증**) — 보너스 **크기**(0.3?)만 미검증.
+- **무기 타이밍/명중원 데이터** (2026-07-02): roledata shot 블록 14필드(발사 ramp·모션딜레이·명중원·펠릿·버스트게이지) → `weaponData` → `WeaponDataDto`/`Nikke.WeaponData` **배선 완료** (raw 보존, 정규화=소비측 단일 지점 — W 단위 결정과 동일 원칙). MG ramp = 60→4200 발/분(발당 +100, 중단 1s 리셋). 단위 앵커: AR 720=12발/s·SMG 1440=24발/s. 잔여 = K3 소비 + `WeaponStatTable` 하드코딩 대체(MG/SG 불일치) + spot_first_delay(0.2s 추정) vs 구 실측 0.03s 캘리브레이션. ※ 명중률 **시뮬 소비**는 §1 스코프 결정(현재 제외) 별도 — 데이터만 선확보.
 
 ---
 

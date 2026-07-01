@@ -41,7 +41,8 @@
 | 스탯 조립 | `Stats/StatCalculator.cs` | `GetCoreAppliedStats(class,weapon,mfr,lv,grade,core,bond,consoles)` · `GetEquipmentStats` · `GetConsoleStats` (DESIGN §3.5) |
 | 자료 로딩 | `Stats/StatTable.cs` | (로딩) `Initialize(csvPath)`(레벨/호감도) + `InitializeEquipment/InitializeCubeBase/InitializeCollectionBase(jsonPath)` ; (raw 접근) `GetLevelClassStat`·`GetBondClassStat`·`TryGetEquipBase`·`GetCubeStat(lv)`·`GetCollectionStats(lv)` **(전부 공식 JSON 연동 완료, stub 아님)** |
 | OL 합산 | `Stats/OverloadProcessor.cs` | `CalculateFinalBaseStat(native, olPercents, olFlatSum, decimals)` ; `CalculateFlatBonus(opts,type)` |
-| 무기 타이밍 | `Stats/WeaponStatTable.cs` | `GetBaseFireRate(weapon)→발/sec` (AR12/MG60/SMG24/SG 5÷3; SR·RL 호출=throw) ; `GetChargeTiming(weapon)→ChargeTiming{MotionDelaySec .03, FullChargeSec 1.0, TapIntervalSec .215}` ; `IsChargeWeapon` ; weapon 문자열 상수 |
+| 무기 타이밍 (⚠레거시) | `Stats/WeaponStatTable.cs` | `GetBaseFireRate(weapon)→발/sec` (AR12/MG60/SMG24/SG 5÷3) ; `GetChargeTiming(weapon)→ChargeTiming{...}` — ⚠ **공식 데이터와 불일치** (MG=ramp 60→4200발/분 인데 60/s 고정, SG 데이터=1.5/s, per-char 편차 무시, 상수 "Machine Gun"≠데이터 "Minigun"). **fire-rate 권위 = `Nikke.WeaponData`(아래)** — K3 착수 시 이 테이블 대체/폐기 |
+| 무기 데이터 (per-char, raw) | `Data/Dto/RootDto.cs` `WeaponDataDto` → `Nikke.WeaponData` | 발사 ramp(`rateOfFire/endRateOfFire/rateOfFireChangePerShot/rateOfFireResetTime`, **발/분** — /60=발/초) · 모션(`spotFirstDelay/spotLastDelay`, 1/100초) · 명중원(`*AccuracyCircleScale/accuracyChange*`) · 펠릿(`shotCount`) · 버스트게이지(`burstEnergyPerShot`). raw 보존 — 정규화는 소비측(K3) 단일 지점. 구 merged DB=null 가능(null-safe 필수) |
 | 크리 RNG | `Stats/IRandomSource.cs` | `IRandomSource.NextDouble()` ; `SystemRandomSource.Instance` ; `CritSampler.RollCrit(rng, baseCritRate)→bool` |
 | 캐릭터 | `Entities/Nikke.cs` | `new Nikke(CharacterDto, GlobalStateDto)` ; `BuildAttackContext()→AttackContext` ; `FinalBaseAtk/HP/Def/MaxAmmo` ; `EquipCube(tid,lv)` ; `BasicAtkMultiplier/ChargeTime/ChargeDamage/CoreHitBonus` ; `WeaponType/Element/Class` |
 | 데이터 I/O | `Data/JsonProvider.cs` | `GetSmartDatabasePath(file)` ; `LoadJson<T>(path)` |
@@ -107,7 +108,7 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 
 **SimClock** — 이산이벤트 큐. `Schedule(double atSec, Action ev)` / `Run(double untilSec)`. 최소시각 이벤트 pop→clock 전진→실행(새 이벤트 예약 가능). 동일시각 tie-break 결정적(삽입순). RNG 외 결정적.
 
-**FiringModel** — Combatant+무기 → 발사 이벤트 생성. 비차지: `1/GetBaseFireRate` 간격. 차지: `MotionDelaySec+FullChargeSec`(풀차지) 또는 `TapIntervalSec`(톡). 탄창(`FinalBaseMaxAmmo`) 0→`reloadTime` 후 재장전. 발사 시 `IsFullCharge` 세팅.
+**FiringModel** — Combatant+무기 → 발사 이벤트 생성. 발사속도 권위 = **`Nikke.WeaponData`(per-char raw, 발/분)**: 비차지 간격 `60/rateOfFire` 초, **MG ramp** = 발당 `+rateOfFireChangePerShot`·캡 `endRateOfFire`(60fps 프레임캡 → 실효 ≤60발/s)·사격중단 `rateOfFireResetTime/100`초 후 리셋(MG 재장전 2.5s > 1s → 재장전마다 리셋). 차지: `MotionDelaySec+FullChargeSec`(풀차지) 또는 `TapIntervalSec`(톡; WeaponStatTable 잔존 용도). SG = `shotCount` 펠릿/클릭. 탄창(`FinalBaseMaxAmmo`) 0→`reloadTime` 후 재장전. 발사 시 `IsFullCharge` 세팅.
 
 **SkillParsed DTO + Loader** — Pydantic `skill_schema.py` 미러: `SkillParsedDto/TriggeredEffectGroupDto/TriggerBlockDto/TargetBlockDto/EffectBlockDto/StackConditionBranchDto` + enum(또는 string + 검증). `JsonProvider.LoadJson` 로 `skills_parsed.json`(key=name_code) 로드.
 
@@ -141,6 +142,7 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 ## 7. 데이터/검증 의존 (블로커 아닌 항목 — 병행)
 - ✅ 장비표·큐브·소장품 base/특수효과: **공식 blablalink JSON 연동 완료** (`GetEquipmentStats` + cube/collection base JSON + `EffectType`/`EffectTable`). 옛 "stub/예시 수치" 는 해소됨. 잔여 = 타이밍/조건부 효과(sim 루프 대기, `SKILL_DATA_BLABLALINK.md` §4.2).
 - ProperDistance: ✅ 무기별 **범위** 확보(`proper_distance_table.json`; roledata bonusrange → MG 35-55·AR 25-45·SMG 15-35·SG 0-25·RL 0-0·SR 45-100). 보너스 **크기**(0.3?)만 미검증. (per-char `properRange` 도 merged DB 에 있어 SR 예외 보존.)
+- ✅ 무기 타이밍/명중원 데이터(2026-07-02): roledata shot 블록 14필드 → `weaponData`(clean/merged) → `WeaponDataDto`/`Nikke.WeaponData` 배선 + `WeaponDataTests` 4 (192캐릭 전수 불변식). 잔여 = K3 소비(FiringModel) · merged DB 재생성(구 파일 weaponData 없음) · spot_first_delay(0.2s 추정) vs 구 실측 모션딜레이 0.03s 단위 캘리브레이션.
 - 검증 전략: 슬라이스별 in-game 대조 + RNG 는 N회 수렴.
 
 ---

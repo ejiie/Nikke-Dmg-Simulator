@@ -81,8 +81,8 @@
 - 임플: `PriorityQueue<Action,(double,long)>` + 단조증가 seq 로 동시각 삽입순 결정적 고정(.NET PQ 동순위 불안정 보정). `Run(untilSec)` = untilSec 포함·종료 시 `NowSec=untilSec` 클램프(resumable). 계약 무수정.
 
 ### K3 — FiringModel
-- 목표: Combatant+무기 → 발사 이벤트. 비차지 `1/GetBaseFireRate`, 차지 `Motion+FullCharge`/`Tap`, 탄창→재장전, `IsFullCharge` 세팅.
-- 스코프: `Engine/FiringModel.cs`. 입력: WeaponStatTable, Nikke. 의존: K0. 수용: 무기별 발사 타임라인이 RPS/탄창/재장전/차지에 정합.
+- 목표: Combatant+무기 → 발사 이벤트. 비차지 = per-char `WeaponData.rateOfFire`(발/분) 간격 + **MG ramp**(발당 증가·캡·리셋; ENGINE_GUIDE §5), 차지 `Motion+FullCharge`/`Tap`, SG `shotCount` 펠릿, 탄창→재장전, `IsFullCharge` 세팅.
+- 스코프: `Engine/FiringModel.cs`. 입력: **`Nikke.WeaponData`(fire-rate 권위, 2026-07-02 배선)** + WeaponStatTable(차지 타이밍만; fire-rate 하드코딩은 데이터 불일치 → 대체/폐기). 의존: K0. 수용: 무기별 발사 타임라인이 RPS/탄창/재장전/차지/MG ramp 에 정합.
 
 ### K4 — SkillParsed DTO+Loader + Translator
 - 목표: `skills_parsed.json`(v3, key=name_code) → C# DTO 역직렬화 + static/runtime 2축 분류(DESIGN §5). `groups:[]`/PARSE_ERROR = no-op.

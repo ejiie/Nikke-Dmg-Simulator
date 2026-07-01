@@ -53,6 +53,10 @@ namespace Nikke.Simulator.Core.Data.Dto
 
         public BasicAttackDto basicAttack { get; set; }
 
+        // 무기 타이밍/명중원/펠릿/버스트게이지 (roledata shot 블록 raw).
+        // 구 merged DB(재생성 전)에는 없어 null 가능 — 소비측 null-safe 필수.
+        public WeaponDataDto weaponData { get; set; }
+
         // 스킬은 blablalink roledata 구조(skill1/skill2/burst dict). 스킬 런타임 미구현이라
         // 지금은 원본 JSON 그대로 보관(역직렬화 안 깨지게). 추후 전용 DTO 로 구조화.
         public JsonElement? skills { get; set; }
@@ -67,6 +71,40 @@ namespace Nikke.Simulator.Core.Data.Dto
     {
         public int? min { get; set; }
         public int? max { get; set; }
+    }
+
+    /// <summary>
+    /// roledata shot 블록 raw 값 (roledata_cleaner._weapon_data). **단위 변환 없음** —
+    /// 정규화는 소비측 단일 지점 (W 단위 정규화 결정과 동일 원칙, DESIGN §6).
+    ///   rate* = 발/분 (/60 = 발/초; AR 720→12/s, SMG 1440→24/s 캘리브레이션 확정)
+    ///   *Delay / rateOfFireResetTime = 1/100 초
+    ///   accuracy*Scale = 명중원 스케일 (작을수록 조밀)
+    /// </summary>
+    public class WeaponDataDto
+    {
+        // 발사 속도 ramp (발/분). MG 만 start≠end: 60→4200, 발당 +100, 중단 reset 후 원복.
+        public int? rateOfFire { get; set; }
+        public int? endRateOfFire { get; set; }
+        public int? rateOfFireChangePerShot { get; set; }
+        public int? rateOfFireResetTime { get; set; }
+
+        // 발사 전/후 모션 딜레이 (1/100초; 대부분 20)
+        public int? spotFirstDelay { get; set; }
+        public int? spotLastDelay { get; set; }
+
+        // 명중원 (연사 streak 수축)
+        public int? startAccuracyCircleScale { get; set; }
+        public int? endAccuracyCircleScale { get; set; }
+        public int? accuracyChangePerShot { get; set; }
+        public int? accuracyChangeSpeed { get; set; }
+
+        // 멀티펠릿 (SG shotCount=10 — 1클릭당 펠릿 수)
+        public int? shotCount { get; set; }
+        public int? muzzleCount { get; set; }
+
+        // 버스트 게이지 충전 (raw; 게이지 총량 상수 미확정)
+        public int? burstEnergyPerShot { get; set; }
+        public int? targetBurstEnergyPerShot { get; set; }
     }
 
     public class BasicAttackDto

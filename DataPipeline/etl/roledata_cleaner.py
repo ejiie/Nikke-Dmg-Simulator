@@ -10,6 +10,13 @@ basicAttack 단위 변환(45캐릭 prydwen 교차검증 일치):
   coreHitBonus = shot.core_damage_rate / 10000 - 1
   chargeTime   = shot.charge_time / 100
   chargeDamage = shot.full_charge_damage / 10000     (비차지 = 10000 → 1.0)
+
+weaponData 블록(발사 ramp/명중원/모션/펠릿/버스트게이지)은 **raw 보존** — 단위 변환 없음,
+정규화는 소비측(C#) 단일 지점 (W 단위 정규화 위치 결정과 동일 원칙, DESIGN §6).
+  단위: rate* = 발/분 (/60 = 발/초; AR 720→12/s, SMG 1440→24/s 캘리브레이션 확정)
+        *Delay / rateOfFireResetTime = 1/100 초
+        accuracy*Scale = 명중원 스케일 (작을수록 조밀; MG 250→10 연사 수축)
+  ※ 키는 'weaponData' — 기존 'weapon'(무기타입 문자열)과 충돌 금지.
 """
 import json
 import os
@@ -44,6 +51,32 @@ def _basic_attack(shot):
     }
 
 
+def _weapon_data(shot):
+    """shot 블록 → weaponData (raw 보존; 단위는 모듈 docstring 참조)."""
+    shot = shot or {}
+    return {
+        # 발사 속도 ramp (발/분). MG 만 start≠end (60→4200, 발당 +100, 사격중단 reset 후 원복)
+        "rateOfFire": shot.get("rate_of_fire"),
+        "endRateOfFire": shot.get("end_rate_of_fire"),
+        "rateOfFireChangePerShot": shot.get("rate_of_fire_change_pershot"),
+        "rateOfFireResetTime": shot.get("rate_of_fire_reset_time"),
+        # 발사 전/후 모션 딜레이 (1/100초; 대부분 20)
+        "spotFirstDelay": shot.get("spot_first_delay"),
+        "spotLastDelay": shot.get("spot_last_delay"),
+        # 명중원 (연사 streak 수축; 작을수록 조밀)
+        "startAccuracyCircleScale": shot.get("start_accuracy_circle_scale"),
+        "endAccuracyCircleScale": shot.get("end_accuracy_circle_scale"),
+        "accuracyChangePerShot": shot.get("accuracy_change_pershot"),
+        "accuracyChangeSpeed": shot.get("accuracy_change_speed"),
+        # 멀티펠릿 (SG shotCount=10 — 1클릭당 펠릿 수)
+        "shotCount": shot.get("shot_count"),
+        "muzzleCount": shot.get("muzzle_count"),
+        # 버스트 게이지 충전 (raw; 게이지 총량 상수 미확정)
+        "burstEnergyPerShot": shot.get("burst_energy_pershot"),
+        "targetBurstEnergyPerShot": shot.get("target_burst_energy_pershot"),
+    }
+
+
 def clean_roledata():
     print("🧼 roledata 정제 시작 (blablalink 공식 → prydwen_clean 호환, name_code 키)...")
     if not os.path.exists(RAW_FILE):
@@ -68,6 +101,7 @@ def clean_roledata():
             "reloadTime": (shot.get("reload_time") or 0) / 100.0,
             "iconUrl": f"portraits/si/{nc}.webp",   # 로컬 초상화(getFromBlaLinkPortraits), name_code 키
             "basicAttack": _basic_attack(shot),
+            "weaponData": _weapon_data(shot),       # 발사 ramp/명중원/모션/펠릿/게이지 (raw)
             "squad": c.get("squad"),                # 동일 스쿼드 아군 조건 버프용
             # 적정거리 보너스 범위(per-char; 무기별 결정, SR 1명 예외 보존)
             "properRange": {"min": c.get("bonusrange_min"), "max": c.get("bonusrange_max")},
