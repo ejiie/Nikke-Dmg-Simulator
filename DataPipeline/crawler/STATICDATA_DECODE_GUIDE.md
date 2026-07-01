@@ -2,7 +2,30 @@
 
 > 목적: StaticData 표(특히 `FunctionTable`)의 **레코드 스키마(필드명·타입·순서)** 를 게임 바이너리에서
 > 뽑아, 이미 깬 표 바이너리 포맷에 입혀 디코드한다.
-> 산출 = `Nikke.proto` + `dump.cs` → 나에게 전달 → Python 디코더 포팅 + 스킬 ETL.
+> 산출 = `dump.cs`/타입 목록 → 나에게 전달 → Python 디코더 타입 확정 + 스킬 ETL.
+
+## 📌 진척 현황 (2026-07-01)
+
+**✅ 확보 (완전):**
+- StaticData fetch+복호(`getFromNikkeStaticData.py`), 표 바이너리 포맷 + list 인코딩 완전 규명(`STATICDATA_PREP.md` §7).
+- il2cpp **스키마(580 Record, 필드명·순서)** — 모바일 `global-metadata.dat`(v31) 파싱(`metadata_fields.py`).
+- **스칼라 표 완전 디코드**(`staticdata_decode.py`): **monster 수치**(Lv별 HP/ATK/DEF, int64 58억~1105억)·
+  캐릭 레벨스탯(64800)·element 상성·bond·grade/core 상수·CoverStatEnhance·SkillInfo(9130). 인벤토리=`STATICDATA_TABLES.md`.
+
+**⚠️ 막힌 것 = 필드 타입(int64/float/List<int>vs<struct>/struct):**
+- 이름추론으로 FunctionTable 70%까지 갔으나 cascade. 정답 타입 = 게임 바이너리 il2cpp type array 에만 있음.
+- **모든 외부 RE 시도 실패**(확인됨):
+  - arm64 AVD(안드스튜디오): x86 Windows 호스트가 arm64 이미지 **FATAL 거부**(호스트≠arm64).
+  - LDPlayer(x86 에뮬): arm 번역이 frida 모듈탐지·root dd 메모리읽기 **둘 다 차단**.
+  - NIKKE PC(x86 네이티브): **안티탬퍼**가 frida 주입(VirtualAllocEx)·모듈열거(Toolhelp)·정적 Il2CppDumper(바이너리 보호) **전부 ACCESS_DENIED/실패**.
+- 남은 유일 우회 = in-process DLL 하이재킹(밴 리스크 큼, 비추).
+
+**➡️ 다음 = Apple Silicon 맥 (사용자 준비 중):**
+- 맥(M1~)은 **arm64 네이티브** → 안드스튜디오 **arm64-v8a Google APIs AVD가 네이티브+빠르게** 돎(x86 PC의 FATAL 없음).
+- 절차 = 아래 **📱 모바일 경로** 그대로 (arm64 AVD → `adb root` → NIKKE sideload → frida-server **arm64** → `types.js` → `nikke_types.txt`).
+- **frida-il2cpp-bridge가 네이티브 arm64서 런타임 타입 뽑음**(보호·번역 면역). LDPlayer/PC의 벽 없음.
+- 산출 `nikke_types.txt`(필드별 `System.Int32`/`Int64`/`Single`/`String`/`List<...>`) → 나에게 → `staticdata_decode.py`에 타입 입혀 **FunctionTable 포함 전 표 100% 완성** + 보스/스킬 ETL 배선.
+- 참고: 스칼라 표(monster 수치 등)는 **지금도 완성** — 맥은 FunctionTable(스킬 효과의미)용. 값 갱신은 언제든 Python fetch.
 
 ## ⚠️ 경고 (먼저 읽기)
 **MetadataDumper 단계는 게임 프로세스에 DLL 을 주입한다 → 안티치트/계정 밴 위험.** 본인 판단·책임.
