@@ -51,6 +51,21 @@ StaticData **fetch/복호 자체**(`getFromNikkeStaticData.py`)는 주입 없음
 > 그럴 때: MuMu 로 바꿔보거나, 안 되면 **arm64 시스템 이미지**(AVD arm64 / 물리 arm64 기기 = 네이티브).
 > **버전 정합 필수**: `frida-server` == `frida-tools`(=agent 의 frida) 버전. 안 맞으면 attach 실패.
 
+## arm64 AVD 경로 (안드스튜디오 — 확실, 보호·번역 면역)
+LDPlayer(x86)는 arm 번역이 frida·dd 다 막음(실증됨). **arm64 네이티브 AVD**면 frida-il2cpp-bridge가
+런타임 타입을 그대로 뽑음(정답). x86 PC선 QEMU 전체에뮬=느리지만, il2cpp init은 앱 시작 초반이라 덤프는 됨.
+
+1. **안드스튜디오** 설치 → SDK Manager → 시스템이미지 **`arm64-v8a` + `Google APIs`**(Play 아님! Google APIs여야 `adb root` 됨) 설치. API 31~34.
+2. Device Manager → Create Device → Pixel류 → 위 **arm64-v8a Google APIs** 이미지 선택 → 실행.
+3. **root**: `adb root` → "restarting adbd as root" 뜨면 OK (Google APIs 이미지라 됨).
+4. **NIKKE 설치**(Play 없으니 sideload): APKPure 등서 arm64 APK+OBB.
+   - split APK면 `adb install-multiple base.apk config.arm64_v8a.apk config.xxhdpi.apk`
+   - OBB: `adb push <obb> /sdcard/Android/obb/com.proximabeta.nikke/`
+5. **frida-server ARM64**: `frida-server-<ver>-android-**arm64**`(x86아님!) push+chmod+실행(위 §에뮬 4번과 동일, arm64 빌드만).
+6. **덤프**(§에뮬 6번 agent 그대로): `frida -U -f com.proximabeta.nikke -l agent.js` → 스플래시서 `DUMPED`(느려도 기다림) → `/sdcard/nikke_dump.cs`.
+   - LDPlayer와 달리 여기선 `Il2Cpp.perform` 이 libil2cpp 찾음(네이티브 arm64).
+7. `adb pull /sdcard/nikke_dump.cs` → 나에게. **dump.cs = 모든 클래스 필드의 정답 타입**(int/long/float/List<T>/string) → 복잡표(FunctionTable 등) 100% 디코드 완성.
+
 ## 나에게 전달 (모바일·PC 공통)
 `dump.cs`(핵심) + `Nikke.proto`(있으면). 큰 파일이면 표 레코드 클래스만 발췌해도 됨.
 표 클래스 검색: `FunctionTable`·`StateEffectTable`·`SkillInfoTable`·`CharacterSkillTable`·`MonsterTable`·
