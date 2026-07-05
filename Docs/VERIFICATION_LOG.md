@@ -5,6 +5,42 @@
 
 ---
 
+## 2026-07-02 (2차) — 유실 무기 레이어 복구 통합 (WeaponProfile/AccuracyModel/DummyTarget)
+
+**범위**: `.claude/worktrees/vibrant-kirch-db3d48` 에서 **uncommitted 방치**로 유실됐던 2026-07-01
+무기 레이어를 발굴·통합. 아래 1단계(같은 날 1차 엔트리)의 flat raw `weaponData` shape 을
+유실판(중첩+ETL 정규화, 발/sec·초·분수)으로 **대체**. ⚠ `ElementAdvantage`(속성 상성 유틸)는
+**보류**(사용자 결정) — DummyTarget 상성 미반영.
+
+### 1. 통합 내용
+- ETL `_weapon`: 30+필드 정규화(+ 유실판에 없던 `spotFirst/LastDelaySec` 모션 딜레이 병합 추가).
+- `WeaponDto`(+Accuracy/Burst 중첩) → `Stats/WeaponProfile`(`Nikke.Weapon`, null-safe Empty):
+  `FireRateAtShot(n)` = MG spin-up(1→70 nominal) + **60fps 프레임캡 → 실효 60발/s**.
+- `Combat/AccuracyModel`: 명중원 발당 수축 + P(코어힛)=(rc/R)² 면적확률 + `RollCoreHit/RollHit`.
+- `Combat/ProperDistanceTable`: 유실판 PLACEHOLDER 구간 → **공식 bonusrange 최빈값**으로 교체
+  (SG 0-25·SMG 15-35·AR 25-45·MG 35-55·SR 45-100·RL=없음) + per-char 오버로드(SR 예외 25-45 대응)
+  + 커밋된 `proper_distance_table.json` 교차검증 테스트.
+- `ITarget` 계약 갱신(K0 동결 해제 승인, 2026-07-02): 구 `InProperRange` bool(무기 비의존=의미오류) 폐기
+  → `Distance/CoreRadius/BodyRadius` + `PopulateContext(+attackerWeaponType)`. `DummyTarget`(K5) 구현.
+- `WeaponStatTable` 레거시 배너(remarks) + `EffectType.HitRate` 주석(명중률 스코프 진입, 버프 배선 잔여).
+
+### 2. 빌드 — 0 errors / 테스트 — 77/77 통과 (기존 53 → 77; 유실 16 중 상성 2 제외 복구 + 데이터 전수 6)
+```
+dotnet test SimulatorEngine
+→ 실패: 0, 통과: 77, 건너뜀: 0.
+```
+- 신규 데이터 발견: **Pascal(5096) = 비차지 RL**(charge_time=0, 1.5발/s 평사, fullChargeDamage=1.0)
+  → "SR/RL=차지"도 무기타입 상수 불가. 차지 판정 = per-char `isChargeWeapon`.
+- 전수 불변식(192): 비차지 116명 fullChargeDamage=1.0 / 차지 76명 {2.5×68, 2.0×2, 3.5×5, 1.5×1}.
+
+### 3. 잔여
+- ElementAdvantage 통합(보류 해제 시) → DummyTarget 상성 배선 + 상성 테스트 2종 복원.
+- K3 FiringModel(소비), HitRate 버프→AccuracyModel 배선, spot delay 0.2s vs 구 실측 0.03s 캘리브레이션,
+  타겟 코어/몸체 반지름 상수 확정, merged DB 재생성(파이프라인 재실행).
+- 유실 원본 worktree(`vibrant-kirch-db3d48`) = 통합 확인 후 정리 권장 (백업: 세션 scratchpad).
+
+---
+
 ## 2026-07-02 — 무기 타이밍 데이터 레이어 1단계 (ETL weaponData → DTO)
 
 **범위**: roledata `shot` 블록의 발사 ramp/명중원/모션딜레이/펠릿/버스트게이지 14필드를

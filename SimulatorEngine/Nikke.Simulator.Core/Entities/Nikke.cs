@@ -24,9 +24,9 @@ namespace Nikke.Simulator.Core.Entities
         public int ProperRangeMin { get; private set; }
         public int ProperRangeMax { get; private set; }
 
-        // 무기 타이밍/명중원/펠릿/버스트게이지 raw (단위: WeaponDataDto 주석).
-        // 소비처 = FiringModel(K3). 구 merged DB 에는 없어 null 가능.
-        public WeaponDataDto WeaponData { get; private set; }
+        // --- [무기 프로파일] 발사속도/탄창/차지/명중원/버스트게이지 (roledata weaponData 블록).
+        //     FiringModel(K3)·AccuracyModel·ProperDistanceTable 이 소비. 데이터 없으면 Empty.
+        public WeaponProfile Weapon { get; private set; }
 
         // --- [레벨/등급 정보] ---
         public int Level { get; private set; }
@@ -107,7 +107,8 @@ namespace Nikke.Simulator.Core.Entities
             Squad = dto.StaticInfo.squad;
             ProperRangeMin = dto.StaticInfo.properRange?.min ?? 0;
             ProperRangeMax = dto.StaticInfo.properRange?.max ?? 0;
-            WeaponData = dto.StaticInfo.weaponData;
+            // 무기 프로파일 (roledata weaponData 블록 → 타입드). 구 데이터엔 없을 수 있어 null-safe.
+            Weapon = new WeaponProfile(dto.StaticInfo.weaponData);
 
             // [2] 레벨 정보 세팅
             Level = dto.user.level;

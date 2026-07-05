@@ -81,16 +81,16 @@
 - 임플: `PriorityQueue<Action,(double,long)>` + 단조증가 seq 로 동시각 삽입순 결정적 고정(.NET PQ 동순위 불안정 보정). `Run(untilSec)` = untilSec 포함·종료 시 `NowSec=untilSec` 클램프(resumable). 계약 무수정.
 
 ### K3 — FiringModel
-- 목표: Combatant+무기 → 발사 이벤트. 비차지 = per-char `WeaponData.rateOfFire`(발/분) 간격 + **MG ramp**(발당 증가·캡·리셋; ENGINE_GUIDE §5), 차지 `Motion+FullCharge`/`Tap`, SG `shotCount` 펠릿, 탄창→재장전, `IsFullCharge` 세팅.
-- 스코프: `Engine/FiringModel.cs`. 입력: **`Nikke.WeaponData`(fire-rate 권위, 2026-07-02 배선)** + WeaponStatTable(차지 타이밍만; fire-rate 하드코딩은 데이터 불일치 → 대체/폐기). 의존: K0. 수용: 무기별 발사 타임라인이 RPS/탄창/재장전/차지/MG ramp 에 정합.
+- 목표: Combatant+무기 → 발사 이벤트. 발사 간격 = `Weapon.FireIntervalSec(n)`(MG spin-up+60fps캡 내장), 사격중단 리셋, 차지 = `IsChargeWeapon`(무기타입 아님 — Pascal=비차지 RL) `ChargeTimeSec`/`Tap`, SG `ShotCount` 펠릿, 탄창→재장전(`ReloadBulletRate`), 모션 `SpotFirst/LastDelaySec`, `IsFullCharge` 세팅 + `AccuracyModel.RollCoreHit`→`IsCoreHit`.
+- 스코프: `Engine/FiringModel.cs`. 입력: **`Nikke.Weapon`(WeaponProfile — fire-rate 권위, 2026-07-02 복구 통합)** + AccuracyModel + ITarget(CoreRadius/BodyRadius). WeaponStatTable 은 레거시(tap 간격 실측값만 잔존 용도). 의존: K0. 수용: 무기별 발사 타임라인이 RPS/탄창/재장전/차지/MG ramp 에 정합.
 
 ### K4 — SkillParsed DTO+Loader + Translator
 - 목표: `skills_parsed.json`(v3, key=name_code) → C# DTO 역직렬화 + static/runtime 2축 분류(DESIGN §5). `groups:[]`/PARSE_ERROR = no-op.
 - 스코프: `Engine/Skills/SkillParsedDto.cs`, `SkillLoader.cs`, `SkillTranslator.cs`. 입력: skills_parsed.json. 의존: K0. 수용: 134 완성분 로드 0-throw, 분류 스냅샷 테스트.
 
-### K5 — ITarget: DummyTarget
-- 목표: 고정 DEF/파츠없음/속성중립/적정거리 → 히트마다 AttackContext 의 DEF·`IsCoreHit/IsPartsHit`·`ProperDistanceBonus`·`SumStrongElem` 채우는 헬퍼.
-- 스코프: `Engine/Targets/DummyTarget.cs`. 의존: K0. 수용: 컨텍스트 필드 채움 단위테스트.
+### K5 — ITarget: DummyTarget — 🟢 구현 (2026-07-01 유실→07-02 복구 통합)
+- 목표: 고정 DEF/속성/거리/지오메트리 타겟 → 히트마다 AttackContext 의 DEF·`ProperDistanceBonus` 채움. ✅ `ITarget` 계약 갱신(`Distance/CoreRadius/BodyRadius`, `PopulateContext(+attackerWeaponType)`; 구 `InProperRange` 폐기 — 무기 비의존 bool 은 의미오류).
+- 스코프: `Engine/Targets/DummyTarget.cs`. 의존: K0. 수용: ✅ 컨텍스트 주입 단위테스트(`WeaponDataTests`). 잔여: 속성 상성(SumStrongElem) = ElementAdvantage 보류(사용자 결정)로 미반영, 코어힛은 K3(FiringModel)가 AccuracyModel 로 샘플링.
 
 ### K6 — MetricsCollector
 - 목표: 히트마다 `Record(timeSec, sourceId, amount, tags)` → `RunResult`(총대미지 + 시간축/캐릭별/브래킷 분해).
@@ -130,7 +130,9 @@
 - 70 bailout(57명)+완전실패 2명 재파싱, trait_weapon_transformed granular(20), filter(62)/required(184) token enum화, distrib/sequential 브래킷, julia/ein 재분류. 산출: skills_parsed.json 품질↑(스키마 v3 동결 유지). K4 가 무중단 흡수.
 
 ### KP2 — 데이터 실측 (사용자, ∥)
-- ✅ 장비표·큐브·소장품(base+특수효과): 공식 blablalink JSON 으로 **연동 완료** (Core stub 해소). 잔여 = ProperDistance, 그리고 타이밍/조건부 큐브효과(sim 루프 대기).
+- ✅ 장비표·큐브·소장품(base+특수효과): 공식 blablalink JSON 으로 **연동 완료** (Core stub 해소).
+- ✅ 무기 데이터(roledata `weaponData`): 발사속도 ramp/탄창/차지/명중원/모션딜레이/버스트게이지/멀티펠릿 → `WeaponProfile`+모델 **연동 완료**(2026-07-01 유실→07-02 복구). 적정거리 구간도 공식 bonusrange 로 확보.
+- 잔여 = ProperDistance **보너스 크기(0.3) 실측** + 명중 모델용 타겟 core/body 반지름 실측 + spot delay(0.2s vs 구 실측 0.03s) 캘리브레이션 + 타이밍/조건부 큐브효과(sim 루프 대기).
 
 ---
 

@@ -34,7 +34,7 @@
 |---|---|---|
 | **목표** | 풀 tick 정밀 로테이션 sim | 닫힌형/평균 shortcut 안 씀 |
 | **대미지 공식** | 18-golden 검증 **additive B2 + 곱셈 B3/B4/B5** (§3) | 단일 권위. 모순 표기 전부 정정/제거 |
-| **스코프** | 명중률(StatAccuracyCircle)만 제외, 그 외 전부 (생존/CC/힐/실드 포함) | 단계적 |
+| **스코프** | 전부 (생존/CC/힐/실드 포함). 명중률도 진입(2026-07-02, `Combat/AccuracyModel` — 명중원→면적확률; HitRate 버프 stat 배선만 잔여) | 단계적 |
 | **엔진** | **event-driven** 이산이벤트 | 발사/스킬/버프만료/차지완료를 큐 예약→점프. 정밀도·효율 우위 |
 | **로테이션 제어** | **2모드** — `IRotationController` ← `AutoController` / `ScriptedController` | 단순덱=자동, 기믹덱=수동 |
 | **대미지 대상** | `ITarget` 추상화 ← `DummyTarget`(먼저) / `BossTarget`(나중) | |
@@ -170,7 +170,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 - **UI/컴퓨트 위치**: 보류 — M1 단일 sim 속도 측정 후 (client Blazor vs 서버 오프로드). 엔진은 무관하게 진행.
 - **엔진**: event-driven 확정. (구현 세부 — 이벤트 큐 자료구조 등 — 슬라이스 1에서.)
 - **데이터 실측**: 장비표·큐브·소장품 → **확보+C# 연동 완료** (`blabla_static_tables.json`; 장비 `round(base×(1+0.3·corp+0.1·level))` + 큐브/소장품 base·특수효과 = `GetEquipmentStats`/base JSON/`EffectTable` 배선, 34/34 테스트). 타이밍/조건부 효과만 sim 루프 대기. ProperDistance: 무기별 **범위** 확보(roledata bonusrange → `proper_distance_table.json`; MG 35-55·AR 25-45·SMG 15-35·SG 0-25·RL 0-0·SR 45-100, **RL=0 확증**) — 보너스 **크기**(0.3?)만 미검증.
-- **무기 타이밍/명중원 데이터** (2026-07-02): roledata shot 블록 14필드(발사 ramp·모션딜레이·명중원·펠릿·버스트게이지) → `weaponData` → `WeaponDataDto`/`Nikke.WeaponData` **배선 완료** (raw 보존, 정규화=소비측 단일 지점 — W 단위 결정과 동일 원칙). MG ramp = 60→4200 발/분(발당 +100, 중단 1s 리셋). 단위 앵커: AR 720=12발/s·SMG 1440=24발/s. 잔여 = K3 소비 + `WeaponStatTable` 하드코딩 대체(MG/SG 불일치) + spot_first_delay(0.2s 추정) vs 구 실측 0.03s 캘리브레이션. ※ 명중률 **시뮬 소비**는 §1 스코프 결정(현재 제외) 별도 — 데이터만 선확보.
+- **무기 타이밍/명중원 데이터+모델** (2026-07-01 작업 유실→2026-07-02 복구 통합): roledata shot 블록(발사 ramp·모션딜레이·명중원·펠릿·재장전·버스트게이지, ETL 정규화: 발/sec·초·분수) → `weaponData` → `WeaponDto`/`Nikke.Weapon`(`WeaponProfile`, null-safe) **배선 완료**. 모델: `Combat/AccuracyModel`(명중원 발당 수축 + P(코어힛)=(rc/R)² 면적확률 + RNG 샘플), `Combat/ProperDistanceTable`(공식 bonusrange 구간 + per-char 오버로드, RL=무보너스), `Targets/DummyTarget`(K5) + `ITarget` 계약 갱신(`Distance/CoreRadius/BodyRadius`, `PopulateContext(+attackerWeaponType)`; 구 `InProperRange` bool 폐기). MG spin-up = 1→70발/s nominal, 발당 +100/60, **60fps 프레임캡→실효 60/s**(`FireRateAtShot`), 중단 1s 리셋. per-char 편차 확증: AR 12|2.5, RL 탭 1~5/s, SG 펠릿 5|10, **Pascal=비차지 RL**(charge_time=0, 1.5발/s 평사) → 무기타입 상수 금지, per-char 데이터가 권위. ⚠ **속성 상성 판정 유틸(ElementAdvantage) = 보류**(2026-07-02 사용자 결정) — DummyTarget 상성 미반영. 잔여 = K3 소비(FiringModel) + HitRate 버프 배선 + spot delay(0.2s) vs 구 실측 0.03s 캘리브레이션 + 타겟 지오메트리(코어/몸체 반지름) 상수 확정.
 
 ---
 

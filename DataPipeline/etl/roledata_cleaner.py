@@ -11,12 +11,20 @@ basicAttack 단위 변환(45캐릭 prydwen 교차검증 일치):
   chargeTime   = shot.charge_time / 100
   chargeDamage = shot.full_charge_damage / 10000     (비차지 = 10000 → 1.0)
 
-weaponData 블록(발사 ramp/명중원/모션/펠릿/버스트게이지)은 **raw 보존** — 단위 변환 없음,
-정규화는 소비측(C#) 단일 지점 (W 단위 정규화 위치 결정과 동일 원칙, DESIGN §6).
-  단위: rate* = 발/분 (/60 = 발/초; AR 720→12/s, SMG 1440→24/s 캘리브레이션 확정)
-        *Delay / rateOfFireResetTime = 1/100 초
-        accuracy*Scale = 명중원 스케일 (작을수록 조밀; MG 250→10 연사 수축)
-  ※ 키는 'weaponData' — 기존 'weapon'(무기타입 문자열)과 충돌 금지.
+weaponData 블록(2026-07-01 유실분 복구·2026-07-02 재통합) — roledata shot/top-level 의 유의미
+무기 데이터를 엔진이 쓰도록 노출. (주의: 기존 `weapon` 키는 롱폼 무기타입 문자열 — 충돌 회피 위해
+프로파일은 `weaponData`.)
+단위 역공학(blabla_roledata 실값 검증; ETL 정규화 채택):
+  fireRate     = shot.rate_of_fire / 60      (raw=RPM → 발/sec. AR 720→12, SMG 1440→24, MG 60→1 spin-up)
+  *Sec         = (charge/reload/reset/spot_delay/burst_duration/apply_delay) / 100   (raw=centisec → sec)
+  fullChargeDamage = full_charge_damage / 10000   (SR 25000→2.5, RL 35000→3.5, 비차지 10000→1.0)
+  coreDamageRate   = core_damage_rate / 10000     (20000→2.0; coreHitBonus = 이값-1)
+  reloadBulletRate = reload_bullet / 10000        (10000→1.0=전탄, 3300→0.33=부분장전)
+  accuracy.*Circle = *_accuracy_circle_scale (raw spread 반지름; SR/RL 10 핀포인트, MG 250→10 spin-up)
+  burst.energyPerShot / targetEnergyPerShot / fullChargeEnergy = raw 게이지 단위 (정규화 미정 — 게이지 총량 상수 대기)
+  shotCount/muzzleCount/penetration/spotRadius/spotExplosionRange/maxAmmo/reloadStartAmmo = raw (이미 사용 단위)
+※ accuracy→코어힛 확률, weaponType→적정거리 구간은 C# 모델(AccuracyModel/ProperDistanceTable)에서 소비.
+※ spotFirstDelaySec/spotLastDelaySec(발사 개시/종료 모션, 대부분 0.2s)는 구 실측 0.03s 와 상충 — 캘리브레이션 대기.
 """
 import json
 import os
@@ -51,29 +59,65 @@ def _basic_attack(shot):
     }
 
 
-def _weapon_data(shot):
-    """shot 블록 → weaponData (raw 보존; 단위는 모듈 docstring 참조)."""
+def _num(d, k):
+    """None 안전 숫자 getter (raw 0 보존)."""
+    return d.get(k) or 0
+
+
+def _weapon(c, shot):
+    """엔진이 소비하는 무기 프로파일(발사속도/탄창/차지/명중원/버스트게이지/멀티펠릿).
+
+    weaponType 는 raw 단축코드(SG/SMG/AR/MG/SR/RL) 그대로 — C# 측은 static.weapon(롱폼)으로
+    적정거리 룩업하므로 여기 단축코드는 참조/검증용. accuracy 는 manual + auto(aim) 2세트.
+    """
     shot = shot or {}
     return {
-        # 발사 속도 ramp (발/분). MG 만 start≠end (60→4200, 발당 +100, 사격중단 reset 후 원복)
-        "rateOfFire": shot.get("rate_of_fire"),
-        "endRateOfFire": shot.get("end_rate_of_fire"),
-        "rateOfFireChangePerShot": shot.get("rate_of_fire_change_pershot"),
-        "rateOfFireResetTime": shot.get("rate_of_fire_reset_time"),
-        # 발사 전/후 모션 딜레이 (1/100초; 대부분 20)
-        "spotFirstDelay": shot.get("spot_first_delay"),
-        "spotLastDelay": shot.get("spot_last_delay"),
-        # 명중원 (연사 streak 수축; 작을수록 조밀)
-        "startAccuracyCircleScale": shot.get("start_accuracy_circle_scale"),
-        "endAccuracyCircleScale": shot.get("end_accuracy_circle_scale"),
-        "accuracyChangePerShot": shot.get("accuracy_change_pershot"),
-        "accuracyChangeSpeed": shot.get("accuracy_change_speed"),
-        # 멀티펠릿 (SG shotCount=10 — 1클릭당 펠릿 수)
-        "shotCount": shot.get("shot_count"),
-        "muzzleCount": shot.get("muzzle_count"),
-        # 버스트 게이지 충전 (raw; 게이지 총량 상수 미확정)
-        "burstEnergyPerShot": shot.get("burst_energy_pershot"),
-        "targetBurstEnergyPerShot": shot.get("target_burst_energy_pershot"),
+        "weaponType": shot.get("weapon_type"),                       # SG/SMG/AR/MG/SR/RL
+        "isChargeWeapon": _num(shot, "charge_time") > 0,
+        # 발사속도 (raw=RPM → 발/sec). MG 는 spin-up: fireRate(시작)→endFireRate, 발당 rampPerShot 증가.
+        "fireRate": _num(shot, "rate_of_fire") / 60.0,
+        "endFireRate": _num(shot, "end_rate_of_fire") / 60.0,
+        "fireRateRampPerShot": _num(shot, "rate_of_fire_change_pershot") / 60.0,
+        "fireRateResetTimeSec": _num(shot, "rate_of_fire_reset_time") / 100.0,
+        # 발사 개시/종료 모션 딜레이 (대부분 0.2s; 구 실측 0.03s 와 상충 — 캘리브레이션 대기)
+        "spotFirstDelaySec": _num(shot, "spot_first_delay") / 100.0,
+        "spotLastDelaySec": _num(shot, "spot_last_delay") / 100.0,
+        # 탄창/재장전
+        "maxAmmo": shot.get("max_ammo"),
+        "reloadTimeSec": _num(shot, "reload_time") / 100.0,
+        "reloadBulletRate": _num(shot, "reload_bullet") / 10000.0,   # 1.0=전탄, 0.33=부분
+        "reloadStartAmmo": shot.get("reload_start_ammo"),
+        # 차지 (SR/RL)
+        "chargeTimeSec": _num(shot, "charge_time") / 100.0,
+        "fullChargeDamage": _num(shot, "full_charge_damage") / 10000.0,
+        # 멀티펠릿/투사체
+        "shotCount": shot.get("shot_count"),                         # SG 펠릿 5~10
+        "muzzleCount": shot.get("muzzle_count"),                     # 총구 1~2
+        "penetration": shot.get("penetration"),
+        "spotRadius": shot.get("spot_radius"),                       # RL 스플래시
+        "spotExplosionRange": shot.get("spot_explosion_range"),
+        "coreDamageRate": _num(shot, "core_damage_rate") / 10000.0,  # 2.0 (coreHitBonus=이값-1)
+        # 명중원 (spread 반지름; manual + auto). AccuracyModel 이 코어힛/명중 확률로 소비.
+        "accuracy": {
+            "startCircle": shot.get("start_accuracy_circle_scale"),
+            "endCircle": shot.get("end_accuracy_circle_scale"),
+            "changePerShot": shot.get("accuracy_change_pershot"),
+            "changeSpeed": shot.get("accuracy_change_speed"),
+            "autoStartCircle": shot.get("auto_start_accuracy_circle_scale"),
+            "autoEndCircle": shot.get("auto_end_accuracy_circle_scale"),
+            "autoChangePerShot": shot.get("auto_accuracy_change_pershot"),
+            "autoChangeSpeed": shot.get("auto_accuracy_change_speed"),
+        },
+        # 버스트 게이지 (raw 단위; 게이지 총량 상수 확정 시 정규화)
+        "burst": {
+            "energyPerShot": shot.get("burst_energy_pershot"),
+            "targetEnergyPerShot": shot.get("target_burst_energy_pershot"),
+            "fullChargeEnergy": shot.get("full_charge_burst_energy"),
+            "durationSec": _num(c, "burst_duration") / 100.0,        # 1000→10s (풀버스트 창)
+            "applyDelaySec": _num(c, "burst_apply_delay") / 100.0,
+            "useBurstSkill": c.get("use_burst_skill"),               # Step1/2/3/AllStep
+            "changeBurstStep": c.get("change_burst_step"),
+        },
     }
 
 
@@ -101,7 +145,7 @@ def clean_roledata():
             "reloadTime": (shot.get("reload_time") or 0) / 100.0,
             "iconUrl": f"portraits/si/{nc}.webp",   # 로컬 초상화(getFromBlaLinkPortraits), name_code 키
             "basicAttack": _basic_attack(shot),
-            "weaponData": _weapon_data(shot),       # 발사 ramp/명중원/모션/펠릿/게이지 (raw)
+            "weaponData": _weapon(c, shot),         # 무기 프로파일(발사속도/명중원/모션/펠릿/게이지)
             "squad": c.get("squad"),                # 동일 스쿼드 아군 조건 버프용
             # 적정거리 보너스 범위(per-char; 무기별 결정, SR 1명 예외 보존)
             "properRange": {"min": c.get("bonusrange_min"), "max": c.get("bonusrange_max")},
