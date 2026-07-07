@@ -70,10 +70,11 @@ broadcast 디스패치만 추가. 버스트게이지=`Database/processed/burst_g
 ## 6. 데이터 의존 = FunctionTable — ✅ 봉쇄 해제 (2026-07-08)
 이 런타임은 **각 function_id 의 FunctionData**(functionType/value/target/standard/trigger/duration)가 필요.
 보스/니케 스킬 → skill_id → function_id (우리 `MonsterTable.skill_data` clean 디코드로 확보) → FunctionData.
-**스키마 확보됨**: SharpnelXu 공개 repo `NikkeMpkConverter/model/Skills.cs` 에 `FunctionData`/`SkillData`/
-`StateEffectData` `[MemoryPackOrder]` + 공식 enum 전부 → `memorypack_decode.py` 이식으로 디코드
-(경위 = `DataPipeline/crawler/FUNCTIONTABLE_DECODE_PLAN.md` §0). **결정(사용자 2026-07-08): 엔진 스킬
-데이터원 = 공식 FunctionTable** — skills_parsed.json(v3, LLM)은 검증 참조로 강등.
+**✅ 디코드 완료(2026-07-08)**: SharpnelXu 공개 스키마(`NikkeMpkConverter/model/Skills.cs`) 이식 →
+`memorypack_decode.py` 가 FunctionTable(19459)/CharacterSkillTable/StateEffectTable/SkillInfoTable/CharacterTable
+**clean 디코드 + 풀루프 검증 통과**(니케 스킬 수치 roledata bit-exact, value=×10000, 상세 =
+`DataPipeline/crawler/FUNCTIONTABLE_DECODE_PLAN.md` §0). **결정(사용자 2026-07-08): 엔진 스킬
+데이터원 = 공식 FunctionTable** — skills_parsed.json(v3, LLM)은 검증 참조로 강등. 잔여 = 체인 조립(D3)→K4/K7.
 
 ## 7. 즉시 참조 파일 (nikke-einkk)
 - `lib/model/battle/function.dart` (1410줄) — **트리거+효과 적용 핵심**

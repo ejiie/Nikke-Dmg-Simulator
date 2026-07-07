@@ -5,6 +5,38 @@
 
 ---
 
+## 2026-07-08 — D1: 공식 스킬 테이블 디코드 (FunctionTable — THE GAP 데이터원 확보)
+
+**범위**: 사용자 결정(공식 FunctionTable 채택, skills_parsed v3 강등)에 따라 SharpnelXu 공개 스키마
+(`NikkeMpkConverter/model/Skills.cs`·`CharacterData.cs`)를 `memorypack_decode.py` 에 이식, StaticData
+qa-260702 디코드+검증. 복호 산출물 = gitignore(스크립트/스키마만 커밋).
+
+### 1. 디코드 — 8표 전부 clean (off==len)
+```
+FunctionTable 19459 · CharacterSkillTable 4387 · StateEffectTable 5155 · SkillInfoTable 9280
+· CharacterTable 1905 · (기존) MonsterParts 669 · Monster 2043 · MonsterStatEnhance 30671
+```
+- CharacterTable 필드셋 drift: 실직렬화 40멤버 = 모델 41 − `surface_category`. 후보 drop 자동탐색(구조 통과
+  5~14 전부) → 의미 배제(class=0 불능) + **roledata 192캐릭 전수 교차검증 mismatch 0**(element/bonusrange/
+  critical_ratio·damage/burst_duration·apply_delay)으로 확정.
+- 과거 RE 실패 root cause 규명: FunctionData 의 long 3개(function_value/status_trigger_value/×2)를 int 로
+  읽어 member index 가 밀렸었음(관측 Buff_icon@33 = Order30 + 3).
+
+### 2. 풀루프 검증 (FUNCTIONTABLE_DECODE_PLAN §4) — 통과
+- Red Hood(5001) 버스트(ChangeWeapon) lv10 `skill_value=81342` ↔ roledata 설명 `813.42%` **bit-exact**.
+  부가 발견: value_data 에 교체 무기 `shot_id=1010202` + 차지시간 `120`(=2초×60fps) — weapon-swap 의 실체.
+- Emma(5005) 스킬1 lv10: `HealCharacter(2) val=1077`(10.77%) + `OnHurtRatio(7) trig=500`(5%) ↔ 설명값 일치.
+- value 스케일 = ×10000(10000=100%) 확정. 시간류 = 60fps 프레임 단위 존재 확인.
+- 보스 passive(StateEffect 7252022/7252002) = Immune{Stun/ForcedStop/GravityBomb}(+ImmuneDamage_MainHP) — 정합.
+- enum 미지값 = function_type 214~218 · timing 91~94 · status 67~73 (기지 최대 바로 위 연속) = 게임 신버전
+  추가분 → 엔진 graceful-unknown 대상. 오정렬 증거 없음.
+
+### 3. 잔여
+- D3 조립: 니케/보스 skill→function 체인 JSON (+스킬 레벨 축). 소비처 = K4(공식 FunctionData 로더).
+- 조립 JSON 커밋 정책(복호 raw 는 gitignore 확정) = D3 착수 시 확정.
+
+---
+
 ## 2026-07-02 (2차) — 유실 무기 레이어 복구 통합 (WeaponProfile/AccuracyModel/DummyTarget)
 
 **범위**: `.claude/worktrees/vibrant-kirch-db3d48` 에서 **uncommitted 방치**로 유실됐던 2026-07-01

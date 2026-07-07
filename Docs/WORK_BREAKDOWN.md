@@ -131,9 +131,9 @@
 - 데이터원이 공식 FunctionTable 로 재결정되어 LLM 재파싱 backlog 은 중단. skills_parsed.json(v3)은 현상태로 검증 참조만. (구 스코프: bailout 재파싱·token enum화 등 — 기록용으로 보존.)
 
 ### KP3 — 공식 스킬 데이터 디코드+조립 (Python, ★D1 — K4/K7 데이터원)
-- 목표: SharpnelXu 공개 스키마(`NikkeMpkConverter/model/Skills.cs`)를 `memorypack_decode.py` 에 이식 → `FunctionTable`(19459)/`SkillTable`/`StateEffectTable`/`CharacterSkillTable` clean 디코드 → 니케(name_code→skill1/2/burst)·보스(MonsterTable.skill_data) skill→function 체인 조립 JSON.
-- 검증: `FUNCTIONTABLE_DECODE_PLAN.md` §4 — s39 보스 코어 passive 7252022→재생 계열, 유명 니케 버스트 수치 대조, value ×10000 스케일, enum 값이 공식 enum 범위 내.
-- 산출: 복호 raw = gitignore(재배포 금지, raid 정책 준용), 스크립트+조립 JSON 정책은 작업 중 확정. 의존: StaticData zip(qa-260702, 로컬). 수용: 위 검증 3종 통과.
+- **디코드+검증 ✅ (2026-07-08, D1)**: 스키마 이식 완료 → FunctionTable(19459)/CharacterSkillTable(4387)/StateEffectTable(5155)/SkillInfoTable(9280)/CharacterTable(1905, surface_category drift 교정) **전부 clean**. 검증 통과: 니케 스킬 수치 roledata bit-exact(Red Hood 813.42%/Emma 10.77%+5%트리거), value=×10000, 보스 passive 정합, enum 미지값=신값뿐. 상세 = `FUNCTIONTABLE_DECODE_PLAN.md` §0.
+- 잔여 = **조립(D3)**: 니케(name_code→skill1/2/burst)·보스(MonsterTable.skill_data) skill→function 체인 JSON + 레벨 축(스킬 lv1~10 = id 연속) 정리. 산출 정책(조립 JSON 커밋 여부 — 복호 raw 는 gitignore 확정) = 착수 시 확정.
+- 의존: StaticData zip(qa-260702, 로컬). 소비처 = K4.
 
 ### KP2 — 데이터 실측 (사용자, ∥)
 - ✅ 장비표·큐브·소장품(base+특수효과): 공식 blablalink JSON 으로 **연동 완료** (Core stub 해소).
