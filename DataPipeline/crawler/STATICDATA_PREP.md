@@ -90,10 +90,21 @@ Field:
 - **✅ 완전 디코드**(스칼라+단순): CharacterStat(64800)·MonsterStatEnhance(30671, Lv1200 HP 1105억 int64)·
   AttractiveLevel·Element·RecycleResearch·SkillInfo(9130). **monster 수치·캐릭 레벨스탯·속성상성 확보.**
 - **list 인코딩 확정** = `[i32 count] + count×중첩레코드`(재귀 `[u8 nf][fields]`). 문자열=마커+printable 검증.
-- **⚠️ 미해결 = 필드 타입**: `int32 vs int64 vs float vs List<int> vs List<struct> vs struct` 구분이
-  게임 바이너리의 il2cpp **type array** 에만 있음(보호됨, LDPlayer arm번역이 frida·dd 차단). 이름추론이
+- **⚠️ 미해결 = 필드 타입 + 필드셋 drift**: `int32 vs int64 vs float vs List<int> vs List<struct> vs struct`
+  구분이 게임 바이너리의 il2cpp **type array** 에만 있음(보호됨). **추가 root cause(2026-07-07 확정)**:
+  metadata Record 클래스 필드목록 ≠ 실제 .mpk 직렬화 필드셋 (예 `CampaignStageRecord` metadata 27필드
+  vs 실제 25필드, `Parents_id`/`Character_lv` 미직렬화) → 타입 이전에 정렬부터 어긋나 cascade. 이름추론이
   혼합 복잡표(**FunctionTable**/MonsterTable-base/CharacterShot/CharacterSkill)에서 한계 → 그 표들은 미완.
 - **완전 디코드 = arm64 네이티브 frida-il2cpp-bridge**(런타임 전체 타입, 보호·번역 면역). 그 환경 생기면 끝.
+
+## 8. 로컬 디스크 우회 — `sd.bin` (2026-07-07, `C:\NIKKE` 전수조사)
+서버 .mpk 를 안 거치고, 게임설치 `nikke_Data/StreamingAssets/sd.bin`(ZIP) 안에 **5개 표가 평문 JSON**
+(`{version, records:[{필드:값}]}`, self-describing → 타입/스키마 불필요)으로 동봉됨:
+`CampaignStageTable`(보스 129 스테이지, field_monster_id·monster_stage_lv)·`CampaignChapterTable`·
+`ConfigBattleTable`(⭐ 전역 전투상수 core_damge_rate/BonusRangeRate/ElementBonusDamage/ulti_gauge)·
+`ConfigGameTable`·`CharacterReactionTable`. 추출=`getFromLocalSdBin.py`. **이게 위 필드셋 drift 의
+ground truth 증거이자, 5표에 한해 완전 디코드.** 전체 지도·전역상수·미개척(dp catalog 복호)
+= `LOCAL_GAME_DATA.md`. 나머지 표는 여전히 서버 .mpk(필드셋 교정 필요).
 
 ## Sources
 [Hiro420/NikkeTools](https://github.com/Hiro420/NikkeTools) — `StaticData/NikkeStaticData/Program.cs` · `ResStaticDataPackInfo.cs` 정독.
