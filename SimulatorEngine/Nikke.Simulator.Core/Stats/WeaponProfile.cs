@@ -27,7 +27,9 @@ namespace Nikke.Simulator.Core.Stats
         public double FireRate { get; }            // 시작 발사속도 (nominal)
         public double EndFireRate { get; }         // 가속 후 최대 발사속도 (nominal; MG 70 → 실현 60)
         public double FireRateRampPerShot { get; } // 발당 발사속도 증가량
-        public double FireRateResetTimeSec { get; }// 미발사 시 발사속도 리셋까지 시간
+        // 비사격(엄폐/재장전) 동안 ramp 가 **점진 감쇠**하는 시정수 — 즉시 리셋 아님 (einkk 검증 2026-07-08):
+        // 비사격 프레임마다 (End−Start)/reset_time 만큼 하강 → reset_time 프레임에 걸쳐 full ramp 소실.
+        public double FireRateResetTimeSec { get; }
 
         /// <summary>
         /// 게임 엔진 고정 프레임레이트(fps). 단일 무기는 **프레임당 최대 1발**이라 실현 발사속도 상한 = 이 값(발/sec).
@@ -36,8 +38,12 @@ namespace Nikke.Simulator.Core.Stats
         /// </summary>
         public const double EngineFrameRate = 60.0;
 
-        // ── 발사 개시/종료 모션 딜레이 (초) ──
-        // roledata spot_first/last_delay (대부분 0.2s). 구 실측 0.03s 와 상충 — in-game 캘리브레이션 대기.
+        // ── 발사 개시/종료 모션 딜레이 (초) — semantics 확정 (einkk 검증 2026-07-08, VERIFICATION_LOG) ──
+        // SpotFirst(0.2s 지배적): 사격 상태 진입(엄폐→조준) 후 첫 발사/차지 시작 전 대기. 비사격 동안 재-arm.
+        //   차지무기는 딜레이 종료 프레임에 charge 1프레임 선시작.
+        // SpotLast(0.2s): SR/RL(input=UP) 발사 후 강제 엄폐 복귀 모션 — 이 동안 비사격 취급 → 다음 사이클은
+        //   SpotFirst 부터. SR 실효 사이클 ≈ SpotLast+SpotFirst+FullCharge (84f ≈ 1.4s @60fps).
+        // (구 실측 0.03s 설은 spot 계열과 무관 — 폐기. maintain_fire_stance>0 무기는 복귀 없이 자세 유지.)
         public double SpotFirstDelaySec { get; }
         public double SpotLastDelaySec { get; }
 

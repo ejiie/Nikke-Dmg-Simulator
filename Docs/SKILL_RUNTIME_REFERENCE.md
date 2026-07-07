@@ -74,7 +74,8 @@ broadcast 디스패치만 추가. 버스트게이지=`Database/processed/burst_g
 `memorypack_decode.py` 가 FunctionTable(19459)/CharacterSkillTable/StateEffectTable/SkillInfoTable/CharacterTable
 **clean 디코드 + 풀루프 검증 통과**(니케 스킬 수치 roledata bit-exact, value=×10000, 상세 =
 `DataPipeline/crawler/FUNCTIONTABLE_DECODE_PLAN.md` §0). **결정(사용자 2026-07-08): 엔진 스킬
-데이터원 = 공식 FunctionTable** — skills_parsed.json(v3, LLM)은 검증 참조로 강등. 잔여 = 체인 조립(D3)→K4/K7.
+데이터원 = 공식 FunctionTable** — skills_parsed.json(v3, LLM)은 검증 참조로 강등. 체인 조립(D3) ✅ 2026-07-08
+= `staticdata_skill_chains.py` → `assembled/skill_chains.json`(gitignore). 잔여 = K4(C# 로더)/K7.
 
 ## 7. 즉시 참조 파일 (nikke-einkk)
 - `lib/model/battle/function.dart` (1410줄) — **트리거+효과 적용 핵심**

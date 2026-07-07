@@ -31,7 +31,8 @@ CharacterTable 1905 (+기존 Monster 3표). 검증:
   컨버터 스냅샷보다 신버전. 오정렬 아님 → 엔진은 미지 enum graceful 처리.
 - **CharacterTable 필드셋 drift**: 실직렬화 40멤버 = 모델 41 − `surface_category`. 판별 = 의미 배제 + **roledata
   192캐릭 전수 교차검증 mismatch 0** (element/bonusrange/crit/burst). LOCAL_GAME_DATA §3 drift 사례 추가분.
-잔여 = 조립(D3: 니케/보스 skill→function 체인 JSON) + K4 소비.
+조립(D3) ✅ 2026-07-08: `staticdata_skill_chains.py` → `assembled/skill_chains.json`(gitignore) — 니케 192
+(레벨 5,750)·보스 87·함수 14,249(connected BFS·Fx 제거·enum 주석). 잔여 = K4 소비(C# 로더).
 
 ## 1. 확정 사실
 - `.mpk` = MemoryPack. 디코더 = `memorypack_decode.py`(스칼라/리스트/문자열 OK, MonsterParts 등 clean).

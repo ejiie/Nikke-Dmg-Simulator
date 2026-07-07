@@ -110,7 +110,12 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 
 **SimClock** — 이산이벤트 큐. `Schedule(double atSec, Action ev)` / `Run(double untilSec)`. 최소시각 이벤트 pop→clock 전진→실행(새 이벤트 예약 가능). 동일시각 tie-break 결정적(삽입순). RNG 외 결정적.
 
-**FiringModel** — Combatant+무기 → 발사 이벤트 생성. 발사속도 권위 = **`Nikke.Weapon`(WeaponProfile, per-char)**: 발사 간격 `FireIntervalSec(n)`(MG spin-up + 60fps 프레임캡 내장), 사격중단 `FireRateResetTimeSec`(1s) 후 ramp 리셋(MG 재장전 2.5s > 1s → 재장전마다 리셋). 발사 개시/종료 모션 = `SpotFirst/LastDelaySec`(캘리브레이션 대기). 차지(`IsChargeWeapon`, **무기타입 아님 — Pascal=비차지 RL**): `ChargeTimeSec` 풀차지 / 톡(tap 간격 실측 `WeaponStatTable.ChargeTiming.TapIntervalSec` 잔존 용도). SG = `ShotCount` 펠릿/클릭. 탄창(`FinalBaseMaxAmmo`) 0→`ReloadTimeSec` 후 재장전(`ReloadBulletRate` 부분장전). 발사 시 `IsFullCharge` 세팅 + `AccuracyModel.RollCoreHit` 로 `IsCoreHit` 샘플링.
+**FiringModel** — Combatant+무기 → 발사 이벤트 생성. 발사속도 권위 = **`Nikke.Weapon`(WeaponProfile, per-char)**. **정밀 참조 구현 = nikke-einkk `nikke.dart`** (검증 2026-07-08, VERIFICATION_LOG):
+- **발사 accumulator**: 매 프레임(비사격 포함) `countdown -= rateOfFire(RPM)`, 발사 시 `+= 60×fps`(=3600) — 구조적 1발/프레임 = MG nominal 70/s → 실효 60/s (`FireRateAtShot` 캡과 일치).
+- **MG ramp**: 발사마다 `+changePerShot` clamp[start,end]. **리셋 = 점진 감쇠** — 비사격 프레임마다 `(end−start)/reset_time` 하강 (즉시 리셋 아님; 부분 중단 = 부분 손실).
+- **모션 딜레이**: `SpotFirstDelaySec`(사격 진입→첫 발사/차지 시작 전, 0.2s 지배적; 비사격 동안 재-arm, 차지무기는 종료 프레임에 charge 1f 선시작) / `SpotLastDelaySec`(SR/RL input=UP 발사 후 강제 엄폐 복귀 0.2s → SR 사이클 ≈ 12+12+60f = 1.4s). `maintain_fire_stance>0` = 복귀 없이 자세 유지(대기=SpotFirst+maintain). 투사체형은 `uptype_fire_timing`(비율)로 발사 이벤트 시점 보정. **버스트 시전 애니메이션 락 = 데이터 부재**(burst_apply_delay=0.01s 무의미, einkk 미모델) — K8 대조에서 per-char 상수 필요성 판단.
+- **명중원**: 발사마다 `−accuracyChangePerShot`, 비사격 프레임마다 `+changeSpeed/fps` 회복.
+- 차지(`IsChargeWeapon`, **무기타입 아님 — Pascal=비차지 RL**): `ChargeTimeSec` 풀차지. 탄창 0→`ReloadTimeSec` 재장전(`ReloadBulletRate` 부분장전, 엄폐 중 진행). 발사 시 `IsFullCharge` 세팅 + `AccuracyModel.RollCoreHit` 로 `IsCoreHit` 샘플링. 버스트 게이지 = burstStage 0 에서만 충전, 관통 히트 = 파츠당 추가.
 
 **SkillParsed DTO + Loader** — Pydantic `skill_schema.py` 미러: `SkillParsedDto/TriggeredEffectGroupDto/TriggerBlockDto/TargetBlockDto/EffectBlockDto/StackConditionBranchDto` + enum(또는 string + 검증). `JsonProvider.LoadJson` 로 `skills_parsed.json`(key=name_code) 로드.
 

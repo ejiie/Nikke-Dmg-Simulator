@@ -5,6 +5,46 @@
 
 ---
 
+## 2026-07-08 (2차) — D3 체인 조립 + 모션 딜레이 심층 (einkk 발사 루프 검증)
+
+**범위**: ① 니케/보스 skill→function 체인 조립(`staticdata_skill_chains.py`), ② 모션 딜레이/발사 루프
+정밀 semantics 확정 — nikke-einkk(`lib/model/battle/nikke.dart`·`utils.dart`) 정독으로 단위 모순 해소.
+산출 정책(사용자): **GitHub = gitignore 준수, 로컬 master 에 전부 머지.**
+
+### 1. D3 조립 — `assembled/skill_chains.json` (gitignore, 22MB)
+```
+characters 192 (스킬레벨 5,750 — 결손 = name_code 3001 스킬2 부재(base_id=0) 1명뿐)
+bosses 87 (solo raid 변종 statenhance=230000; passive StateEffect 체인 + skill use/hurt 체인)
+functions 14,249 (connected_function BFS 확장, Fx/아이콘 필드 제거, enum 이름 주석)
+state_effects 3,381
+```
+스팟 재검증: Emma s1 lv10 = HealCharacter 1077/OnHurtRatio 500 · Red Hood burst lv10 = 81342 ✓.
+
+### 2. 모션 딜레이 — 단위·semantics 확정 (einkk `timeDataToFrame(t)=t×fps/100` = **1/100초**)
+| 필드 | 값(지배적) | 확정 의미 |
+|---|---|---|
+| `spot_first_delay` | 20=0.2s=12f | 사격 상태 진입(엄폐→조준) 후 첫 발사/차지 시작 전 대기. 비사격 동안 재-arm. 차지무기 = 종료 프레임에 charge 1f 선시작 |
+| `spot_last_delay` | 20=0.2s | **SR/RL(input=UP) 발사 후 강제 엄폐 복귀** 모션. 복귀 동안 비사격 → SR 사이클 ≈ 12+12+60f = **1.4s** |
+| `maintain_fire_stance` | 대부분 0 | >0 = 발사 후 복귀 없이 자세 유지, 대기 = spotFirst+maintain (einkk: A2 +9f 미해명 TODO) |
+| `uptype_fire_timing` | 비율(×10000) | 투사체형: 발사 이벤트를 maintain×비율 시점으로 보정(투사체 생성 타이밍) |
+| `burst_apply_delay` | 1=0.01s | einkk 미소비 — 무시 가능 |
+| 버스트 시전 애니메이션 락 | **데이터 부재** | einkk 도 미모델. K8 in-game 대조에서 per-char 상수 필요성 판단 |
+| 구 실측 0.03s | — | spot 계열과 무관 — **폐기** (ARCHITECTURE 레거시) |
+
+### 3. 발사 루프 정밀 사실 (einkk 검증 → K3 스펙 = ENGINE_GUIDE §5 갱신)
+- **RPM accumulator**: 매 프레임(비사격 포함) `countdown −= rateOfFire(RPM)`, 발사 시 `+= 60×fps`(=3600).
+  구조적 1발/프레임 → MG nominal 70/s = **실효 60/s** (`WeaponProfile.FireRateAtShot` 60fps 캡과 일치 ✓).
+- **ramp 리셋 = 점진 감쇠** (교정): 비사격 프레임마다 `(end−start)/reset_time` 하강 — "중단 1s 후 즉시 리셋" 아님.
+- 명중원: 발사 `−changePerShot` / 비사격 `+changeSpeed/fps` per frame 회복 (MG 250→10→회복).
+- 재장전: 엄폐 상태에서 진행(잔탄<max 자동), `reload_bullet` 비율 부분장전.
+- 버스트 게이지: burstStage 0 에서만 충전, 관통 히트 = 파츠당 추가 게이지 이벤트.
+
+### 4. 잔여
+- K4: skill_chains.json → C# DTO/로더 (공식 enum 미러 + 미지값 graceful). K3: 위 스펙 구현.
+- 브랜치 → 로컬 master 머지 (사용자 지시, 이 커밋 후 수행).
+
+---
+
 ## 2026-07-08 — D1: 공식 스킬 테이블 디코드 (FunctionTable — THE GAP 데이터원 확보)
 
 **범위**: 사용자 결정(공식 FunctionTable 채택, skills_parsed v3 강등)에 따라 SharpnelXu 공개 스키마

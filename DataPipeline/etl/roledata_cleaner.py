@@ -25,7 +25,8 @@ weaponData 블록(2026-07-01 유실분 복구·2026-07-02 재통합) — roledat
     (총량 상수 확보됨: burst_gauge_table.json burst_energy_max=1,000,000 — 정규화는 K9 버스트 게이지 구현 시)
   shotCount/muzzleCount/penetration/spotRadius/spotExplosionRange/maxAmmo/reloadStartAmmo = raw (이미 사용 단위)
 ※ accuracy→코어힛 확률, weaponType→적정거리 구간은 C# 모델(AccuracyModel/ProperDistanceTable)에서 소비.
-※ spotFirstDelaySec/spotLastDelaySec(발사 개시/종료 모션, 대부분 0.2s)는 구 실측 0.03s 와 상충 — 캘리브레이션 대기.
+※ spotFirstDelaySec/spotLastDelaySec 단위·semantics 확정(2026-07-08, einkk timeDataToFrame=t×fps/100 검증):
+  first=사격 진입 후 첫 발사/차지 전 대기(0.2s 지배적), last=SR/RL 발사 후 엄폐 복귀(0.2s). 구 0.03s 설 폐기.
 """
 import json
 import os

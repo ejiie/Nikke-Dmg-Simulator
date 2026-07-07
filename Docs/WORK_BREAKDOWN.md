@@ -81,8 +81,8 @@
 - 임플: `PriorityQueue<Action,(double,long)>` + 단조증가 seq 로 동시각 삽입순 결정적 고정(.NET PQ 동순위 불안정 보정). `Run(untilSec)` = untilSec 포함·종료 시 `NowSec=untilSec` 클램프(resumable). 계약 무수정.
 
 ### K3 — FiringModel
-- 목표: Combatant+무기 → 발사 이벤트. 발사 간격 = `Weapon.FireIntervalSec(n)`(MG spin-up+60fps캡 내장), 사격중단 리셋, 차지 = `IsChargeWeapon`(무기타입 아님 — Pascal=비차지 RL) `ChargeTimeSec`/`Tap`, SG `ShotCount` 펠릿, 탄창→재장전(`ReloadBulletRate`), 모션 `SpotFirst/LastDelaySec`, `IsFullCharge` 세팅 + `AccuracyModel.RollCoreHit`→`IsCoreHit`.
-- 스코프: `Engine/FiringModel.cs`. 입력: **`Nikke.Weapon`(WeaponProfile — fire-rate 권위, 2026-07-02 복구 통합)** + AccuracyModel + ITarget(CoreRadius/BodyRadius). WeaponStatTable 은 레거시(tap 간격 실측값만 잔존 용도). 의존: K0. 수용: 무기별 발사 타임라인이 RPS/탄창/재장전/차지/MG ramp 에 정합.
+- 목표: Combatant+무기 → 발사 이벤트. **정밀 스펙 = ENGINE_GUIDE §5 FiringModel** (einkk 검증 2026-07-08): RPM accumulator(1발/프레임 구조 캡) · MG ramp+점진 감쇠 리셋 · 모션 `SpotFirst/LastDelaySec`(0.2s; SR 사이클 1.4s) · maintain_fire_stance · 차지 = `IsChargeWeapon`(Pascal=비차지 RL) · SG `ShotCount` 펠릿 · 재장전(부분장전, 엄폐 중 진행) · `IsFullCharge` + `AccuracyModel.RollCoreHit`→`IsCoreHit`.
+- 스코프: `Engine/FiringModel.cs`. 입력: **`Nikke.Weapon`(WeaponProfile — fire-rate 권위)** + AccuracyModel + ITarget(CoreRadius/BodyRadius). WeaponStatTable 은 레거시(tap 간격 실측값만 잔존 용도). 의존: K0. 수용: 무기별 발사 타임라인이 RPS/탄창/재장전/차지/MG ramp/SR 사이클(1.4s)에 정합.
 
 ### K4 — 스킬 데이터 Loader + Translator — ⚠ 방향 재결정 (2026-07-08)
 - **데이터원 = 공식 FunctionTable** (사용자 결정; `FUNCTIONTABLE_DECODE_PLAN.md` §0, `SKILL_RUNTIME_REFERENCE.md`). skills_parsed v3 는 검증 참조.
@@ -132,13 +132,13 @@
 
 ### KP3 — 공식 스킬 데이터 디코드+조립 (Python, ★D1 — K4/K7 데이터원)
 - **디코드+검증 ✅ (2026-07-08, D1)**: 스키마 이식 완료 → FunctionTable(19459)/CharacterSkillTable(4387)/StateEffectTable(5155)/SkillInfoTable(9280)/CharacterTable(1905, surface_category drift 교정) **전부 clean**. 검증 통과: 니케 스킬 수치 roledata bit-exact(Red Hood 813.42%/Emma 10.77%+5%트리거), value=×10000, 보스 passive 정합, enum 미지값=신값뿐. 상세 = `FUNCTIONTABLE_DECODE_PLAN.md` §0.
-- 잔여 = **조립(D3)**: 니케(name_code→skill1/2/burst)·보스(MonsterTable.skill_data) skill→function 체인 JSON + 레벨 축(스킬 lv1~10 = id 연속) 정리. 산출 정책(조립 JSON 커밋 여부 — 복호 raw 는 gitignore 확정) = 착수 시 확정.
-- 의존: StaticData zip(qa-260702, 로컬). 소비처 = K4.
+- **조립(D3) ✅ (2026-07-08)**: `staticdata_skill_chains.py` → `assembled/skill_chains.json`(**gitignore** — 사용자 결정: GitHub=gitignore, 로컬 생성). 니케 192(스킬레벨 5,750; 결손=3001 스킬2 부재 1명뿐) + 솔로레이드 보스 87(statenhance 230000; passive+use/hurt 체인) + 사용 함수 14,249(connected BFS, Fx 필드 제거+enum 이름 주석) + state_effects 3,381.
+- 의존: StaticData zip(qa-260702, 로컬). 소비처 = K4(다음).
 
 ### KP2 — 데이터 실측 (사용자, ∥)
 - ✅ 장비표·큐브·소장품(base+특수효과): 공식 blablalink JSON 으로 **연동 완료** (Core stub 해소).
 - ✅ 무기 데이터(roledata `weaponData`): 발사속도 ramp/탄창/차지/명중원/모션딜레이/버스트게이지/멀티펠릿 → `WeaponProfile`+모델 **연동 완료**(2026-07-01 유실→07-02 복구). 적정거리 구간도 공식 bonusrange 로 확보.
-- 잔여 = ProperDistance **보너스 크기(0.3) 실측** + 명중 모델용 타겟 core/body 반지름 실측 + spot delay(0.2s vs 구 실측 0.03s) 캘리브레이션 + 타이밍/조건부 큐브효과(sim 루프 대기).
+- 잔여 = ProperDistance **보너스 크기(0.3) 실측** + 명중 모델용 타겟 core/body 반지름 실측 + 타이밍/조건부 큐브효과(sim 루프 대기). (spot delay 캘리브레이션은 einkk 검증으로 해소 — ENGINE_GUIDE §5.)
 
 ---
 
