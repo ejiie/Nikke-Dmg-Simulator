@@ -1,7 +1,21 @@
-# FunctionTable.mpk 디코드 — 계획 (실행 전, 2026-07-07)
+# FunctionTable.mpk 디코드 — 계획 → 해결 경로 확정 (2026-07-08)
 
 > 목표: `FunctionTable.mpk`(MemoryPack, 19459 함수) → 함수별 `FunctionData`. **스킬 런타임(THE GAP)의
-> 데이터원**. 참조 = `Docs/SKILL_RUNTIME_REFERENCE.md`. **이 문서는 계획만 — 아직 실행 안 함.**
+> 데이터원**. 참조 = `Docs/SKILL_RUNTIME_REFERENCE.md`.
+
+## 0. ✅ 해결 (2026-07-08) — 스키마가 공개 repo에 이미 있음
+
+아래 §3-A 의 "FunctionData 모델 = 비공개, 컨택 필요" 판정은 **오판**이었다. 공개 스냅샷
+`github.com/SharpnelXu/nikke-mpk-json-converter` → **`NikkeMpkConverter/model/Skills.cs`** 에:
+- **`FunctionData`** — 전 필드 `[MemoryPackOrder]` 명시 (§1 의 순열 문제 = 즉시 해소)
+- `SkillData`/`SkillValueData`/`SkillFunction`/`StateEffectData`/`SkillInfoData` — 스킬 계층 전부
+- 공식 enum: `FunctionType`(77)·`TimingTriggerType`·`StatusTriggerType`·`StandardType`·
+  `FunctionTargetType`·`DurationType`·`ValueType`·`BuffType` (il2cpp TypeDefIndex 주석)
+- 덤: `CharacterData.cs`(니케→skill link)·`CharacterShotTable.cs`(공식 shot 스키마)
+
+→ **실행 = Plan A/B 불필요.** `memorypack_decode.py` 에 스키마 이식(MonsterTable 때와 동일 수법)만.
+**결정(사용자 2026-07-08): 엔진 스킬 데이터원 = 공식 FunctionTable 채택** (skills_parsed v3 = 검증 참조로 강등).
+검증 절차는 §4 유지. 아래 §1~§5 = 역사 기록 (스키마 없던 시점의 분석).
 
 ## 1. 확정 사실
 - `.mpk` = MemoryPack. 디코더 = `memorypack_decode.py`(스칼라/리스트/문자열 OK, MonsterParts 등 clean).

@@ -3,6 +3,11 @@
 > 실패 원인 = 필드 타입 미확정(int64/float/List<int>vs<struct>). 정답=`nikke_types.txt`(맥 arm64 frida).
 > 그 전엔 **필드별 타입 수동 추론**으로 도전. 힌트: `i64?`=큰HP류(8B?), `flt?`=비율, `str`=문자열마커, `LIST`=재귀[count]+중첩, `int`=4B.
 > 이미 해결(int64 지정): CharacterStat/MonsterStatEnhance = `staticdata_decode.py` INT64 딕셔너리. Attractive/Element/Cover/RecycleResearch/SkillInfo = clean.
+>
+> **⚡ 2026-07-08 갱신**: 아래 **Function / CharacterSkill / StateEffect**(+Skill 계열)는 이 문서의 타입추론
+> 불필요 — SharpnelXu 공개 repo `NikkeMpkConverter/model/*.cs` 에 `[MemoryPackOrder]` 스키마 존재
+> (`Skills.cs`/`CharacterData.cs`/`CharacterShotTable.cs` 등) → `memorypack_decode.py` 이식으로 해결(KP3/D1).
+> 경위 = `FUNCTIONTABLE_DECODE_PLAN.md` §0. 이 워크리스트는 스키마 없는 잔여 표에만 유효.
 
 ## Function (19111행, 55필드) — unpack_from requires a buffer of at least 6553357 bytes for unpacking 4 bytes at offset 6553353 (actual buffer size is 6553356), 13407/19111 rec
 | # | 필드 | 타입추측 |

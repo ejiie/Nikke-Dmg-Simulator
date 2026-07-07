@@ -84,9 +84,10 @@
 - 목표: Combatant+무기 → 발사 이벤트. 발사 간격 = `Weapon.FireIntervalSec(n)`(MG spin-up+60fps캡 내장), 사격중단 리셋, 차지 = `IsChargeWeapon`(무기타입 아님 — Pascal=비차지 RL) `ChargeTimeSec`/`Tap`, SG `ShotCount` 펠릿, 탄창→재장전(`ReloadBulletRate`), 모션 `SpotFirst/LastDelaySec`, `IsFullCharge` 세팅 + `AccuracyModel.RollCoreHit`→`IsCoreHit`.
 - 스코프: `Engine/FiringModel.cs`. 입력: **`Nikke.Weapon`(WeaponProfile — fire-rate 권위, 2026-07-02 복구 통합)** + AccuracyModel + ITarget(CoreRadius/BodyRadius). WeaponStatTable 은 레거시(tap 간격 실측값만 잔존 용도). 의존: K0. 수용: 무기별 발사 타임라인이 RPS/탄창/재장전/차지/MG ramp 에 정합.
 
-### K4 — SkillParsed DTO+Loader + Translator
-- 목표: `skills_parsed.json`(v3, key=name_code) → C# DTO 역직렬화 + static/runtime 2축 분류(DESIGN §5). `groups:[]`/PARSE_ERROR = no-op.
-- 스코프: `Engine/Skills/SkillParsedDto.cs`, `SkillLoader.cs`, `SkillTranslator.cs`. 입력: skills_parsed.json. 의존: K0. 수용: 134 완성분 로드 0-throw, 분류 스냅샷 테스트.
+### K4 — 스킬 데이터 Loader + Translator — ⚠ 방향 재결정 (2026-07-08)
+- **데이터원 = 공식 FunctionTable** (사용자 결정; `FUNCTIONTABLE_DECODE_PLAN.md` §0, `SKILL_RUNTIME_REFERENCE.md`). skills_parsed v3 는 검증 참조.
+- 목표: KP3 산출(skill→function 체인 JSON) → C# DTO(FunctionData: type/value/target/standard/trigger/duration) 역직렬화 + static/runtime 2축 분류(DESIGN §5). 공식 enum(FunctionType 77·TimingTrigger·Standard·Target·Duration) 미러 + 미지값 graceful.
+- 스코프: `Engine/Skills/` (신규 FunctionData DTO/Loader/Translator; 기존 `SkillParsedDto.cs`=v3 계약 보존·비주력). 의존: K0, KP3. 수용: 전 니케/보스 함수 로드 0-throw, FunctionType→브래킷(B2~B5)/스탯/타이밍 매핑표 테스트.
 
 ### K5 — ITarget: DummyTarget — 🟢 구현 (2026-07-01 유실→07-02 복구 통합)
 - 목표: 고정 DEF/속성/거리/지오메트리 타겟 → 히트마다 AttackContext 의 DEF·`ProperDistanceBonus` 채움. ✅ `ITarget` 계약 갱신(`Distance/CoreRadius/BodyRadius`, `PopulateContext(+attackerWeaponType)`; 구 `InProperRange` 폐기 — 무기 비의존 bool 은 의미오류).
@@ -126,8 +127,13 @@
 ### K14 / K15 — Web UI / 배포
 - 목표: 로스터 입력·결과·차트 / 공개 호스팅. 스코프: 별 앱. 의존: K12/K13 API(쉘은 계약 대고 조기). UI 스택 = M1 벤치 후 결정(보류).
 
-### KP1 — 파서 backlog (Python, ∥)
-- 70 bailout(57명)+완전실패 2명 재파싱, trait_weapon_transformed granular(20), filter(62)/required(184) token enum화, distrib/sequential 브래킷, julia/ein 재분류. 산출: skills_parsed.json 품질↑(스키마 v3 동결 유지). K4 가 무중단 흡수.
+### KP1 — 파서 backlog (Python, ∥) — ⏸ 사실상 종료 (2026-07-08)
+- 데이터원이 공식 FunctionTable 로 재결정되어 LLM 재파싱 backlog 은 중단. skills_parsed.json(v3)은 현상태로 검증 참조만. (구 스코프: bailout 재파싱·token enum화 등 — 기록용으로 보존.)
+
+### KP3 — 공식 스킬 데이터 디코드+조립 (Python, ★D1 — K4/K7 데이터원)
+- 목표: SharpnelXu 공개 스키마(`NikkeMpkConverter/model/Skills.cs`)를 `memorypack_decode.py` 에 이식 → `FunctionTable`(19459)/`SkillTable`/`StateEffectTable`/`CharacterSkillTable` clean 디코드 → 니케(name_code→skill1/2/burst)·보스(MonsterTable.skill_data) skill→function 체인 조립 JSON.
+- 검증: `FUNCTIONTABLE_DECODE_PLAN.md` §4 — s39 보스 코어 passive 7252022→재생 계열, 유명 니케 버스트 수치 대조, value ×10000 스케일, enum 값이 공식 enum 범위 내.
+- 산출: 복호 raw = gitignore(재배포 금지, raid 정책 준용), 스크립트+조립 JSON 정책은 작업 중 확정. 의존: StaticData zip(qa-260702, 로컬). 수용: 위 검증 3종 통과.
 
 ### KP2 — 데이터 실측 (사용자, ∥)
 - ✅ 장비표·큐브·소장품(base+특수효과): 공식 blablalink JSON 으로 **연동 완료** (Core stub 해소).

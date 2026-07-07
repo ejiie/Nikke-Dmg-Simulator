@@ -153,7 +153,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 
 - **Static modifier** → `Nikke.BuildAttackContext` 주입. 상태 독립/느린 값 (OL, 큐브 고정, 콜렉션 무기효과).
 - **Runtime trigger** → 시뮬 루프 소비. 시간/조건/스택/쿨다운 (`trigger.event ≠ passive` 또는 `duration` non-null 또는 `stack_conditions` 존재).
-- **스킬 번역기**(GAP phase 1) = `skills_parsed.json` → 두 버킷 라우팅. groups=[] (파서 bailout) = no-op, throw 금지.
+- **스킬 번역기**(GAP phase 1): 데이터원 = **공식 FunctionTable**(결정 2026-07-08 — `Docs/SKILL_RUNTIME_REFERENCE.md` 모델). skill→function 체인의 FunctionData(what/when/who/how much/duration)를 두 버킷으로 라우팅. `skills_parsed.json`(v3, LLM)은 **검증 참조로 강등** — groups=[] no-op·throw 금지 원칙은 잔존 소비처에 유지.
 
 ---
 
@@ -161,7 +161,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 
 - **코드 구조**: ✅ **`Nikke.Simulator.Engine` 프로젝트 분리 완료**(2026-06-30, K0). Engine→Core 단방향(컴파일러가 Core→Engine 역참조 차단). 공유 계약(ISimClock/IRotationController/ITarget/Combatant/SkillParsedDto 패밀리/BuffInstance/IMetricsSink·RunResult/SimulationRunner)을 컴파일되는 스텁으로 동결. 조건(Core UI/compute 무지) 유지.
 - **`DamageCalculator`/`AttackContext` 위치**: ✅ 확정(2026-06-30) = `Combat/`, namespace `Nikke.Simulator.Core.Combat`. 동시에 3-way split: `Stats/StatCalculator`(대미지) → `Combat/DamageCalculator` 개명·이동, 스탯 조립(`GetCoreAppliedStats`/`GetEquipmentStats`/`GetConsoleStats`)은 `StatTable`→`StatCalculator` 로 이관, `StatTable`=로딩+raw 전용. 38/38 테스트 그린.
-- **파서 prerequisite**: 런타임 먼저 + 결손(bailout/PARSE_ERROR) no-op + 파서 병행 (lean). skills_parsed v3 동결.
+- **파서 prerequisite**: ✅ 재결정(2026-07-08) — **스킬 데이터원 = 공식 FunctionTable** (SharpnelXu 공개 스키마로 디코드 가능 확인, `crawler/FUNCTIONTABLE_DECODE_PLAN.md` §0). skills_parsed v3 = 검증 참조 강등, LLM 재파싱 backlog(KP1) 사실상 종료. (구 결정 "런타임 먼저 + 파서 병행"은 v3 가 유일 데이터원이던 시점 기준.)
 - **W 단위 정규화 위치**: ✅ 확정(2026-06-30) = `Nikke` 생성자(주입측, `Nikke.cs` [4]). 엔진 로컬 — ETL 재실행/merged DB 재생성 불필요, 데이터 DTO 는 raw(percent-number) 유지 (§3 ✅). (구 `atk_parser.py` 폐기; 현 multiplier 생산처 = `roledata_cleaner.py`.)
 - **출력/Evaluator**: sim 1 run = **총대미지 표본 1개** 기록 → Evaluator 가 N run 으로 **분포** 구성(샘플/분위수; tail 필요). 부가: 시간축 DPS·캐릭별·브래킷 분해.
 - **Optimizer 지표 정확형**: `P(합딜 ≥ X)` vs 고분위수(예 P90) — 그리고 X/분위수 설정 방식 (UI 입력?). 미정.
@@ -170,7 +170,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 - **UI/컴퓨트 위치**: 보류 — M1 단일 sim 속도 측정 후 (client Blazor vs 서버 오프로드). 엔진은 무관하게 진행.
 - **엔진**: event-driven 확정. (구현 세부 — 이벤트 큐 자료구조 등 — 슬라이스 1에서.)
 - **데이터 실측**: 장비표·큐브·소장품 → **확보+C# 연동 완료** (`blabla_static_tables.json`; 장비 `round(base×(1+0.3·corp+0.1·level))` + 큐브/소장품 base·특수효과 = `GetEquipmentStats`/base JSON/`EffectTable` 배선, 34/34 테스트). 타이밍/조건부 효과만 sim 루프 대기. ProperDistance: 무기별 **범위** 확보(roledata bonusrange → `proper_distance_table.json`; MG 35-55·AR 25-45·SMG 15-35·SG 0-25·RL 0-0·SR 45-100, **RL=0 확증**) — 보너스 **크기**(0.3?)만 미검증.
-- **무기 타이밍/명중원 데이터+모델** (2026-07-01 작업 유실→2026-07-02 복구 통합): roledata shot 블록(발사 ramp·모션딜레이·명중원·펠릿·재장전·버스트게이지, ETL 정규화: 발/sec·초·분수) → `weaponData` → `WeaponDto`/`Nikke.Weapon`(`WeaponProfile`, null-safe) **배선 완료**. 모델: `Combat/AccuracyModel`(명중원 발당 수축 + P(코어힛)=(rc/R)² 면적확률 + RNG 샘플), `Combat/ProperDistanceTable`(공식 bonusrange 구간 + per-char 오버로드, RL=무보너스), `Targets/DummyTarget`(K5) + `ITarget` 계약 갱신(`Distance/CoreRadius/BodyRadius`, `PopulateContext(+attackerWeaponType)`; 구 `InProperRange` bool 폐기). MG spin-up = 1→70발/s nominal, 발당 +100/60, **60fps 프레임캡→실효 60/s**(`FireRateAtShot`), 중단 1s 리셋. per-char 편차 확증: AR 12|2.5, RL 탭 1~5/s, SG 펠릿 5|10, **Pascal=비차지 RL**(charge_time=0, 1.5발/s 평사) → 무기타입 상수 금지, per-char 데이터가 권위. ⚠ **속성 상성 판정 유틸(ElementAdvantage) = 보류**(2026-07-02 사용자 결정) — DummyTarget 상성 미반영. 잔여 = K3 소비(FiringModel) + HitRate 버프 배선 + spot delay(0.2s) vs 구 실측 0.03s 캘리브레이션 + 타겟 지오메트리(코어/몸체 반지름) 상수 확정.
+- **무기 타이밍/명중원 데이터+모델** (2026-07-01 작업 유실→2026-07-02 복구 통합): roledata shot 블록(발사 ramp·모션딜레이·명중원·펠릿·재장전·버스트게이지, ETL 정규화: 발/sec·초·분수) → `weaponData` → `WeaponDto`/`Nikke.Weapon`(`WeaponProfile`, null-safe) **배선 완료**. 모델: `Combat/AccuracyModel`(명중원 발당 수축 + P(코어힛)=(rc/R)² 면적확률 + RNG 샘플), `Combat/ProperDistanceTable`(공식 bonusrange 구간 + per-char 오버로드, RL=무보너스), `Targets/DummyTarget`(K5) + `ITarget` 계약 갱신(`Distance/CoreRadius/BodyRadius`, `PopulateContext(+attackerWeaponType)`; 구 `InProperRange` bool 폐기). MG spin-up = 1→70발/s nominal, 발당 +100/60, **60fps 프레임캡→실효 60/s**(`FireRateAtShot`), 중단 1s 리셋. per-char 편차 확증: AR 12|2.5, RL 탭 1~5/s, SG 펠릿 5|10, **Pascal=비차지 RL**(charge_time=0, 1.5발/s 평사) → 무기타입 상수 금지, per-char 데이터가 권위. ⚠ **속성 상성(ElementAdvantage)**: 내용 **사실 확인**(사용자 2026-07-08 — 순환 Water→Fire→Wind→Iron→Electric→Water, +0.1; ConfigBattle `ElementBonusDamage`=+10% 및 StaticData ElementTable weak cycle 과 일치). 코드 통합은 아직(현재 DummyTarget 상성 미반영). **통합 시 경계 = 중복 가산 금지**: B5 기본 우월 +0.1 의 소스는 **하나만**(`ElementAdvantage.StrongElementBonus`) — ConfigBattle 값·OL `IncElementDmg`(별축)·스킬 상성버프와 이중 적용되면 안 됨. 골든 테스트의 `SumStrongElem` 값은 이미 기본 0.1 포함 형태로 검증됐음을 유의. 잔여 = K3 소비(FiringModel) + HitRate 버프 배선 + spot delay(0.2s) vs 구 실측 0.03s 캘리브레이션 + 타겟 지오메트리(코어/몸체 반지름) 상수 확정.
 
 ---
 
