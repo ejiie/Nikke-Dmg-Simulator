@@ -21,7 +21,8 @@ weaponData 블록(2026-07-01 유실분 복구·2026-07-02 재통합) — roledat
   coreDamageRate   = core_damage_rate / 10000     (20000→2.0; coreHitBonus = 이값-1)
   reloadBulletRate = reload_bullet / 10000        (10000→1.0=전탄, 3300→0.33=부분장전)
   accuracy.*Circle = *_accuracy_circle_scale (raw spread 반지름; SR/RL 10 핀포인트, MG 250→10 spin-up)
-  burst.energyPerShot / targetEnergyPerShot / fullChargeEnergy = raw 게이지 단위 (정규화 미정 — 게이지 총량 상수 대기)
+  burst.energyPerShot / targetEnergyPerShot / fullChargeEnergy = raw 게이지 단위
+    (총량 상수 확보됨: burst_gauge_table.json burst_energy_max=1,000,000 — 정규화는 K9 버스트 게이지 구현 시)
   shotCount/muzzleCount/penetration/spotRadius/spotExplosionRange/maxAmmo/reloadStartAmmo = raw (이미 사용 단위)
 ※ accuracy→코어힛 확률, weaponType→적정거리 구간은 C# 모델(AccuracyModel/ProperDistanceTable)에서 소비.
 ※ spotFirstDelaySec/spotLastDelaySec(발사 개시/종료 모션, 대부분 0.2s)는 구 실측 0.03s 와 상충 — 캘리브레이션 대기.
