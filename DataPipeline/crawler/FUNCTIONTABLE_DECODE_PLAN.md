@@ -48,6 +48,18 @@ nikke-einkk 는 **디코드된 `FunctionTable.json`을 외부서 받아** 씀(�
   의 use function → heal/regen 계열이면 "재생 코어"(사용자 관측) 확증. 유명 니케 버스트 스킬로도 검증.
 - FunctionType 분포가 nikke-einkk enum 범위(0~77+) 안인지, function_value 가 %스케일(10000=100%)인지 sanity.
 
+## 4b. B 실행 결과 (2026-07-07 — 시도, 미완)
+경험적 RE 착수했으나 벽 확인:
+- metadata 선언순 + 타입tweak → 실패. **1bool+3long 전조합(42504) 탐색 → 500레코드 통과 0** = **순서가
+  metadata서 재배치됨(permutation) 확정**.
+- rec0 구조는 규명: `0-3 int · 4=Name(str) · 5-32=27 int + 1 bool · 33=Buff_icon(str) · 34-54=Fx tail+Connected`.
+  Buff_icon 이 member **33**(metadata 30 아님) = 순서 어긋남 증거. long 없음(사이 109B=27·4+1).
+- bool 위치+resync → 57/19459 (resync 가 `byte==55` 흔해 오탐). `id=group×100+lv` 경계휴리스틱 → 1541만
+  (대부분 함수 id 규칙 불균일).
+- **핵심 난점**: 순서·경계 chicken-egg — 전체 55필드 순서 없이 레코드 경계 신뢰검출 불가, 경계 없이 순서 역산 불가.
+  → 본격 **구조 솔버**(다중레코드 통계로 member별 타입+순서 동시추정, list/bool 위치 포함) 필요 = 고비용·불확실.
+**판정: B 는 가능하나 비효율. A(SharpnelXu 컨택)가 실질 최선.** 효과 의미는 nikke-einkk 에 이미 있어 엔진 K7 설계는 B 없이 진행 가능.
+
 ## 5. 권장 순서
 1. **A 컨택 시도** (즉시성). 응답 없으면 →
 2. **B 단계1~3** (문자열 위치 → 타입 → resync 로 효과필드만). Fx junk 무시로 난이도 대폭↓.
