@@ -22,6 +22,16 @@ namespace Nikke.Simulator.Core.Stats
         public string WeaponTypeCode { get; }   // SG/SMG/AR/MG/SR/RL (단축코드; null-safe="")
         public bool IsChargeWeapon { get; }
 
+        // ── SR/RL 부류 판별 (per-char; ENGINE_GUIDE §5, 2026-07-08 확정) ──
+        public string InputType { get; }             // "UP"=릴리즈 발사 / "DOWN_Charge"=only 풀차지 / "DOWN"=평사
+        public string FireType { get; }              // "Instant"/"Projectile*" (발사 이벤트 타이밍)
+        public double MaintainFireStanceSec { get; } // >0 = 발사 후 복귀 없이 자세 유지 (값=자체 후딜레이)
+        public double UpTypeFireTiming { get; }      // 투사체 발사 이벤트 시점 비율 (분수)
+        public int SpotProjectileSpeed { get; }
+
+        /// <summary>only 풀차지 무기 (릴리즈/톡톡이 발사 불가 — Liberalio·Neon:VE 등).</summary>
+        public bool IsOnlyFullCharge => InputType == "DOWN_Charge";
+
         // ── 발사속도 (발/sec). MG 는 spin-up. ──
         // ⚠ 이 값들은 **nominal(데이터 그대로)**. 실현 발사속도는 60fps 프레임 캡 적용 → FireRateAtShot 참조.
         public double FireRate { get; }            // 시작 발사속도 (nominal)
@@ -38,12 +48,14 @@ namespace Nikke.Simulator.Core.Stats
         /// </summary>
         public const double EngineFrameRate = 60.0;
 
-        // ── 발사 개시/종료 모션 딜레이 (초) — semantics 확정 (einkk 검증 2026-07-08, VERIFICATION_LOG) ──
-        // SpotFirst(0.2s 지배적): 사격 상태 진입(엄폐→조준) 후 첫 발사/차지 시작 전 대기. 비사격 동안 재-arm.
+        // ── 상태 전이 모션 딜레이 (초) — semantics 확정 (einkk+사용자 실측 2026-07-08, ENGINE_GUIDE §5) ──
+        // SpotFirst(0.2s 지배적): 엄폐→조준 전이 후 첫 발사/차지 시작 전 대기. 비사격 동안 재-arm.
         //   차지무기는 딜레이 종료 프레임에 charge 1프레임 선시작.
-        // SpotLast(0.2s): SR/RL(input=UP) 발사 후 강제 엄폐 복귀 모션 — 이 동안 비사격 취급 → 다음 사이클은
-        //   SpotFirst 부터. SR 실효 사이클 ≈ SpotLast+SpotFirst+FullCharge (84f ≈ 1.4s @60fps).
-        // (구 실측 0.03s 설은 spot 계열과 무관 — 폐기. maintain_fire_stance>0 무기는 복귀 없이 자세 유지.)
+        // SpotLast(0.2s): 조준→엄폐 전이 — **전 무기** (einkk 은 UP형만 모델하나 실게임은 전 무기).
+        //   SR/RL(UP, maintain=0)은 매 발사 후 강제 복귀 → 사이클 ≈ Last+First+FullCharge (84f ≈ 1.4s).
+        //   SR/RL 부류는 무기타입이 아니라 per-char 필드: input_type(UP/DOWN_Charge=only풀차지/DOWN) +
+        //   maintain_fire_stance(>0 = 복귀 없이 자세 유지, 값=자체 후딜레이: SBS 0.23/Raven 0.83/A2 0.84s).
+        // (구 실측 0.03s 설은 spot 계열과 무관 — 폐기.)
         public double SpotFirstDelaySec { get; }
         public double SpotLastDelaySec { get; }
 
@@ -87,6 +99,8 @@ namespace Nikke.Simulator.Core.Stats
             if (dto == null)
             {
                 WeaponTypeCode = "";
+                InputType = "";
+                FireType = "";
                 FullChargeDamage = 1.0;
                 FireRate = 0.0;
                 EndFireRate = 0.0;
@@ -97,6 +111,12 @@ namespace Nikke.Simulator.Core.Stats
 
             WeaponTypeCode = dto.weaponType ?? "";
             IsChargeWeapon = dto.isChargeWeapon;
+
+            InputType = dto.inputType ?? "";
+            FireType = dto.fireType ?? "";
+            MaintainFireStanceSec = dto.maintainFireStanceSec;
+            UpTypeFireTiming = dto.upTypeFireTiming;
+            SpotProjectileSpeed = dto.spotProjectileSpeed;
 
             FireRate = dto.fireRate;
             EndFireRate = dto.endFireRate > 0 ? dto.endFireRate : dto.fireRate;

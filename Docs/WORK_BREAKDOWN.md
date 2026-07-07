@@ -138,7 +138,8 @@
 ### KP2 — 데이터 실측 (사용자, ∥)
 - ✅ 장비표·큐브·소장품(base+특수효과): 공식 blablalink JSON 으로 **연동 완료** (Core stub 해소).
 - ✅ 무기 데이터(roledata `weaponData`): 발사속도 ramp/탄창/차지/명중원/모션딜레이/버스트게이지/멀티펠릿 → `WeaponProfile`+모델 **연동 완료**(2026-07-01 유실→07-02 복구). 적정거리 구간도 공식 bonusrange 로 확보.
-- 잔여 = ProperDistance **보너스 크기(0.3) 실측** + 명중 모델용 타겟 core/body 반지름 실측 + 타이밍/조건부 큐브효과(sim 루프 대기). (spot delay 캘리브레이션은 einkk 검증으로 해소 — ENGINE_GUIDE §5.)
+- ✅ 발사/모션/재장전 스펙 확정(2026-07-08, 사용자 실측+einkk+데이터 — ENGINE_GUIDE §5): 전이 0.2s 전 무기 · 재장전 감산형 공식+R1/R2 · SR/RL 3부류(input/maintain 필드) · re-click [0.02,0.028]s · 풀버 10s=진입 기산.
+- 잔여 실측 = **①3버스트→풀버스트 진입 딜레이**(데이터 없음 확인 — ConfigBattle 스캔) + **②버스트 시전 사격공백 실존 여부/크기**(per-char; 정의 = 버스트 스킬 사용 순간 그 캐릭 평타 사격이 멈추는 시간) + ProperDistance 보너스 크기(0.3) + 타겟 core/body 반지름 + `RLV2SwitchDelayTime`(=0.2s, ConfigBattle) 의미 + 타이밍/조건부 큐브효과(sim 루프 대기).
 
 ---
 

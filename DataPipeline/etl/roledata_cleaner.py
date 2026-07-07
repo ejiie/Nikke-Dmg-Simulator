@@ -76,6 +76,14 @@ def _weapon(c, shot):
     return {
         "weaponType": shot.get("weapon_type"),                       # SG/SMG/AR/MG/SR/RL
         "isChargeWeapon": _num(shot, "charge_time") > 0,
+        # SR/RL 부류 판별 (2026-07-08 확정, ENGINE_GUIDE §5): UP=릴리즈 발사(maintain=0 이면 발사 후
+        # 강제 엄폐 복귀) / DOWN_Charge=only 풀차지(릴리즈 발사 불가) / DOWN=평사(Pascal).
+        "inputType": shot.get("input_type"),
+        "fireType": shot.get("fire_type"),                           # Instant/Projectile* (발사 이벤트 타이밍)
+        # >0 = 발사 후 복귀 없이 자세 유지, 값=자체 후딜레이 (SBS 0.23 / Raven 0.83 / A2 0.84s)
+        "maintainFireStanceSec": _num(shot, "maintain_fire_stance") / 100.0,
+        "upTypeFireTiming": _num(shot, "uptype_fire_timing") / 10000.0,  # 투사체 발사 이벤트 시점 비율
+        "spotProjectileSpeed": shot.get("spot_projectile_speed"),
         # 발사속도 (raw=RPM → 발/sec). MG 는 spin-up: fireRate(시작)→endFireRate, 발당 rampPerShot 증가.
         "fireRate": _num(shot, "rate_of_fire") / 60.0,
         "endFireRate": _num(shot, "end_rate_of_fire") / 60.0,

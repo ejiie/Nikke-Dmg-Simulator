@@ -43,6 +43,19 @@ state_effects 3,381
 - K4: skill_chains.json → C# DTO/로더 (공식 enum 미러 + 미지값 graceful). K3: 위 스펙 구현.
 - 브랜치 → 로컬 master 머지 (사용자 지시, 이 커밋 후 수행).
 
+### 5. 후속 확정 (2026-07-08 3차 — 사용자 실측 ground truth + 데이터 판별)
+- **상태 전이 0.2s = 전 무기 양방향** (einkk 은 aim→cover 를 UP형에만 — 실게임 관측으로 교정).
+- **재장전**: 공식 = `reload_time×(1−Σ버프)` 감산형(사용자 확정; einkk 버프 음수 percent 정합 + 첫 재장전에
+  spot_last 가산). **≥100% = re-click([0.02,0.028]s) 이내 즉시 장전**(3.5년 플레이 확정) — 톡톡이 무소모/
+  탄0 즉시충전 전부 "비사격 프레임 재장전 진행" 원시 규칙(R1/R2)에서 창발. 특례 하드코딩 금지.
+- **SR/RL 3부류 = 데이터 필드로 판별** (roledata shot 전수):
+  `UP+maintain=0` 68명(강제 복귀) / `UP+maintain>0` = SBS(0.23s)·Raven(0.83s)·A2(0.84s) — **자체 후딜레이 =
+  maintain_fire_stance 값** + uptype_fire_timing 보정 / `DOWN_Charge` = Liberalio·Neon:VE·Vesti:TU·Anis:Star·
+  Cinderella — **only 풀차지**(릴리즈 발사 불가) / `DOWN` = Pascal. 사용자 관측과 필드가 1:1 대응.
+- **풀버스트 10s = 진입 시점 기산**(확정). 버스트 stage 간 딜레이 상수 = ConfigBattle 에 **없음**
+  (`burst_duration_time=0`; step 배율 10000/15000 뿐) → [0.01,0.17]s 실측 채택, 3버→풀버 = 실측 대기.
+- ConfigBattle 신규 참고: `RLV2SwitchDelayTime=20`(0.2s) — DOWN_Charge(V2) 연관 추정, 의미 미확정.
+
 ---
 
 ## 2026-07-08 — D1: 공식 스킬 테이블 디코드 (FunctionTable — THE GAP 데이터원 확보)

@@ -85,6 +85,13 @@ namespace Nikke.Simulator.Core.Data.Dto
         public string weaponType { get; set; }      // SG/SMG/AR/MG/SR/RL (단축코드)
         public bool isChargeWeapon { get; set; }
 
+        // SR/RL 부류 판별 (ENGINE_GUIDE §5): UP=릴리즈 발사 / DOWN_Charge=only 풀차지 / DOWN=평사
+        public string inputType { get; set; }
+        public string fireType { get; set; }                 // Instant/Projectile* (발사 이벤트 타이밍)
+        public double maintainFireStanceSec { get; set; }    // >0 = 복귀 없이 자세 유지(값=자체 후딜레이)
+        public double upTypeFireTiming { get; set; }         // 투사체 발사 이벤트 시점 비율 (분수)
+        public int spotProjectileSpeed { get; set; }
+
         // 발사속도 (발/sec). MG 는 spin-up: fireRate(시작)→endFireRate, 발당 fireRateRampPerShot 증가.
         public double fireRate { get; set; }
         public double endFireRate { get; set; }

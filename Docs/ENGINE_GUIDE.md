@@ -110,12 +110,18 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 
 **SimClock** — 이산이벤트 큐. `Schedule(double atSec, Action ev)` / `Run(double untilSec)`. 최소시각 이벤트 pop→clock 전진→실행(새 이벤트 예약 가능). 동일시각 tie-break 결정적(삽입순). RNG 외 결정적.
 
-**FiringModel** — Combatant+무기 → 발사 이벤트 생성. 발사속도 권위 = **`Nikke.Weapon`(WeaponProfile, per-char)**. **정밀 참조 구현 = nikke-einkk `nikke.dart`** (검증 2026-07-08, VERIFICATION_LOG):
+**FiringModel** — Combatant+무기 → 발사 이벤트 생성. 발사속도 권위 = **`Nikke.Weapon`(WeaponProfile, per-char)**. 참조 구현 = nikke-einkk `nikke.dart` + **사용자 실측 확정(2026-07-08, 3.5년 플레이 ground truth)**:
 - **발사 accumulator**: 매 프레임(비사격 포함) `countdown -= rateOfFire(RPM)`, 발사 시 `+= 60×fps`(=3600) — 구조적 1발/프레임 = MG nominal 70/s → 실효 60/s (`FireRateAtShot` 캡과 일치).
 - **MG ramp**: 발사마다 `+changePerShot` clamp[start,end]. **리셋 = 점진 감쇠** — 비사격 프레임마다 `(end−start)/reset_time` 하강 (즉시 리셋 아님; 부분 중단 = 부분 손실).
-- **모션 딜레이**: `SpotFirstDelaySec`(사격 진입→첫 발사/차지 시작 전, 0.2s 지배적; 비사격 동안 재-arm, 차지무기는 종료 프레임에 charge 1f 선시작) / `SpotLastDelaySec`(SR/RL input=UP 발사 후 강제 엄폐 복귀 0.2s → SR 사이클 ≈ 12+12+60f = 1.4s). `maintain_fire_stance>0` = 복귀 없이 자세 유지(대기=SpotFirst+maintain). 투사체형은 `uptype_fire_timing`(비율)로 발사 이벤트 시점 보정. **버스트 시전 애니메이션 락 = 데이터 부재**(burst_apply_delay=0.01s 무의미, einkk 미모델) — K8 대조에서 per-char 상수 필요성 판단.
+- **상태 전이 (전 무기, 확정)**: 엄폐→조준 = `SpotFirstDelaySec`(0.2s; 비사격 동안 재-arm, 차지무기는 종료 프레임에 charge 1f 선시작) / 조준→엄폐 = `SpotLastDelaySec`(0.2s — einkk 은 UP형에만 적용하나 **실게임은 전 무기**; 데이터도 전 무기 20).
+- **재장전 (원시 규칙 — 특례 금지)**: R1 = 비사격 프레임(엄폐·전이·re-click 갭)마다 진행 · R2 = 실효 시간 ≤ 창이면 그 안에서 완료. 공식 = **`reload_time × (1 − Σreload_speed_buff)`(감산형, 사용자 확정)** + 첫 재장전에 spot_last 가산(einkk). `ReloadBulletRate` 부분장전. **≥100% 버프 = re-click 이내 즉시 장전(확정)** → 톡톡이 장탄 무소모 / 비차지·maintain형 탄0도 re-click 내 충전 — R1/R2 에서 창발, 하드코딩 금지.
+- **SR/RL 3부류 (per-char 데이터 판별 — 무기타입 상수 금지 재확인)**:
+  ① `input=UP, maintain=0`(68명): 발사 후 강제 엄폐 복귀 — 사이클 = last(0.2)+first(0.2)+charge (Red Hood 1.4s).
+  ② `input=UP, maintain>0`(SBS 0.23s·Raven 0.83s·A2 0.84s): **복귀 없음, 자체 후딜레이 = maintain_fire_stance**(대기 = first+maintain, einkk). `uptype_fire_timing`(비율)로 투사체 발사 이벤트 시점 보정. SBS 는 charge 0.3s 라 톡톡이처럼 보임.
+  ③ `input=DOWN_Charge`(Liberalio·Neon:VE·Vesti:TU·Anis:Star·Cinderella): **only 풀차지** — 홀드 시 자동 풀차지 반복, 릴리즈 발사 불가, 복귀 없음, rate_of_fire 가 사이클 gate. (④ `DOWN` = Pascal 평사 RL.)
+- **컨트롤 정책 축 (Auto 4명 / Manual 1명, IRotationController 와 별개)**: Manual profile = re-click 갭 **[0.02, 0.028]s**(확정; 프레임 반올림 1~2f) + 차지 오차 ε(프로파일 구간, 정수 프레임; δ=0 결정론 모드 필수). Manual 풀차지 루틴 = first(0.2)+[charge(1+ε)+reclick]×장탄+last(0.2) — 조준 유지로 발당 first 미지불. Manual 톡톡이 = [first(0.2)+reclick] 반복(UP형; 구 실측 0.215 와 부합).
 - **명중원**: 발사마다 `−accuracyChangePerShot`, 비사격 프레임마다 `+changeSpeed/fps` 회복.
-- 차지(`IsChargeWeapon`, **무기타입 아님 — Pascal=비차지 RL**): `ChargeTimeSec` 풀차지. 탄창 0→`ReloadTimeSec` 재장전(`ReloadBulletRate` 부분장전, 엄폐 중 진행). 발사 시 `IsFullCharge` 세팅 + `AccuracyModel.RollCoreHit` 로 `IsCoreHit` 샘플링. 버스트 게이지 = burstStage 0 에서만 충전, 관통 히트 = 파츠당 추가.
+- **버스트**: 게이지 = burstStage 0 에서만 충전(관통 히트 = 파츠당 추가). stage 간 딜레이 = [0.01, 0.17]s random(사용자 실측; 데이터 상수 없음 — ConfigBattle 확인). **풀버스트 10s = 진입 시점 기산(확정)**. 3버→풀버 진입 딜레이 = 실측 대기. 발사 시 `IsFullCharge` 세팅 + `AccuracyModel.RollCoreHit` 로 `IsCoreHit` 샘플링. (참고: ConfigBattle `RLV2SwitchDelayTime=20` — DOWN_Charge(V2)형 연관 추정, 의미 미확정.)
 
 **SkillParsed DTO + Loader** — Pydantic `skill_schema.py` 미러: `SkillParsedDto/TriggeredEffectGroupDto/TriggerBlockDto/TargetBlockDto/EffectBlockDto/StackConditionBranchDto` + enum(또는 string + 검증). `JsonProvider.LoadJson` 로 `skills_parsed.json`(key=name_code) 로드.
 

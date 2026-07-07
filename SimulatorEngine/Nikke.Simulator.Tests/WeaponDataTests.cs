@@ -274,6 +274,29 @@ public class WeaponDataTests
     }
 
     [Fact]
+    public void SrRl_subtypes_are_identified_by_per_char_fields()
+    {
+        var db = Load();
+        if (db == null) return;
+
+        var srRl = db.Values.Where(c => c.weapon == "Sniper Rifle" || c.weapon == "Rocket Launcher").ToList();
+        Assert.All(srRl, c => Assert.Contains(c.weaponData.inputType, new[] { "UP", "DOWN", "DOWN_Charge" }));
+
+        // ① UP + maintain>0 = 복귀 없는 자체 후딜레이형 (SBS 0.23s / Raven 0.83s / A2 0.84s)
+        var maintain = srRl.Where(c => c.weaponData.maintainFireStanceSec > 0).ToList();
+        Assert.True(maintain.Count >= 3);
+        Assert.All(maintain, c => Assert.Equal("UP", c.weaponData.inputType));
+        Assert.Contains(maintain, c => System.Math.Abs(c.weaponData.maintainFireStanceSec - 0.23) < 1e-9); // SBS
+
+        // ② DOWN_Charge = only 풀차지 (Liberalio·Neon:VE·Vesti:TU·Anis:Star·Cinderella)
+        Assert.True(srRl.Count(c => c.weaponData.inputType == "DOWN_Charge") >= 3);
+
+        // ③ DOWN = 비차지 평사 (Pascal) — 차지 플래그와 정합
+        Assert.All(srRl.Where(c => c.weaponData.inputType == "DOWN"),
+            c => Assert.False(c.weaponData.isChargeWeapon));
+    }
+
+    [Fact]
     public void Charge_flag_is_consistent_with_charge_timing()
     {
         var db = Load();
