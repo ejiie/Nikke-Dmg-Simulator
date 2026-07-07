@@ -1,0 +1,22 @@
+{
+  "_source": "ConfigBattleTable (sd.bin, NIKKE StaticData) — DataPipeline/crawler/getFromLocalSdBin.py",
+  "_note": "버스트 게이지 상수 (gauge fill + cap). 게이지가 burst_energy_max 도달 시 버스트 준비. 등급 kill: m=minion e=elite c=centurion b=boss.",
+  "burst_energy_max": 1000000,
+  "ally": {
+    "per_sec": 100,
+    "kill": { "minion": 960, "elite": 1440, "centurion": 1920, "boss": 2880 },
+    "use_skill": 200,
+    "skill_hit": 100,
+    "shot_hit": 4,
+    "hurt": 480,
+    "cover_hurt": 0,
+    "empty_ammo": 13
+  },
+  "monster": {
+    "per_sec": 250,
+    "use_skill": 100,
+    "skill_hit": 10,
+    "shot_hit": 4,
+    "hurt": 4
+  }
+}
