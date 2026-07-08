@@ -5,6 +5,36 @@
 
 ---
 
+## 2026-07-08 (5차) — K4 공식 스킬 로더/번역기 + 버스트 전이 실측 반영
+
+**범위**: `Engine/Skills/` K4 구현 — skill_chains.json(D3) → C# DTO/Loader/Translator.
++ 사용자 영상 실측: **3버스트→풀버스트 진입 딜레이 = 0.46s ≈ 28프레임** (ENGINE_GUIDE §5 반영, K9 상수).
+버스트 시전 사격공백(측정②)은 사용자 결정으로 **무시**.
+
+### 1. 구현
+- `OfficialSkillEnums.cs`: 공식 enum 8종 미러(FunctionType 213 등) — memorypack_decode.py dict 기계생성(수기 금지).
+- `SkillChainDto.cs`: JSON 1:1. enum 필드 = **원시 int 보존**(신값 graceful) + `Typed*` 캐스팅 접근,
+  `ValueAsFraction`(Percent ×10000 해석).
+- `SkillChainLoader.cs`: `TryLoad` — gitignore 파일 부재 = false(throw 금지, fresh clone 정상),
+  로드 시 **참조 무결성**(전 체인 function id ⊆ Functions 사전) 검증.
+- `SkillTranslator.cs`: DESIGN §5 **2축 분류**(트리거·상태조건 없음+영구 = Static → BuildAttackContext,
+  그 외 Runtime → K7) + **EffectRoute 매핑표** — 확실 타입만 개별 슬롯(AtkRate/CritDmgAdd/StrongElemAdd/
+  ReloadTiming/BurstGauge …), 브래킷 미검증 = `Unverified`(K8 골든 대조로 승격), 정의 밖 신값 = `Unknown` no-op.
+
+### 2. 테스트 — 110/110 (신규 17 = `SkillChainLoaderTests`)
+- 로드: 192캐릭·87보스·14,249함수 0-throw + 무결성 통과.
+- D1 검증값 재확인: Emma s1 lv10 = HealCharacter 1077(0.1077)/OnHurtRatio 500 → Runtime 분류 ✓;
+  Red Hood burst lv10 = ChangeWeapon·쿨 4000·81342·차지 120f ✓.
+- 전 함수 라우팅/분류 graceful — 미지 신값 = `?214` **11개뿐**(<0.1%).
+- 분포 스냅샷(우선순위 자료): StatAtk 1,763 · **UseCharacterSkillId 1,401**(연쇄 스킬 호출 — K7 필수 지원) ·
+  Damage 686 · **AddDamage 620**(브래킷 미검증 최대 항목 — K8 대조 1순위) · HealCharacter 590 · StatDef 588.
+
+### 3. 잔여
+- K6 Metrics(소품) → K8 통합(M1): SimClock+FiringModel+Loader 배선, Static 주입 + 골든 대조.
+- K7 SkillRuntime: Runtime 축 소비 (einkk function.dart 4단계) — UseCharacterSkillId 연쇄 포함.
+
+---
+
 ## 2026-07-08 (4차) — K3 FiringModel 구현 (Wave1 마지막 대형 청크)
 
 **범위**: `Engine/FiringModel.cs` — 60fps 프레임 스텝 발사 상태기계. 3차 확정 스펙(사용자 실측 + einkk)

@@ -48,6 +48,7 @@
 | 크리 RNG | `Stats/IRandomSource.cs` | `IRandomSource.NextDouble()` ; `SystemRandomSource.Instance` ; `CritSampler.RollCrit(rng, baseCritRate)→bool` |
 | 캐릭터 | `Entities/Nikke.cs` | `new Nikke(CharacterDto, GlobalStateDto)` ; `BuildAttackContext()→AttackContext` ; `FinalBaseAtk/HP/Def/MaxAmmo` ; `EquipCube(tid,lv)` ; `BasicAtkMultiplier/ChargeTime/ChargeDamage/CoreHitBonus` ; `WeaponType/Element/Class` |
 | 데이터 I/O | `Data/JsonProvider.cs` | `GetSmartDatabasePath(file)` ; `LoadJson<T>(path)` |
+| 공식 스킬 데이터 (K4 ✅) | `Engine/Skills/` `SkillChainLoader`·`SkillChainDto`·`SkillTranslator`·`OfficialSkillEnums` | `SkillChainLoader.TryLoad(out chains)`(skill_chains.json — gitignore, 부재=false) ; `chains.Characters[nameCode].Skills["skill1"/"skill2"/"burst"].Levels["1".."10"].FunctionIds` → `chains.Functions[fid]`(FunctionDto: Typed* enum 접근·`ValueAsFraction`) ; `SkillTranslator.Classify(fn)→Static\|Runtime` ; `SkillTranslator.Route(fn)→EffectRoute`(확실 슬롯/Unverified/Unknown) |
 | DTO | `Data/Dto/RootDto.cs` | `RootDto.roster: Dictionary<name_code, CharacterDto>` ; `SkillDto.descriptionLevel10` |
 
 > `AttackContext` 가 매 히트 입력. 엔진의 일은 **이 struct 를 매 히트 정확히 채워 `CalculateDamage` 에 넘기는 것**.
@@ -121,7 +122,7 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
   ③ `input=DOWN_Charge`(Liberalio·Neon:VE·Vesti:TU·Anis:Star·Cinderella): **only 풀차지** — 홀드 시 자동 풀차지 반복, 릴리즈 발사 불가, 복귀 없음, rate_of_fire 가 사이클 gate. (④ `DOWN` = Pascal 평사 RL.)
 - **컨트롤 정책 축 (Auto 4명 / Manual 1명, IRotationController 와 별개)**: Manual profile = re-click 갭 **[0.02, 0.028]s**(확정; 프레임 반올림 1~2f) + 차지 오차 ε(프로파일 구간, 정수 프레임; δ=0 결정론 모드 필수). Manual 풀차지 루틴 = first(0.2)+[charge(1+ε)+reclick]×장탄+last(0.2) — 조준 유지로 발당 first 미지불. Manual 톡톡이 = [first(0.2)+reclick] 반복(UP형; 구 실측 0.215 와 부합).
 - **명중원**: 발사마다 `−accuracyChangePerShot`, 비사격 프레임마다 `+changeSpeed/fps` 회복.
-- **버스트**: 게이지 = burstStage 0 에서만 충전(관통 히트 = 파츠당 추가). stage 간 딜레이 = [0.01, 0.17]s random(사용자 실측; 데이터 상수 없음 — ConfigBattle 확인). **풀버스트 10s = 진입 시점 기산(확정)**. 3버→풀버 진입 딜레이 = 실측 대기. 발사 시 `IsFullCharge` 세팅 + `AccuracyModel.RollCoreHit` 로 `IsCoreHit` 샘플링. (참고: ConfigBattle `RLV2SwitchDelayTime=20` — DOWN_Charge(V2)형 연관 추정, 의미 미확정.)
+- **버스트**: 게이지 = burstStage 0 에서만 충전(관통 히트 = 파츠당 추가). stage 간 딜레이 = [0.01, 0.17]s random(사용자 실측; 데이터 상수 없음 — ConfigBattle 확인). **풀버스트 10s = 진입 시점 기산(확정)**. **3버→풀버 진입 딜레이 = 0.46s ≈ 28프레임(사용자 영상 실측 2026-07-08)** — K9 버스트 사이클 상수. 발사 시 `IsFullCharge` 세팅 + `AccuracyModel.RollCoreHit` 로 `IsCoreHit` 샘플링. (참고: ConfigBattle `RLV2SwitchDelayTime=20` — DOWN_Charge(V2)형 연관 추정, 의미 미확정.)
 
 **SkillParsed DTO + Loader** — Pydantic `skill_schema.py` 미러: `SkillParsedDto/TriggeredEffectGroupDto/TriggerBlockDto/TargetBlockDto/EffectBlockDto/StackConditionBranchDto` + enum(또는 string + 검증). `JsonProvider.LoadJson` 로 `skills_parsed.json`(key=name_code) 로드.
 
