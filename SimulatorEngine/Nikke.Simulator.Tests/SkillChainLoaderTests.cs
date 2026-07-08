@@ -46,7 +46,7 @@ public class SkillChainLoaderTests
     }
 
     [Fact]
-    public void RedHood_burst_lv10_is_weapon_swap_with_verified_value()
+    public void Maxwell_burst_lv10_is_weapon_swap_with_verified_value()
     {
         var c = Load();
         if (c == null) return;

@@ -40,7 +40,7 @@ public class FiringModelTests
         accuracy = new WeaponAccuracyDto { startCircle = 250, endCircle = 10, changePerShot = 7, changeSpeed = 150 },
     });
 
-    private static WeaponProfile SrUp() => new(new WeaponDto // Red Hood 형
+    private static WeaponProfile SrUp() => new(new WeaponDto // Maxwell 형 (UP·maintain=0·charge 1s)
     {
         weaponType = "SR", inputType = "UP", fireType = "Instant", isChargeWeapon = true,
         chargeTimeSec = 1.0, fullChargeDamage = 2.5,
