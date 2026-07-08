@@ -5,6 +5,28 @@
 
 ---
 
+## 2026-07-08 (11차) — 타이밍 감쇠식 최종 확정: 니케식 group-then-round + 1/100초 정수 (권위=OverloadProcessor)
+
+**정정 (10차 재정정)**: 라운딩 규칙의 권위 = **`OverloadProcessor`** (사용자 지정) — 10차의 "항별" 라운딩이
+아니라 **니케식 group-then-round** (동일값 버프 **선합산** → 그룹 단위 사사오입, OL 스탯 합산과 동일 규칙):
+```
+effectiveCs = baseCs − Σ_group round(baseCs × value × count)     [사사오입, AwayFromZero]
+```
+- 동일값 2항 [14.5%, 14.5%]: 그룹 round(100cs×0.29)=29 → 71cs  (항별이면 15+15=30 → 70cs — 다름)
+- 상이값 2항 [14.5%, 14.6%]: 그룹 2개 → 15+15 → 70cs
+- **시간 = 1/100초 정수(게임 timeData) 유지** (사용자: "시간 관련은 정수형") + 버프 ×10000 정수 복원
+  → 순수 정수 연산 — 10차의 decimal 우회 불필요, 이진 부동소수 오차 원천 차단.
+  ("초 단위 소수 둘째자리 반올림" = cs 정수 사사오입과 동치. `OverloadProcessor` 주석의 "차지 시간=2" 정합.)
+
+**구현**: `OverloadProcessor.ReduceTimeCs(baseCs, buffFractions)` 신설 (니케식 합산 소관 클래스) —
+FiringModel 은 시간을 cs 정수로 복원(`ToCs`)해 감쇠 → `CsToFrames`(= einkk timeDataToFrame) 로 프레임화.
+`FiringModel.ApplyTimingReduction`(10차 임시) 폐기.
+
+테스트 — **129/129**: 그룹 vs 항별 구분(71≠70), 상이값 항 분리, 사사오입(85), 하한 0,
+Resilience lv15 실값(250cs→176cs=1.76s), 프레임 반영(43f, 재장전 재개 f77).
+
+---
+
 ## 2026-07-08 (10차) — 타이밍 감쇠식 정정: 항별 소수 둘째자리 사사오입 (사용자 확정)
 
 **정정**: 9차의 `time × (1 − Σbuff)` 는 근사 — 실게임 공식(사용자 확정)은
