@@ -5,6 +5,31 @@
 
 ---
 
+## 2026-07-08 (7차) — K8 M1: 단일캐릭 통합 배선 (SimulationRunner.RunOnce 이행)
+
+**범위**: K0 동결 엔트리 `SimulationRunner.RunOnce(team, target, rng, durationSec)` 구현 —
+SimClock(60fps tick) → FiringModel(K3) → BuildHitContext(static, Combatant 스텁 이행) →
+ITarget.PopulateContext(K5) → AccuracyModel 명중/코어힛 + CritSampler 크리 → DamageCalculator →
+MetricsCollector(K6, crit/core/full 태그). `Combatant.Firing`(FiringControl) 추가 = per-멤버 Auto/Manual.
+스킬/버프/버스트 미포함 (M1 정의) — K7/K9 배선 자리 주석.
+
+### 1. 테스트 — 124/124 (신규 8 = `SimulationRunnerTests`)
+- **프레임 정밀 타임라인**: AR 10s = 102히트(60발+재장전 72f+spotFirst 12f+42발), 초 버킷(0초=10·1초=12),
+  팀 2인 소스 분해, SG 3트리거×10펠릿=30히트, 인자 방어.
+- **확률 수렴**(시스템 RNG, N≈6100): 크리 15%±2%p · 코어힛 (25/75)²=11.1% · 빗맞음 게이트 1/9 — 전부 통과.
+- **테스트 격리 사고 해결**: xUnit 병렬로 타 클래스가 전역 StatTable 초기화 → 합성 니케 ATK 오염 발견.
+  해법 = DEF 거대 타겟(최소뎀 1 고정) — 전역 상태 무관 타이밍 불변식(TotalDamage==HitCount). 2연속 그린.
+
+### 2. 가정 (M2 골든 대조에서 확정)
+- SG 펠릿 = 펠릿마다 독립 히트/개별 크리·코어 롤, W 계수 = 펠릿당.
+- 관통(pierce 다중 히트)·버스트 게이지 충전 = 미배선 (K9).
+
+### 3. 잔여
+- **M2 = in-game DPS 골든 대조 (사용자)**: 실캐릭(merged DB) + DummyTarget 파라미터로 RunOnce ↔ 실측 DPS.
+- K7 SkillRuntime 배선(ActiveBuffs 집계→ctx), K9 버스트 사이클(28f 상수 확보됨).
+
+---
+
 ## 2026-07-08 (6차) — K6 MetricsCollector (Wave1 완결)
 
 **범위**: `Engine/Metrics/MetricsCollector.cs` — record-every-instance(D4) 수집기. `RunResult`

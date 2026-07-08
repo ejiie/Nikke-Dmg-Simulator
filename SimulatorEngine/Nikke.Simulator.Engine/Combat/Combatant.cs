@@ -24,6 +24,9 @@ namespace Nikke.Simulator.Engine.Combat
         /// <summary>이 캐릭에게 현재 적용 중인 버프(자기 + 팀 전파). 만료 tick 에 제거. (K7 이 채움)</summary>
         public List<BuffInstance> ActiveBuffs { get; } = new();
 
+        /// <summary>발사 컨트롤 정책 (K3/K8 — Auto 4명/Manual 1명 축, IRotationController 와 별개). 기본 Auto.</summary>
+        public FiringControl Firing { get; set; } = new();
+
         public Combatant(CoreNikke nikke, string id)
         {
             Nikke = nikke ?? throw new ArgumentNullException(nameof(nikke));
@@ -31,11 +34,11 @@ namespace Nikke.Simulator.Engine.Combat
         }
 
         /// <summary>
-        /// 이번 히트의 <see cref="AttackContext"/> 를 만든다: Nikke 의 static 주입분 +
-        /// 활성 버프 집계(니케식 group-then-round) + 타겟/플래그.
-        /// 임플 = Wave2 K7/K8 (BuffAggregator). K0 스텁.
+        /// 이번 히트의 <see cref="AttackContext"/> 를 만든다 (K8 이행): Nikke 의 static 주입분
+        /// (스탯/OL/큐브/콜렉션/W). 활성 버프 집계(니케식 group-then-round)는 K7 BuffAggregator 가
+        /// 이 위에 얹는다 — 현재 ActiveBuffs 는 미소비 (M1 = 스킬·팀버프 없음).
         /// </summary>
         public AttackContext BuildHitContext()
-            => throw new NotImplementedException("BuffAggregator 배선 대기 (Wave2 K7/K8).");
+            => Nikke.BuildAttackContext();
     }
 }
