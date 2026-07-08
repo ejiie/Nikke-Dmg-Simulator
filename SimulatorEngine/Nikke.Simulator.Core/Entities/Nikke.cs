@@ -28,6 +28,13 @@ namespace Nikke.Simulator.Core.Entities
         //     FiringModel(K3)·AccuracyModel·ProperDistanceTable 이 소비. 데이터 없으면 Empty.
         public WeaponProfile Weapon { get; private set; }
 
+        // --- [타이밍 특수효과] 큐브+소장품 합산 (분수) — FiringModel 소비 (K8 배선 2026-07-08) ---
+        // ReloadSpeed(Resilience)·ChargeSpeed(Adjutant) = 감산형 시간 단축(사용자 확정 재장전 공식과 동일 원칙).
+        // BurstGauge(Quantum) = 노출만(소비 = K9). ReloadRounds(Bastion, 조건부) = K7 트리거 대기.
+        public double TimingReloadSpeed { get; private set; }
+        public double TimingChargeSpeed { get; private set; }
+        public double TimingBurstGauge { get; private set; }
+
         // --- [레벨/등급 정보] ---
         public int Level { get; private set; }
         public int Grade { get; private set; }
@@ -175,11 +182,16 @@ namespace Nikke.Simulator.Core.Entities
             // [H1] 큐브/소장품 공식 특수효과 중 **기초스탯 rate 버프**: stat × (1 + Σrate).
             //  - MaxHp(Vigor), Def(Endurance), MaxAmmo(Wingman/콜렉션) — 큐브+콜렉션 합산.
             //  (ElemAdv/Charge/Parts 등 대미지 효과는 BuildAttackContext 에서 소비.
-            //   ReloadSpeed/DamageTaken 등 타이밍·생존 효과는 미소비.)
+            //   ReloadSpeed/ChargeSpeed 는 Timing* 프로퍼티로 FiringModel 소비, DamageTaken 등 생존 = 미소비.)
             _collectionEffects = EffectTable.GetCollectionEffects(WeaponType, FavoriteItemLv);
             double hpRate = EffSum(EffectType.MaxHp);
             double defRate = EffSum(EffectType.Def);
             double ammoRate = EffSum(EffectType.MaxAmmo);
+
+            // [타이밍 특수효과] FiringModel 소비분 (분수 합산). Bastion(ReloadRounds)은 조건부 — K7.
+            TimingReloadSpeed = EffSum(EffectType.ReloadSpeed);
+            TimingChargeSpeed = EffSum(EffectType.ChargeSpeed);
+            TimingBurstGauge = EffSum(EffectType.BurstGauge);
 
             // [C] Consts 합산 (Effective Native Stat: baseAtk = atk_core + consts)
             double effectiveNativeHP = (coreHP + collHP + equipHP + cubeHP) * (1.0 + hpRate);
@@ -242,7 +254,7 @@ namespace Nikke.Simulator.Core.Entities
         ///  - [A2] 큐브 TrueDamageBonus → ctx.SumTrueDmgBuff (IsTrueDamage 시 B3 조건부 가산)
         ///
         /// 아직 반영하지 않는 것 (TODO):
-        ///  - AmmoChargeRate / ReloadTimeReduction (시간 축, 로테이션 시뮬에서 소비)
+        ///  - (해소 2026-07-08) 타이밍 축 = Timing* 프로퍼티 → FiringModel. 잔여 = Bastion(조건부, K7)
         ///  - DefIncreaseRate / DamageTakenReduction / CoverHpIncreaseRate (자기 생존 — DPS 스코프 외)
         /// </summary>
         public AttackContext BuildAttackContext()
@@ -264,7 +276,7 @@ namespace Nikke.Simulator.Core.Entities
             ctx.ChargeDmgBase = BasicAtkChargeDamage;
 
             // 큐브 + 소장품 공식 특수효과(enum/dict) → 대미지 브래킷.
-            // 기초스탯(MaxHp/Def/MaxAmmo)은 InitializeFinalStats 에서, 타이밍·생존 효과는 미소비.
+            // 기초스탯(MaxHp/Def/MaxAmmo)·타이밍(Reload/Charge/BurstGauge→Timing*)은 InitializeFinalStats 에서, 생존 = 미소비.
             RouteEffects(ref ctx, _cubeEffects);
             RouteEffects(ref ctx, _collectionEffects);
 

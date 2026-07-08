@@ -253,6 +253,28 @@ public class FiringModelTests
     }
 
     [Fact]
+    public void Charge_speed_buff_shortens_full_charge_subtractively()
+    {
+        // Adjutant 류 차지속도 버프 = 감산형: charge 1.0s × (1−0.5) = 0.5s = 30f
+        var m = new FiringModel(SrUp(), 6, new FiringControl { Mode = ControlMode.Auto }, Rng,
+                                chargeSpeedBuff: 0.5);
+        var fired = FireFrames(m, 200);
+        Assert.Equal(41, fired[0]);                       // spotFirst 12 + charge 29 (선차지 1f)
+        Assert.All(fired.Zip(fired.Skip(1)),
+            p => Assert.Equal(53, p.Second - p.First));   // last 12 + first 12 + charge 29
+    }
+
+    [Fact]
+    public void Character_reload_buff_stacks_with_control_policy_buff()
+    {
+        // 캐릭 고유(큐브 0.5) + 정책(0.5) 합산 = 1.0 → 즉시 장전 (감산형 하한 1f)
+        var ctl = new FiringControl { Mode = ControlMode.Manual, ReloadSpeedBuff = 0.5 };
+        var m = new FiringModel(Ar(), 5, ctl, Rng, reloadSpeedBuff: 0.5);
+        var fired = FireFrames(m, 300);
+        Assert.All(fired.Zip(fired.Skip(1)), p => Assert.Equal(5, p.Second - p.First)); // 무중단
+    }
+
+    [Fact]
     public void SrUp_with_full_reload_buff_never_depletes_ammo()
     {
         // UP형 + ≥100%: 발사 후 spot_last 창(비사격)에서 즉시 충전 → 장탄 무소모 (자동/수동 동일 — 사용자 확정)

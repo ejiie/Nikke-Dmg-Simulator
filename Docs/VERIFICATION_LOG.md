@@ -5,6 +5,20 @@
 
 ---
 
+## 2026-07-08 (9차) — 큐브/소장품 타이밍 특수효과 → FiringModel 배선
+
+**범위**: 파싱만 돼 있던 타이밍 특수효과 소비 배선 — `Nikke.TimingReloadSpeed/TimingChargeSpeed/TimingBurstGauge`
+(큐브+소장품 EffSum, InitializeFinalStats) → `FiringModel(reloadSpeedBuff, chargeSpeedBuff)` (정책
+`FiringControl.ReloadSpeedBuff` 와 **합산**) → `SimulationRunner` 주입. 하네스 스펙 출력에 큐브효과 표기.
+- ReloadSpeed(Resilience)·ChargeSpeed(Adjutant) = **감산형 시간 단축** (사용자 확정 재장전 공식과 동일 원칙;
+  차지의 ÷(1+Σ) 대안은 M2 대조 확인 항목).
+- BurstGauge(Quantum) = 노출만 (소비 K9) · ReloadRounds(Bastion 조건부) = K7 트리거 대기.
+- 테스트 — **127/127** (신규 3): 차지속도 0.5 → 사이클 83f→53f 프레임 정밀 · 캐릭 고유+정책 버프 합산 =
+  1.0 → 무중단 · Resilience lv15 표→EquipCube→`TimingReloadSpeed=0.2969` 흐름.
+→ M2 대조 시 재장전/차지 큐브 낀 캐릭도 그대로 사용 가능해짐 (스킬 패시브만 회피하면 됨).
+
+---
+
 ## 2026-07-08 (8차) — M2 검증 콘솔 하네스 + 라벨 정정 (5001=Maxwell)
 
 **범위**: `Nikke.Simulator.Harness`(신규 콘솔, sln 등록) — 실캐릭(merged DB)을 `RunOnce` 로 굴려
