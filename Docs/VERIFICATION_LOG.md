@@ -5,6 +5,20 @@
 
 ---
 
+## 2026-07-08 (6차) — K6 MetricsCollector (Wave1 완결)
+
+**범위**: `Engine/Metrics/MetricsCollector.cs` — record-every-instance(D4) 수집기. `RunResult`
+분해 필드 확정(K0 주석의 "K6 에서 확정" 이행): `HitCount` · `DamageByTag`("tag=value") ·
+`DamagePerSecond`(초 버킷). 히트당 고정 누적(리스트 미보관) — 54k 히트/run 에도 O(고유 태그) 메모리.
+`Build()` = 스냅샷(반복 호출 유효), `Reset()` = Evaluator N-run 재사용. run 창 밖 시각 = throw.
+
+테스트 — **116/116** (신규 6): 총합/소스별/태그 분해/초 버킷 경계(0.99 vs 1.0, 종료 경계)/스냅샷 불변/Reset/인자 방어.
+
+**Wave1 (K2~K6) 전부 완료** → 다음 = K8 통합(M1: SimClock+FiringModel+Loader+Metrics 배선, 단일캐릭
+in-game 골든 대조) ∥ K7 SkillRuntime(Runtime 축 소비).
+
+---
+
 ## 2026-07-08 (5차) — K4 공식 스킬 로더/번역기 + 버스트 전이 실측 반영
 
 **범위**: `Engine/Skills/` K4 구현 — skill_chains.json(D3) → C# DTO/Loader/Translator.

@@ -93,9 +93,9 @@
 - 목표: 고정 DEF/속성/거리/지오메트리 타겟 → 히트마다 AttackContext 의 DEF·`ProperDistanceBonus` 채움. ✅ `ITarget` 계약 갱신(`Distance/CoreRadius/BodyRadius`, `PopulateContext(+attackerWeaponType)`; 구 `InProperRange` 폐기 — 무기 비의존 bool 은 의미오류).
 - 스코프: `Engine/Targets/DummyTarget.cs`. 의존: K0. 수용: ✅ 컨텍스트 주입 단위테스트(`WeaponDataTests`). 잔여: 속성 상성(SumStrongElem) = ElementAdvantage 보류(사용자 결정)로 미반영, 코어힛은 K3(FiringModel)가 AccuracyModel 로 샘플링.
 
-### K6 — MetricsCollector
-- 목표: 히트마다 `Record(timeSec, sourceId, amount, tags)` → `RunResult`(총대미지 + 시간축/캐릭별/브래킷 분해).
-- 스코프: `Engine/Metrics/MetricsCollector.cs`. 의존: K0. 수용: 집계 정확성 테스트.
+### K6 — MetricsCollector — ✅ 완료 (2026-07-08, 6 테스트)
+- 구현: `Engine/Metrics/MetricsCollector.cs` — record-every-instance(D4), 히트당 고정 누적(인스턴스 리스트 미보관 = O(고유 태그) 메모리). `RunResult` 분해 필드 확정: `HitCount`·`DamageByTag`("tag=value" 키)·`DamagePerSecond`(초 버킷). `Build()`=스냅샷(반복 호출 가능)·`Reset()`(N-run 재사용). run 창 밖 시각 = throw(클럭 배선 버그 조기 검출).
+- 수용 ✅: `MetricsCollectorTests`(6) — 총합/소스별/태그분해/초버킷 경계/스냅샷 불변/Reset/인자 방어.
 
 ### K7 — SkillRuntime + BuffStore + BuffAggregator
 - 목표: 트리거 등록→이벤트 발생 시 조건평가→effects 적용(BuffInstance 스폰 / deal_damage 인스턴스). 활성버프 → AttackContext 합산(니케식 group-then-round). duration 만료, stack 분기.

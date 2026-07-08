@@ -136,7 +136,7 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 
 **ITarget** — `FinalDef` / `HasParts` / `Element` / `Distance` / `CoreRadius` / `BodyRadius` / `IsBoss` 제공 (2026-07-02 계약 갱신 — 구 `InProperRange` bool 폐기). `PopulateContext(ref ctx, attackerElement, attackerWeaponType)` 가 히트마다 DEF·`ProperDistanceBonus`(ProperDistanceTable)·`SumStrongElem`(상성 — 판정 유틸 보류 중) 채움. 코어힛/명중은 발사 시점 RNG 의존이라 FiringModel 이 `AccuracyModel` + `CoreRadius/BodyRadius` 로 샘플링. `DummyTarget`(고정, ✅ 2026-07-02) / `BossTarget`(데이터, K11).
 
-**MetricsCollector** — 히트마다 `Record(timeSec, sourceId, amount, tags{crit,core,bracket…})`. 집계: 총대미지 / 시간축 DPS / 캐릭별 기여 / 브래킷 분해.
+**MetricsCollector** — ✅ **구현 완료** (2026-07-08, `Engine/Metrics/MetricsCollector.cs`, 6 테스트). `Record(timeSec, sourceId, amount, tags{crit,core,bracket…})` → `Build()` = `RunResult{TotalDamage, DurationSec, HitCount, DamageBySource, DamageByTag("tag=value"), DamagePerSecond(초 버킷)}`. 스냅샷 반복 호출 가능 + `Reset()`(N-run 재사용). run 창 밖 시각 = throw (배선 버그 조기 검출).
 
 ---
 

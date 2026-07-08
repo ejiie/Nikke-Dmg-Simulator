@@ -24,7 +24,7 @@ namespace Nikke.Simulator.Engine.Metrics
 
     /// <summary>
     /// sim 1 run 결과 (ENGINE_GUIDE §5). 핵심 = <see cref="TotalDamage"/> (표본 1개).
-    /// 부가 분해(시간축 DPS / 캐릭별 / 브래킷)는 K6 에서 채워지며, 필드는 그때 확정.
+    /// 부가 분해 필드 = K6 확정 (2026-07-08, `MetricsCollector` 가 채움).
     /// </summary>
     public sealed class RunResult
     {
@@ -34,8 +34,18 @@ namespace Nikke.Simulator.Engine.Metrics
         /// <summary>sim 종료 시각(초). DPS = TotalDamage / DurationSec.</summary>
         public double DurationSec { get; init; }
 
-        /// <summary>Combatant 식별자 → 기여 대미지. (K6 채움)</summary>
+        /// <summary>Combatant 식별자 → 기여 대미지.</summary>
         public IReadOnlyDictionary<string, double> DamageBySource { get; init; }
             = new Dictionary<string, double>();
+
+        /// <summary>기록된 대미지 인스턴스 수 (record-every-instance, ENGINE_GUIDE D4).</summary>
+        public int HitCount { get; init; }
+
+        /// <summary>태그별 대미지 분해 — 키 = "tag=value" (예: "crit=True", "bracket=b3"). 태그 없는 히트 = 미포함.</summary>
+        public IReadOnlyDictionary<string, double> DamageByTag { get; init; }
+            = new Dictionary<string, double>();
+
+        /// <summary>시간축 분해 — 인덱스 = 초(floor), 값 = 그 1초 구간 대미지 합. 길이 = ceil(DurationSec).</summary>
+        public IReadOnlyList<double> DamagePerSecond { get; init; } = System.Array.Empty<double>();
     }
 }
