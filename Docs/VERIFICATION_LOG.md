@@ -5,6 +5,33 @@
 
 ---
 
+## 2026-07-08 (8차) — M2 검증 콘솔 하네스 + 라벨 정정 (5001=Maxwell)
+
+**범위**: `Nikke.Simulator.Harness`(신규 콘솔, sln 등록) — 실캐릭(merged DB)을 `RunOnce` 로 굴려
+in-game 실측과 대조하는 M2 도구.
+```
+nikke-harness list [필터]
+nikke-harness run <name_code> [--sec 60] [--runs N] [--manual] [--tap] [--charge-err s]
+                 [--reload-buff f] [--def d] [--dist m] [--core r] [--body r] [--db 경로]
+```
+출력 = 캐릭 스펙(ATK/W/탄창/무기 부류) + 총딜/DPS/히트(트리거×펠릿)/크리·코어·풀차지 분해/초당
+타임라인 + N-run 분포(mean/std/min/max). 데이터 로딩 = WPF `App.OnStartup` 패턴 동일.
+merged DB 부재 = 안내 후 종료(재생성법 표기). 구 콘솔(`SimulatorEngine/Core`) = 레거시 그대로.
+
+### 스모크 (합성 DB — roledata static + 가짜 유저 Lv200)
+- Maxwell(SR) auto 30s: 18발(83f 사이클 ✓), 풀차지 100%, N=3 std 2.5%.
+- Maxwell 수동+재장전버프 100%: **29발/30s** (61f 사이클 ✓, 재장전 무정지) — 수동컨 이득 +61% 정량화.
+- Emma(MG)+타겟(core r4/body r5): 명중원 수축→빗맞음 게이트→탄진(5s@60/s) 재장전 0구간 — 타임라인 전부 정합.
+
+### 라벨 정정 (하네스 스모크로 발견)
+- **name_code 5001 = Maxwell** (Red Hood = 5101). D1~K4 문서/테스트의 "Red Hood(5001)" 라벨 오류 —
+  검증 자체는 name_code 기반 bit-exact 라 **결과 유효**, 명칭만 전면 정정 (docs/tests/memory).
+- 부수 확인: **crit = 전 192캐릭 (15%, 150%) 단일** — `AttackContext` 기본값과 정합, per-char crit 배선 불필요.
+
+테스트 124/124 유지.
+
+---
+
 ## 2026-07-08 (7차) — K8 M1: 단일캐릭 통합 배선 (SimulationRunner.RunOnce 이행)
 
 **범위**: K0 동결 엔트리 `SimulationRunner.RunOnce(team, target, rng, durationSec)` 구현 —
@@ -63,7 +90,7 @@ in-game 골든 대조) ∥ K7 SkillRuntime(Runtime 축 소비).
 ### 2. 테스트 — 110/110 (신규 17 = `SkillChainLoaderTests`)
 - 로드: 192캐릭·87보스·14,249함수 0-throw + 무결성 통과.
 - D1 검증값 재확인: Emma s1 lv10 = HealCharacter 1077(0.1077)/OnHurtRatio 500 → Runtime 분류 ✓;
-  Red Hood burst lv10 = ChangeWeapon·쿨 4000·81342·차지 120f ✓.
+  Maxwell burst lv10 = ChangeWeapon·쿨 4000·81342·차지 120f ✓.
 - 전 함수 라우팅/분류 graceful — 미지 신값 = `?214` **11개뿐**(<0.1%).
 - 분포 스냅샷(우선순위 자료): StatAtk 1,763 · **UseCharacterSkillId 1,401**(연쇄 스킬 호출 — K7 필수 지원) ·
   Damage 686 · **AddDamage 620**(브래킷 미검증 최대 항목 — K8 대조 1순위) · HealCharacter 590 · StatDef 588.
@@ -121,7 +148,7 @@ bosses 87 (solo raid 변종 statenhance=230000; passive StateEffect 체인 + ski
 functions 14,249 (connected_function BFS 확장, Fx/아이콘 필드 제거, enum 이름 주석)
 state_effects 3,381
 ```
-스팟 재검증: Emma s1 lv10 = HealCharacter 1077/OnHurtRatio 500 · Red Hood burst lv10 = 81342 ✓.
+스팟 재검증: Emma s1 lv10 = HealCharacter 1077/OnHurtRatio 500 · Maxwell burst lv10 = 81342 ✓.
 
 ### 2. 모션 딜레이 — 단위·semantics 확정 (einkk `timeDataToFrame(t)=t×fps/100` = **1/100초**)
 | 필드 | 값(지배적) | 확정 의미 |
@@ -179,7 +206,7 @@ FunctionTable 19459 · CharacterSkillTable 4387 · StateEffectTable 5155 · Skil
   읽어 member index 가 밀렸었음(관측 Buff_icon@33 = Order30 + 3).
 
 ### 2. 풀루프 검증 (FUNCTIONTABLE_DECODE_PLAN §4) — 통과
-- Red Hood(5001) 버스트(ChangeWeapon) lv10 `skill_value=81342` ↔ roledata 설명 `813.42%` **bit-exact**.
+- Maxwell(5001) 버스트(ChangeWeapon) lv10 `skill_value=81342` ↔ roledata 설명 `813.42%` **bit-exact**.
   부가 발견: value_data 에 교체 무기 `shot_id=1010202` + 차지시간 `120`(=2초×60fps) — weapon-swap 의 실체.
 - Emma(5005) 스킬1 lv10: `HealCharacter(2) val=1077`(10.77%) + `OnHurtRatio(7) trig=500`(5%) ↔ 설명값 일치.
 - value 스케일 = ×10000(10000=100%) 확정. 시간류 = 60fps 프레임 단위 존재 확인.

@@ -117,7 +117,7 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 - **상태 전이 (전 무기, 확정)**: 엄폐→조준 = `SpotFirstDelaySec`(0.2s; 비사격 동안 재-arm, 차지무기는 종료 프레임에 charge 1f 선시작) / 조준→엄폐 = `SpotLastDelaySec`(0.2s — einkk 은 UP형에만 적용하나 **실게임은 전 무기**; 데이터도 전 무기 20).
 - **재장전 (원시 규칙 — 특례 금지)**: R1 = 비사격 프레임(엄폐·전이·re-click 갭)마다 진행 · R2 = 실효 시간 ≤ 창이면 그 안에서 완료. 공식 = **`reload_time × (1 − Σreload_speed_buff)`(감산형, 사용자 확정)** + 첫 재장전에 spot_last 가산(einkk). `ReloadBulletRate` 부분장전. **≥100% 버프 = re-click 이내 즉시 장전(확정)** → 톡톡이 장탄 무소모 / 비차지·maintain형 탄0도 re-click 내 충전 — R1/R2 에서 창발, 하드코딩 금지.
 - **SR/RL 3부류 (per-char 데이터 판별 — 무기타입 상수 금지 재확인)**:
-  ① `input=UP, maintain=0`(68명): 발사 후 강제 엄폐 복귀 — 사이클 = last(0.2)+first(0.2)+charge (Red Hood 1.4s).
+  ① `input=UP, maintain=0`(68명): 발사 후 강제 엄폐 복귀 — 사이클 = last(0.2)+first(0.2)+charge (Maxwell 1.4s).
   ② `input=UP, maintain>0`(SBS 0.23s·Raven 0.83s·A2 0.84s): **복귀 없음, 자체 후딜레이 = maintain_fire_stance**(대기 = first+maintain, einkk). `uptype_fire_timing`(비율)로 투사체 발사 이벤트 시점 보정. SBS 는 charge 0.3s 라 톡톡이처럼 보임.
   ③ `input=DOWN_Charge`(Liberalio·Neon:VE·Vesti:TU·Anis:Star·Cinderella): **only 풀차지** — 홀드 시 자동 풀차지 반복, 릴리즈 발사 불가, 복귀 없음, rate_of_fire 가 사이클 gate. (④ `DOWN` = Pascal 평사 RL.)
 - **컨트롤 정책 축 (Auto 4명 / Manual 1명, IRotationController 와 별개)**: Manual profile = re-click 갭 **[0.02, 0.028]s**(확정; 프레임 반올림 1~2f) + 차지 오차 ε(프로파일 구간, 정수 프레임; δ=0 결정론 모드 필수). Manual 풀차지 루틴 = first(0.2)+[charge(1+ε)+reclick]×장탄+last(0.2) — 조준 유지로 발당 first 미지불. Manual 톡톡이 = [first(0.2)+reclick] 반복(UP형; 구 실측 0.215 와 부합).
