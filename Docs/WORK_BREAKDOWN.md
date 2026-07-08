@@ -84,10 +84,10 @@
 - 구현: `Engine/FiringModel.cs` — 60fps 프레임 상태기계 (SimClock 배선·대미지/게이지 이벤트 발행 = K8 몫). ENGINE_GUIDE §5 확정 스펙 전부: RPM accumulator(1발/프레임 구조 캡 → MG 실효 60/s) · MG ramp+점진 감쇠 · 전이 spot 0.2s 양방향 · SR/RL 3부류(UP 사이클 83f≈1.4s / maintain 자체후딜 / DOWN_Charge only풀차지+rate gate) · 재장전 R1/R2(감산형 공식, ≥100% 버프 = 무한탄창 **창발** 검증) · `ControlMode.Auto/Manual`(re-click [0.02,0.028]s, 수동 풀차지 61f≈1.02s·톡톡이 14f≈0.23s = 사용자 실측 재현) · SG 펠릿 · 명중원 수축/회복.
 - 수용 ✅: `FiringModelTests`(15) — AR 12/s·MG 스핀업/감쇠·SR 사이클·수동 루틴·무한탄창·펠릿 전부 프레임 단위 검증. 잔여 = K8 배선(발사→AttackContext/AccuracyModel.RollCoreHit), 버스트 stage 딜레이 상수(측정① 대기).
 
-### K4 — 스킬 데이터 Loader + Translator — ⚠ 방향 재결정 (2026-07-08)
-- **데이터원 = 공식 FunctionTable** (사용자 결정; `FUNCTIONTABLE_DECODE_PLAN.md` §0, `SKILL_RUNTIME_REFERENCE.md`). skills_parsed v3 는 검증 참조.
-- 목표: KP3 산출(skill→function 체인 JSON) → C# DTO(FunctionData: type/value/target/standard/trigger/duration) 역직렬화 + static/runtime 2축 분류(DESIGN §5). 공식 enum(FunctionType 77·TimingTrigger·Standard·Target·Duration) 미러 + 미지값 graceful.
-- 스코프: `Engine/Skills/` (신규 FunctionData DTO/Loader/Translator; 기존 `SkillParsedDto.cs`=v3 계약 보존·비주력). 의존: K0, KP3. 수용: 전 니케/보스 함수 로드 0-throw, FunctionType→브래킷(B2~B5)/스탯/타이밍 매핑표 테스트.
+### K4 — 스킬 데이터 Loader + Translator — ✅ 완료 (2026-07-08, 17 테스트)
+- **데이터원 = 공식 FunctionTable** (사용자 결정; `FUNCTIONTABLE_DECODE_PLAN.md` §0). skills_parsed v3 는 검증 참조.
+- 구현: `Engine/Skills/` — `OfficialSkillEnums.cs`(공식 enum 미러 8종, memorypack_decode dict 기계생성) · `SkillChainDto.cs`(skill_chains.json 1:1, enum=원시 int 보존+Typed* 접근, `ValueAsFraction` ×10000 해석) · `SkillChainLoader.cs`(TryLoad — 파일 부재=graceful false, 참조 무결성 검증) · `SkillTranslator.cs`(**2축 분류** Classify: 트리거·조건 無+영구=Static/그 외 Runtime + **EffectRoute 매핑표**: 확실 타입만 슬롯 배정, 미검증=Unverified(K8 승격 대상), 신값=Unknown no-op).
+- 수용 ✅: `SkillChainLoaderTests`(17) — 192캐릭/87보스/14,249함수 로드+무결성 0-throw, Emma·Red Hood D1 검증값 재확인, 전 함수 라우팅/분류 graceful(미지 신값 ?214 ×11개뿐). 분포 스냅샷: StatAtk 1763 · UseCharacterSkillId 1401(연쇄 호출 — K7 필수) · Damage 686 · AddDamage 620(브래킷 미검증 — K8 대조 우선).
 
 ### K5 — ITarget: DummyTarget — 🟢 구현 (2026-07-01 유실→07-02 복구 통합)
 - 목표: 고정 DEF/속성/거리/지오메트리 타겟 → 히트마다 AttackContext 의 DEF·`ProperDistanceBonus` 채움. ✅ `ITarget` 계약 갱신(`Distance/CoreRadius/BodyRadius`, `PopulateContext(+attackerWeaponType)`; 구 `InProperRange` 폐기 — 무기 비의존 bool 은 의미오류).
@@ -139,7 +139,8 @@
 - ✅ 장비표·큐브·소장품(base+특수효과): 공식 blablalink JSON 으로 **연동 완료** (Core stub 해소).
 - ✅ 무기 데이터(roledata `weaponData`): 발사속도 ramp/탄창/차지/명중원/모션딜레이/버스트게이지/멀티펠릿 → `WeaponProfile`+모델 **연동 완료**(2026-07-01 유실→07-02 복구). 적정거리 구간도 공식 bonusrange 로 확보.
 - ✅ 발사/모션/재장전 스펙 확정(2026-07-08, 사용자 실측+einkk+데이터 — ENGINE_GUIDE §5): 전이 0.2s 전 무기 · 재장전 감산형 공식+R1/R2 · SR/RL 3부류(input/maintain 필드) · re-click [0.02,0.028]s · 풀버 10s=진입 기산.
-- 잔여 실측 = **①3버스트→풀버스트 진입 딜레이**(데이터 없음 확인 — ConfigBattle 스캔) + **②버스트 시전 사격공백 실존 여부/크기**(per-char; 정의 = 버스트 스킬 사용 순간 그 캐릭 평타 사격이 멈추는 시간) + ProperDistance 보너스 크기(0.3) + 타겟 core/body 반지름 + `RLV2SwitchDelayTime`(=0.2s, ConfigBattle) 의미 + 타이밍/조건부 큐브효과(sim 루프 대기).
+- ✅ ①3버스트→풀버스트 진입 딜레이 = **0.46s ≈ 28프레임** (사용자 영상 실측 2026-07-08). ②버스트 시전 사격공백 = **무시 결정**(사용자).
+- 잔여 실측 = ProperDistance 보너스 크기(0.3) + 타겟 core/body 반지름 + `RLV2SwitchDelayTime`(=0.2s, ConfigBattle) 의미 + 타이밍/조건부 큐브효과(sim 루프 대기).
 
 ---
 
