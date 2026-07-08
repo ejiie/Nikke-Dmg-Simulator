@@ -110,7 +110,7 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 
 **SimClock** — 이산이벤트 큐. `Schedule(double atSec, Action ev)` / `Run(double untilSec)`. 최소시각 이벤트 pop→clock 전진→실행(새 이벤트 예약 가능). 동일시각 tie-break 결정적(삽입순). RNG 외 결정적.
 
-**FiringModel** — Combatant+무기 → 발사 이벤트 생성. 발사속도 권위 = **`Nikke.Weapon`(WeaponProfile, per-char)**. 참조 구현 = nikke-einkk `nikke.dart` + **사용자 실측 확정(2026-07-08, 3.5년 플레이 ground truth)**:
+**FiringModel** — ✅ **구현 완료** (2026-07-08, `Engine/FiringModel.cs` — 60fps 프레임 상태기계 + `ControlMode.Auto/Manual`·`FireStyle` 축, 15 테스트; SimClock 배선/이벤트 발행 = K8). 발사속도 권위 = **`Nikke.Weapon`(WeaponProfile, per-char)**. 참조 구현 = nikke-einkk `nikke.dart` + **사용자 실측 확정(2026-07-08, 3.5년 플레이 ground truth)**:
 - **발사 accumulator**: 매 프레임(비사격 포함) `countdown -= rateOfFire(RPM)`, 발사 시 `+= 60×fps`(=3600) — 구조적 1발/프레임 = MG nominal 70/s → 실효 60/s (`FireRateAtShot` 캡과 일치).
 - **MG ramp**: 발사마다 `+changePerShot` clamp[start,end]. **리셋 = 점진 감쇠** — 비사격 프레임마다 `(end−start)/reset_time` 하강 (즉시 리셋 아님; 부분 중단 = 부분 손실).
 - **상태 전이 (전 무기, 확정)**: 엄폐→조준 = `SpotFirstDelaySec`(0.2s; 비사격 동안 재-arm, 차지무기는 종료 프레임에 charge 1f 선시작) / 조준→엄폐 = `SpotLastDelaySec`(0.2s — einkk 은 UP형에만 적용하나 **실게임은 전 무기**; 데이터도 전 무기 20).

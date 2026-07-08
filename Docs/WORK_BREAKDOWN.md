@@ -80,9 +80,9 @@
 - 스코프: `Engine/Clock/SimClock.cs`(인터페이스 옆). 의존: K0. 수용: ✅ `SimClockTests.cs` 10(순서/동시각 FIFO/재귀예약 2종/과거예약 throw/분할Run/NowSec 단조·종료=untilSec/빈큐/창밖/경계포함).
 - 임플: `PriorityQueue<Action,(double,long)>` + 단조증가 seq 로 동시각 삽입순 결정적 고정(.NET PQ 동순위 불안정 보정). `Run(untilSec)` = untilSec 포함·종료 시 `NowSec=untilSec` 클램프(resumable). 계약 무수정.
 
-### K3 — FiringModel
-- 목표: Combatant+무기 → 발사 이벤트. **정밀 스펙 = ENGINE_GUIDE §5 FiringModel** (einkk 검증 2026-07-08): RPM accumulator(1발/프레임 구조 캡) · MG ramp+점진 감쇠 리셋 · 모션 `SpotFirst/LastDelaySec`(0.2s; SR 사이클 1.4s) · maintain_fire_stance · 차지 = `IsChargeWeapon`(Pascal=비차지 RL) · SG `ShotCount` 펠릿 · 재장전(부분장전, 엄폐 중 진행) · `IsFullCharge` + `AccuracyModel.RollCoreHit`→`IsCoreHit`.
-- 스코프: `Engine/FiringModel.cs`. 입력: **`Nikke.Weapon`(WeaponProfile — fire-rate 권위)** + AccuracyModel + ITarget(CoreRadius/BodyRadius). WeaponStatTable 은 레거시(tap 간격 실측값만 잔존 용도). 의존: K0. 수용: 무기별 발사 타임라인이 RPS/탄창/재장전/차지/MG ramp/SR 사이클(1.4s)에 정합.
+### K3 — FiringModel — ✅ 완료 (2026-07-08, 15 단위테스트)
+- 구현: `Engine/FiringModel.cs` — 60fps 프레임 상태기계 (SimClock 배선·대미지/게이지 이벤트 발행 = K8 몫). ENGINE_GUIDE §5 확정 스펙 전부: RPM accumulator(1발/프레임 구조 캡 → MG 실효 60/s) · MG ramp+점진 감쇠 · 전이 spot 0.2s 양방향 · SR/RL 3부류(UP 사이클 83f≈1.4s / maintain 자체후딜 / DOWN_Charge only풀차지+rate gate) · 재장전 R1/R2(감산형 공식, ≥100% 버프 = 무한탄창 **창발** 검증) · `ControlMode.Auto/Manual`(re-click [0.02,0.028]s, 수동 풀차지 61f≈1.02s·톡톡이 14f≈0.23s = 사용자 실측 재현) · SG 펠릿 · 명중원 수축/회복.
+- 수용 ✅: `FiringModelTests`(15) — AR 12/s·MG 스핀업/감쇠·SR 사이클·수동 루틴·무한탄창·펠릿 전부 프레임 단위 검증. 잔여 = K8 배선(발사→AttackContext/AccuracyModel.RollCoreHit), 버스트 stage 딜레이 상수(측정① 대기).
 
 ### K4 — 스킬 데이터 Loader + Translator — ⚠ 방향 재결정 (2026-07-08)
 - **데이터원 = 공식 FunctionTable** (사용자 결정; `FUNCTIONTABLE_DECODE_PLAN.md` §0, `SKILL_RUNTIME_REFERENCE.md`). skills_parsed v3 는 검증 참조.

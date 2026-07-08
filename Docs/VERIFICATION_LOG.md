@@ -5,6 +5,40 @@
 
 ---
 
+## 2026-07-08 (4차) — K3 FiringModel 구현 (Wave1 마지막 대형 청크)
+
+**범위**: `Engine/FiringModel.cs` — 60fps 프레임 스텝 발사 상태기계. 3차 확정 스펙(사용자 실측 + einkk)
+전부 구현. SimClock 배선·대미지/게이지 이벤트 발행 = K8 몫 (이 클래스 = 타이밍 전담, `AdvanceFrame()`).
+
+### 1. 구현 범위
+- RPM accumulator(`−=RPM`/프레임, 발사 시 `+=3600`) — 구조적 1발/프레임 = MG 실효 60/s.
+- MG ramp(발사당 +100RPM clamp) + **점진 감쇠**(비사격 프레임당 (end−start)/reset_time).
+- 상태 전이 spot_first/last 0.2s 양방향(전 무기) · 차지무기 = 전이 말 프레임 charge 1f 선시작(einkk).
+- SR/RL 3부류: UP(발사 후 강제 복귀) / UP+maintain(자체 후딜레이 = spot_first+maintain) /
+  DOWN_Charge(only 풀차지, rate gate; Tap 지정 시 ctor throw).
+- 재장전 R1/R2: 감산형 `reload×(1−Σ버프)` 하한 1프레임 + 자동 탄0 = spot_last 가산·spot_first 재지불,
+  수동 탄0 = 전이 생략. 비사격 프레임(복귀/re-click 갭) 수동 재장전 진행, 발사 시 리셋.
+- `ControlMode.Auto/Manual` + `FireStyle.FullCharge/Tap` + re-click [0.02,0.028]s(프레임 샘플) +
+  수동 차지오차 프로파일(기본 0 = 결정론).
+- 명중원 발사 수축/비사격 회복. SG 펠릿(트리거당 ShotCount, 탄약 1).
+
+### 2. 테스트 — 93/93 (신규 15 = `FiringModelTests`, 프레임 단위 결정론 검증)
+```
+AR 12발/s(주기 5f) · MG 스핀업→캡(말기 60발/60f)·감쇠 곡선(50f 중간값→110f 바닥) · SG 펠릿10/탄1
+SR auto 사이클 83f≈1.4s(첫발 71f) · 수동 풀차지 61f≈1.02s · 수동 톡톡이 14f≈0.23s(비풀차지)
+maintain(Raven형) 121f · DOWN_Charge 60f(전 발사 풀차지, Tap=throw)
+재장전: auto 탄0 f33→f118 재개(0.2+1.0+0.2) · manual f94(전이 생략) ·
+버프 100% = 주기 무중단(무한탄창 창발) · SR(UP)+100% = 장탄 무소모(spot_last 창 충전)
+```
+사용자 실측 루틴(풀차지 1.02~1.03s/발, 톡톡이 0.22~0.26s)과 프레임 정합.
+
+### 3. 잔여
+- K8: SimClock 프레임 루프 + 발사→AttackContext(BuildAttackContext+RollCoreHit/RollCrit)→Damage→Metrics 배선.
+- 버스트 stage 간 딜레이 상수 주입 자리(측정① 3버→풀버 = 사용자 영상 실측 대기).
+- Wave1 잔여 = K4(공식 스킬 로더)·K6(Metrics).
+
+---
+
 ## 2026-07-08 (2차) — D3 체인 조립 + 모션 딜레이 심층 (einkk 발사 루프 검증)
 
 **범위**: ① 니케/보스 skill→function 체인 조립(`staticdata_skill_chains.py`), ② 모션 딜레이/발사 루프
