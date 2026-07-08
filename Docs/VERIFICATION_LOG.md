@@ -5,6 +5,25 @@
 
 ---
 
+## 2026-07-08 (10차) — 타이밍 감쇠식 정정: 항별 소수 둘째자리 사사오입 (사용자 확정)
+
+**정정**: 9차의 `time × (1 − Σbuff)` 는 근사 — 실게임 공식(사용자 확정)은
+```
+effective = base − Σᵢ round(base × buffᵢ, 2)    ← 항별 소수 둘째자리 사사오입 (AwayFromZero)
+```
+차지·재장전 동일. B2 per-term floor 와 동류의 니케식 **항별 라운딩** — Σ 후 곱셈으로 대체 불가
+(예: base 1.0, 항 [0.145, 0.145] → 항별 0.15+0.15=0.30 → 0.70s vs Σ곱셈 0.71s).
+
+**구현**: `FiringModel.ApplyTimingReduction(baseSec, terms)` — 개별 항 리스트 필요해져
+`Nikke.TimingReloadSpeedTerms/TimingChargeSpeedTerms`(큐브·소장품 각 1항) 신설, 정책값
+(`FiringControl.ReloadSpeedBuff`)도 1항으로 합류. **라운딩 = decimal 경유** — double 이진 오차
+(0.145 → 0.1449…9 → 오반올림 0.14)를 차단해야 사사오입 정확 (게임 원천 = ×10000 십진 정수).
+
+테스트 — **129/129** (신규 2 + 기존 갱신): 항별 vs Σ곱셈 구분 케이스(0.70≠0.71, 프레임 42f≠43f),
+사사오입 확인(banker's 배제), 하한 0, 재장전 f76 프레임 정밀, 기존 합산·즉시장전 케이스 유지.
+
+---
+
 ## 2026-07-08 (9차) — 큐브/소장품 타이밍 특수효과 → FiringModel 배선
 
 **범위**: 파싱만 돼 있던 타이밍 특수효과 소비 배선 — `Nikke.TimingReloadSpeed/TimingChargeSpeed/TimingBurstGauge`
