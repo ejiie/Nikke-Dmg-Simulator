@@ -161,7 +161,7 @@ SkillChainLoader ──(skill_chains.json, 공식)──> SkillTranslator ──
 ---
 
 ## 8. 참조
-- 병렬 작업 청킹·순서(멀티 에이전트): [`Docs/WORK_BREAKDOWN.md`](WORK_BREAKDOWN.md)
+- 작업 순서·마일스톤(줄기): [`Docs/ROADMAP.md`](ROADMAP.md) + 가지 [`Docs/tasks/`](tasks/) (구 WORK_BREAKDOWN 대체, 2026-07-08)
 - 방향·공식 권위: [`Docs/DESIGN.md`](DESIGN.md)
 - 스킬 데이터: `Docs/SKILL_RUNTIME_REFERENCE.md` + `Engine/Skills/OfficialSkillEnums.cs` (공식 enum 미러)
 - 공식 유도: 루트 `_dmg_probe.py` / `_dmg_calibrate.py`, golden: `Nikke.Simulator.Tests/DamageFormulaGoldenTests.cs`
