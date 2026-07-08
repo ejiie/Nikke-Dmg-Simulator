@@ -50,7 +50,7 @@ namespace Nikke.Simulator.Core.Stats
         /// </summary>
         public static void Initialize(string csvPath)
         {
-            if (!File.Exists(csvPath)) throw new FileNotFoundException("CSV 파일이 없어, 허접군!");
+            if (!File.Exists(csvPath)) throw new FileNotFoundException($"stat_table.csv 없음: {csvPath}");
 
             // Latin1 = 바이트 1:1 디코딩(절대 throw 안 함). 숫자 셀은 ASCII 라 안전; 한글 헤더는 미사용.
             var rows = ParseCsv(File.ReadAllText(csvPath, System.Text.Encoding.Latin1));

@@ -21,7 +21,7 @@ EXIT_NO_USER_DATA = 11    # 로그인은 됐지만 유저 데이터를 하나도
 EXIT_INCOMPLETE = 12      # replay 디테일 수 < roster 수 (부분 수집) → 저장 생략
 EXIT_LOGIN_FAIL = 13      # 로그인 단계 실패 (셀렉터 불일치·잘못된 계정·비밀정보 누락)
 
-# ── [가키짱의 절대 경로 마법] ──
+# ── 절대 경로 (스크립트 위치 기준) ──
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_DIR = os.path.join(CURRENT_DIR, "..", "..", "Database", "raw")
 os.makedirs(RAW_DIR, exist_ok=True)

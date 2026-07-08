@@ -50,7 +50,11 @@ namespace Nikke.Simulator.Engine
             foreach (var c in team)
             {
                 int maxAmmo = Math.Max(1, (int)Math.Round(c.Nikke.FinalBaseMaxAmmo));
-                units.Add((c, new FiringModel(c.Nikke.Weapon, maxAmmo, c.Firing ?? new FiringControl(), rng)));
+                // 큐브/소장품 타이밍 특수효과(Resilience 재장전·Adjutant 차지) = 개별 항으로 주입
+                // (항별 반올림 감쇠식 — FiringModel.ApplyTimingReduction)
+                units.Add((c, new FiringModel(c.Nikke.Weapon, maxAmmo, c.Firing ?? new FiringControl(), rng,
+                                              reloadSpeedBuffs: c.Nikke.TimingReloadSpeedTerms,
+                                              chargeSpeedBuffs: c.Nikke.TimingChargeSpeedTerms)));
             }
 
             void Tick(int frame)

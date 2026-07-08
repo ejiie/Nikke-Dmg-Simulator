@@ -5,7 +5,7 @@ namespace Nikke.Simulator.Core.Data.Dto
     /// </summary>
     public class OverloadOptionDto
     {
-        public string type { get; set; }     // 예: "StatAtk", "StatMaxAmmo", "StatCriticalDamage"
+        public string type { get; set; }     // 예: "StatAtk", "StatAmmoLoad", "StatCriticalDamage"
         public double value { get; set; }    // 예: 0.1181, 1644
         public string val_type { get; set; } // 예: "Percent", "Integer"
     }

@@ -23,7 +23,7 @@
                          ┌─────────────────────────── Python 독립 트랙 (언제든 병렬) ───────────┐
                          │ KP1 파서 backlog   KP2 데이터 실측(장비표·큐브·거리)                  │
                          └──────────────────────────────────┬───────────────────────────────────┘
-                                                             │ (skills_parsed v3 / csv; no-op 내성)
+                                                             │ (공식 skill_chains / csv; no-op 내성)
  WAVE0 (serial, blocks all)                                  ▼
    K0 Engine 프로젝트 + 계약 스텁 ───────┬───────────────────────────────────────────┐
    K1 W단위픽스 + foundation검증(M0) ─────┤ (정확성 게이트)                            │
@@ -66,7 +66,7 @@
 
 ### K0 — Engine 프로젝트 + 계약 스텁 ★blocks all  — 🟢 빌드 완료, 리뷰 동결 대기
 - 목표: `Nikke.Simulator.Engine` 프로젝트(ref Core) 생성 + **모든 공유 계약을 컴파일되는 스텁으로** 박고 동결.
-- 스코프: 새 csproj + sln 등록. `ISimClock`, `IRotationController`, `ITarget`, `Combatant`, `SkillParsedDto` 패밀리, `BuffInstance`, `IMetricsSink`, 엔트리 `SimulationRunner.RunOnce(teams, target, rng) → RunResult{ TotalDamage, … }`.
+- 스코프: 새 csproj + sln 등록. `ISimClock`, `IRotationController`, `ITarget`, `Combatant`, `BuffInstance`, `IMetricsSink`, 엔트리 `SimulationRunner.RunOnce(teams, target, rng) → RunResult{ TotalDamage, … }`.
 - 산출: 0-에러 빌드 + 동결된 계약. **이게 W1 전체를 푼다.**
 - 의존: 없음. 수용: ✅ 빌드 통과(2026-06-30, 4 프로젝트 0 에러) · [~] 계약 시그니처 리뷰 승인(사용자 리뷰 후 read-only 동결).
 
@@ -87,7 +87,7 @@
 ### K4 — 스킬 데이터 Loader + Translator — ✅ 완료 (2026-07-08, 17 테스트)
 - **데이터원 = 공식 FunctionTable** (사용자 결정; `FUNCTIONTABLE_DECODE_PLAN.md` §0). skills_parsed v3 는 검증 참조.
 - 구현: `Engine/Skills/` — `OfficialSkillEnums.cs`(공식 enum 미러 8종, memorypack_decode dict 기계생성) · `SkillChainDto.cs`(skill_chains.json 1:1, enum=원시 int 보존+Typed* 접근, `ValueAsFraction` ×10000 해석) · `SkillChainLoader.cs`(TryLoad — 파일 부재=graceful false, 참조 무결성 검증) · `SkillTranslator.cs`(**2축 분류** Classify: 트리거·조건 無+영구=Static/그 외 Runtime + **EffectRoute 매핑표**: 확실 타입만 슬롯 배정, 미검증=Unverified(K8 승격 대상), 신값=Unknown no-op).
-- 수용 ✅: `SkillChainLoaderTests`(17) — 192캐릭/87보스/14,249함수 로드+무결성 0-throw, Emma·Red Hood D1 검증값 재확인, 전 함수 라우팅/분류 graceful(미지 신값 ?214 ×11개뿐). 분포 스냅샷: StatAtk 1763 · UseCharacterSkillId 1401(연쇄 호출 — K7 필수) · Damage 686 · AddDamage 620(브래킷 미검증 — K8 대조 우선).
+- 수용 ✅: `SkillChainLoaderTests`(17) — 192캐릭/87보스/14,249함수 로드+무결성 0-throw, Emma·Maxwell D1 검증값 재확인, 전 함수 라우팅/분류 graceful(미지 신값 ?214 ×11개뿐). 분포 스냅샷: StatAtk 1763 · UseCharacterSkillId 1401(연쇄 호출 — K7 필수) · Damage 686 · AddDamage 620(브래킷 미검증 — K8 대조 우선).
 
 ### K5 — ITarget: DummyTarget — 🟢 구현 (2026-07-01 유실→07-02 복구 통합)
 - 목표: 고정 DEF/속성/거리/지오메트리 타겟 → 히트마다 AttackContext 의 DEF·`ProperDistanceBonus` 채움. ✅ `ITarget` 계약 갱신(`Distance/CoreRadius/BodyRadius`, `PopulateContext(+attackerWeaponType)`; 구 `InProperRange` 폐기 — 무기 비의존 bool 은 의미오류).
@@ -131,7 +131,7 @@
 - 데이터원이 공식 FunctionTable 로 재결정되어 LLM 재파싱 backlog 은 중단. skills_parsed.json(v3)은 현상태로 검증 참조만. (구 스코프: bailout 재파싱·token enum화 등 — 기록용으로 보존.)
 
 ### KP3 — 공식 스킬 데이터 디코드+조립 (Python, ★D1 — K4/K7 데이터원)
-- **디코드+검증 ✅ (2026-07-08, D1)**: 스키마 이식 완료 → FunctionTable(19459)/CharacterSkillTable(4387)/StateEffectTable(5155)/SkillInfoTable(9280)/CharacterTable(1905, surface_category drift 교정) **전부 clean**. 검증 통과: 니케 스킬 수치 roledata bit-exact(Red Hood 813.42%/Emma 10.77%+5%트리거), value=×10000, 보스 passive 정합, enum 미지값=신값뿐. 상세 = `FUNCTIONTABLE_DECODE_PLAN.md` §0.
+- **디코드+검증 ✅ (2026-07-08, D1)**: 스키마 이식 완료 → FunctionTable(19459)/CharacterSkillTable(4387)/StateEffectTable(5155)/SkillInfoTable(9280)/CharacterTable(1905, surface_category drift 교정) **전부 clean**. 검증 통과: 니케 스킬 수치 roledata bit-exact(Maxwell 813.42%/Emma 10.77%+5%트리거), value=×10000, 보스 passive 정합, enum 미지값=신값뿐. 상세 = `FUNCTIONTABLE_DECODE_PLAN.md` §0.
 - **조립(D3) ✅ (2026-07-08)**: `staticdata_skill_chains.py` → `assembled/skill_chains.json`(**gitignore** — 사용자 결정: GitHub=gitignore, 로컬 생성). 니케 192(스킬레벨 5,750; 결손=3001 스킬2 부재 1명뿐) + 솔로레이드 보스 87(statenhance 230000; passive+use/hurt 체인) + 사용 함수 14,249(connected BFS, Fx 필드 제거+enum 이름 주석) + state_effects 3,381.
 - 의존: StaticData zip(qa-260702, 로컬). 소비처 = K4(다음).
 
@@ -157,4 +157,4 @@
 ## 6. 참조
 - 방향·목표·tier: `Docs/DESIGN.md` (§0.5 tiers, §6 열린항목)
 - 엔진 컴포넌트 계약·마일스톤·MUST: `Docs/ENGINE_GUIDE.md`
-- 스킬 스키마: `DataPipeline/schema/skill_schema_legend.txt`
+- 스킬 데이터: `Docs/SKILL_RUNTIME_REFERENCE.md` (공식 FunctionTable 체인)

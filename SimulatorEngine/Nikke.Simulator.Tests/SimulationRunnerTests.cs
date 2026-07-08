@@ -139,6 +139,23 @@ public class SimulationRunnerTests
             () => SimulationRunner.RunOnce(team, MinDamageTarget(), rng, 0));
     }
 
+    [Fact]
+    public void Cube_timing_effects_flow_from_table_to_nikke_properties()
+    {
+        // Resilience(1000303) lv15 = 재장전 속도 29.69% — 표 → EquipCube → Timing* → FiringModel 경로의 앞단
+        try
+        {
+            Nikke.Simulator.Core.Data.Constants.EffectTable.InitializeCube(
+                Nikke.Simulator.Core.Data.JsonProvider.GetSmartDatabasePath("cube_effect_table.json"));
+        }
+        catch { return; } // 표 없는 환경 = skip
+
+        var nikke = MakeNikke(ArWeapon(), "Assault Rifle", 60);
+        nikke.EquipCube(1000303, 15);
+        Assert.Equal(0.2969, nikke.TimingReloadSpeed, 9);
+        Assert.Equal(0.0, nikke.TimingChargeSpeed, 9);
+    }
+
     // ───────────────────── 확률 축 (시스템 RNG 수렴 — INV: 고정 시드 금지) ─────────────────────
 
     [Fact]

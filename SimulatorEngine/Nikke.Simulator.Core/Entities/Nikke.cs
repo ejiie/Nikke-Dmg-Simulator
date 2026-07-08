@@ -28,6 +28,16 @@ namespace Nikke.Simulator.Core.Entities
         //     FiringModel(K3)·AccuracyModel·ProperDistanceTable 이 소비. 데이터 없으면 Empty.
         public WeaponProfile Weapon { get; private set; }
 
+        // --- [타이밍 특수효과] 큐브+소장품 — FiringModel 소비 (K8 배선 2026-07-08) ---
+        // 감쇠 공식(사용자 확정): time = base − Σᵢ round(base × buffᵢ, 2)  ← **항별** 소수 둘째자리 사사오입.
+        // 항별 반올림이라 Σ값이 아니라 **개별 항 리스트**가 필요 (*Terms). Σ 프로퍼티는 표시/요약용.
+        // BurstGauge(Quantum) = 노출만(소비 = K9). ReloadRounds(Bastion, 조건부) = K7 트리거 대기.
+        public double TimingReloadSpeed { get; private set; }
+        public double TimingChargeSpeed { get; private set; }
+        public double TimingBurstGauge { get; private set; }
+        public IReadOnlyList<double> TimingReloadSpeedTerms { get; private set; } = Array.Empty<double>();
+        public IReadOnlyList<double> TimingChargeSpeedTerms { get; private set; } = Array.Empty<double>();
+
         // --- [레벨/등급 정보] ---
         public int Level { get; private set; }
         public int Grade { get; private set; }
@@ -74,6 +84,16 @@ namespace Nikke.Simulator.Core.Entities
         private double EffSum(EffectType t)
             => (_cubeEffects.TryGetValue(t, out var a) ? a : 0.0)
              + (_collectionEffects.TryGetValue(t, out var b) ? b : 0.0);
+
+        /// <summary>개별 버프 항 목록 (0 제외) — 항별 반올림 감쇠식용 (큐브·소장품 각 1항).</summary>
+        private double[] EffTerms(EffectType t)
+        {
+            Span<double> tmp = stackalloc double[2];
+            int n = 0;
+            if (_cubeEffects.TryGetValue(t, out var a) && a != 0) tmp[n++] = a;
+            if (_collectionEffects.TryGetValue(t, out var b) && b != 0) tmp[n++] = b;
+            return n == 0 ? Array.Empty<double>() : tmp[..n].ToArray();
+        }
 
         public Nikke(CharacterDto dto, GlobalStateDto globalState)
         {
@@ -175,11 +195,19 @@ namespace Nikke.Simulator.Core.Entities
             // [H1] 큐브/소장품 공식 특수효과 중 **기초스탯 rate 버프**: stat × (1 + Σrate).
             //  - MaxHp(Vigor), Def(Endurance), MaxAmmo(Wingman/콜렉션) — 큐브+콜렉션 합산.
             //  (ElemAdv/Charge/Parts 등 대미지 효과는 BuildAttackContext 에서 소비.
-            //   ReloadSpeed/DamageTaken 등 타이밍·생존 효과는 미소비.)
+            //   ReloadSpeed/ChargeSpeed 는 Timing* 프로퍼티로 FiringModel 소비, DamageTaken 등 생존 = 미소비.)
             _collectionEffects = EffectTable.GetCollectionEffects(WeaponType, FavoriteItemLv);
             double hpRate = EffSum(EffectType.MaxHp);
             double defRate = EffSum(EffectType.Def);
             double ammoRate = EffSum(EffectType.MaxAmmo);
+
+            // [타이밍 특수효과] FiringModel 소비분. Σ = 표시용, Terms = 항별 반올림 감쇠식 입력.
+            // Bastion(ReloadRounds)은 조건부 — K7.
+            TimingReloadSpeed = EffSum(EffectType.ReloadSpeed);
+            TimingChargeSpeed = EffSum(EffectType.ChargeSpeed);
+            TimingBurstGauge = EffSum(EffectType.BurstGauge);
+            TimingReloadSpeedTerms = EffTerms(EffectType.ReloadSpeed);
+            TimingChargeSpeedTerms = EffTerms(EffectType.ChargeSpeed);
 
             // [C] Consts 합산 (Effective Native Stat: baseAtk = atk_core + consts)
             double effectiveNativeHP = (coreHP + collHP + equipHP + cubeHP) * (1.0 + hpRate);
@@ -242,7 +270,7 @@ namespace Nikke.Simulator.Core.Entities
         ///  - [A2] 큐브 TrueDamageBonus → ctx.SumTrueDmgBuff (IsTrueDamage 시 B3 조건부 가산)
         ///
         /// 아직 반영하지 않는 것 (TODO):
-        ///  - AmmoChargeRate / ReloadTimeReduction (시간 축, 로테이션 시뮬에서 소비)
+        ///  - (해소 2026-07-08) 타이밍 축 = Timing* 프로퍼티 → FiringModel. 잔여 = Bastion(조건부, K7)
         ///  - DefIncreaseRate / DamageTakenReduction / CoverHpIncreaseRate (자기 생존 — DPS 스코프 외)
         /// </summary>
         public AttackContext BuildAttackContext()
@@ -264,7 +292,7 @@ namespace Nikke.Simulator.Core.Entities
             ctx.ChargeDmgBase = BasicAtkChargeDamage;
 
             // 큐브 + 소장품 공식 특수효과(enum/dict) → 대미지 브래킷.
-            // 기초스탯(MaxHp/Def/MaxAmmo)은 InitializeFinalStats 에서, 타이밍·생존 효과는 미소비.
+            // 기초스탯(MaxHp/Def/MaxAmmo)·타이밍(Reload/Charge/BurstGauge→Timing*)은 InitializeFinalStats 에서, 생존 = 미소비.
             RouteEffects(ref ctx, _cubeEffects);
             RouteEffects(ref ctx, _collectionEffects);
 

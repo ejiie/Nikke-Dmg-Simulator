@@ -40,7 +40,7 @@ public class FiringModelTests
         accuracy = new WeaponAccuracyDto { startCircle = 250, endCircle = 10, changePerShot = 7, changeSpeed = 150 },
     });
 
-    private static WeaponProfile SrUp() => new(new WeaponDto // Red Hood 형
+    private static WeaponProfile SrUp() => new(new WeaponDto // Maxwell 형 (UP·maintain=0·charge 1s)
     {
         weaponType = "SR", inputType = "UP", fireType = "Instant", isChargeWeapon = true,
         chargeTimeSec = 1.0, fullChargeDamage = 2.5,
@@ -250,6 +250,63 @@ public class FiringModelTests
         // 탄0 → 개시 프레임에 즉시 충전(실효 1f ≤ 갭) → 발사 주기(5f)가 한 번도 끊기지 않음 = 무한 탄창 창발
         Assert.All(fired.Zip(fired.Skip(1)), p => Assert.Equal(5, p.Second - p.First));
         Assert.Equal((300 - 13) / 5 + 1, fired.Count);    // 12발/s 무중단
+    }
+
+    [Fact]
+    public void Charge_speed_buff_shortens_full_charge_subtractively()
+    {
+        // Adjutant 류 차지속도 버프: 1.0 − round(1.0×0.5, 2) = 0.5s = 30f
+        var m = new FiringModel(SrUp(), 6, new FiringControl { Mode = ControlMode.Auto }, Rng,
+                                chargeSpeedBuffs: new[] { 0.5 });
+        var fired = FireFrames(m, 200);
+        Assert.Equal(41, fired[0]);                       // spotFirst 12 + charge 29 (선차지 1f)
+        Assert.All(fired.Zip(fired.Skip(1)),
+            p => Assert.Equal(53, p.Second - p.First));   // last 12 + first 12 + charge 29
+    }
+
+    [Fact]
+    public void Timing_reduction_is_nikke_group_then_round_in_centiseconds()
+    {
+        // 니케식 감쇠 (권위 = OverloadProcessor, 사용자 확정): 시간 = 1/100초 **정수** 유지,
+        //   effectiveCs = baseCs − Σ_group round(baseCs × value × count)  ← 동일값 선합산 → 그룹 사사오입
+        // 동일값 2항 = 그룹핑: 100 − round(100×0.29) = 100−29 = 71  (항별 라운딩이면 15+15=30 → 70 — 다름!)
+        Assert.Equal(71, OverloadProcessor.ReduceTimeCs(100, new[] { 0.145, 0.145 }));
+        // 상이값 2항 = 그룹 2개: 100 − (round(14.5)+round(14.6)) = 100 − (15+15) = 70
+        Assert.Equal(70, OverloadProcessor.ReduceTimeCs(100, new[] { 0.145, 0.146 }));
+        // 사사오입(AwayFromZero) — 절사면 14 → 86 이 됐을 것 (이진 오차 내성 = 정수 연산)
+        Assert.Equal(85, OverloadProcessor.ReduceTimeCs(100, new[] { 0.145 }));
+        // 하한 0 (과잉 버프: 그룹 0.7×2 = round(140) → 음수 clamp)
+        Assert.Equal(0, OverloadProcessor.ReduceTimeCs(100, new[] { 0.7, 0.7 }));
+        // Resilience lv15 실값: 250cs − round(250×0.2969 = 74.225) = 250 − 74 = 176cs (1.76s)
+        Assert.Equal(176, OverloadProcessor.ReduceTimeCs(250, new[] { 0.2969 }));
+
+        // 프레임 반영: charge 1.0s + [0.145, 0.145] → 71cs → round(42.6) = 43f
+        var m = new FiringModel(SrUp(), 6, new FiringControl { Mode = ControlMode.Auto }, Rng,
+                                chargeSpeedBuffs: new[] { 0.145, 0.145 });
+        var fired = FireFrames(m, 100);
+        Assert.Equal(54, fired[0]);                       // spotFirst 12 + charge 42 (선차지 1f)
+    }
+
+    [Fact]
+    public void Character_reload_buff_stacks_with_control_policy_buff()
+    {
+        // 캐릭 고유 항(큐브 0.5) + 정책 항(0.5): 1.0 − (0.5+0.5) = 0초 → 하한 1f = 즉시 장전
+        var ctl = new FiringControl { Mode = ControlMode.Manual, ReloadSpeedBuff = 0.5 };
+        var m = new FiringModel(Ar(), 5, ctl, Rng, reloadSpeedBuffs: new[] { 0.5 });
+        var fired = FireFrames(m, 300);
+        Assert.All(fired.Zip(fired.Skip(1)), p => Assert.Equal(5, p.Second - p.First)); // 무중단
+    }
+
+    [Fact]
+    public void Reload_reduction_uses_group_then_round()
+    {
+        // AR reload 1.0s + 동일값 항 [0.145, 0.145] (수동, 전이 없음): 그룹 감쇠 71cs → 43f
+        // 5발: f13..33 → f34 재장전 개시(=첫 진행) → f76 완료 → f77 재개
+        var ctl = new FiringControl { Mode = ControlMode.Manual };
+        var m = new FiringModel(Ar(), 5, ctl, Rng, reloadSpeedBuffs: new[] { 0.145, 0.145 });
+        var fired = FireFrames(m, 300);
+        Assert.Equal(33, fired[4]);
+        Assert.Equal(77, fired[5]);
     }
 
     [Fact]

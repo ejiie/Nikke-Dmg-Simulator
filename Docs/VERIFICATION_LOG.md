@@ -5,6 +5,126 @@
 
 ---
 
+## 2026-07-08 (12차) — 전수 감사 집행: 버그 수정 + 레거시 정리 (사용자 결정 반영)
+
+**범위**: 문서 19·C# 51·Python 27·DB 10 파일 전수 감사(주석 포함) 후 사용자 결정대로 집행.
+상세 결정 = 세션 기록; 요지:
+
+### 버그 수정 (A1)
+- `StatCalculator.MapWeapon`: merged DB 현행 무기 표기("Minigun"/"SMG") 미매칭 → **MG/SMG 캐릭 DEF 가
+  AR 열로 폴백**하던 버그 (prydwen 시절 잔재). 신·구 표기 병행 수용 + 회귀 테스트
+  (`WUnitFoundationTests.MapWeapon_handles_roledata_weapon_strings`).
+
+### 삭제 (대체 완료 확인)
+- `SkillParsedDto.cs`(v3 계약 — 참조 데이터 skills_parsed.json 자체가 부재), `UnitTest1.cs`(빈 템플릿),
+  `patternAnalyze.py`(삭제된 worktree 경로 하드코딩), `weapon_overrides.json`(공식 ChangeWeapon 데이터로 대체),
+  `SimulatorEngine/Core/`(구세대 콘솔 — Harness 대체), **`WeaponStatTable.cs`**(하드코딩 상수 —
+  구 실측값 정체 규명: "모션 0.03s" = 차지완료→발사 프레임격자+입력지연(현 모델 re-click/ε 와 동일 실체),
+  "tap 0.215s" = spot_first 0.2s+1f 로 모델이 유도).
+
+### 아카이브 (`_archive/` 신설 — 학습 참고용, 현행 권위 아님)
+- `llm_skill_parser/`(스키마·파서·테스트 — KP1 종료) · `il2cpp_route/`(staticdata_decode/metadata_fields/
+  DECODE_GUIDE — MemoryPack 스키마로 우회 완료) · `task_docs/`(ENGINE_WAVE0·ROLEDATA_SKILL_AUDIT — 완료/무의미화).
+
+### 문서/주석 정정
+- Docs/_archive 깨진 참조 3곳(사용자가 의도 삭제 — 문구 정리), DESIGN §2 구조도 현행화(신 스택),
+  §5 skills_parsed 잔존 문구, ENGINE_GUIDE §3/§5 스킬 라인 K4 현행화, SKILL_RUNTIME_REFERENCE
+  FunctionType 77→213(einkk 스냅샷 주석), STATICDATA_PREP 상태(실행 완료), STATICDATA_WORKLIST 역사화,
+  OverloadOptionDto dead 타입 예시, BuffInstance v3 주석 → K7 공식 기준 예고, 톤 잔재 정리("가키짱/허접군"),
+  WPF MainWindow 디버그 셸 제거(Harness 가 대체).
+- `run_pipeline.py` 에 **staticdata 스테이지 신설** (`--stage staticdata`: memorypack→raid→solo_raid→
+  skill_chains; 복호물 gitignore·기본 all 미포함) — 신 스택 재생성 경로 공식화.
+
+### 성능 벤치 (background sim 타당성 — F)
+- **180초 sim 1 run ≈ 26ms** (Release, MG 단일 = 최악급 히트수, N=200): 단일 코어 시간당 **~14만 run**
+  (5인 팀 추정 ~2.7만 run/h) — 멀티코어 병렬 전제 시 대량 무작위 덱 축적 충분. std 0.25%(크리 분산).
+
+테스트 — **129/129** (UnitTest1 −1, A1 회귀 +1). staticdata dry-run ✓.
+
+---
+
+## 2026-07-08 (11차) — 타이밍 감쇠식 최종 확정: 니케식 group-then-round + 1/100초 정수 (권위=OverloadProcessor)
+
+**정정 (10차 재정정)**: 라운딩 규칙의 권위 = **`OverloadProcessor`** (사용자 지정) — 10차의 "항별" 라운딩이
+아니라 **니케식 group-then-round** (동일값 버프 **선합산** → 그룹 단위 사사오입, OL 스탯 합산과 동일 규칙):
+```
+effectiveCs = baseCs − Σ_group round(baseCs × value × count)     [사사오입, AwayFromZero]
+```
+- 동일값 2항 [14.5%, 14.5%]: 그룹 round(100cs×0.29)=29 → 71cs  (항별이면 15+15=30 → 70cs — 다름)
+- 상이값 2항 [14.5%, 14.6%]: 그룹 2개 → 15+15 → 70cs
+- **시간 = 1/100초 정수(게임 timeData) 유지** (사용자: "시간 관련은 정수형") + 버프 ×10000 정수 복원
+  → 순수 정수 연산 — 10차의 decimal 우회 불필요, 이진 부동소수 오차 원천 차단.
+  ("초 단위 소수 둘째자리 반올림" = cs 정수 사사오입과 동치. `OverloadProcessor` 주석의 "차지 시간=2" 정합.)
+
+**구현**: `OverloadProcessor.ReduceTimeCs(baseCs, buffFractions)` 신설 (니케식 합산 소관 클래스) —
+FiringModel 은 시간을 cs 정수로 복원(`ToCs`)해 감쇠 → `CsToFrames`(= einkk timeDataToFrame) 로 프레임화.
+`FiringModel.ApplyTimingReduction`(10차 임시) 폐기.
+
+테스트 — **129/129**: 그룹 vs 항별 구분(71≠70), 상이값 항 분리, 사사오입(85), 하한 0,
+Resilience lv15 실값(250cs→176cs=1.76s), 프레임 반영(43f, 재장전 재개 f77).
+
+---
+
+## 2026-07-08 (10차) — 타이밍 감쇠식 정정: 항별 소수 둘째자리 사사오입 (사용자 확정)
+
+**정정**: 9차의 `time × (1 − Σbuff)` 는 근사 — 실게임 공식(사용자 확정)은
+```
+effective = base − Σᵢ round(base × buffᵢ, 2)    ← 항별 소수 둘째자리 사사오입 (AwayFromZero)
+```
+차지·재장전 동일. B2 per-term floor 와 동류의 니케식 **항별 라운딩** — Σ 후 곱셈으로 대체 불가
+(예: base 1.0, 항 [0.145, 0.145] → 항별 0.15+0.15=0.30 → 0.70s vs Σ곱셈 0.71s).
+
+**구현**: `FiringModel.ApplyTimingReduction(baseSec, terms)` — 개별 항 리스트 필요해져
+`Nikke.TimingReloadSpeedTerms/TimingChargeSpeedTerms`(큐브·소장품 각 1항) 신설, 정책값
+(`FiringControl.ReloadSpeedBuff`)도 1항으로 합류. **라운딩 = decimal 경유** — double 이진 오차
+(0.145 → 0.1449…9 → 오반올림 0.14)를 차단해야 사사오입 정확 (게임 원천 = ×10000 십진 정수).
+
+테스트 — **129/129** (신규 2 + 기존 갱신): 항별 vs Σ곱셈 구분 케이스(0.70≠0.71, 프레임 42f≠43f),
+사사오입 확인(banker's 배제), 하한 0, 재장전 f76 프레임 정밀, 기존 합산·즉시장전 케이스 유지.
+
+---
+
+## 2026-07-08 (9차) — 큐브/소장품 타이밍 특수효과 → FiringModel 배선
+
+**범위**: 파싱만 돼 있던 타이밍 특수효과 소비 배선 — `Nikke.TimingReloadSpeed/TimingChargeSpeed/TimingBurstGauge`
+(큐브+소장품 EffSum, InitializeFinalStats) → `FiringModel(reloadSpeedBuff, chargeSpeedBuff)` (정책
+`FiringControl.ReloadSpeedBuff` 와 **합산**) → `SimulationRunner` 주입. 하네스 스펙 출력에 큐브효과 표기.
+- ReloadSpeed(Resilience)·ChargeSpeed(Adjutant) = **감산형 시간 단축** (사용자 확정 재장전 공식과 동일 원칙;
+  차지의 ÷(1+Σ) 대안은 M2 대조 확인 항목).
+- BurstGauge(Quantum) = 노출만 (소비 K9) · ReloadRounds(Bastion 조건부) = K7 트리거 대기.
+- 테스트 — **127/127** (신규 3): 차지속도 0.5 → 사이클 83f→53f 프레임 정밀 · 캐릭 고유+정책 버프 합산 =
+  1.0 → 무중단 · Resilience lv15 표→EquipCube→`TimingReloadSpeed=0.2969` 흐름.
+→ M2 대조 시 재장전/차지 큐브 낀 캐릭도 그대로 사용 가능해짐 (스킬 패시브만 회피하면 됨).
+
+---
+
+## 2026-07-08 (8차) — M2 검증 콘솔 하네스 + 라벨 정정 (5001=Maxwell)
+
+**범위**: `Nikke.Simulator.Harness`(신규 콘솔, sln 등록) — 실캐릭(merged DB)을 `RunOnce` 로 굴려
+in-game 실측과 대조하는 M2 도구.
+```
+nikke-harness list [필터]
+nikke-harness run <name_code> [--sec 60] [--runs N] [--manual] [--tap] [--charge-err s]
+                 [--reload-buff f] [--def d] [--dist m] [--core r] [--body r] [--db 경로]
+```
+출력 = 캐릭 스펙(ATK/W/탄창/무기 부류) + 총딜/DPS/히트(트리거×펠릿)/크리·코어·풀차지 분해/초당
+타임라인 + N-run 분포(mean/std/min/max). 데이터 로딩 = WPF `App.OnStartup` 패턴 동일.
+merged DB 부재 = 안내 후 종료(재생성법 표기). 구 콘솔(`SimulatorEngine/Core`) = 레거시 그대로.
+
+### 스모크 (합성 DB — roledata static + 가짜 유저 Lv200)
+- Maxwell(SR) auto 30s: 18발(83f 사이클 ✓), 풀차지 100%, N=3 std 2.5%.
+- Maxwell 수동+재장전버프 100%: **29발/30s** (61f 사이클 ✓, 재장전 무정지) — 수동컨 이득 +61% 정량화.
+- Emma(MG)+타겟(core r4/body r5): 명중원 수축→빗맞음 게이트→탄진(5s@60/s) 재장전 0구간 — 타임라인 전부 정합.
+
+### 라벨 정정 (하네스 스모크로 발견)
+- **name_code 5001 = Maxwell** (Red Hood = 5101). D1~K4 문서/테스트의 "Red Hood(5001)" 라벨 오류 —
+  검증 자체는 name_code 기반 bit-exact 라 **결과 유효**, 명칭만 전면 정정 (docs/tests/memory).
+- 부수 확인: **crit = 전 192캐릭 (15%, 150%) 단일** — `AttackContext` 기본값과 정합, per-char crit 배선 불필요.
+
+테스트 124/124 유지.
+
+---
+
 ## 2026-07-08 (7차) — K8 M1: 단일캐릭 통합 배선 (SimulationRunner.RunOnce 이행)
 
 **범위**: K0 동결 엔트리 `SimulationRunner.RunOnce(team, target, rng, durationSec)` 구현 —
@@ -63,7 +183,7 @@ in-game 골든 대조) ∥ K7 SkillRuntime(Runtime 축 소비).
 ### 2. 테스트 — 110/110 (신규 17 = `SkillChainLoaderTests`)
 - 로드: 192캐릭·87보스·14,249함수 0-throw + 무결성 통과.
 - D1 검증값 재확인: Emma s1 lv10 = HealCharacter 1077(0.1077)/OnHurtRatio 500 → Runtime 분류 ✓;
-  Red Hood burst lv10 = ChangeWeapon·쿨 4000·81342·차지 120f ✓.
+  Maxwell burst lv10 = ChangeWeapon·쿨 4000·81342·차지 120f ✓.
 - 전 함수 라우팅/분류 graceful — 미지 신값 = `?214` **11개뿐**(<0.1%).
 - 분포 스냅샷(우선순위 자료): StatAtk 1,763 · **UseCharacterSkillId 1,401**(연쇄 스킬 호출 — K7 필수 지원) ·
   Damage 686 · **AddDamage 620**(브래킷 미검증 최대 항목 — K8 대조 1순위) · HealCharacter 590 · StatDef 588.
@@ -121,7 +241,7 @@ bosses 87 (solo raid 변종 statenhance=230000; passive StateEffect 체인 + ski
 functions 14,249 (connected_function BFS 확장, Fx/아이콘 필드 제거, enum 이름 주석)
 state_effects 3,381
 ```
-스팟 재검증: Emma s1 lv10 = HealCharacter 1077/OnHurtRatio 500 · Red Hood burst lv10 = 81342 ✓.
+스팟 재검증: Emma s1 lv10 = HealCharacter 1077/OnHurtRatio 500 · Maxwell burst lv10 = 81342 ✓.
 
 ### 2. 모션 딜레이 — 단위·semantics 확정 (einkk `timeDataToFrame(t)=t×fps/100` = **1/100초**)
 | 필드 | 값(지배적) | 확정 의미 |
@@ -179,7 +299,7 @@ FunctionTable 19459 · CharacterSkillTable 4387 · StateEffectTable 5155 · Skil
   읽어 member index 가 밀렸었음(관측 Buff_icon@33 = Order30 + 3).
 
 ### 2. 풀루프 검증 (FUNCTIONTABLE_DECODE_PLAN §4) — 통과
-- Red Hood(5001) 버스트(ChangeWeapon) lv10 `skill_value=81342` ↔ roledata 설명 `813.42%` **bit-exact**.
+- Maxwell(5001) 버스트(ChangeWeapon) lv10 `skill_value=81342` ↔ roledata 설명 `813.42%` **bit-exact**.
   부가 발견: value_data 에 교체 무기 `shot_id=1010202` + 차지시간 `120`(=2초×60fps) — weapon-swap 의 실체.
 - Emma(5005) 스킬1 lv10: `HealCharacter(2) val=1077`(10.77%) + `OnHurtRatio(7) trig=500`(5%) ↔ 설명값 일치.
 - value 스케일 = ×10000(10000=100%) 확정. 시간류 = 60fps 프레임 단위 존재 확인.

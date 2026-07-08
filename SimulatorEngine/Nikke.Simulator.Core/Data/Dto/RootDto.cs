@@ -31,7 +31,7 @@ namespace Nikke.Simulator.Core.Data.Dto
         public string slug { get; set; }
         public string name_code { get; set; }
 
-        // C# 예약어 'static'을 피하는 가키짱의 우아한 테크닉 ♥
+        // C# 예약어 'static' 회피 — JSON 키는 "static" 유지.
         [JsonPropertyName("static")]
         public CharacterStaticDto StaticInfo { get; set; }
 

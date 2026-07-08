@@ -9,9 +9,11 @@ namespace Nikke.Simulator.Core.Stats
     ///
     /// 역할 경계:
     ///   - 이 클래스          : 발사속도/탄창/차지/멀티펠릿/명중원 raw 보유 + 발사 타이밍 helper.
-    ///   - <see cref="WeaponStatTable"/> : (구) 무기타입 하드코딩 상수 — fire-rate 는 이제 데이터(이 클래스)가 권위.
     ///   - Combat.AccuracyModel  : accuracy 원 → 코어힛/명중 확률.
     ///   - Combat.ProperDistanceTable : weaponType + dist → 적정거리 활성 여부.
+    /// (구 WeaponStatTable 하드코딩 상수는 2026-07-08 감사에서 삭제 — 실측 잔재의 정체 규명:
+    ///  "모션 0.03s" ≈ 차지완료→발사의 프레임 격자+입력 지연 = 현 모델의 re-click/ε(0.02~0.028s)와 동일 실체,
+    ///  "tap 0.215s" = spot_first(0.2s=12f)+1f — 현 모델이 유도. 별도 상수 불필요.)
     ///
     /// 단위(ETL `roledata_cleaner._weapon` 정규화 완료): FireRate=발/sec, *Sec=초, *Rate=분수,
     /// Accuracy*=raw 스프레드 반지름, Burst*EnergyPerShot=raw 게이지 단위.

@@ -8,8 +8,7 @@ namespace Nikke.Simulator.Core.Stats
     /// <summary>
     /// 오버로드(OL) + 런타임 %-버프의 니케식 합산 전담 프로세서.
     ///
-    /// 규칙 정의: 니케식 group-then-round (동일값 그룹핑 → 그룹별 반올림 → 합산). 권위 = Docs/DESIGN.md §3
-    /// (구 ARCHITECTURE.md §4.4 는 Docs/_archive/ 로 이동).
+    /// 규칙 정의: 니케식 group-then-round (동일값 그룹핑 → 그룹별 반올림 → 합산). 권위 = Docs/DESIGN.md §3.
     ///
     /// 책임 분리 (2026-06-30 · 3-way split):
     ///   - OverloadProcessor       : OL %-버프 니케식 합산 (이 클래스).
@@ -49,6 +48,36 @@ namespace Nikke.Simulator.Core.Stats
             return allOptions
                 .Where(opt => opt.type == targetType && opt.val_type == "Integer")
                 .Sum(opt => opt.value);
+        }
+
+        /// <summary>
+        /// 시간(1/100초 **정수**) 니케식 감쇠 — 차지/재장전 속도 버프용 (사용자 확정 2026-07-08).
+        ///   effectiveCs = baseCs − Σ_group round(baseCs × value × count)   ← group-then-round, 사사오입
+        /// <see cref="CalculateNikkeOverloadBonus"/> 와 동일 규칙(동일값 선합산 → 그룹 사사오입)의
+        /// 정수 도메인 판: 시간은 게임 원천이 1/100초 정수(timeData)이므로 **cs 정수로 유지**하고,
+        /// buff 분수는 ×10000 정수로 복원(원천 = 십진 정수) → 순수 정수 연산 = 이진 부동소수 오차 원천 차단.
+        /// (초 단위 "소수 둘째자리 반올림" 과 동치 — decimals=2 를 cs 정수 사사오입으로 구현.)
+        /// </summary>
+        /// <param name="baseCs">기준 시간 (1/100초 정수, 예: 재장전 2.5s = 250).</param>
+        /// <param name="buffFractions">속도 버프 분수 목록 (예: 0.2969 = 29.69%). 음수 = 시간 증가 디버프.</param>
+        public static int ReduceTimeCs(int baseCs, IEnumerable<double> buffFractions)
+        {
+            long reduced = baseCs;
+            if (buffFractions != null)
+            {
+                var groups = buffFractions
+                    .Select(b => (long)Math.Round(b * 10000.0, MidpointRounding.AwayFromZero))
+                    .Where(x => x != 0)
+                    .GroupBy(x => x);
+                foreach (var g in groups)
+                {
+                    long num = (long)baseCs * g.Key * g.Count();      // cs × (버프×10000 정수 합)
+                    long delta = num >= 0 ? (num + 5000) / 10000      // 사사오입 (정수 나눗셈)
+                                          : (num - 5000) / 10000;
+                    reduced -= delta;
+                }
+            }
+            return (int)Math.Max(0, reduced);
         }
 
         /// <summary>

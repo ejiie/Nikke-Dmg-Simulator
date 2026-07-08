@@ -2,7 +2,7 @@ import json
 import os
 import sys
 
-# ── 가키짱의 절대 경로 마법 ──
+# ── 절대 경로 (스크립트 위치 기준) ──
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_FILE = os.path.join(CURRENT_DIR, "..", "..", "Database", "raw", "nikke_full_scroll_result.json")
 PROCESSED_FILE = os.path.join(CURRENT_DIR, "..", "..", "Database", "processed", "user_state_clean.json")

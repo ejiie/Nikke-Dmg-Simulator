@@ -21,10 +21,10 @@
 `memorypack_decode.py` 확장 → StaticData qa-260702 기준 **8표 clean(off==len)**:
 FunctionTable **19459** · CharacterSkillTable 4387 · StateEffectTable 5155 · SkillInfoTable 9280 ·
 CharacterTable 1905 (+기존 Monster 3표). 검증:
-- **니케 풀루프 bit-exact**: Red Hood(5001) 버스트 lv10 `skill_value=81342` = roledata 설명 `813.42%`;
+- **니케 풀루프 bit-exact**: Maxwell(5001) 버스트 lv10 `skill_value=81342` = roledata 설명 `813.42%`;
   Emma(5005) 스킬1 lv10 = `HealCharacter val=1077`(10.77%) + `OnHurtRatio trig_value=500`(피격 5% 확률) — 전부 일치.
 - **value 스케일**: Percent = ×10000 (10000=100%) 확정. ChangeWeapon `skill_value` 의 120 = **2초를 60fps 프레임**으로
-  (Red Hood SR 차지 2s) — 무기교체 스킬이 교체 shot_id(1010202)도 들고 있음(`trait_weapon_transformed` 실체).
+  (Maxwell 버스트 SR 차지 2s) — 무기교체 스킬이 교체 shot_id(1010202)도 들고 있음(`trait_weapon_transformed` 실체).
 - **보스 passive**: 7252022/7252002(StateEffect) → Immune{Stun/ForcedStop/GravityBomb}(+7252002 는 ImmuneDamage_MainHP)
   — 보스 본체/파츠 passive 로 정합. (구 "재생" 추정은 ImmuneDamage_MainHP 로 해석 교정 여지 — K11 에서 확정.)
 - **enum 미지값 = 신값뿐**: function_type 214~218, timing 91~94, status 67~73 — 기지 최대치 바로 위 연속 = 게임이

@@ -97,7 +97,15 @@ namespace Nikke.Simulator.Engine
         public double CurrentRatePerSec => _rateOfFire / 60.0;
         public double AccuracyCircle => _accuracyCircle;
 
-        public FiringModel(WeaponProfile weapon, int maxAmmo, FiringControl control, IRandomSource rng)
+        private readonly int _effectiveReloadCs;    // 니케식 감쇠 적용 후 재장전 시간 (1/100초 정수)
+
+        /// <param name="reloadSpeedBuffs">재장전 속도 버프 **개별 항** (큐브/소장품 `Nikke.TimingReloadSpeedTerms`) —
+        /// 정책값 <see cref="FiringControl.ReloadSpeedBuff"/> 도 1항으로 합류.
+        /// 감쇠 = <see cref="OverloadProcessor.ReduceTimeCs"/> (니케식 group-then-round, cs 정수 도메인).</param>
+        /// <param name="chargeSpeedBuffs">차지 속도 버프 개별 항 (`Nikke.TimingChargeSpeedTerms`) — 동일 감쇠식.</param>
+        public FiringModel(WeaponProfile weapon, int maxAmmo, FiringControl control, IRandomSource rng,
+                           IReadOnlyList<double> reloadSpeedBuffs = null,
+                           IReadOnlyList<double> chargeSpeedBuffs = null)
         {
             _w = weapon ?? throw new ArgumentNullException(nameof(weapon));
             _ctl = control ?? throw new ArgumentNullException(nameof(control));
@@ -109,9 +117,18 @@ namespace Nikke.Simulator.Engine
             _maxAmmo = maxAmmo;
             CurrentAmmo = maxAmmo;
             _isCharge = _w.IsChargeWeapon;
+
+            // 시간류는 1/100초 **정수**(게임 timeData 원천)로 복원해 정수 연산 (사용자 확정 2026-07-08).
+            // 재장전: 캐릭 고유 항들 + 정책 항(수동 지정) → 니케식 감쇠. 0cs = 하한 1프레임(즉시 장전 창발).
+            var reloadTerms = new List<double>(reloadSpeedBuffs ?? Array.Empty<double>());
+            if (_ctl.ReloadSpeedBuff != 0) reloadTerms.Add(_ctl.ReloadSpeedBuff);
+            _effectiveReloadCs = OverloadProcessor.ReduceTimeCs(ToCs(_w.ReloadTimeSec), reloadTerms);
+
             _spotFirstFrames = ToFrames(_w.SpotFirstDelaySec);
             _spotLastFrames = ToFrames(_w.SpotLastDelaySec);
-            _fullChargeFrames = ToFrames(_w.ChargeTimeSec);
+            // 차지: 동일 감쇠식, 하한 1프레임
+            _fullChargeFrames = Math.Max(1,
+                CsToFrames(OverloadProcessor.ReduceTimeCs(ToCs(_w.ChargeTimeSec), chargeSpeedBuffs)));
             _rateOfFire = _w.FireRate * 60.0;              // 발/sec → RPM
             _spotFirstLeft = _spotFirstFrames;             // 전투 개시 = 엄폐→조준부터
             _accuracyCircle = _w.StartAccuracyCircle;
@@ -119,6 +136,12 @@ namespace Nikke.Simulator.Engine
         }
 
         private static int ToFrames(double sec) => Math.Max(0, (int)Math.Round(sec * Fps));
+
+        /// <summary>초(ETL /100 유래) → 1/100초 정수 무손실 복원.</summary>
+        private static int ToCs(double sec) => (int)Math.Round(sec * 100.0);
+
+        /// <summary>1/100초 정수 → 프레임 (einkk timeDataToFrame: round(cs × fps / 100)).</summary>
+        private static int CsToFrames(int cs) => Math.Max(0, (int)Math.Round(cs * Fps / 100.0));
 
         private int NextChargeTarget()
             => _fullChargeFrames
@@ -131,12 +154,12 @@ namespace Nikke.Simulator.Engine
             return Math.Max(1, (int)Math.Round(sec * Fps));
         }
 
-        /// <summary>실효 재장전 프레임 — 감산형 공식, 하한 1프레임 (≥100% 버프 = 1프레임 = 즉시 장전 창발).</summary>
+        /// <summary>실효 재장전 프레임 — 니케식 감쇠 적용값(cs 정수), 하한 1프레임 (0cs = 즉시 장전 창발).</summary>
         private int EffectiveReloadFrames(bool addCoverReturn)
         {
-            double sec = _w.ReloadTimeSec * (1.0 - _ctl.ReloadSpeedBuff);
-            if (addCoverReturn) sec += _w.SpotLastDelaySec; // einkk: 첫(강제) 재장전에 spot_last 가산
-            return Math.Max(1, ToFrames(sec));
+            int cs = _effectiveReloadCs;
+            if (addCoverReturn) cs += ToCs(_w.SpotLastDelaySec); // einkk: 첫(강제) 재장전에 spot_last 가산
+            return Math.Max(1, CsToFrames(cs));
         }
 
         /// <summary>프레임 1개 진행. 발사/재장전/전이/차지 상태 갱신 후 결과 반환.</summary>
