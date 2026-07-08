@@ -183,7 +183,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 |---|---|
 | 방향·구조 | **이 문서** (`Docs/DESIGN.md`) |
 | 엔진 구현 (how/순서) | `Docs/ENGINE_GUIDE.md` |
-| 병렬 작업 분담 (chunk·DAG·순서) | `Docs/WORK_BREAKDOWN.md` |
+| 작업 순서·마일스톤 (줄기) | `Docs/ROADMAP.md` (+ 가지 `Docs/tasks/T##`) |
 | 빌드/테스트/데이터 정합 증거 | `Docs/VERIFICATION_LOG.md` |
 | 대미지 공식 | 이 문서 §3 + `Combat/DamageCalculator.cs` + golden test + `_dmg_probe.py`/`_dmg_calibrate.py` |
 | 스탯 조립 공식 | 이 문서 §3.5 + `Stats/StatCalculator.cs`(+`OverloadProcessor`/`StatTable`) + VERIFICATION_LOG §5 불변식 |
