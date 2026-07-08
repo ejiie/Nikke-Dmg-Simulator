@@ -97,7 +97,15 @@ namespace Nikke.Simulator.Engine
         public double CurrentRatePerSec => _rateOfFire / 60.0;
         public double AccuracyCircle => _accuracyCircle;
 
-        public FiringModel(WeaponProfile weapon, int maxAmmo, FiringControl control, IRandomSource rng)
+        private readonly double _reloadSpeedBuff;   // Σ재장전 속도 (정책 + 캐릭 고유 Timing 합산)
+        private readonly double _chargeSpeedBuff;   // Σ차지 속도 (캐릭 고유 Timing — Adjutant 등)
+
+        /// <param name="reloadSpeedBuff">캐릭 고유 재장전 속도 버프 (큐브/소장품 `Nikke.TimingReloadSpeed`) —
+        /// 정책값 <see cref="FiringControl.ReloadSpeedBuff"/> 와 **합산**, 감산형 `reload×(1−Σ)`.</param>
+        /// <param name="chargeSpeedBuff">캐릭 고유 차지 속도 버프 (`Nikke.TimingChargeSpeed`) —
+        /// 감산형 `charge×(1−Σ)` (재장전 공식과 동일 원칙 채택; ÷(1+Σ) 대안은 M2 대조로 확정).</param>
+        public FiringModel(WeaponProfile weapon, int maxAmmo, FiringControl control, IRandomSource rng,
+                           double reloadSpeedBuff = 0.0, double chargeSpeedBuff = 0.0)
         {
             _w = weapon ?? throw new ArgumentNullException(nameof(weapon));
             _ctl = control ?? throw new ArgumentNullException(nameof(control));
@@ -109,9 +117,12 @@ namespace Nikke.Simulator.Engine
             _maxAmmo = maxAmmo;
             CurrentAmmo = maxAmmo;
             _isCharge = _w.IsChargeWeapon;
+            _reloadSpeedBuff = _ctl.ReloadSpeedBuff + reloadSpeedBuff;
+            _chargeSpeedBuff = chargeSpeedBuff;
             _spotFirstFrames = ToFrames(_w.SpotFirstDelaySec);
             _spotLastFrames = ToFrames(_w.SpotLastDelaySec);
-            _fullChargeFrames = ToFrames(_w.ChargeTimeSec);
+            // 차지 속도 = 감산형 시간 단축, 하한 1프레임
+            _fullChargeFrames = Math.Max(1, ToFrames(_w.ChargeTimeSec * (1.0 - _chargeSpeedBuff)));
             _rateOfFire = _w.FireRate * 60.0;              // 발/sec → RPM
             _spotFirstLeft = _spotFirstFrames;             // 전투 개시 = 엄폐→조준부터
             _accuracyCircle = _w.StartAccuracyCircle;
@@ -134,7 +145,7 @@ namespace Nikke.Simulator.Engine
         /// <summary>실효 재장전 프레임 — 감산형 공식, 하한 1프레임 (≥100% 버프 = 1프레임 = 즉시 장전 창발).</summary>
         private int EffectiveReloadFrames(bool addCoverReturn)
         {
-            double sec = _w.ReloadTimeSec * (1.0 - _ctl.ReloadSpeedBuff);
+            double sec = _w.ReloadTimeSec * (1.0 - _reloadSpeedBuff);
             if (addCoverReturn) sec += _w.SpotLastDelaySec; // einkk: 첫(강제) 재장전에 spot_last 가산
             return Math.Max(1, ToFrames(sec));
         }

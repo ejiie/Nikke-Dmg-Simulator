@@ -166,7 +166,10 @@ static void PrintSpec(CoreNikke n, FiringControl ctl, DummyTarget t, double sec)
                       $"maintain={w.MaintainFireStanceSec:0.##}s");
     Console.WriteLine($"컨트롤   : {ctl.Mode}" +
                       (ctl.Mode == ControlMode.Manual ? $" ({ctl.Style}, chargeErr≤{ctl.ChargeErrorMaxSec}s)" : "") +
-                      (ctl.ReloadSpeedBuff > 0 ? $" | 재장전버프 {ctl.ReloadSpeedBuff:P0}" : ""));
+                      (ctl.ReloadSpeedBuff > 0 ? $" | 재장전버프(수동지정) {ctl.ReloadSpeedBuff:P0}" : ""));
+    if (n.TimingReloadSpeed > 0 || n.TimingChargeSpeed > 0 || n.TimingBurstGauge > 0)
+        Console.WriteLine($"큐브효과 : 재장전 {n.TimingReloadSpeed:P2} | 차지 {n.TimingChargeSpeed:P2} | " +
+                          $"게이지 {n.TimingBurstGauge:P2}(K9 대기)");
     Console.WriteLine($"타겟     : DEF {t.FinalDef:N0} | dist {t.Distance} | core r{t.CoreRadius} | body r{t.BodyRadius}");
     Console.WriteLine($"적정거리 : {n.ProperRangeMin}~{n.ProperRangeMax} → 보너스 {(t.Distance >= n.ProperRangeMin && t.Distance <= n.ProperRangeMax ? "적용권" : "밖")} (판정은 무기표 기준)");
     Console.WriteLine($"길이     : {sec}s ({sec * 60:N0} frames)");

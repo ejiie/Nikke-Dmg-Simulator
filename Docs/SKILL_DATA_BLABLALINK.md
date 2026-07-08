@@ -90,11 +90,11 @@ skill1/2 는 `skill_table:"StateEffect"` — 패시브 효과도 StateEffect 함
 아래 효과들은 effect 표에 **파싱돼 저장**돼 있으나 엔진이 **아직 소비 안 함**. EffectType enum
 에는 존재. `Nikke.RouteEffects` 의 switch 에 case 추가 + 소비처 구현하면 됨.
 
-**무기 타이밍 (로테이션 sim 루프 생기면 소비)** — 발사/재장전/버스트 사이클:
-- `ReloadSpeed` (Resilience 큐브): 재장전 시간 단축 → 재장전 틱 계산
-- `ReloadRounds` (Bastion 큐브, **조건부**: N발 발사마다 M발 재장전)
-- `ChargeSpeed` (Adjutant 큐브): 차지 완료 시간 단축
-- `BurstGauge` (Quantum 큐브): 버스트 게이지 충전속도 → 풀버스트 주기
+**무기 타이밍** — 발사/재장전/버스트 사이클:
+- ✅ `ReloadSpeed` (Resilience 큐브): **소비됨** (2026-07-08) — `Nikke.TimingReloadSpeed` → FiringModel, 감산형 `reload×(1−Σ)`
+- ✅ `ChargeSpeed` (Adjutant 큐브): **소비됨** — `Nikke.TimingChargeSpeed` → FiringModel, 감산형 `charge×(1−Σ)` (÷(1+Σ) 대안은 M2 대조로 확정)
+- ⏸ `BurstGauge` (Quantum 큐브): `Nikke.TimingBurstGauge` 노출만 — 소비 = K9 버스트 게이지
+- ⏸ `ReloadRounds` (Bastion 큐브, **조건부**: N발 발사마다 M발 재장전) — K7 트리거 시스템 대기
 - (`MaxAmmo` 는 base stat 으로 이미 소비)
 
 **조건부 효과 (sim 런타임의 트리거/조건 시스템 필요)**:
