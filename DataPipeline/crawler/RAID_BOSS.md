@@ -96,7 +96,11 @@ resist×3·attack·parts_skin·destroy_anim_trigger·**is_main_part**(bool)·**i
 - **몸통판정(암묵)**: 코어 collider 파츠 **없음** → 코어=바디 기본약점(prefab). s38 등 25종.
 
 종합 = `staticdata_solo_raid.py` → **`raid/solo_raid_boss.{json,md}`** (39 solo × 정체/element/model/lv/
-스탯230000/**전 파츠[type·is_main·damageable·hp_ratio·passive]**/코어판정). union 드롭(사용자). 잔여=보스 스킬값(`MonsterSkillTable` = 별도 표, function_id).
+스탯230000/**전 파츠[type·is_main·damageable·hp_ratio·passive]**/코어판정). union 드롭(사용자).
+잔여였던 보스 스킬값: **FunctionTable/StateEffectTable 디코드 완료(2026-07-08, `FUNCTIONTABLE_DECODE_PLAN.md` §0)**
+— MonsterTable.skill_data 의 function_id → FunctionData 해석 가능. 파츠 passive 실해석 예: 7252002 =
+Immune{Stun/ForcedStop/GravityBomb} + **ImmuneDamage_MainHP** (구 "재생" 관측의 데이터 실체 — K11 에서 의미 확정).
+잔여 = `MonsterSkillTable`(캐스팅 스킬 자체 수치) 필요 시 추가 + D3 조립.
 
 ## 산출물
 - `staticdata_raid_decode.py` — SoloRaid Preset/Manager·MonsterModel 등 flat 표 clean 디코드(bool+NF) → `raid/*.json`(gitignore).

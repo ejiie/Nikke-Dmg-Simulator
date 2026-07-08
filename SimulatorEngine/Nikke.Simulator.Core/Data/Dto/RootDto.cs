@@ -53,6 +53,11 @@ namespace Nikke.Simulator.Core.Data.Dto
 
         public BasicAttackDto basicAttack { get; set; }
 
+        // 무기 프로파일 (roledata_cleaner._weapon → db_merger passthrough). 발사속도/탄창/차지/
+        // 명중원/버스트게이지/멀티펠릿. 구 데이터엔 없을 수 있어 nullable — WeaponProfile 이 안전 처리.
+        // (위 string `weapon`(롱폼 무기타입)과 별개 — JSON 키 충돌 회피 위해 `weaponData`.)
+        public WeaponDto weaponData { get; set; }
+
         // 스킬은 blablalink roledata 구조(skill1/skill2/burst dict). 스킬 런타임 미구현이라
         // 지금은 원본 JSON 그대로 보관(역직렬화 안 깨지게). 추후 전용 DTO 로 구조화.
         public JsonElement? skills { get; set; }
@@ -67,6 +72,81 @@ namespace Nikke.Simulator.Core.Data.Dto
     {
         public int? min { get; set; }
         public int? max { get; set; }
+    }
+
+    /// <summary>
+    /// 무기 프로파일 DTO — blabla_roledata `shot`/top-level 의 정규화된 무기 데이터 (1:1 JSON 매핑).
+    /// 단위는 ETL(`roledata_cleaner._weapon`)에서 정규화: fireRate=발/sec, *Sec=초, *Rate=분수,
+    /// 명중원(accuracy)·버스트게이지(burst)는 raw 단위(스프레드 반지름 / 게이지 단위).
+    /// (W 단위(raw 유지·주입측 정규화)와 달리 ETL 정규화 채택 — 필드 수가 많아 단일 docstring 로 관리.)
+    /// </summary>
+    public class WeaponDto
+    {
+        public string weaponType { get; set; }      // SG/SMG/AR/MG/SR/RL (단축코드)
+        public bool isChargeWeapon { get; set; }
+
+        // SR/RL 부류 판별 (ENGINE_GUIDE §5): UP=릴리즈 발사 / DOWN_Charge=only 풀차지 / DOWN=평사
+        public string inputType { get; set; }
+        public string fireType { get; set; }                 // Instant/Projectile* (발사 이벤트 타이밍)
+        public double maintainFireStanceSec { get; set; }    // >0 = 복귀 없이 자세 유지(값=자체 후딜레이)
+        public double upTypeFireTiming { get; set; }         // 투사체 발사 이벤트 시점 비율 (분수)
+        public int spotProjectileSpeed { get; set; }
+
+        // 발사속도 (발/sec). MG 는 spin-up: fireRate(시작)→endFireRate, 발당 fireRateRampPerShot 증가.
+        public double fireRate { get; set; }
+        public double endFireRate { get; set; }
+        public double fireRateRampPerShot { get; set; }
+        public double fireRateResetTimeSec { get; set; }
+
+        // 발사 개시/종료 모션 딜레이 (초; 대부분 0.2 — in-game 캘리브레이션 대기)
+        public double spotFirstDelaySec { get; set; }
+        public double spotLastDelaySec { get; set; }
+
+        // 탄창/재장전
+        public int maxAmmo { get; set; }
+        public double reloadTimeSec { get; set; }
+        public double reloadBulletRate { get; set; }   // 1.0=전탄, 0.33=부분장전
+        public int reloadStartAmmo { get; set; }
+
+        // 차지 (SR/RL)
+        public double chargeTimeSec { get; set; }
+        public double fullChargeDamage { get; set; }   // SR 2.5 / RL 3.5 / 비차지 1.0
+
+        // 멀티펠릿/투사체
+        public int shotCount { get; set; }             // SG 펠릿 5~10
+        public int muzzleCount { get; set; }
+        public int penetration { get; set; }
+        public int spotRadius { get; set; }
+        public int spotExplosionRange { get; set; }
+        public double coreDamageRate { get; set; }     // 2.0 (coreHitBonus = 이값 - 1)
+
+        public WeaponAccuracyDto accuracy { get; set; }
+        public WeaponBurstDto burst { get; set; }
+    }
+
+    /// <summary>명중원(spread 반지름) — manual + auto(조준) 2세트. AccuracyModel 이 코어힛/명중 확률로 소비.</summary>
+    public class WeaponAccuracyDto
+    {
+        public double startCircle { get; set; }
+        public double endCircle { get; set; }
+        public double changePerShot { get; set; }
+        public double changeSpeed { get; set; }
+        public double autoStartCircle { get; set; }
+        public double autoEndCircle { get; set; }
+        public double autoChangePerShot { get; set; }
+        public double autoChangeSpeed { get; set; }
+    }
+
+    /// <summary>버스트 게이지 — 발당 충전량(raw 단위) + 풀버스트 창 타이밍/스텝.</summary>
+    public class WeaponBurstDto
+    {
+        public double energyPerShot { get; set; }
+        public double targetEnergyPerShot { get; set; }
+        public double fullChargeEnergy { get; set; }
+        public double durationSec { get; set; }       // 풀버스트 창 (보통 10s)
+        public double applyDelaySec { get; set; }
+        public string useBurstSkill { get; set; }     // Step1/2/3/AllStep
+        public string changeBurstStep { get; set; }
     }
 
     public class BasicAttackDto

@@ -1,7 +1,38 @@
-# FunctionTable.mpk 디코드 — 계획 (실행 전, 2026-07-07)
+# FunctionTable.mpk 디코드 — 계획 → 해결 경로 확정 (2026-07-08)
 
 > 목표: `FunctionTable.mpk`(MemoryPack, 19459 함수) → 함수별 `FunctionData`. **스킬 런타임(THE GAP)의
-> 데이터원**. 참조 = `Docs/SKILL_RUNTIME_REFERENCE.md`. **이 문서는 계획만 — 아직 실행 안 함.**
+> 데이터원**. 참조 = `Docs/SKILL_RUNTIME_REFERENCE.md`.
+
+## 0. ✅ 해결 (2026-07-08) — 스키마가 공개 repo에 이미 있음
+
+아래 §3-A 의 "FunctionData 모델 = 비공개, 컨택 필요" 판정은 **오판**이었다. 공개 스냅샷
+`github.com/SharpnelXu/nikke-mpk-json-converter` → **`NikkeMpkConverter/model/Skills.cs`** 에:
+- **`FunctionData`** — 전 필드 `[MemoryPackOrder]` 명시 (§1 의 순열 문제 = 즉시 해소)
+- `SkillData`/`SkillValueData`/`SkillFunction`/`StateEffectData`/`SkillInfoData` — 스킬 계층 전부
+- 공식 enum: `FunctionType`(77)·`TimingTriggerType`·`StatusTriggerType`·`StandardType`·
+  `FunctionTargetType`·`DurationType`·`ValueType`·`BuffType` (il2cpp TypeDefIndex 주석)
+- 덤: `CharacterData.cs`(니케→skill link)·`CharacterShotTable.cs`(공식 shot 스키마)
+
+→ **실행 = Plan A/B 불필요.** `memorypack_decode.py` 에 스키마 이식(MonsterTable 때와 동일 수법)만.
+**결정(사용자 2026-07-08): 엔진 스킬 데이터원 = 공식 FunctionTable 채택** (skills_parsed v3 = 검증 참조로 강등).
+아래 §1~§5 = 역사 기록 (스키마 없던 시점의 분석).
+
+### ✅ 실행 완료 (2026-07-08, D1/KP3) — 전 표 clean 디코드 + §4 검증 통과
+`memorypack_decode.py` 확장 → StaticData qa-260702 기준 **8표 clean(off==len)**:
+FunctionTable **19459** · CharacterSkillTable 4387 · StateEffectTable 5155 · SkillInfoTable 9280 ·
+CharacterTable 1905 (+기존 Monster 3표). 검증:
+- **니케 풀루프 bit-exact**: Red Hood(5001) 버스트 lv10 `skill_value=81342` = roledata 설명 `813.42%`;
+  Emma(5005) 스킬1 lv10 = `HealCharacter val=1077`(10.77%) + `OnHurtRatio trig_value=500`(피격 5% 확률) — 전부 일치.
+- **value 스케일**: Percent = ×10000 (10000=100%) 확정. ChangeWeapon `skill_value` 의 120 = **2초를 60fps 프레임**으로
+  (Red Hood SR 차지 2s) — 무기교체 스킬이 교체 shot_id(1010202)도 들고 있음(`trait_weapon_transformed` 실체).
+- **보스 passive**: 7252022/7252002(StateEffect) → Immune{Stun/ForcedStop/GravityBomb}(+7252002 는 ImmuneDamage_MainHP)
+  — 보스 본체/파츠 passive 로 정합. (구 "재생" 추정은 ImmuneDamage_MainHP 로 해석 교정 여지 — K11 에서 확정.)
+- **enum 미지값 = 신값뿐**: function_type 214~218, timing 91~94, status 67~73 — 기지 최대치 바로 위 연속 = 게임이
+  컨버터 스냅샷보다 신버전. 오정렬 아님 → 엔진은 미지 enum graceful 처리.
+- **CharacterTable 필드셋 drift**: 실직렬화 40멤버 = 모델 41 − `surface_category`. 판별 = 의미 배제 + **roledata
+  192캐릭 전수 교차검증 mismatch 0** (element/bonusrange/crit/burst). LOCAL_GAME_DATA §3 drift 사례 추가분.
+조립(D3) ✅ 2026-07-08: `staticdata_skill_chains.py` → `assembled/skill_chains.json`(gitignore) — 니케 192
+(레벨 5,750)·보스 87·함수 14,249(connected BFS·Fx 제거·enum 주석). 잔여 = K4 소비(C# 로더).
 
 ## 1. 확정 사실
 - `.mpk` = MemoryPack. 디코더 = `memorypack_decode.py`(스칼라/리스트/문자열 OK, MonsterParts 등 clean).

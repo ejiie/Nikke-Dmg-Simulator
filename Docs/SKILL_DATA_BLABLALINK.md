@@ -83,7 +83,7 @@ skill1/2 는 `skill_table:"StateEffect"` — 패시브 효과도 StateEffect 함
 | **DamageTaken(받피감)** | **생존(비대미지)** | ⚠ "캐릭이 적에게서 받는 뎀 감소". B4 `damage_taken`(적 취약=내 출력↑)과 **방향 반대·별개** |
 | ReloadSpeed/MaxAmmo/ChargeSpeed/BurstGauge/ReloadRounds | 무기타이밍(sim루프) | 파싱만 |
 | HealPotency / CoverHp / 조건부 | 생존 | 파싱만 |
-| HitRate | 제외 | DESIGN: 명중률만 제외 |
+| HitRate | 미연동(파싱만) | 명중률은 스코프 진입(2026-07-02, `AccuracyModel`). 단 HitRate **버프 stat → 모델 배선**은 미구현(명중원 수축/명중확률 보정으로 흡수 예정) |
 
 ## 4.2 ⏸ 미소비 효과 — 추후 구현 (잊지 말 것)
 
@@ -107,7 +107,7 @@ skill1/2 는 `skill_table:"StateEffect"` — 패시브 효과도 StateEffect 함
 - `HealPotency` (Healing 큐브): 받는 회복량 증가
 - `CoverHp` (Stealth 큐브 / 소장품): 엄폐물 HP 증가
 
-**제외**: `HitRate` (Assault 큐브) — DESIGN: 명중률(StatAccuracyCircle)만 제외.
+**미연동**: `HitRate` (Assault 큐브) — 명중률 자체는 2026-07-02 스코프 진입(`AccuracyModel`: 명중원→코어힛/명중 실확률). HitRate **버프 stat** 을 모델에 어떻게 흡수할지(명중원 반지름 축소 등)는 미정 → 현재 파싱만.
 
 ## 5. 열린 항목
 

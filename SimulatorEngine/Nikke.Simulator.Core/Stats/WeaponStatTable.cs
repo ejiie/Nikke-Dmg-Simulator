@@ -11,6 +11,15 @@ namespace Nikke.Simulator.Core.Stats
     /// ※ `trait_weapon_transformed` 로 변경되는 fire_rate / charge_time 등 granular override 는
     ///   `Nikke.cs` 측 일시적 플래그로 처리 — 이 테이블은 원본 무기 기준 값만 반환 (§5.4).
     /// </summary>
+    /// <remarks>
+    /// ⚠️ <b>레거시 (2026-07-02).</b> 발사속도/차지 타이밍은 이제 per-캐릭 실데이터
+    /// <see cref="WeaponProfile"/>(roledata `weaponData` → <c>Nikke.Weapon</c>)가 권위:
+    /// <c>FireRate</c>/<c>FireRateAtShot</c>(MG spin-up)/<c>ChargeTimeSec</c>. 신규 코드는 그쪽을 쓸 것.
+    /// 이 테이블의 하드코딩은 실데이터와 불일치(MG 60/s 고정=ramp 누락, SG 5/3 vs 1.5/s)하며,
+    /// 무기 문자열 상수(<c>"Machine Gun"</c>/<c>"Submachine Gun"</c>)도 실데이터 롱폼
+    /// (<c>"Minigun"</c>/<c>"SMG"</c>)과 <b>불일치</b> → 실데이터로 <see cref="GetBaseFireRate"/> 호출 시
+    /// <see cref="NotSupportedException"/> 위험. 보존만 하고 fire-rate 경로엔 사용 금지.
+    /// </remarks>
     public static class WeaponStatTable
     {
         // ──────────────────────────────────────────────────────────

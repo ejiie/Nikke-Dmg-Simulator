@@ -67,11 +67,15 @@ LaunchWeaponEvent · TimeEvent`. 트리거가 이 이벤트들을 구독. 우리
 이벤트들 모든 니케/보스에 broadcast, (c) 정리. **우리 SimClock(K2)이 프레임루프 담당** → timeline 스케줄러 +
 broadcast 디스패치만 추가. 버스트게이지=`Database/processed/burst_gauge_table.json`(이번 커밋) 사용.
 
-## 6. 데이터 의존 = FunctionTable (별도 계획서)
+## 6. 데이터 의존 = FunctionTable — ✅ 봉쇄 해제 (2026-07-08)
 이 런타임은 **각 function_id 의 FunctionData**(functionType/value/target/standard/trigger/duration)가 필요.
 보스/니케 스킬 → skill_id → function_id (우리 `MonsterTable.skill_data` clean 디코드로 확보) → FunctionData.
-FunctionData 는 `FunctionTable.mpk`(MemoryPack)에 있으나 **디코드 미완**(순서 RE) →
-계획 = `DataPipeline/crawler/FUNCTIONTABLE_DECODE_PLAN.md`. **효과에 필요한 필드는 ~13개뿐**(Fx 26개 문자열=시각효과 무관).
+**✅ 디코드 완료(2026-07-08)**: SharpnelXu 공개 스키마(`NikkeMpkConverter/model/Skills.cs`) 이식 →
+`memorypack_decode.py` 가 FunctionTable(19459)/CharacterSkillTable/StateEffectTable/SkillInfoTable/CharacterTable
+**clean 디코드 + 풀루프 검증 통과**(니케 스킬 수치 roledata bit-exact, value=×10000, 상세 =
+`DataPipeline/crawler/FUNCTIONTABLE_DECODE_PLAN.md` §0). **결정(사용자 2026-07-08): 엔진 스킬
+데이터원 = 공식 FunctionTable** — skills_parsed.json(v3, LLM)은 검증 참조로 강등. 체인 조립(D3) ✅ 2026-07-08
+= `staticdata_skill_chains.py` → `assembled/skill_chains.json`(gitignore). 잔여 = K4(C# 로더)/K7.
 
 ## 7. 즉시 참조 파일 (nikke-einkk)
 - `lib/model/battle/function.dart` (1410줄) — **트리거+효과 적용 핵심**

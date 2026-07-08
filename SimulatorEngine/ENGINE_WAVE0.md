@@ -17,6 +17,7 @@
    - `ISimClock` (`Schedule(double atSec, Action)`, `Run(double untilSec)`)
    - `IRotationController` (`Decide(simState)→actions`)
    - `ITarget` (FinalDef/HasParts/Element/InProperRange/IsBoss → AttackContext 채움)
+     ↳ ※ 계약 갱신됨(2026-07-02, 유실분 복구): `InProperRange`→`Distance`+`CoreRadius`/`BodyRadius`, `PopulateContext(+attackerWeaponType)`. 현행 = `Targets/ITarget.cs`.
    - `Combatant` (Core `Nikke` 래핑 + 런타임 버프 상태 보유 — **Nikke(Core)는 static 유지**)
    - `SkillParsedDto` 패밀리 (스킬 소스 audit 결과 반영; 미정이면 최소 placeholder)
    - `BuffInstance` (stat/value/bracket/expirySec/stacks)

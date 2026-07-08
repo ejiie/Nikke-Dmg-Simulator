@@ -35,7 +35,8 @@ namespace Nikke.Simulator.Core.Data.Constants
         HealPotency,
         CoverHp,
 
-        // 제외 (DESIGN: 명중률만 제외)
+        // 명중률 버프 — 파싱만. 명중률은 2026-07-02 스코프 진입(Combat.AccuracyModel: 명중원→실확률);
+        // 단 이 HitRate 버프 stat 을 모델에 흡수하는 배선은 미구현. (SKILL_DATA_BLABLALINK §4.2)
         HitRate
     }
 }
