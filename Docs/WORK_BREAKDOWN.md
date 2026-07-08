@@ -101,9 +101,9 @@
 - 목표: 트리거 등록→이벤트 발생 시 조건평가→effects 적용(BuffInstance 스폰 / deal_damage 인스턴스). 활성버프 → AttackContext 합산(니케식 group-then-round). duration 만료, stack 분기.
 - 스코프: `Engine/Skills/SkillRuntime.cs`, `Engine/Buffs/*.cs`. 의존: K0, K4. 수용: passive/지속/스택/만료 시나리오 테스트.
 
-### K8 — 단일 캐릭 통합 (M1+M2) ★integration
-- 목표: K2+K3+K5+K6(+K7) 배선 → `SimulationRunner.RunOnce` 가 캐릭 1명 시간축 DPS 산출. 크리 RNG 포함.
-- 스코프: `Engine/SimulationRunner.cs`(엔트리 구현). 의존: K2,K3,K5,K6,K7,K1. 수용: 단일캐릭 DPS in-game 대조 + N회 크리 수렴.
+### K8 — 단일 캐릭 통합 (M1+M2) ★integration — 🟢 M1 배선 완료 (2026-07-08, 8 테스트)
+- 구현: `SimulationRunner.RunOnce` — SimClock(60fps tick 재귀 예약) → per-Combatant FiringModel → 발사 시 `BuildHitContext`(static 주입, Combatant K0 스텁 이행) + `ITarget.PopulateContext` + `AccuracyModel.RollHit/RollCoreHit`(타겟 반지름>0 시) + `CritSampler` → `DamageCalculator` → `MetricsCollector`(crit/core/full 태그). SG 펠릿 = 개별 히트 인스턴스(개별 롤 — 가정, M2 골든에서 확정). `Combatant.Firing`(FiringControl) 추가 — Auto/Manual per-멤버.
+- 수용: ✅ M1 자동 테스트(`SimulationRunnerTests` 8) — 프레임 정밀 타임라인(AR 재장전 사이클 102히트/10s, 초 버킷, 팀 2인, SG 펠릿), 크리 15%±2%p·코어힛 (rc/R)²·빗맞음 게이트 수렴(시스템 RNG). 테스트 오염 내성 = DEF 거대 타겟(최소뎀 1 고정). ⏳ **M2 = in-game DPS 골든 대조(사용자)** — 잔여: 실캐릭 대조 후 W/펠릿 가정 확정. K7 배선(Runtime 버프)·K9 버스트는 후속.
 
 ### K9 — 팀 + 풀버스트 (M3)
 - 목표: 5 Combatant, ally-target 버프 팀 전파, 버스트 게이지→Full Burst, `burst_*` 트리거.
