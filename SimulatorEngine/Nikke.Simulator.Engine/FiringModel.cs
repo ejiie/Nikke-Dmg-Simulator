@@ -97,27 +97,11 @@ namespace Nikke.Simulator.Engine
         public double CurrentRatePerSec => _rateOfFire / 60.0;
         public double AccuracyCircle => _accuracyCircle;
 
-        private readonly double _effectiveReloadSec; // 항별 반올림 감쇠 적용 후 재장전 시간(초)
-
-        /// <summary>
-        /// 타이밍 감쇠식 (사용자 확정 2026-07-08, in-game):
-        ///   effective = base − Σᵢ round(base × buffᵢ, 2)   ← **항별** 소수 둘째자리 사사오입(AwayFromZero).
-        /// B2 per-term floor 와 동류의 니케식 항별 라운딩 — Σ 후 곱셈으로 대체 금지. 하한 0.
-        /// 라운딩은 decimal 경유 — 게임 원천값이 ×10000 정수(십진)라 double 이진 오차
-        /// (예: 0.145 → 0.1449…9 → 오반올림 0.14)를 차단해야 사사오입이 정확.
-        /// </summary>
-        public static double ApplyTimingReduction(double baseSec, IEnumerable<double> buffTerms)
-        {
-            decimal reduced = (decimal)baseSec;
-            if (buffTerms != null)
-                foreach (double b in buffTerms)
-                    if (b != 0)
-                        reduced -= Math.Round((decimal)baseSec * (decimal)b, 2, MidpointRounding.AwayFromZero);
-            return Math.Max(0.0, (double)reduced);
-        }
+        private readonly int _effectiveReloadCs;    // 니케식 감쇠 적용 후 재장전 시간 (1/100초 정수)
 
         /// <param name="reloadSpeedBuffs">재장전 속도 버프 **개별 항** (큐브/소장품 `Nikke.TimingReloadSpeedTerms`) —
-        /// 정책값 <see cref="FiringControl.ReloadSpeedBuff"/> 도 1항으로 합류. 항별 반올림 감쇠식 적용.</param>
+        /// 정책값 <see cref="FiringControl.ReloadSpeedBuff"/> 도 1항으로 합류.
+        /// 감쇠 = <see cref="OverloadProcessor.ReduceTimeCs"/> (니케식 group-then-round, cs 정수 도메인).</param>
         /// <param name="chargeSpeedBuffs">차지 속도 버프 개별 항 (`Nikke.TimingChargeSpeedTerms`) — 동일 감쇠식.</param>
         public FiringModel(WeaponProfile weapon, int maxAmmo, FiringControl control, IRandomSource rng,
                            IReadOnlyList<double> reloadSpeedBuffs = null,
@@ -134,15 +118,17 @@ namespace Nikke.Simulator.Engine
             CurrentAmmo = maxAmmo;
             _isCharge = _w.IsChargeWeapon;
 
-            // 재장전: 캐릭 고유 항들 + 정책 항(수동 지정) → 항별 반올림 감쇠. ≥100% 상당 = 0초 → 하한 1프레임(즉시).
+            // 시간류는 1/100초 **정수**(게임 timeData 원천)로 복원해 정수 연산 (사용자 확정 2026-07-08).
+            // 재장전: 캐릭 고유 항들 + 정책 항(수동 지정) → 니케식 감쇠. 0cs = 하한 1프레임(즉시 장전 창발).
             var reloadTerms = new List<double>(reloadSpeedBuffs ?? Array.Empty<double>());
             if (_ctl.ReloadSpeedBuff != 0) reloadTerms.Add(_ctl.ReloadSpeedBuff);
-            _effectiveReloadSec = ApplyTimingReduction(_w.ReloadTimeSec, reloadTerms);
+            _effectiveReloadCs = OverloadProcessor.ReduceTimeCs(ToCs(_w.ReloadTimeSec), reloadTerms);
 
             _spotFirstFrames = ToFrames(_w.SpotFirstDelaySec);
             _spotLastFrames = ToFrames(_w.SpotLastDelaySec);
             // 차지: 동일 감쇠식, 하한 1프레임
-            _fullChargeFrames = Math.Max(1, ToFrames(ApplyTimingReduction(_w.ChargeTimeSec, chargeSpeedBuffs)));
+            _fullChargeFrames = Math.Max(1,
+                CsToFrames(OverloadProcessor.ReduceTimeCs(ToCs(_w.ChargeTimeSec), chargeSpeedBuffs)));
             _rateOfFire = _w.FireRate * 60.0;              // 발/sec → RPM
             _spotFirstLeft = _spotFirstFrames;             // 전투 개시 = 엄폐→조준부터
             _accuracyCircle = _w.StartAccuracyCircle;
@@ -150,6 +136,12 @@ namespace Nikke.Simulator.Engine
         }
 
         private static int ToFrames(double sec) => Math.Max(0, (int)Math.Round(sec * Fps));
+
+        /// <summary>초(ETL /100 유래) → 1/100초 정수 무손실 복원.</summary>
+        private static int ToCs(double sec) => (int)Math.Round(sec * 100.0);
+
+        /// <summary>1/100초 정수 → 프레임 (einkk timeDataToFrame: round(cs × fps / 100)).</summary>
+        private static int CsToFrames(int cs) => Math.Max(0, (int)Math.Round(cs * Fps / 100.0));
 
         private int NextChargeTarget()
             => _fullChargeFrames
@@ -162,12 +154,12 @@ namespace Nikke.Simulator.Engine
             return Math.Max(1, (int)Math.Round(sec * Fps));
         }
 
-        /// <summary>실효 재장전 프레임 — 항별 반올림 감쇠 적용값, 하한 1프레임 (0초 = 즉시 장전 창발).</summary>
+        /// <summary>실효 재장전 프레임 — 니케식 감쇠 적용값(cs 정수), 하한 1프레임 (0cs = 즉시 장전 창발).</summary>
         private int EffectiveReloadFrames(bool addCoverReturn)
         {
-            double sec = _effectiveReloadSec;
-            if (addCoverReturn) sec += _w.SpotLastDelaySec; // einkk: 첫(강제) 재장전에 spot_last 가산
-            return Math.Max(1, ToFrames(sec));
+            int cs = _effectiveReloadCs;
+            if (addCoverReturn) cs += ToCs(_w.SpotLastDelaySec); // einkk: 첫(강제) 재장전에 spot_last 가산
+            return Math.Max(1, CsToFrames(cs));
         }
 
         /// <summary>프레임 1개 진행. 발사/재장전/전이/차지 상태 갱신 후 결과 반환.</summary>
