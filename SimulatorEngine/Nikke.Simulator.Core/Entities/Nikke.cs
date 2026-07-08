@@ -28,12 +28,15 @@ namespace Nikke.Simulator.Core.Entities
         //     FiringModel(K3)·AccuracyModel·ProperDistanceTable 이 소비. 데이터 없으면 Empty.
         public WeaponProfile Weapon { get; private set; }
 
-        // --- [타이밍 특수효과] 큐브+소장품 합산 (분수) — FiringModel 소비 (K8 배선 2026-07-08) ---
-        // ReloadSpeed(Resilience)·ChargeSpeed(Adjutant) = 감산형 시간 단축(사용자 확정 재장전 공식과 동일 원칙).
+        // --- [타이밍 특수효과] 큐브+소장품 — FiringModel 소비 (K8 배선 2026-07-08) ---
+        // 감쇠 공식(사용자 확정): time = base − Σᵢ round(base × buffᵢ, 2)  ← **항별** 소수 둘째자리 사사오입.
+        // 항별 반올림이라 Σ값이 아니라 **개별 항 리스트**가 필요 (*Terms). Σ 프로퍼티는 표시/요약용.
         // BurstGauge(Quantum) = 노출만(소비 = K9). ReloadRounds(Bastion, 조건부) = K7 트리거 대기.
         public double TimingReloadSpeed { get; private set; }
         public double TimingChargeSpeed { get; private set; }
         public double TimingBurstGauge { get; private set; }
+        public IReadOnlyList<double> TimingReloadSpeedTerms { get; private set; } = Array.Empty<double>();
+        public IReadOnlyList<double> TimingChargeSpeedTerms { get; private set; } = Array.Empty<double>();
 
         // --- [레벨/등급 정보] ---
         public int Level { get; private set; }
@@ -81,6 +84,16 @@ namespace Nikke.Simulator.Core.Entities
         private double EffSum(EffectType t)
             => (_cubeEffects.TryGetValue(t, out var a) ? a : 0.0)
              + (_collectionEffects.TryGetValue(t, out var b) ? b : 0.0);
+
+        /// <summary>개별 버프 항 목록 (0 제외) — 항별 반올림 감쇠식용 (큐브·소장품 각 1항).</summary>
+        private double[] EffTerms(EffectType t)
+        {
+            Span<double> tmp = stackalloc double[2];
+            int n = 0;
+            if (_cubeEffects.TryGetValue(t, out var a) && a != 0) tmp[n++] = a;
+            if (_collectionEffects.TryGetValue(t, out var b) && b != 0) tmp[n++] = b;
+            return n == 0 ? Array.Empty<double>() : tmp[..n].ToArray();
+        }
 
         public Nikke(CharacterDto dto, GlobalStateDto globalState)
         {
@@ -188,10 +201,13 @@ namespace Nikke.Simulator.Core.Entities
             double defRate = EffSum(EffectType.Def);
             double ammoRate = EffSum(EffectType.MaxAmmo);
 
-            // [타이밍 특수효과] FiringModel 소비분 (분수 합산). Bastion(ReloadRounds)은 조건부 — K7.
+            // [타이밍 특수효과] FiringModel 소비분. Σ = 표시용, Terms = 항별 반올림 감쇠식 입력.
+            // Bastion(ReloadRounds)은 조건부 — K7.
             TimingReloadSpeed = EffSum(EffectType.ReloadSpeed);
             TimingChargeSpeed = EffSum(EffectType.ChargeSpeed);
             TimingBurstGauge = EffSum(EffectType.BurstGauge);
+            TimingReloadSpeedTerms = EffTerms(EffectType.ReloadSpeed);
+            TimingChargeSpeedTerms = EffTerms(EffectType.ChargeSpeed);
 
             // [C] Consts 합산 (Effective Native Stat: baseAtk = atk_core + consts)
             double effectiveNativeHP = (coreHP + collHP + equipHP + cubeHP) * (1.0 + hpRate);

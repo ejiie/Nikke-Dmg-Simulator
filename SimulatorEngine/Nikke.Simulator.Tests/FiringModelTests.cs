@@ -255,9 +255,9 @@ public class FiringModelTests
     [Fact]
     public void Charge_speed_buff_shortens_full_charge_subtractively()
     {
-        // Adjutant 류 차지속도 버프 = 감산형: charge 1.0s × (1−0.5) = 0.5s = 30f
+        // Adjutant 류 차지속도 버프: 1.0 − round(1.0×0.5, 2) = 0.5s = 30f
         var m = new FiringModel(SrUp(), 6, new FiringControl { Mode = ControlMode.Auto }, Rng,
-                                chargeSpeedBuff: 0.5);
+                                chargeSpeedBuffs: new[] { 0.5 });
         var fired = FireFrames(m, 200);
         Assert.Equal(41, fired[0]);                       // spotFirst 12 + charge 29 (선차지 1f)
         Assert.All(fired.Zip(fired.Skip(1)),
@@ -265,13 +265,43 @@ public class FiringModelTests
     }
 
     [Fact]
+    public void Timing_reduction_rounds_each_term_to_2_decimals()
+    {
+        // 감쇠식 = base − Σᵢ round(base×buffᵢ, 2) — **항별** 사사오입 (사용자 확정, in-game).
+        // 항별: 1.0 − (round(0.145,2)+round(0.145,2)) = 1.0 − 0.30 = 0.70  (Σ 후 곱셈이면 0.71 — 다름!)
+        Assert.Equal(0.70, FiringModel.ApplyTimingReduction(1.0, new[] { 0.145, 0.145 }), 12);
+        // 사사오입(AwayFromZero) 확인: banker's 라면 round(0.145,2)=0.14 → 0.72 가 됐을 것
+        Assert.Equal(0.85, FiringModel.ApplyTimingReduction(1.0, new[] { 0.145 }), 12);
+        // 하한 0 (과잉 버프)
+        Assert.Equal(0.0, FiringModel.ApplyTimingReduction(1.0, new[] { 0.7, 0.7 }), 12);
+
+        // 프레임 반영: charge 1.0s + [0.145, 0.145] → 0.70s = 42f (Σ곱셈식이면 0.71s → 43f)
+        var m = new FiringModel(SrUp(), 6, new FiringControl { Mode = ControlMode.Auto }, Rng,
+                                chargeSpeedBuffs: new[] { 0.145, 0.145 });
+        var fired = FireFrames(m, 100);
+        Assert.Equal(53, fired[0]);                       // spotFirst 12 + charge 41 (선차지 1f)
+    }
+
+    [Fact]
     public void Character_reload_buff_stacks_with_control_policy_buff()
     {
-        // 캐릭 고유(큐브 0.5) + 정책(0.5) 합산 = 1.0 → 즉시 장전 (감산형 하한 1f)
+        // 캐릭 고유 항(큐브 0.5) + 정책 항(0.5): 1.0 − (0.5+0.5) = 0초 → 하한 1f = 즉시 장전
         var ctl = new FiringControl { Mode = ControlMode.Manual, ReloadSpeedBuff = 0.5 };
-        var m = new FiringModel(Ar(), 5, ctl, Rng, reloadSpeedBuff: 0.5);
+        var m = new FiringModel(Ar(), 5, ctl, Rng, reloadSpeedBuffs: new[] { 0.5 });
         var fired = FireFrames(m, 300);
         Assert.All(fired.Zip(fired.Skip(1)), p => Assert.Equal(5, p.Second - p.First)); // 무중단
+    }
+
+    [Fact]
+    public void Reload_reduction_also_rounds_per_term()
+    {
+        // AR reload 1.0s + 항 [0.145, 0.145] (수동, 전이 없음): 실효 0.70s = 42f
+        // 5발: f13..33 → f34 재장전 개시(=첫 진행) → f75 완료 → f76 재개 (Σ곱셈식이면 43f → f77)
+        var ctl = new FiringControl { Mode = ControlMode.Manual };
+        var m = new FiringModel(Ar(), 5, ctl, Rng, reloadSpeedBuffs: new[] { 0.145, 0.145 });
+        var fired = FireFrames(m, 300);
+        Assert.Equal(33, fired[4]);
+        Assert.Equal(76, fired[5]);
     }
 
     [Fact]
