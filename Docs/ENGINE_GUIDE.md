@@ -9,7 +9,7 @@
 
 ## 0. 범위
 
-엔진 = `skills_parsed.json` + 검증된 대미지/스탯 코어를 **시간축 위에서 굴려** 팀 1회 run 의 총대미지(RNG 표본)를 내는 Runtime 층 = **Tier 2** (DESIGN §0.5).
+엔진 = 공식 스킬 체인(`skill_chains.json`) + 검증된 대미지/스탯 코어를 **시간축 위에서 굴려** 팀 1회 run 의 총대미지(RNG 표본)를 내는 Runtime 층 = **Tier 2** (DESIGN §0.5).
 목표 형태(DESIGN §1): **event-driven 풀 tick 로테이션 sim**, 2모드 제어, 타겟 추상화.
 
 > ⚠️ 엔진은 **Tier 3(Evaluator)·4(Optimizer)·5(Web)·6(배포) 의 재사용 대상.** → **UI·compute·직렬화 무지 순수 라이브러리** 로 짓는다. 출력은 run 1회당 **총대미지 표본 1개**(Evaluator 가 N run → 분포). 절대 UI/서버 타입을 엔진에 끌어들이지 말 것.
@@ -41,7 +41,6 @@
 | 스탯 조립 | `Stats/StatCalculator.cs` | `GetCoreAppliedStats(class,weapon,mfr,lv,grade,core,bond,consoles)` · `GetEquipmentStats` · `GetConsoleStats` (DESIGN §3.5) |
 | 자료 로딩 | `Stats/StatTable.cs` | (로딩) `Initialize(csvPath)`(레벨/호감도) + `InitializeEquipment/InitializeCubeBase/InitializeCollectionBase(jsonPath)` ; (raw 접근) `GetLevelClassStat`·`GetBondClassStat`·`TryGetEquipBase`·`GetCubeStat(lv)`·`GetCollectionStats(lv)` **(전부 공식 JSON 연동 완료, stub 아님)** |
 | OL 합산 | `Stats/OverloadProcessor.cs` | `CalculateFinalBaseStat(native, olPercents, olFlatSum, decimals)` ; `CalculateFlatBonus(opts,type)` |
-| 무기 타이밍 (⚠레거시) | `Stats/WeaponStatTable.cs` | `GetBaseFireRate(weapon)→발/sec` (AR12/MG60/SMG24/SG 5÷3) ; `GetChargeTiming(weapon)→ChargeTiming{...}` — ⚠ **공식 데이터와 불일치** (MG=spin-up 인데 60/s 고정, SG 데이터=1.5/s, per-char 편차 무시, 상수 "Machine Gun"≠데이터 "Minigun"). **fire-rate 권위 = `Nikke.Weapon`(아래)** — 보존만, fire-rate 경로 사용 금지 |
 | 무기 프로파일 (per-char) | `Stats/WeaponProfile.cs` ← `Data/Dto/RootDto.cs` `WeaponDto` → `Nikke.Weapon` | ETL 정규화(발/sec·초·분수): 발사 ramp `FireRate/EndFireRate/FireRateRampPerShot/FireRateResetTimeSec` + **`FireRateAtShot(n)`**(MG spin-up 1→70 nominal, **60fps 프레임캡→실효 60**)/`FireIntervalSec` · 모션 `SpotFirst/LastDelaySec`(0.2s 지배적) · 탄창/재장전(`ReloadBulletRate` 부분장전) · 차지(`ChargeTimeSec/FullChargeDamage`) · 펠릿(`ShotCount` SG 5\|10) · 명중원(`*AccuracyCircle*`) · 버스트게이지(`BurstEnergyPerShot/BurstDurationSec/UseBurstSkill`). null-safe(`Empty`) — 구 merged DB 호환 |
 | 명중 모델 | `Combat/AccuracyModel.cs` | `CircleRadius(start,end,perShot,n)`(연사 수축) ; `CoreHitProbability/HitProbability`=**(r/R)² 면적확률** ; `RollCoreHit/RollHit(rng,…)` (CritSampler 패턴). 타겟 코어/몸체 반지름 = ITarget 설정 상수 |
 | 적정 거리 | `Combat/ProperDistanceTable.cs` | `GetBand(weapon)`(공식 bonusrange 최빈값: SG 0-25·SMG 15-35·AR 25-45·MG 35-55·SR 45-100·**RL=없음**) ; `GetBonus(weapon,dist)→0.3\|0` ; `GetBonusPerChar(dist,min,max)`(per-char 정확, SR 예외 캐릭 포함). 커밋된 `proper_distance_table.json` 과 테스트 교차검증 |
@@ -62,7 +61,7 @@ SimClock(이벤트큐) ──┬─> FiringModel ──> (히트 발생)──> 
                      ├─> SkillRuntime(트리거→BuffInstance/DamageInstance) ──> BuffStore ──┘
                      └─> IRotationController(Auto/Scripted) ──(스킬/버스트 명령)──> SkillRuntime
 ITarget(Dummy/Boss) ──(DEF/파츠/속성/거리)──> AttackContext 채움
-SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator ──(static/runtime 2축)──> Nikke / SkillRuntime
+SkillChainLoader ──(skill_chains.json, 공식)──> SkillTranslator ──(static/runtime 2축)──> Nikke / SkillRuntime
 ```
 
 핵심 신규: **SimClock · FiringModel · SkillParsed DTO+Loader · SkillTranslator · SkillRuntime · BuffStore/Aggregator · IRotationController · ITarget · MetricsCollector**.
@@ -86,7 +85,7 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 
 ### M2 — 단일 캐릭 스킬 (브리지 + 런타임)
 - **목표**: 그 캐릭 *자기* 스킬(self 버프/트리거)을 시간축에 반영.
-- **하는 것**: SkillParsed C# DTO+Loader(`skills_parsed.json`), SkillTranslator(static→Nikke 주입 / runtime→트리거 등록), SkillRuntime(event→BuffInstance/DamageInstance), BuffStore + BuffAggregator(활성버프→AttackContext, 니케식 합산).
+- **하는 것**: SkillChainLoader(공식 skill_chains.json — ✅ K4), SkillTranslator(2축 분류+EffectRoute — ✅ K4), SkillRuntime(event→BuffInstance/DamageInstance — K7), BuffStore + BuffAggregator(활성버프→AttackContext, 니케식 합산 — K7).
 - **Acceptance**: passive/지속 버프가 컨텍스트에 반영, duration 만료 처리, `groups:[]` no-op, stack 분기(cumulative/replace) 동작.
 
 ### M3 — 팀 (버프 전파 + 풀버스트)
@@ -124,9 +123,9 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 - **명중원**: 발사마다 `−accuracyChangePerShot`, 비사격 프레임마다 `+changeSpeed/fps` 회복.
 - **버스트**: 게이지 = burstStage 0 에서만 충전(관통 히트 = 파츠당 추가). stage 간 딜레이 = [0.01, 0.17]s random(사용자 실측; 데이터 상수 없음 — ConfigBattle 확인). **풀버스트 10s = 진입 시점 기산(확정)**. **3버→풀버 진입 딜레이 = 0.46s ≈ 28프레임(사용자 영상 실측 2026-07-08)** — K9 버스트 사이클 상수. 발사 시 `IsFullCharge` 세팅 + `AccuracyModel.RollCoreHit` 로 `IsCoreHit` 샘플링. (참고: ConfigBattle `RLV2SwitchDelayTime=20` — DOWN_Charge(V2)형 연관 추정, 의미 미확정.)
 
-**SkillParsed DTO + Loader** — Pydantic `skill_schema.py` 미러: `SkillParsedDto/TriggeredEffectGroupDto/TriggerBlockDto/TargetBlockDto/EffectBlockDto/StackConditionBranchDto` + enum(또는 string + 검증). `JsonProvider.LoadJson` 로 `skills_parsed.json`(key=name_code) 로드.
+**SkillChainLoader (✅ K4)** — 공식 skill_chains.json 로드 + 참조 무결성 검증 (§2 표 '공식 스킬 데이터' 행).
 
-**SkillTranslator** — `SkillParsedDto` → 2축(DESIGN §5): static modifier(→ Nikke 사전집계 주입) / runtime trigger(→ SkillRuntime 등록). 분기 기준: `trigger.event≠passive` || `duration≠null` || `stack_conditions` 존재 → runtime.
+**SkillTranslator (✅ K4)** — `FunctionDto` → 2축(DESIGN §5): Classify(트리거·조건 無+영구=Static / 그 외 Runtime) + Route(EffectRoute — 확실 슬롯/Unverified/Unknown).
 
 **SkillRuntime** — 트리거 등록부. 이벤트(skill_cast/on_hit/burst_*/every_n_shots/…) 발생 시 조건(`condition_on`/`required_token`/`hp_*`) 평가 후 effects 적용: 버프면 `BuffInstance`(stat/value/bracket/expirySec/stacks) 스폰, `deal_damage` 면 `DamageInstance`(W 슬롯, bracket=null) → 히트 인스턴스.
 
@@ -149,7 +148,7 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 | D3 | 파서 prerequisite | **런타임 먼저, 134 완성분 + 결손 no-op, 파서 병행** | 닭달걀 차단 |
 | D4 | 출력 지표 | record-every-instance MetricsCollector | 총/DPS곡선/캐릭별/브래킷 전부 사후 집계 |
 | D5 | SimClock 자료구조 | min-heap 우선순위큐 | 동시각 삽입순 tie-break |
-| D6 | 스킬 enum | C# enum 미러 + 미지값 graceful | legend/`skill_schema.py` 와 동기 (드리프트 시 §11 체크리스트) |
+| D6 | 스킬 enum | ✅ 공식 enum 미러(`OfficialSkillEnums.cs`, 기계생성) + 미지값 graceful | 게임 신버전 값 = Unknown no-op (D1 검증: 신값은 연속 추가뿐) |
 
 ---
 
@@ -164,6 +163,6 @@ SkillParsed C# DTO + Loader ──(skills_parsed.json)──> SkillTranslator �
 ## 8. 참조
 - 병렬 작업 청킹·순서(멀티 에이전트): [`Docs/WORK_BREAKDOWN.md`](WORK_BREAKDOWN.md)
 - 방향·공식 권위: [`Docs/DESIGN.md`](DESIGN.md)
-- 스킬 스키마/enum: `DataPipeline/schema/skill_schema_legend.txt` + `skill_schema.py`
+- 스킬 데이터: `Docs/SKILL_RUNTIME_REFERENCE.md` + `Engine/Skills/OfficialSkillEnums.cs` (공식 enum 미러)
 - 공식 유도: 루트 `_dmg_probe.py` / `_dmg_calibrate.py`, golden: `Nikke.Simulator.Tests/DamageFormulaGoldenTests.cs`
-- 과거 설계 배경(참고만): `Docs/_archive/DEVLOG.md` (배너·날짜 확인)
+- 폐기 레거시(참고만): `_archive/` (LLM 파서·il2cpp 루트·완료 태스크 문서)

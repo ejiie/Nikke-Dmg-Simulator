@@ -151,14 +151,17 @@ namespace Nikke.Simulator.Core.Stats
         }
 
         // 니케 무기 종류 → 레벨표 DEF 키 매핑.
+        // ⚠ merged DB 의 현행 표기 = roledata_cleaner WEAPON_MAP 산출("Minigun"/"SMG") — prydwen 시절
+        //   롱폼("Machine Gun"/"Submachine Gun")과 병행 수용 (2026-07-08 감사 A1: 미매칭 시 AR 폴백으로
+        //   MG/SMG 캐릭 DEF 가 AR 열로 계산되던 버그 수정).
         private static string MapWeapon(string w) => w switch
         {
             "Assault Rifle" => "AR",
             "Sniper Rifle" => "SR",
-            "Submachine Gun" => "SMG",
+            "Submachine Gun" or "SMG" => "SMG",
             "Shotgun" => "SG",
             "Rocket Launcher" => "RL",
-            "Machine Gun" => "MG",
+            "Machine Gun" or "Minigun" => "MG",
             _ => "AR"
         };
 

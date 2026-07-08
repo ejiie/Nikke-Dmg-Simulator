@@ -1,7 +1,7 @@
 # DESIGN — Nikke Damage Simulator 방향·구조 (권위)
 
 > **역할**: 프로젝트가 *무엇을* 만들고 *어떻게* 구성되는지의 단일 권위 문서.
-> **지위**: 이 문서 = 현행 ground truth. `Docs/_archive/*` 는 historical(2026-04, 일부 superseded).
+> **지위**: 이 문서 = 현행 ground truth. (구 ARCHITECTURE/DEVLOG 계열 문서는 내용 노후로 폐기됨 — 2026-07-08.)
 > **확정일**: 2026-06-28 (사용자와 원점 재논의 후 확정).
 
 ---
@@ -49,19 +49,22 @@
 ## 2. 시스템 레이어 (현행)
 
 ```
-DataPipeline/ (Python)   크롤러+ETL+LLM 파서 → Database/*.json + skills_parsed.json
+DataPipeline/ (Python)   크롤러(blabla/roledata/StaticData) + MemoryPack 디코더 + ETL
+                          → Database/processed/*.json + raw/staticdata/{mpk,assembled}(gitignore)
         │ (파일 경계)
 SimulatorEngine/Nikke.Simulator.Core (C# .NET8)   ← 순수 라이브러리 (UI/compute 무지)
    Data/        JsonProvider(I/O 단일점) + Dto(JSON 1:1) + Constants(큐브/콜렉션)
    Stats/       StatTable(원천 자료 **로딩** CSV/JSON + raw 접근) · StatCalculator(**스탯 조립** §3.5)
-                · OverloadProcessor(OL 니케식 합산) · WeaponStatTable(발사속도/차지) · IRandomSource/CritSampler(크리 RNG)
+                · OverloadProcessor(니케식 합산 + ReduceTimeCs) · WeaponProfile(per-char 무기) · IRandomSource/CritSampler(크리 RNG)
    Combat/      DamageCalculator(per-tick **대미지** 공식 §3) + AttackContext(tick struct)
-   Entities/    Nikke(최종 기초스탯 + BuildAttackContext 팩토리)
-   [신설 예정]  Runtime/ — 이벤트 클럭 + 스킬 런타임 + 버프 스토어 + 로테이션 제어 + 타겟
+                + AccuracyModel(코어힛 면적확률) + ProperDistanceTable(적정거리)
+   Entities/    Nikke(최종 기초스탯 + BuildAttackContext 팩토리 + Weapon/Timing*)
         │
-SimulatorEngine/Nikke.Simulator.Engine (C# .NET8)  ← Runtime 엔진 (계약 스텁 동결, K0). Engine→Core 단방향.
+SimulatorEngine/Nikke.Simulator.Engine (C# .NET8)  ← Runtime 엔진. Engine→Core 단방향.
+   Clock/SimClock(K2✅) · FiringModel(K3✅) · Skills/(공식 로더·번역기 K4✅) · Targets/(K5✅)
+   Metrics/(K6✅) · SimulationRunner(K8 M1✅) · Buffs/·Rotation/(K7/K10 대기)
         │
-SimulatorEngine/Nikke.Simulator.Wpf  (WPF UI; App.OnStartup 에서 StatTable.Initialize)
+SimulatorEngine/Nikke.Simulator.Harness (M2 대조 콘솔) · Nikke.Simulator.Wpf (UI 보류 셸)
 ```
 
 > 역할 분리(2026-06-30 3-way split): **StatTable=로딩 / StatCalculator=스탯 계산 / DamageCalculator=대미지**.
@@ -99,7 +102,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 - 골든 테스트: `Nikke.Simulator.Tests/DamageFormulaGoldenTests.cs` (18점, ≤1.3e-7).
 - 유도/캘리브레이션: 저장소 루트 `_dmg_probe.py`(구조 발견) + `_dmg_calibrate.py`(계수 역산).
 
-> **이 §3 이 대미지 공식의 단일 권위.** legend / skill_schema / 그 외 문서의 공식 표기는 여기에 종속.
+> **이 §3 이 대미지 공식의 단일 권위.** 다른 문서의 공식 표기는 여기에 종속.
 
 ---
 
@@ -143,7 +146,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 
 1. **단일 캐릭 풀 로테이션** — 이벤트 클럭 + 발사(RPS/차지/탭) + 탄창/재장전 + 풀차지 판정 + 크리 RNG + `DamageCalculator` 를 end-to-end 연결. 팀버프 없음. (드디어 `Initialize→Nikke→BuildAttackContext→CalculateDamage` 루프 실행.)
 2. **팀 버프 전파** — 5인 교차버프(static/runtime 2축, §5) → 매 발사 tick `AttackContext` 합산. NIKKE 대미지의 8할.
-3. **스킬 런타임 breadth** — `skills_parsed.json` 134 완성분 + stack/조건/required_token/filter_token dispatch 전수.
+3. **스킬 런타임 breadth** — 공식 FunctionTable 체인(`skill_chains.json`) 의 FunctionType/트리거 커버리지 전수 (K7).
 
 > 상세 구현 가이드(컴포넌트 계약 · 마일스톤 M0~M5 · 결정포인트): [`Docs/ENGINE_GUIDE.md`](ENGINE_GUIDE.md).
 
@@ -153,13 +156,13 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 
 - **Static modifier** → `Nikke.BuildAttackContext` 주입. 상태 독립/느린 값 (OL, 큐브 고정, 콜렉션 무기효과).
 - **Runtime trigger** → 시뮬 루프 소비. 시간/조건/스택/쿨다운 (`trigger.event ≠ passive` 또는 `duration` non-null 또는 `stack_conditions` 존재).
-- **스킬 번역기**(GAP phase 1): 데이터원 = **공식 FunctionTable**(결정 2026-07-08 — `Docs/SKILL_RUNTIME_REFERENCE.md` 모델). skill→function 체인의 FunctionData(what/when/who/how much/duration)를 두 버킷으로 라우팅. `skills_parsed.json`(v3, LLM)은 **검증 참조로 강등** — groups=[] no-op·throw 금지 원칙은 잔존 소비처에 유지.
+- **스킬 번역기**(GAP phase 1): 데이터원 = **공식 FunctionTable**(결정 2026-07-08 — `Docs/SKILL_RUNTIME_REFERENCE.md` 모델). skill→function 체인의 FunctionData(what/when/who/how much/duration)를 두 버킷으로 라우팅. (구 skills_parsed.json v3 스택은 2026-07-08 감사에서 폐기·아카이브 — `_archive/llm_skill_parser/`. 결손 no-op·throw 금지 원칙은 공식 체인 로더에 승계: 미지 enum = graceful.)
 
 ---
 
 ## 6. 열린 항목 (착수하며 확정)
 
-- **코드 구조**: ✅ **`Nikke.Simulator.Engine` 프로젝트 분리 완료**(2026-06-30, K0). Engine→Core 단방향(컴파일러가 Core→Engine 역참조 차단). 공유 계약(ISimClock/IRotationController/ITarget/Combatant/SkillParsedDto 패밀리/BuffInstance/IMetricsSink·RunResult/SimulationRunner)을 컴파일되는 스텁으로 동결. 조건(Core UI/compute 무지) 유지.
+- **코드 구조**: ✅ **`Nikke.Simulator.Engine` 프로젝트 분리 완료**(2026-06-30, K0). Engine→Core 단방향(컴파일러가 Core→Engine 역참조 차단). 공유 계약(ISimClock/IRotationController/ITarget/Combatant/BuffInstance/IMetricsSink·RunResult/SimulationRunner)을 스텁으로 동결 후 순차 이행 (SkillParsedDto 는 v3 폐기와 함께 삭제, 2026-07-08). 조건(Core UI/compute 무지) 유지.
 - **`DamageCalculator`/`AttackContext` 위치**: ✅ 확정(2026-06-30) = `Combat/`, namespace `Nikke.Simulator.Core.Combat`. 동시에 3-way split: `Stats/StatCalculator`(대미지) → `Combat/DamageCalculator` 개명·이동, 스탯 조립(`GetCoreAppliedStats`/`GetEquipmentStats`/`GetConsoleStats`)은 `StatTable`→`StatCalculator` 로 이관, `StatTable`=로딩+raw 전용. 38/38 테스트 그린.
 - **파서 prerequisite**: ✅ 재결정(2026-07-08) — **스킬 데이터원 = 공식 FunctionTable** (SharpnelXu 공개 스키마로 디코드 가능 확인, `crawler/FUNCTIONTABLE_DECODE_PLAN.md` §0). skills_parsed v3 = 검증 참조 강등, LLM 재파싱 backlog(KP1) 사실상 종료. (구 결정 "런타임 먼저 + 파서 병행"은 v3 가 유일 데이터원이던 시점 기준.)
 - **W 단위 정규화 위치**: ✅ 확정(2026-06-30) = `Nikke` 생성자(주입측, `Nikke.cs` [4]). 엔진 로컬 — ETL 재실행/merged DB 재생성 불필요, 데이터 DTO 는 raw(percent-number) 유지 (§3 ✅). (구 `atk_parser.py` 폐기; 현 multiplier 생산처 = `roledata_cleaner.py`.)

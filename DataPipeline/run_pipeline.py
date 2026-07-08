@@ -45,6 +45,15 @@ ETL_STAGES = [
     ("etl:roledata_cleaner",  "etl/roledata_cleaner.py", "Database/processed/roledata_clean.json"),
     ("etl:db_merger",         "etl/db_merger.py",        "Database/processed/nikke_merged_db_returned.json"),
 ]
+# StaticData 체인 (2026-07-08 신설) — 공식 스킬/보스 데이터. ⚖️ 복호물 = gitignore(재배포 금지).
+# 전제: Database/raw/staticdata/StaticData.zip (getFromNikkeStaticData.py — 라이브 fetch 는 사용자
+# 명시 시에만 별도 실행). 기본 `all` 에 포함하지 않음 — `--stage staticdata` 로 명시 실행. 순서 의존.
+STATICDATA_STAGES = [
+    ("sd:memorypack",   "crawler/memorypack_decode.py",       "Database/raw/staticdata/mpk/FunctionTable.json"),
+    ("sd:raid_decode",  "crawler/staticdata_raid_decode.py",  "Database/raw/staticdata/raid/SoloRaidPresetTable.json"),
+    ("sd:solo_raid",    "crawler/staticdata_solo_raid.py",    "Database/raw/staticdata/raid/solo_raid_boss.json"),
+    ("sd:skill_chains", "crawler/staticdata_skill_chains.py", "Database/raw/staticdata/assembled/skill_chains.json"),
+]
 
 
 def run_stage(label, rel_path):
@@ -75,6 +84,8 @@ def build_plan(args):
             plan.append((label, path, expected))
     if args.stage in ("all", "etl"):
         plan.extend(ETL_STAGES)
+    if args.stage == "staticdata":
+        plan.extend(STATICDATA_STAGES)
     return plan
 
 
@@ -82,8 +93,9 @@ def main():
     parser = argparse.ArgumentParser(
         description="DataPipeline 오케스트레이터 (crawl 3종 → etl 7단계)"
     )
-    parser.add_argument("--stage", choices=["all", "crawl", "etl"], default="all",
-                        help="실행 범위. all=수집+가공(기본), crawl=수집만, etl=가공만")
+    parser.add_argument("--stage", choices=["all", "crawl", "etl", "staticdata"], default="all",
+                        help="실행 범위. all=수집+가공(기본), crawl=수집만, etl=가공만, "
+                             "staticdata=공식 스킬/보스 체인(StaticData.zip 로컬 필요, gitignore 산출)")
     parser.add_argument("--skip-blabla", action="store_true",
                         help="유저 데이터 크롤(getFromBlaLink) 제외 (로그인/브라우저 불필요할 때)")
     parser.add_argument("--skip-roledata", action="store_true",

@@ -22,7 +22,7 @@
 | `battle_entity.dart` `entity.broadcast(event, sim)` | 니케/보스가 이벤트 수신 | `Nikke`/`BossTarget` 에 broadcast (**신규**) |
 | `function.dart` `BattleFunction.broadcast()` | **트리거 체크 → 효과 적용** (핵심) | `SkillRuntime` (**미구축 K7 = THE GAP**) |
 | `buff.dart` `BattleBuff` | 스탯 버프 1개 (duration·stack·standard) | `BuffInstance` (✅ 데이터컨테이너) + `BuffStore`/`BuffAggregator` (K7) |
-| `FunctionType`(77) `TimingTriggerType` `StatusTriggerType` `StandardType` `FunctionTargetType` `DurationType` `ValueType` | 공식 enum | `EffectType`(현재 키워드파생 부분집합) → **공식 enum 으로 확장** §3 |
+| `FunctionType`(213 — "77"은 einkk 스냅샷 기준) `TimingTriggerType`(90) `StatusTriggerType`(66) `StandardType` `FunctionTargetType` `DurationType` `ValueType` | 공식 enum | ✅ `Engine/Skills/OfficialSkillEnums.cs` 미러 완료 (K4) |
 
 **핵심 통찰**: 우리는 스탯모델(`base×(1+Σbuff)`)·데미지공식(B2~B5, `DamageCalculator`)·SimClock·BuffInstance
 는 있으나, **트리거→효과 적용 루프(`function.dart` 대응)가 없음**. 그게 THE GAP. nikke-einkk `function.dart`
@@ -47,7 +47,7 @@ BattleFunction.broadcast(event, simulation):
 → 우리 `SkillRuntime` = 이 4단계를 C#로. `BuffInstance`(이미 있음)에 `StandardType`/`FunctionTarget`/
 `durationType` 슬롯 추가 필요.
 
-## 3. FunctionType 77종 (공식 효과 의미) → 우리 EffectType 확장
+## 3. FunctionType 213종 (공식 효과 의미 — "77"은 einkk 스냅샷 기준) → OfficialSkillEnums 미러 ✅
 nikke-einkk `skills.dart` `enum FunctionType` 이 권위 목록. 우리 `EffectType`(키워드파생)을 이걸로 교체·확장.
 대표:
 `statAtk(1)·healCharacter(2)·statCritical(9)·statChargeDamage(11)·statDef(15)·statRateOfFire(16)·
