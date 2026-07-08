@@ -84,6 +84,30 @@ public class WUnitFoundationTests
     }
 
     // ─────────────────────────────────────────────────────────────────────
+    // (1c) A1 회귀 (2026-07-08 감사): merged DB 현행 무기 표기("Minigun"/"SMG")가
+    //      레벨표 DEF 열에 올바로 매핑되는지 — 미매칭 AR 폴백 버그 가드.
+    // ─────────────────────────────────────────────────────────────────────
+    [Fact]
+    public void MapWeapon_handles_roledata_weapon_strings()
+    {
+        string? csv = Find("stat_table.csv");
+        if (csv == null) { _out.WriteLine("csv 없음 → skip"); return; }
+        StatTable.Initialize(csv);
+        var none = new Dictionary<string, int>();
+
+        var mg = StatCalculator.GetCoreAppliedStats("Attacker", "Minigun", "Elysion", 1000, 0, 0, 0, none);
+        var mgLong = StatCalculator.GetCoreAppliedStats("Attacker", "Machine Gun", "Elysion", 1000, 0, 0, 0, none);
+        var smg = StatCalculator.GetCoreAppliedStats("Attacker", "SMG", "Elysion", 1000, 0, 0, 0, none);
+        var smgLong = StatCalculator.GetCoreAppliedStats("Attacker", "Submachine Gun", "Elysion", 1000, 0, 0, 0, none);
+        var ar = StatCalculator.GetCoreAppliedStats("Attacker", "Assault Rifle", "Elysion", 1000, 0, 0, 0, none);
+
+        Assert.Equal(mgLong.DEF, mg.DEF);     // 신·구 표기 동일 열
+        Assert.Equal(smgLong.DEF, smg.DEF);
+        Assert.NotEqual(ar.DEF, mg.DEF);      // AR 폴백이었으면 동일해짐 (버그 재현 조건)
+        Assert.NotEqual(ar.DEF, smg.DEF);
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
     // (2) Foundation smoke — Initialize→Nikke→BuildAttackContext→CalculateDamage.
     //     커밋된 데이터(stat_table.csv + base/effect JSON)만 사용 (merged DB 불필요).
     // ─────────────────────────────────────────────────────────────────────
@@ -133,7 +157,7 @@ public class WUnitFoundationTests
         // fraction-scale 가드: 평타 1발이 FinalAtk 보다 작다(13.65% 수준). 100× 버그면 위반.
         Assert.True(bareShot < nikke.FinalBaseAtk, "평타 1발 > FinalAtk — 100× 버그 의심.");
 
-        // ── TODO(수용 기준 잠금): 사용자 제공 in-game 수치로 교체 ──
+        // ── TODO(M2 통합): in-game 대조는 M2 골든(하네스 `run <name_code>`)으로 수행 — 잠금 시 여기 상수화 ──
         // const double ExpectedFinalAtk = ?????;  // 게임 스탯창
         // const double ExpectedBasicShot = ?????; // 인게임 무버프 평타 1발 (해당 DEF 조건)
         // Assert.Equal(ExpectedFinalAtk, nikke.FinalBaseAtk, 0); // ±표시반올림

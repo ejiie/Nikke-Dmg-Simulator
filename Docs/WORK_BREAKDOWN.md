@@ -23,7 +23,7 @@
                          ┌─────────────────────────── Python 독립 트랙 (언제든 병렬) ───────────┐
                          │ KP1 파서 backlog   KP2 데이터 실측(장비표·큐브·거리)                  │
                          └──────────────────────────────────┬───────────────────────────────────┘
-                                                             │ (skills_parsed v3 / csv; no-op 내성)
+                                                             │ (공식 skill_chains / csv; no-op 내성)
  WAVE0 (serial, blocks all)                                  ▼
    K0 Engine 프로젝트 + 계약 스텁 ───────┬───────────────────────────────────────────┐
    K1 W단위픽스 + foundation검증(M0) ─────┤ (정확성 게이트)                            │
@@ -66,7 +66,7 @@
 
 ### K0 — Engine 프로젝트 + 계약 스텁 ★blocks all  — 🟢 빌드 완료, 리뷰 동결 대기
 - 목표: `Nikke.Simulator.Engine` 프로젝트(ref Core) 생성 + **모든 공유 계약을 컴파일되는 스텁으로** 박고 동결.
-- 스코프: 새 csproj + sln 등록. `ISimClock`, `IRotationController`, `ITarget`, `Combatant`, `SkillParsedDto` 패밀리, `BuffInstance`, `IMetricsSink`, 엔트리 `SimulationRunner.RunOnce(teams, target, rng) → RunResult{ TotalDamage, … }`.
+- 스코프: 새 csproj + sln 등록. `ISimClock`, `IRotationController`, `ITarget`, `Combatant`, `BuffInstance`, `IMetricsSink`, 엔트리 `SimulationRunner.RunOnce(teams, target, rng) → RunResult{ TotalDamage, … }`.
 - 산출: 0-에러 빌드 + 동결된 계약. **이게 W1 전체를 푼다.**
 - 의존: 없음. 수용: ✅ 빌드 통과(2026-06-30, 4 프로젝트 0 에러) · [~] 계약 시그니처 리뷰 승인(사용자 리뷰 후 read-only 동결).
 
@@ -157,4 +157,4 @@
 ## 6. 참조
 - 방향·목표·tier: `Docs/DESIGN.md` (§0.5 tiers, §6 열린항목)
 - 엔진 컴포넌트 계약·마일스톤·MUST: `Docs/ENGINE_GUIDE.md`
-- 스킬 스키마: `DataPipeline/schema/skill_schema_legend.txt`
+- 스킬 데이터: `Docs/SKILL_RUNTIME_REFERENCE.md` (공식 FunctionTable 체인)

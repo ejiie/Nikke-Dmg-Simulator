@@ -5,6 +5,44 @@
 
 ---
 
+## 2026-07-08 (12차) — 전수 감사 집행: 버그 수정 + 레거시 정리 (사용자 결정 반영)
+
+**범위**: 문서 19·C# 51·Python 27·DB 10 파일 전수 감사(주석 포함) 후 사용자 결정대로 집행.
+상세 결정 = 세션 기록; 요지:
+
+### 버그 수정 (A1)
+- `StatCalculator.MapWeapon`: merged DB 현행 무기 표기("Minigun"/"SMG") 미매칭 → **MG/SMG 캐릭 DEF 가
+  AR 열로 폴백**하던 버그 (prydwen 시절 잔재). 신·구 표기 병행 수용 + 회귀 테스트
+  (`WUnitFoundationTests.MapWeapon_handles_roledata_weapon_strings`).
+
+### 삭제 (대체 완료 확인)
+- `SkillParsedDto.cs`(v3 계약 — 참조 데이터 skills_parsed.json 자체가 부재), `UnitTest1.cs`(빈 템플릿),
+  `patternAnalyze.py`(삭제된 worktree 경로 하드코딩), `weapon_overrides.json`(공식 ChangeWeapon 데이터로 대체),
+  `SimulatorEngine/Core/`(구세대 콘솔 — Harness 대체), **`WeaponStatTable.cs`**(하드코딩 상수 —
+  구 실측값 정체 규명: "모션 0.03s" = 차지완료→발사 프레임격자+입력지연(현 모델 re-click/ε 와 동일 실체),
+  "tap 0.215s" = spot_first 0.2s+1f 로 모델이 유도).
+
+### 아카이브 (`_archive/` 신설 — 학습 참고용, 현행 권위 아님)
+- `llm_skill_parser/`(스키마·파서·테스트 — KP1 종료) · `il2cpp_route/`(staticdata_decode/metadata_fields/
+  DECODE_GUIDE — MemoryPack 스키마로 우회 완료) · `task_docs/`(ENGINE_WAVE0·ROLEDATA_SKILL_AUDIT — 완료/무의미화).
+
+### 문서/주석 정정
+- Docs/_archive 깨진 참조 3곳(사용자가 의도 삭제 — 문구 정리), DESIGN §2 구조도 현행화(신 스택),
+  §5 skills_parsed 잔존 문구, ENGINE_GUIDE §3/§5 스킬 라인 K4 현행화, SKILL_RUNTIME_REFERENCE
+  FunctionType 77→213(einkk 스냅샷 주석), STATICDATA_PREP 상태(실행 완료), STATICDATA_WORKLIST 역사화,
+  OverloadOptionDto dead 타입 예시, BuffInstance v3 주석 → K7 공식 기준 예고, 톤 잔재 정리("가키짱/허접군"),
+  WPF MainWindow 디버그 셸 제거(Harness 가 대체).
+- `run_pipeline.py` 에 **staticdata 스테이지 신설** (`--stage staticdata`: memorypack→raid→solo_raid→
+  skill_chains; 복호물 gitignore·기본 all 미포함) — 신 스택 재생성 경로 공식화.
+
+### 성능 벤치 (background sim 타당성 — F)
+- **180초 sim 1 run ≈ 26ms** (Release, MG 단일 = 최악급 히트수, N=200): 단일 코어 시간당 **~14만 run**
+  (5인 팀 추정 ~2.7만 run/h) — 멀티코어 병렬 전제 시 대량 무작위 덱 축적 충분. std 0.25%(크리 분산).
+
+테스트 — **129/129** (UnitTest1 −1, A1 회귀 +1). staticdata dry-run ✓.
+
+---
+
 ## 2026-07-08 (11차) — 타이밍 감쇠식 최종 확정: 니케식 group-then-round + 1/100초 정수 (권위=OverloadProcessor)
 
 **정정 (10차 재정정)**: 라운딩 규칙의 권위 = **`OverloadProcessor`** (사용자 지정) — 10차의 "항별" 라운딩이

@@ -8,8 +8,7 @@ namespace Nikke.Simulator.Core.Stats
     /// <summary>
     /// 오버로드(OL) + 런타임 %-버프의 니케식 합산 전담 프로세서.
     ///
-    /// 규칙 정의: 니케식 group-then-round (동일값 그룹핑 → 그룹별 반올림 → 합산). 권위 = Docs/DESIGN.md §3
-    /// (구 ARCHITECTURE.md §4.4 는 Docs/_archive/ 로 이동).
+    /// 규칙 정의: 니케식 group-then-round (동일값 그룹핑 → 그룹별 반올림 → 합산). 권위 = Docs/DESIGN.md §3.
     ///
     /// 책임 분리 (2026-06-30 · 3-way split):
     ///   - OverloadProcessor       : OL %-버프 니케식 합산 (이 클래스).

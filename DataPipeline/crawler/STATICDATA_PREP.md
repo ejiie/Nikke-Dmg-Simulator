@@ -1,7 +1,7 @@
 # StaticData 복호 — 준비 (read-only 분석, 2026-07-01)
 
 > 목적: blablalink 에 **없는** 게임 데이터(스킬 **FunctionTable** = 런타임 효과 의미, **monster/boss** 전투스탯 = BossTarget K11)를 게임 공식 StaticData 에서 확보.
-> 상태: **메커니즘 분석 완료 / 미실행.** 실행("시도")은 사용자 명시 go-ahead 후 (방침: blabla 먼저 → 그 다음 StaticData).
+> 상태: **실행 완료** — fetch(`getFromNikkeStaticData.py`) + MemoryPack 디코드(`memorypack_decode.py`)로 해소 (2026-07-07~08). 이 문서 = 메커니즘/포맷 기록.
 
 ## 1. 메커니즘 (출처: `Hiro420/NikkeTools` StaticData, 정독)
 게임 설치 불요 — 라이브 로비 서버에서 데이터팩을 받아 2단 복호. 게임 클라이언트가 받는 그 데이터.
