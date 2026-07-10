@@ -6,6 +6,9 @@
 ## 목표
 solo raid 보스 데이터 기반 `ITarget` 구현 — 시즌/난이도 보스를 골라 run.
 
+**스코프 (사용자 확정 2026-07-10)**: MVP = 스탯/파츠/상성 타겟. **보스 기믹(QTE·상태 변화·무적
+페이즈) = MVP 밖** — 기초 BossTarget 완성 후 천천히 확장.
+
 ## 입력 (준비됨 — gitignore, 재생성 `run_pipeline.py --stage staticdata`)
 - `Database/raw/staticdata/raid/solo_raid_boss.json` — 39 solo 변종: element_id·모델·레벨 사다리·
   스탯(group 230000: Lv별 HP/ATK/DEF/파츠HP)·전 파츠[type·is_main·damageable·hp_ratio·passive]·코어 판정 3분류.
@@ -31,5 +34,7 @@ solo raid 보스 데이터 기반 `ITarget` 구현 — 시즌/난이도 보스�
 
 ## 함정
 - solo_raid_boss.json 부재 시 graceful skip (fresh clone). monster_id ↔ skill_chains.bosses 키 = 문자열.
-- 보스 스킬 자체 수치(MonsterSkillTable) 미디코드 — 보스 가해 대미지는 스코프 밖(DPS 타겟 역할만). 생존 시뮬 확장 시 재론.
+- 보스 스킬 자체 수치(MonsterSkillTable) 미디코드 — 보스 가해 대미지는 MVP 스코프 밖(DPS 타겟 역할만).
+  **구조는 확정**(사용자 2026-07-10): 보스→니케 = 니케와 동일 대미지 구조 `(bossAtk − nikkeDef) × 계수`
+  (계수 = 평타/스킬 계수 포괄 상위 개념 — FACTS §1). 생존 시뮬 확장 시 이 구조 + MonsterSkillTable 디코드.
 - HP 스케일 = int64 (5.87B까지) — double 정밀도 주의 (2^53 이내라 OK).

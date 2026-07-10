@@ -167,7 +167,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 - **파서 prerequisite**: ✅ 재결정(2026-07-08) — **스킬 데이터원 = 공식 FunctionTable** (SharpnelXu 공개 스키마로 디코드 가능 확인, `crawler/FUNCTIONTABLE_DECODE_PLAN.md` §0). skills_parsed v3 = 검증 참조 강등, LLM 재파싱 backlog(KP1) 사실상 종료. (구 결정 "런타임 먼저 + 파서 병행"은 v3 가 유일 데이터원이던 시점 기준.)
 - **W 단위 정규화 위치**: ✅ 확정(2026-06-30) = `Nikke` 생성자(주입측, `Nikke.cs` [4]). 엔진 로컬 — ETL 재실행/merged DB 재생성 불필요, 데이터 DTO 는 raw(percent-number) 유지 (§3 ✅). (구 `atk_parser.py` 폐기; 현 multiplier 생산처 = `roledata_cleaner.py`.)
 - **출력/Evaluator**: sim 1 run = **총대미지 표본 1개** 기록 → Evaluator 가 N run 으로 **분포** 구성(샘플/분위수; tail 필요). 부가: 시간축 DPS·캐릭별·브래킷 분해.
-- **Optimizer 지표 정확형**: `P(합딜 ≥ X)` vs 고분위수(예 P90) — 그리고 X/분위수 설정 방식 (UI 입력?). 미정.
+- **Optimizer 지표 정확형**: 미정 — 후보 분석 진행(2026-07-10): `E[max of n runs]`(리트라이 예산 n 직접 모델 — order statistics, 샘플에서 즉시 계산) / P90·P99(고정 proxy) / `P(합딜 ≥ X)`(목표 컷 X 입력 시). DB 는 표본 저장이라 지표는 조회 시 계산 — **표시용은 전부 제공** 가능, 결정 대상 = optimizer 목적함수 default 뿐.
 - **Optimizer 알고리즘**: ✅ 재정의(2026-07-10) — Optimizer = **DB 축적 결과 기반 비중복 best-K 선별기** (greedy 시작, 소규모 brute-force 대조 — T08). 능동 탐색·표본 생성은 T06 background runner 소관. 팀파워 memoize 전제 유지.
 - **팀 합 분포**: 팀별 분포의 합 = convolution(팀간 독립 가정) — 가정 타당성 검증 필요.
 - **UI/컴퓨트 위치**: 보류 — M1 단일 sim 속도 측정 후 (client Blazor vs 서버 오프로드). 엔진은 무관하게 진행.
