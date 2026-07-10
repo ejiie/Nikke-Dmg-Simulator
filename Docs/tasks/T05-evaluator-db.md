@@ -13,9 +13,11 @@
 ## SQLite 스키마 (사용자 검토 2026-07-08 — 통합 채택)
 ```sql
 CREATE TABLE decks (
-  deck_hash    TEXT PRIMARY KEY,   -- members_json 정규화(슬롯순·필드 고정) SHA256
+  deck_hash    TEXT PRIMARY KEY,   -- (members_json + tactic_json) 정규화(슬롯순·키순 고정) SHA256
   members_json TEXT NOT NULL,      -- [{slot, name_code, level, grade, core, bond, skill_lvs[3],
                                    --   cube{tid,lv}, fav_lv, equips, ol, control} ×5]
+  tactic_json  TEXT NOT NULL,      -- 덱 레벨 tactic (T03): 버스트 담당 정책 + directive rule-set/파라미터.
+                                   -- Tier A default = 명명 식별자(예 "auto_v1"). 같은 5인+다른 tactic = 다른 덱.
   team_size    INTEGER NOT NULL
 );
 CREATE TABLE runs (
@@ -48,5 +50,6 @@ CREATE INDEX ix_member_perf ON run_members(name_code);
 - run_members 로 "니케 X 가 덱 A 에서 B 보다 damage 높음" 질의 성립. 버전 필터 격리.
 
 ## 함정
-- members_json 정규화: 슬롯순·키순 고정 안 하면 같은 덱이 다른 해시 → 축적 파편화.
+- members_json/tactic_json 정규화: 슬롯순·키순 고정 안 하면 같은 덱이 다른 해시 → 축적 파편화.
+- tactic 을 해시에서 빼면 다른 택틱의 기록이 한 덱으로 혼합 오염 (2026-07-10 확정 — T03).
 - union_raid = 다팀 동시 → run 이 팀 단위인지 편성 단위인지 확장 시 재설계 (MVP 는 solo 단일팀).

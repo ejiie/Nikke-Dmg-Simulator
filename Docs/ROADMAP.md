@@ -49,12 +49,12 @@ T08 Optimizer(K13) ◄── T05 ───────────────�
 |---|---|---|
 | [T01](tasks/T01-skill-runtime.md) | SkillRuntime — 트리거→효과 적용 루프 (THE GAP 마지막 조각) | 없음 (즉시) |
 | [T02](tasks/T02-burst-team.md) | 버스트 게이지·사이클 + 팀 5인 (K9) | T01 |
-| [T03](tasks/T03-rotation.md) | RotationController Auto/Scripted (K10) | T02 |
+| [T03](tasks/T03-rotation.md) | RotationController Auto/Scripted + 컨트롤 정책(택틱) (K10) | T02 |
 | [T04](tasks/T04-boss-target.md) | BossTarget + ElementAdvantage 통합 (K11) | 없음 (병렬 가능) |
 | [T05](tasks/T05-evaluator-db.md) | Evaluator + SQLite 기록 DB (K12) | T01·T02·T04 |
 | [T06](tasks/T06-background-runner.md) | 무작위 덱 background sim runner | T05 |
 | [T07](tasks/T07-m2-golden.md) | M2 in-game 골든 대조 (사용자 협업, 상시) | 하네스 ✅ |
-| [T08](tasks/T08-optimizer.md) | Optimizer — K팀 분할·tail 목적 (K13) | T05 |
+| [T08](tasks/T08-optimizer.md) | Optimizer — DB 기반 best-K 덱 선별(비중복)·tail 목적 (K13) | T05 |
 
 ## 5. 기록 DB 설계 (확정 방향 — 상세/DDL = T05)
 
@@ -63,6 +63,9 @@ T08 Optimizer(K13) ◄── T05 ───────────────�
   분리 필요해지면 SQLite ATTACH/export 로 마이그레이션 쉬움. (사용자 검토 2026-07-08 — 통합 채택)
 - **run 1행 = 표본 1개** + **run_members 정규화 테이블** (run_id, slot, name_code, damage):
   "어떤 덱 조합에서 특정 니케가 강한가" 를 SQL 로 직접 질의 (사용자 요구 1).
+- **덱 정의 = 조합 + tactic** (2026-07-10 확정): deck_hash = (members_json + tactic_json) 정규화 해시.
+  tactic = 컨트롤 정책(Tier A 기본 / B 덱별 override / C 비스코프 — 상세 = T03). sim 시점에 적용되어
+  결과에 반영 → Optimizer(T08)는 **DB 결과 기반 비중복 best-K 선별기**, 표본 생성은 T06.
 - **버전 태깅 필수**: `engine_version`(git) + `data_version`(StaticData 태그+roledata 해시) —
   공식/데이터 갱신 시 구 기록 오염 방지. 집계는 항상 이 축으로 필터.
 - 시드 저장 금지 (FACTS §7 INV) — 재현은 N-run 수렴.
