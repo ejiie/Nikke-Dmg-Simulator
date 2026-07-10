@@ -39,7 +39,7 @@
 T07 M2 골든 대조(사용자·상시) ─┐
 T01 SkillRuntime(K7) ──────────┼──> T02 버스트 사이클+팀(K9) ──> T03 로테이션(K10) ─┐
 T04 BossTarget(K11) ───────────┘                                                     ├─> ver.0 MVP
-T05 Evaluator+기록DB(K12) ◄── (T01·T02·T04 후 실전 표본) ─────────────────────────────┤
+T05 Evaluator+기록DB(K12) ◄── (T01~T04 후 실전 표본 + tactic 스키마) ─────────────────┤
 T06 background runner ◄── T05                                                         │
 T08 Optimizer(K13) ◄── T05 ───────────────────────────────────────────────────────────┘
 이후(확장): union raid(데이터 복원+다팀 제약) · Web UI · 배포
@@ -51,8 +51,8 @@ T08 Optimizer(K13) ◄── T05 ───────────────�
 | [T02](tasks/T02-burst-team.md) | 버스트 게이지·사이클 + 팀 5인 (K9) | T01 |
 | [T03](tasks/T03-rotation.md) | RotationController Auto/Scripted + 컨트롤 정책(택틱) (K10) | T02 |
 | [T04](tasks/T04-boss-target.md) | BossTarget + ElementAdvantage 통합 (K11) | 없음 (병렬 가능) |
-| [T05](tasks/T05-evaluator-db.md) | Evaluator + SQLite 기록 DB (K12) | T01·T02·T04 |
-| [T06](tasks/T06-background-runner.md) | 무작위 덱 background sim runner | T05 |
+| [T05](tasks/T05-evaluator-db.md) | Evaluator + SQLite 기록 DB (K12) | T01·T02·T03·T04 |
+| [T06](tasks/T06-background-runner.md) | 덱 후보 생성·샘플링 + background sim runner | T05 |
 | [T07](tasks/T07-m2-golden.md) | M2 in-game 골든 대조 (사용자 협업, 상시) | 하네스 ✅ |
 | [T08](tasks/T08-optimizer.md) | Optimizer — DB 기반 best-K 덱 선별(비중복)·tail 목적 (K13) | T05 |
 

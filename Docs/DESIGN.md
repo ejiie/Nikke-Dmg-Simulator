@@ -18,7 +18,7 @@
 | Tier | 내용 | 상태 |
 |---|---|---|
 | 1 **Core** | stat 조립 + per-hit 대미지 공식 | ✅ 공식 18-golden + **stat 조립 0-error**(다캐릭·돌파불변, 사용자 검증 — VERIFICATION_LOG). 잔여=stat 공식 문서화·CI(정본 csv 대기) |
-| 2 **Sim Engine** | event-driven 풀 tick 로테이션 → 팀 1개 1회 run 의 총대미지 (RNG 표본 1개) | ❌ THE GAP (§4) |
+| 2 **Sim Engine** | 60fps 프레임 tick 로테이션 → 팀 1개 1회 run 의 총대미지 (RNG 표본 1개) | ❌ THE GAP (§4) |
 | 3 **Evaluator** | 팀별 N회 run → **분포 저장**(샘플/분위수; 평균+편차로 부족 — tail 필요). = "덱 파워" | ❌ 신규 |
 | 4 **Optimizer** | 로스터 → K팀(3 or 5) 분할(캐릭 1회), **고점×확률 목적** 최대 조합. 역할 확정(2026-07-10) = **기록 DB 축적 결과 기반 비중복 best-K 선별기** — 표본 생성은 background runner(T06), tactic 은 sim 시점 반영(T03/T05) | ❌ 신규 |
 | 5 **Web App** | 로스터 입력 · 결과 · 차트 | ❌ 신규 (UI 스택 보류) |
@@ -35,12 +35,12 @@
 | **목표** | 풀 tick 정밀 로테이션 sim | 닫힌형/평균 shortcut 안 씀 |
 | **대미지 공식** | 18-golden 검증 **additive B2 + 곱셈 B3/B4/B5** (§3) | 단일 권위. 모순 표기 전부 정정/제거 |
 | **스코프** | 전부 (생존/CC/힐/실드 포함). 명중률도 진입(2026-07-02, `Combat/AccuracyModel` — 명중원→면적확률; HitRate 버프 stat 배선만 잔여) | 단계적 |
-| **엔진** | **event-driven** 이산이벤트 | 발사/스킬/버프만료/차지완료를 큐 예약→점프. 정밀도·효율 우위 |
+| **엔진** | **60fps 고정 프레임 tick** (✅ 재확정 2026-07-11 — 구 "event-jump" 결정 대체) | 권위 = 프레임 상태기계 (FACTS §4·§5: RPM accumulator·MG ramp·명중원 회복 = per-frame). SimClock 이벤트 큐 = 스케줄러 — 모든 이벤트 시각 = **프레임 경계 양자화**. 분석적 event-jump 채택 안 함 (재론 조건: 프레임 결과와 bit-동일 보장 시) |
 | **로테이션 제어** | **2모드** — `IRotationController` ← `AutoController` / `ScriptedController` | 단순덱=자동, 기믹덱=수동. 2026-07-10 확장: 스킬/버스트에 더해 발사/재장전 directive(`SetFiring` 개인/전체·`RequestReload`) + 컨트롤 정책 Tier A/B/C — T03 |
 | **대미지 대상** | `ITarget` 추상화 ← `DummyTarget`(먼저) / `BossTarget`(나중) | |
 | **빌드 순서** | 수직 슬라이스 ①단일캐릭 → ②팀버프 → ③스킬 breadth | §4 |
 | **Optimizer 목적** | **고점 × 확률** (상위 tail). Σ평균 아님. 정확형 확정(2026-07-11) = **`E[max of n]`, n=13 default·유저 조정** (§6) | Evaluator 가 **분포 전체** 보관 |
-| **최적화 문제** | 로스터 → K팀(3/5) 분할, 캐릭 1회, tail 목적 최대 | NP-hard → 후보풀+휴리스틱+팀파워 cache |
+| **최적화 문제** | 로스터 → K팀(solo 5 확정/union 3), 캐릭 1회, tail 목적 최대 | NP-hard → **탐색 휴리스틱(후보 생성·샘플링) = T06** · **선별 휴리스틱(set packing) = T08** · 팀파워 cache (분업 확정 2026-07-11) |
 | **UI/컴퓨트** | **보류** (M1 단일 sim 속도 측정 후 결정) | → 엔진 = **UI·compute 무지 순수 라이브러리** 강제 (WPF/Blazor/서버 무엇이든 참조만) |
 | **배포** | 공개·멀티유저 지향 | 하드코딩 개인데이터 X (유저별 로스터 입력), 개인데이터 client-side |
 
@@ -77,18 +77,22 @@ SimulatorEngine/Nikke.Simulator.Harness (M2 대조 콘솔) · Nikke.Simulator.Wp
 **실측 역산 (2026-06-27), in-game 18 측정점 bit-exact 검증.** 과거 multiplicative B2 형식은 **환각/오류 — 폐기**.
 
 ```
-Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
+Damage = floor( B2 × B3 × B4 × B5 )
 
-  P  = (FinalAtk − effectiveDef) × W × C          ← 계수·차지를 B2 floor 이전에 P 에 접음
+  P  = (FinalAtk − effectiveDef) × M              ← 계수·차지(M)를 B2 floor 이전에 P 에 접음
   B2 = floor(P) + Σ_active floor(P × bracket_i)   ← B2 는 **가산 per-term FLOOR** (곱셈 아님!)
        bracket_i ∈ { properDist, fullBurst,
                      (크리 시) Σcrit_dmg,
                      (코어 시) coreHitBase(1.0) + Σcore_hit_buff }
-  B3 = 1 + Σattack_dmg [+pierce][+parts][+dot][+sequential]   ← 곱셈 브래킷
-  B4 = 1 + Σdamage_taken + Σdistrib_dmg                        ← 곱셈 브래킷
-  B5 = 1 + Σstrong_elem                                        ← 곱셈 브래킷
+  B3 = 1 + Σattack_dmg [+pierce][+parts][+dot][+sequential]   ← 곱셈 브래킷 (팩터 자체)
+  B4 = 1 + Σdamage_taken + Σdistrib_dmg                        ← 곱셈 브래킷 (팩터 자체)
+  B5 = 1 + Σstrong_elem                                        ← 곱셈 브래킷 (팩터 자체)
 ```
 
+- **M** = 대미지 인스턴스의 계수 × 차지배율 (표기 확정 2026-07-11 — 구 `(1+ΣB3)` 와 `B3=1+Σ` 이중 정의 해소):
+  일반 무기 히트 = **W×C** · 비차지 히트 = W (C=1) · 직접 `DealDamage` 스킬 = **function 계수** ·
+  보스 공격 = 평타/스킬 지정 계수. **ChangeWeapon 유래 차지 히트 = 무기 히트 → W×C** (스킬 유래여도).
+  구현 = `SkillMultiplier`(W 슬롯) × C — `DamageCalculator` 현행 구조와 일치.
 - **W** = 평타/스킬 계수 — **fraction** (golden 리그 4.995 = 499.5%/100). deal_damage 스킬 계수도 W 슬롯.
   - ✅ 데이터 `basicAttack.multiplier` 는 **percent-number**(예 13.65 = "13.65% ATK"), `chargeDamage` 는 fraction — 단위 불일치. **`Nikke` 생성자(데이터→엔티티 경계)에서 `multiplier/100` 정규화**로 해소(2026-06-30 확정, 단일 지점 = `Nikke.cs` [4]). 그래서 엔티티 `BasicAtkMultiplier` 는 fraction. 안 하면 100× 버그. 회귀 가드 = `WUnitFoundationTests`.
 - **C** = 차지 배율. 비차지 = 1. 풀차지: `C = (ChargeDmgBase + Σcharge_dmg) × (1 + Σcharge_dmg_mult)`.
@@ -171,7 +175,7 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 - **Optimizer 알고리즘**: ✅ 재정의(2026-07-10) — Optimizer = **DB 축적 결과 기반 비중복 best-K 선별기** (greedy 시작, 소규모 brute-force 대조 — T08). 능동 탐색·표본 생성은 T06 background runner 소관. 팀파워 memoize 전제 유지.
 - **팀 합 분포**: 팀별 분포의 합 = convolution(팀간 독립 가정) — 가정 타당성 검증 필요.
 - **UI/컴퓨트 위치**: 보류 — M1 단일 sim 속도 측정 후 (client Blazor vs 서버 오프로드). 엔진은 무관하게 진행.
-- **엔진**: event-driven 확정. (구현 세부 — 이벤트 큐 자료구조 등 — 슬라이스 1에서.)
+- **엔진 실행 모델**: ✅ 재확정(2026-07-11) — **권위 = 60fps 고정 프레임 tick**, SimClock 이벤트 큐 = 프레임 경계 스케줄러. **canonical time = 정수 frame** (초 = frame/60 파생; cs/초 입력은 단일 변환 지점에서 frame 양자화). T01 버프 만료·주기 트리거·T03 스크립트 액션 = 전부 frame 기준. `ISimClock.Schedule(double)` API 는 유지하되 진입 전 양자화 — T01/T03 구현 시 `NowFrame`/`ScheduleFrame` 추가 검토.
 - **데이터 실측**: 장비표·큐브·소장품 → **확보+C# 연동 완료** (`blabla_static_tables.json`; 장비 `round(base×(1+0.3·corp+0.1·level))` + 큐브/소장품 base·특수효과 = `GetEquipmentStats`/base JSON/`EffectTable` 배선, 34/34 테스트). 타이밍/조건부 효과만 sim 루프 대기. ProperDistance: 무기별 **범위** 확보(roledata bonusrange → `proper_distance_table.json`; MG 35-55·AR 25-45·SMG 15-35·SG 0-25·RL 0-0·SR 45-100, **RL=0 확증**) — 보너스 **크기**(0.3?)만 미검증.
 - **무기 타이밍/명중원 데이터+모델** (2026-07-01 작업 유실→2026-07-02 복구 통합): roledata shot 블록(발사 ramp·모션딜레이·명중원·펠릿·재장전·버스트게이지, ETL 정규화: 발/sec·초·분수) → `weaponData` → `WeaponDto`/`Nikke.Weapon`(`WeaponProfile`, null-safe) **배선 완료**. 모델: `Combat/AccuracyModel`(명중원 발당 수축 + P(코어힛)=(rc/R)² 면적확률 + RNG 샘플), `Combat/ProperDistanceTable`(공식 bonusrange 구간 + per-char 오버로드, RL=무보너스), `Targets/DummyTarget`(K5) + `ITarget` 계약 갱신(`Distance/CoreRadius/BodyRadius`, `PopulateContext(+attackerWeaponType)`; 구 `InProperRange` bool 폐기). MG spin-up = 1→70발/s nominal, 발당 +100/60, **60fps 프레임캡→실효 60/s**(`FireRateAtShot`), 중단 1s 리셋. per-char 편차 확증: AR 12|2.5, RL 탭 1~5/s, SG 펠릿 5|10, **Pascal=비차지 RL**(charge_time=0, 1.5발/s 평사) → 무기타입 상수 금지, per-char 데이터가 권위. ⚠ **속성 상성(ElementAdvantage)**: 내용 **사실 확인**(사용자 2026-07-08 — 순환 Water→Fire→Wind→Iron→Electric→Water, +0.1; ConfigBattle `ElementBonusDamage`=+10% 및 StaticData ElementTable weak cycle 과 일치). 코드 통합은 아직(현재 DummyTarget 상성 미반영). **통합 시 경계 = 중복 가산 금지**: B5 기본 우월 +0.1 의 소스는 **하나만**(`ElementAdvantage.StrongElementBonus`) — ConfigBattle 값·OL `IncElementDmg`(별축)·스킬 상성버프와 이중 적용되면 안 됨. 골든 테스트의 `SumStrongElem` 값은 이미 기본 0.1 포함 형태로 검증됐음을 유의. 모션 딜레이 semantics ✅ 확정(2026-07-08, einkk 검증 — ENGINE_GUIDE §5): spot 계열 단위=1/100초, first=사격 진입 대기·last=SR/RL 엄폐 복귀, ramp 리셋=점진 감쇠, 구 실측 0.03s 설 폐기, 버스트 시전 락=데이터 부재(K8 대조 시 per-char 상수 판단). 잔여 = K3 소비(FiringModel) + HitRate 버프 배선 + 타겟 지오메트리(코어/몸체 반지름) 상수 확정.
 

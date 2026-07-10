@@ -1,8 +1,12 @@
 # 공식 스킬 데이터 — blablalink CDN (`roledata`)
 
 > **발견 2026-06-29.** blablalink 공개 CDN 이 **게임 공식·구조화·레벨별 스킬 데이터**를 제공한다.
-> 기존 prydwen 산문 → LLM 파싱 트랙([SKILL_PARSING.md](SKILL_PARSING.md))을 **대체/스킵**할 수 있는 ground-truth.
+> 구 prydwen 산문 → LLM 파싱 트랙(폐기 — `_archive/llm_skill_parser/`)을 대체했던 ground-truth.
 > 접근: `getFromBlaLinkStatic.py` 의 URL 난독화 알고리즘과 동일 (로그인 불필요). 상세는 메모리 `project_blabla_static_cdn`.
+>
+> ⚠ **지위 (2026-07-11 정비)**: 스킬 **데이터원 = 공식 FunctionTable** (2026-07-08 확정 — ROADMAP §2,
+> MemoryPack 디코드). 이 문서의 roledata 스킬 경로(§1~§3) = **검증 대조용** 강등.
+> **§4.1/§4.2 (큐브·소장품 효과 라우팅·미소비 추적) 만 현행 권위.**
 
 ---
 
@@ -64,13 +68,16 @@ skill1/2 는 `skill_table:"StateEffect"` — 패시브 효과도 StateEffect 함
 - 즉 `function_id`(109030101) / `state_effect_id` 의 **기계적 정의는 blablalink 에 없다**. 완전 정의가 필요하면
   게임 자체 datamine(StateEffect StaticDataTable) — 별도 소스, 난이도 높음.
 
-> **그러나 불필요 판단**: 공식 `description_localkey`(게임 작성·일관) + `description_value_list`(레벨별 exact 값)
-> + `skill_type`(효과 종류 코드) 조합이면 스킬을 충분히 모델링 가능. prydwen 산문보다 훨씬 깨끗해 규칙기반
-> 파싱이 현실적이고, LLM 다듬기는 스킵. (function 정의는 후순위 nice-to-have.)
+> ~~그러나 불필요 판단: description + skill_type 조합이면 스킬을 충분히 모델링 가능~~
+> **← 폐기 (2026-07-08)**: FunctionTable/StateEffectTable 은 MemoryPack 디코드로 **확보됨**
+> (`memorypack_decode.py` — SharpnelXu 공개 스키마). 위 판단은 디코드 성공 이전 기준. 현행 스킬
+> 데이터원 = FunctionTable 단일.
 
-## 4.1 특수효과 → 엔진 버킷 / 의미 규칙 (큐브·소장품·스킬 공통)
+## 4.1 특수효과 → 엔진 버킷 / 의미 규칙 (적용 의미축 공통 — 식별 경로는 상이)
 
-효과 종류는 description 키워드로 식별(StateEffect 함수정의 미노출). 각 효과의 **적용 위치·방향**:
+**식별 경로 주의 (2026-07-11 명시)**: description 키워드 식별은 **큐브·소장품 `EffectType` 경로 한정**
+(`Nikke.RouteEffects`). **스킬은 이 표로 dispatch 하지 않는다** — 스킬 식별 = FunctionTable
+`FunctionType → SkillTranslator.EffectRoute` (K4). 공통인 것은 아래 **적용 위치·방향(의미 축)** 뿐:
 
 | effect | 적용 | 비고 |
 |---|---|---|
@@ -85,10 +92,11 @@ skill1/2 는 `skill_table:"StateEffect"` — 패시브 효과도 StateEffect 함
 | HealPotency / CoverHp / 조건부 | 생존 | 파싱만 |
 | HitRate | 미연동(파싱만) | 명중률은 스코프 진입(2026-07-02, `AccuracyModel`). 단 HitRate **버프 stat → 모델 배선**은 미구현(명중원 수축/명중확률 보정으로 흡수 예정) |
 
-## 4.2 ⏸ 미소비 효과 — 추후 구현 (잊지 말 것)
+## 4.2 ⏸ 큐브·소장품 EffectTable 의 미소비 효과 — 추후 구현 (잊지 말 것)
 
-아래 효과들은 effect 표에 **파싱돼 저장**돼 있으나 엔진이 **아직 소비 안 함**. EffectType enum
-에는 존재. `Nikke.RouteEffects` 의 switch 에 case 추가 + 소비처 구현하면 됨.
+아래 효과들(**큐브·소장품 EffectTable 범위** — 스킬 아님)은 effect 표에 **파싱돼 저장**돼 있으나
+엔진이 **아직 소비 안 함**. EffectType enum 에는 존재. `Nikke.RouteEffects` 의 switch 에 case 추가
++ 소비처 구현하면 됨.
 
 **무기 타이밍** — 발사/재장전/버스트 사이클:
 - ✅ `ReloadSpeed` (Resilience 큐브): **소비됨** (2026-07-08) — `Nikke.TimingReloadSpeedTerms` → `OverloadProcessor.ReduceTimeCs` (니케식 group-then-round, 1/100초 정수) → FiringModel
@@ -113,5 +121,7 @@ skill1/2 는 `skill_table:"StateEffect"` — 패시브 효과도 StateEffect 함
 
 - [x] roledata 크롤러 — `getFromBlaLinkRoledata.py` (메타+무기+스킬, 공유 `_bbl_cdn.py`, 로그인 불필요).
       192/192 → `Database/raw/blabla_roledata.json`(name_code 키). `etl/roledata_cleaner.py` 가 정제(prydwen 대체).
-- [ ] 엔진/ETL 연동: 스킬(`skills.skill1/2/burst`) → C# 스킬 런타임 (`skill_type` → dispatch, placeholder↔레벨값 주입).
-- [ ] (후순위) 게임 datamine 에서 StateEffect 정의 확보 — 완전 기계화 시.
+- ~~[ ] 엔진/ETL 연동: 스킬 `skill_type` → dispatch~~ — **폐기 (2026-07-08)**: 스킬 런타임 데이터원 =
+      FunctionTable (`SkillChainLoader`/`SkillTranslator` K4 ✅, 런타임 = T01). roledata 스킬 텍스트는 검증 대조용.
+- [x] 게임 datamine StateEffect 정의 확보 — **해소 (2026-07-08)**: MemoryPack `FunctionTable`/`StateEffectTable`
+      clean 디코드 (`memorypack_decode.py`).
