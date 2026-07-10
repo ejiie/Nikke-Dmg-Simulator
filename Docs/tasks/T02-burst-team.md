@@ -19,6 +19,7 @@
 1. BurstGaugeTracker: 게이지 누적(프레임 per_sec + 발사/히트 이벤트) → cap 도달 = 버스트 준비.
 2. 버스트 시퀀스: 1버 사용자(UseBurstSkill Step1) → [1,10]f → 2버 → [1,10]f → 3버 → 28f → 풀버스트 10s.
    캐릭 `use_burst_skill`(Step1/2/3/AllStep) + `change_burst_step` 로 자격 판정. AllStep 특례(153/154) 존재.
+   **버스트 담당(누가 누를지) = tactic (T03 컨트롤 정책)**: default 배치순(Tier A), 지정/번갈아 override(Tier B).
 3. 팀 버프 전파: T01 의 FunctionTargetType(AllCharacter 등) 이 팀 멤버 전체에 BuffInstance 스폰.
 4. 풀버스트 B2 보너스: `ctx.FullBurstBonus = 0.5` (창 내 히트만 — FACTS §1).
 5. `SimulationRunner` 확장: 5 Combatant + 버스트 사이클 + 버스트 스킬(ulti) 실행.
@@ -29,5 +30,7 @@
 
 ## 함정
 - 게이지 단위 = raw (cap 1M 과 동일 스케일) — 재정규화 금지.
+- 충전 = stage 0 한정 + shot_hit 이 주 수입원 → 재장전이 충전 창과 겹치면 사이클 지연 —
+  해법 = T03 게이지 연속성 rule (풀버 창 안 재장전 완료).
 - 버스트 쿨타임 = `skill_cooltime`(1/100초 — 4000=40s), `StatBurstSkillCoolTime`(143)/`ChangeCoolTimeUlti`(83) 버프.
 - 5인 팀 성능: 히트 이벤트 5× — MetricsCollector 는 O(1)/히트라 무관, FiringModel 5개 인스턴스.

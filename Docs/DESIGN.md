@@ -20,7 +20,7 @@
 | 1 **Core** | stat 조립 + per-hit 대미지 공식 | ✅ 공식 18-golden + **stat 조립 0-error**(다캐릭·돌파불변, 사용자 검증 — VERIFICATION_LOG). 잔여=stat 공식 문서화·CI(정본 csv 대기) |
 | 2 **Sim Engine** | event-driven 풀 tick 로테이션 → 팀 1개 1회 run 의 총대미지 (RNG 표본 1개) | ❌ THE GAP (§4) |
 | 3 **Evaluator** | 팀별 N회 run → **분포 저장**(샘플/분위수; 평균+편차로 부족 — tail 필요). = "덱 파워" | ❌ 신규 |
-| 4 **Optimizer** | 로스터 → K팀(3 or 5) 분할(캐릭 1회), **고점×확률 목적** 최대 조합 탐색 | ❌ 신규 |
+| 4 **Optimizer** | 로스터 → K팀(3 or 5) 분할(캐릭 1회), **고점×확률 목적** 최대 조합. 역할 확정(2026-07-10) = **기록 DB 축적 결과 기반 비중복 best-K 선별기** — 표본 생성은 background runner(T06), tactic 은 sim 시점 반영(T03/T05) | ❌ 신규 |
 | 5 **Web App** | 로스터 입력 · 결과 · 차트 | ❌ 신규 (UI 스택 보류) |
 | 6 **배포** | 공개 · 멀티유저 | ❌ 신규 |
 
@@ -36,10 +36,10 @@
 | **대미지 공식** | 18-golden 검증 **additive B2 + 곱셈 B3/B4/B5** (§3) | 단일 권위. 모순 표기 전부 정정/제거 |
 | **스코프** | 전부 (생존/CC/힐/실드 포함). 명중률도 진입(2026-07-02, `Combat/AccuracyModel` — 명중원→면적확률; HitRate 버프 stat 배선만 잔여) | 단계적 |
 | **엔진** | **event-driven** 이산이벤트 | 발사/스킬/버프만료/차지완료를 큐 예약→점프. 정밀도·효율 우위 |
-| **로테이션 제어** | **2모드** — `IRotationController` ← `AutoController` / `ScriptedController` | 단순덱=자동, 기믹덱=수동 |
+| **로테이션 제어** | **2모드** — `IRotationController` ← `AutoController` / `ScriptedController` | 단순덱=자동, 기믹덱=수동. 2026-07-10 확장: 스킬/버스트에 더해 발사/재장전 directive(`SetFiring` 개인/전체·`RequestReload`) + 컨트롤 정책 Tier A/B/C — T03 |
 | **대미지 대상** | `ITarget` 추상화 ← `DummyTarget`(먼저) / `BossTarget`(나중) | |
 | **빌드 순서** | 수직 슬라이스 ①단일캐릭 → ②팀버프 → ③스킬 breadth | §4 |
-| **Optimizer 목적** | **고점 × 확률** (상위 tail; 예: `P(합딜 ≥ X)` 또는 고분위수). Σ평균 아님 | Evaluator 가 **분포 전체** 보관 |
+| **Optimizer 목적** | **고점 × 확률** (상위 tail). Σ평균 아님. 정확형 확정(2026-07-11) = **`E[max of n]`, n=13 default·유저 조정** (§6) | Evaluator 가 **분포 전체** 보관 |
 | **최적화 문제** | 로스터 → K팀(3/5) 분할, 캐릭 1회, tail 목적 최대 | NP-hard → 후보풀+휴리스틱+팀파워 cache |
 | **UI/컴퓨트** | **보류** (M1 단일 sim 속도 측정 후 결정) | → 엔진 = **UI·compute 무지 순수 라이브러리** 강제 (WPF/Blazor/서버 무엇이든 참조만) |
 | **배포** | 공개·멀티유저 지향 | 하드코딩 개인데이터 X (유저별 로스터 입력), 개인데이터 client-side |
@@ -167,8 +167,8 @@ Damage = floor( B2 × (1 + ΣB3) × (1 + ΣB4) × (1 + ΣB5) )
 - **파서 prerequisite**: ✅ 재결정(2026-07-08) — **스킬 데이터원 = 공식 FunctionTable** (SharpnelXu 공개 스키마로 디코드 가능 확인, `crawler/FUNCTIONTABLE_DECODE_PLAN.md` §0). skills_parsed v3 = 검증 참조 강등, LLM 재파싱 backlog(KP1) 사실상 종료. (구 결정 "런타임 먼저 + 파서 병행"은 v3 가 유일 데이터원이던 시점 기준.)
 - **W 단위 정규화 위치**: ✅ 확정(2026-06-30) = `Nikke` 생성자(주입측, `Nikke.cs` [4]). 엔진 로컬 — ETL 재실행/merged DB 재생성 불필요, 데이터 DTO 는 raw(percent-number) 유지 (§3 ✅). (구 `atk_parser.py` 폐기; 현 multiplier 생산처 = `roledata_cleaner.py`.)
 - **출력/Evaluator**: sim 1 run = **총대미지 표본 1개** 기록 → Evaluator 가 N run 으로 **분포** 구성(샘플/분위수; tail 필요). 부가: 시간축 DPS·캐릭별·브래킷 분해.
-- **Optimizer 지표 정확형**: `P(합딜 ≥ X)` vs 고분위수(예 P90) — 그리고 X/분위수 설정 방식 (UI 입력?). 미정.
-- **Optimizer 알고리즘**: 후보풀 선정 + greedy / beam / branch&bound / ILP 중 — 미정. 팀파워 memoize 전제.
+- **Optimizer 지표 정확형**: ✅ 확정(2026-07-11) — 목적함수 = **`E[max of n runs]`** (리트라이 예산 n 직접 모델, order statistics — 표본 정렬로 계산). **n default = 13, 유저 조정 가능** (덱마다 리트 횟수 다름). `P(합딜 ≥ X)` = 목표 컷 X 입력 시 옵션 모드. 표시 지표(mean/std/P90/P99)는 전부 제공 — DB 가 표본 저장이라 조회 시 계산.
+- **Optimizer 알고리즘**: ✅ 재정의(2026-07-10) — Optimizer = **DB 축적 결과 기반 비중복 best-K 선별기** (greedy 시작, 소규모 brute-force 대조 — T08). 능동 탐색·표본 생성은 T06 background runner 소관. 팀파워 memoize 전제 유지.
 - **팀 합 분포**: 팀별 분포의 합 = convolution(팀간 독립 가정) — 가정 타당성 검증 필요.
 - **UI/컴퓨트 위치**: 보류 — M1 단일 sim 속도 측정 후 (client Blazor vs 서버 오프로드). 엔진은 무관하게 진행.
 - **엔진**: event-driven 확정. (구현 세부 — 이벤트 큐 자료구조 등 — 슬라이스 1에서.)

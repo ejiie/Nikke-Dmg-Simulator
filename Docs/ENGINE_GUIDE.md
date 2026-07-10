@@ -119,7 +119,7 @@ SkillChainLoader ──(skill_chains.json, 공식)──> SkillTranslator ──
   ① `input=UP, maintain=0`(68명): 발사 후 강제 엄폐 복귀 — 사이클 = last(0.2)+first(0.2)+charge (Maxwell 1.4s).
   ② `input=UP, maintain>0`(SBS 0.23s·Raven 0.83s·A2 0.84s): **복귀 없음, 자체 후딜레이 = maintain_fire_stance**(대기 = first+maintain, einkk). `uptype_fire_timing`(비율)로 투사체 발사 이벤트 시점 보정. SBS 는 charge 0.3s 라 톡톡이처럼 보임.
   ③ `input=DOWN_Charge`(Liberalio·Neon:VE·Vesti:TU·Anis:Star·Cinderella): **only 풀차지** — 홀드 시 자동 풀차지 반복, 릴리즈 발사 불가, 복귀 없음, rate_of_fire 가 사이클 gate. (④ `DOWN` = Pascal 평사 RL.)
-- **컨트롤 정책 축 (Auto 4명 / Manual 1명, IRotationController 와 별개)**: Manual profile = re-click 갭 **[0.02, 0.028]s**(확정; 프레임 반올림 1~2f) + 차지 오차 ε(프로파일 구간, 정수 프레임; δ=0 결정론 모드 필수). Manual 풀차지 루틴 = first(0.2)+[charge(1+ε)+reclick]×장탄+last(0.2) — 조준 유지로 발당 first 미지불. Manual 톡톡이 = [first(0.2)+reclick] 반복(UP형; 구 실측 0.215 와 부합).
+- **컨트롤 정책 축 (Auto 4명 / Manual 1명)**: Manual profile = re-click 갭 **[0.02, 0.028]s**(확정; 프레임 반올림 1~2f) + 차지 오차 ε(프로파일 구간, 정수 프레임; δ=0 결정론 모드 필수). Manual 풀차지 루틴 = first(0.2)+[charge(1+ε)+reclick]×장탄+last(0.2) — 조준 유지로 발당 first 미지불. Manual 톡톡이 = [first(0.2)+reclick] 반복(UP형; 구 실측 0.215 와 부합). (2026-07-10 확정: 이 축 = "손이 내는 오차". "무엇을 할지"는 IRotationController directive(`SetFiring` 개인/전체·`RequestReload`)로 T03 에서 연결 — 두 축 직교.)
 - **명중원**: 발사마다 `−accuracyChangePerShot`, 비사격 프레임마다 `+changeSpeed/fps` 회복.
 - **버스트**: 게이지 = burstStage 0 에서만 충전(관통 히트 = 파츠당 추가). stage 간 딜레이 = [0.01, 0.17]s random(사용자 실측; 데이터 상수 없음 — ConfigBattle 확인). **풀버스트 10s = 진입 시점 기산(확정)**. **3버→풀버 진입 딜레이 = 0.46s ≈ 28프레임(사용자 영상 실측 2026-07-08)** — K9 버스트 사이클 상수. 발사 시 `IsFullCharge` 세팅 + `AccuracyModel.RollCoreHit` 로 `IsCoreHit` 샘플링. (참고: ConfigBattle `RLV2SwitchDelayTime=20` — DOWN_Charge(V2)형 연관 추정, 의미 미확정.)
 
@@ -131,7 +131,7 @@ SkillChainLoader ──(skill_chains.json, 공식)──> SkillTranslator ──
 
 **BuffStore + BuffAggregator** — Combatant별 + 팀 활성 `BuffInstance` 보관(만료 tick에 제거). 매 히트: 적용대상 버프를 **브래킷별 Sum*** 로 집계(니케식 group-then-round)해 `AttackContext` 채움.
 
-**IRotationController** — `Decide(simState) → actions(스킬사용/버스트)`. `AutoController`(게이지 full→burst, 쿨다운 만료→스킬) / `ScriptedController`(시각별 액션 테이블).
+**IRotationController** — `Decide(simState) → actions(스킬사용/버스트 + 발사/재장전 directive)`. `AutoController`(게이지 full→burst, 쿨다운 만료→스킬, Tier A 기본 tactic — 게이지 연속성 rule 포함) / `ScriptedController`(시각별 액션 테이블 + 조건/이벤트 rule-set). directive = `SetFiring(개인/전체)`·`RequestReload` — 컨트롤 정책 Tier A/B/C 상세 = `tasks/T03-rotation.md` (2026-07-10 확정).
 
 **ITarget** — `FinalDef` / `HasParts` / `Element` / `Distance` / `CoreRadius` / `BodyRadius` / `IsBoss` 제공 (2026-07-02 계약 갱신 — 구 `InProperRange` bool 폐기). `PopulateContext(ref ctx, attackerElement, attackerWeaponType)` 가 히트마다 DEF·`ProperDistanceBonus`(ProperDistanceTable)·`SumStrongElem`(상성 — 판정 유틸 보류 중) 채움. 코어힛/명중은 발사 시점 RNG 의존이라 FiringModel 이 `AccuracyModel` + `CoreRadius/BodyRadius` 로 샘플링. `DummyTarget`(고정, ✅ 2026-07-02) / `BossTarget`(데이터, K11).
 
