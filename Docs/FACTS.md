@@ -15,6 +15,8 @@ Damage = floor( B2 × (1+ΣB3) × (1+ΣB4) × (1+ΣB5) )
 ```
 - 최소뎀: `effectiveDef ≥ FinalAtk` → 무조건 1. True Damage: `effectiveDef := 0` (+B3 조건부 가산).
 - C(차지) = `(ChargeDmgBase + Σadd) × (1 + Σmult)` — 2축. 비차지 = 1.
+- **보스→니케 대미지 = 동일 구조** `(bossAtk − nikkeDef) × 계수` (계수 = 평타/스킬 계수 포괄 상위
+  개념 — 사용자 확정 2026-07-10). 브래킷 세부 적용 범위 = §8. MVP 는 딜 타겟만, 생존 시뮬은 확장(T04).
 - 구현 `Core/Combat/DamageCalculator.cs` · 골든 `DamageFormulaGoldenTests`.
 
 ## 2. 스탯 조립 (0-error 검증)
@@ -55,6 +57,7 @@ Damage = floor( B2 × (1+ΣB3) × (1+ΣB4) × (1+ΣB5) )
   **재장전 속도 ≥100% = re-click 이내 즉시 장전 (확정)** → 무한탄창·SR(UP) 무소모 = 창발 (특례 코드 금지).
 - **수동 컨트롤** (5인 중 1인): 조작 축 = **니케 개별 엄폐/해제 + 전체 엄폐/해제** (실게임 UI 단위 — 사용자 확정 2026-07-10). re-click 갭 **[0.02, 0.028]s** (1~2프레임). 수동 풀차지 = 발당 charge+ε (spot_first 재지불 없음, 61f≈1.02s). 톡톡이 = spot_first+ε 반복 (14f≈0.23s). 자동 = 풀차지 항상 + 전이 사이클.
 - **버스트**: 풀버스트 10s = **진입 시점** 기산. 3버→풀버 진입 = **0.46s ≈ 28f** (실측). stage 간 딜레이 = [0.01,0.17]s random. 게이지 cap = 1,000,000 (`burst_gauge_table.json`), burstStage 0 에서만 충전. 버스트 시전 사격공백 = 무시(사용자 결정).
+- **solo raid 전투 시간 = 180s** (사용자 확정 2026-07-10) — 표준 sim duration = DB 집계·덱 비교 기준.
 
 ## 6. 데이터 계보 (원천 → 가공 → 소비)
 
@@ -84,4 +87,5 @@ sd.bin(로컬 게임) ─ getFromLocalSdBin ─ ConfigBattle 상수 (burst_gauge
 - ElementAdvantage(순환 Water→Fire→Wind→Iron→Electric→Water, +0.1) = 내용 확정·**코드 통합 보류** (T04).
 - 차지속도 감쇠도 §3 감쇠식으로 통일 — ÷(1+Σ) 대안은 T07 에서 반증 시에만 재론.
 - 타겟 코어/몸체 반지름 = 설정 상수 (실측 미비). ProperDistance 보너스 0.3 = 미검증 (구간은 공식 데이터).
+- 보스→니케 대미지: 기본 구조만 확정(§1) — 크리/코어/B3~B5 브래킷 적용 여부·계수 데이터원(MonsterSkillTable 미디코드) = 미검증.
 - `RLV2SwitchDelayTime=20`(ConfigBattle) 의미 미확정.

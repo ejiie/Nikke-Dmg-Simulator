@@ -7,7 +7,8 @@
 
 ## 분포 산출
 - `RunResult` N개 → mean/std/분위수(P50/P90/P99)/`P(합딜 ≥ X)`. SQLite stdev 없음 → `SUM(x),SUM(x²),COUNT` 앱 계산.
-- Optimizer 목적 = **고점×확률(tail)** — mean 아님 (DESIGN §1). tail 지표는 run 표본 정렬로.
+- Optimizer 목적함수 확정(2026-07-11) = **`E[max of n]`** (n=13 default, 유저 조정 — DESIGN §6) —
+  run 표본 정렬(order statistics)로 계산. mean/std/P90/P99 는 표시용 전부 산출.
 - N-run 병렬: run 독립 → `Parallel.For`, 코어당 MetricsCollector/FiringModel 인스턴스. 26ms/run (FACTS: 벤치).
 
 ## SQLite 스키마 (사용자 검토 2026-07-08 — 통합 채택)
@@ -26,7 +27,7 @@ CREATE TABLE runs (
   mode           TEXT NOT NULL,      -- 'solo_raid'(MVP) | 'union_raid'(확장). 통합 DB + 이 컬럼으로 분기.
   deck_hash      TEXT NOT NULL REFERENCES decks,
   boss_id        INTEGER NOT NULL, boss_level INTEGER NOT NULL,
-  duration_sec   REAL NOT NULL,
+  duration_sec   REAL NOT NULL,      -- 표준 = 180 (solo raid 전투 시간 — FACTS §5). 덱 비교 = 동일 duration 전제.
   engine_version TEXT NOT NULL,      -- git commit (엔진)
   data_version   TEXT NOT NULL,      -- StaticData 태그(qa-260702) + roledata 스냅샷 해시
   total_damage   REAL NOT NULL, hit_count INTEGER NOT NULL,
@@ -42,7 +43,8 @@ CREATE TABLE run_members (              -- 사용자 요구 1: 덱 조합별 니
 CREATE INDEX ix_runs_key ON runs(mode, boss_id, boss_level, engine_version, data_version, deck_hash);
 CREATE INDEX ix_member_perf ON run_members(name_code);
 ```
-- **버전 태깅 필수** (FACTS: 공식/데이터 갱신 시 구 기록 오염) — 집계는 항상 (engine, data) 필터.
+- **버전 태깅 필수** (FACTS: 공식/데이터 갱신 시 구 기록 오염) — 집계는 항상 (engine, data) 필터
+  + **duration_sec = 180 필터** (다른 duration 표본 혼입 방지 — 사용자 확정 2026-07-10).
 - 시드 저장 금지 (FACTS §7-2). 쓰기 = WAL + 단일 writer(배치 INSERT), 계산은 병렬 코어.
 
 ## 수용 기준
