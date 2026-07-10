@@ -7,7 +7,8 @@
 
 ## 분포 산출
 - `RunResult` N개 → mean/std/분위수(P50/P90/P99)/`P(합딜 ≥ X)`. SQLite stdev 없음 → `SUM(x),SUM(x²),COUNT` 앱 계산.
-- Optimizer 목적 = **고점×확률(tail)** — mean 아님 (DESIGN §1). tail 지표는 run 표본 정렬로.
+- Optimizer 목적함수 확정(2026-07-11) = **`E[max of n]`** (n=13 default, 유저 조정 — DESIGN §6) —
+  run 표본 정렬(order statistics)로 계산. mean/std/P90/P99 는 표시용 전부 산출.
 - N-run 병렬: run 독립 → `Parallel.For`, 코어당 MetricsCollector/FiringModel 인스턴스. 26ms/run (FACTS: 벤치).
 
 ## SQLite 스키마 (사용자 검토 2026-07-08 — 통합 채택)

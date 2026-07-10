@@ -66,7 +66,7 @@ T08 Optimizer(K13) ◄── T05 ───────────────�
 - **덱 정의 = 조합 + tactic** (2026-07-10 확정): deck_hash = (members_json + tactic_json) 정규화 해시.
   tactic = 컨트롤 정책(Tier A 기본 / B 덱별 override / C 비스코프 — 상세 = T03). sim 시점에 적용되어
   결과에 반영 → Optimizer(T08)는 **DB 결과 기반 비중복 best-K 선별기** (K=5 확정, union 확장 시 3),
-  표본 생성은 T06.
+  표본 생성은 T06. 목적함수 확정(2026-07-11) = **`E[max of n]`** (n=13 default, 유저 조정 — DESIGN §6).
 - **표준 sim duration = 180s** (solo raid 전투 시간 — 사용자 확정 2026-07-10, FACTS §5). 집계·덱 비교는
   (engine, data, duration=180) 필터 고정.
 - **버전 태깅 필수**: `engine_version`(git) + `data_version`(StaticData 태그+roledata 해시) —
