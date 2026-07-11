@@ -10,6 +10,8 @@
   bosses[monster_id] = {passive(StateEffect 체인), skills[].{skill_id, use/hurt function_ids}}   (solo raid = statenhance 230000)
   functions[fid] = FunctionData (Fx/아이콘 등 시각 필드 제거 + enum 이름 주석) — connected_function BFS 포함
   state_effects[id] = use/hurt/functions id 목록
+  character_skills[skill_id] = UseCharacterSkillId(72) 대상 CharacterSkill 전개 (T01 런타임 필수 —
+      재귀 fixpoint: 대상 스킬의 함수가 다시 72 를 부를 수 있음)
 
 단위: function_value 등 = raw(×10000=100%). 시간류 = 1/100초 (einkk timeDataToFrame(t)=t×fps/100 검증).
 스킬 레벨: lv k 레코드 id = base_id + (k-1)  (SkillInfo/CharacterSkill/StateEffect 공통, 검증 2026-07-08).
@@ -174,6 +176,39 @@ def main():
             "skills": skills,  # skill_id 수치 자체 = MonsterSkillTable(미디코드) — function 체인만
         }
 
+    # ── UseCharacterSkillId(72) 대상 CharacterSkill 전개 (T01 런타임 필수) ──
+    # used_fids 중 function_type=72 의 function_value = CharacterSkill id. 대상 스킬의 함수 체인을
+    # collect_functions 로 수집하면 그 안에 다시 72 가 나올 수 있어 fixpoint 까지 반복.
+    USE_CHARACTER_SKILL_ID = 72
+    character_skills = {}
+
+    def add_character_skill(sid):
+        s = cs.get(sid)
+        if s is None:
+            return
+        fids = []
+        for lst in ("before_use_function_id_list", "before_hurt_function_id_list",
+                    "after_use_function_id_list", "after_hurt_function_id_list"):
+            fids += [x for x in (s.get(lst) or []) if x]
+        collect_functions(fids)
+        character_skills[sid] = {
+            "skill_id": sid,
+            "function_ids": fids,
+            "skill": {k: s[k] for k in (
+                "skill_type", "skill_cooltime", "duration_type", "duration_value",
+                "skill_value_data", "attack_type", "prefer_target", "prefer_target_condition",
+                "resource_name") if k in s},
+        }
+
+    while True:
+        targets = {ft[fid]["function_value"] for fid in used_fids
+                   if ft[fid]["function_type"] == USE_CHARACTER_SKILL_ID}
+        new = [sid for sid in targets if sid not in character_skills and sid in cs]
+        if not new:
+            break
+        for sid in sorted(new):
+            add_character_skill(sid)
+
     out = {
         "_source": "StaticData qa-260702 (memorypack_decode.py) — FUNCTIONTABLE_DECODE_PLAN.md §0",
         "_units": "function_value/status_trigger_value: raw ×10000=100% · 시간류: 1/100초 (einkk t×fps/100 검증) · duration_value: duration_type 참조",
@@ -183,13 +218,15 @@ def main():
         "state_effects": {sid: {k: se[sid][k] for k in ("use_function_id_list", "hurt_function_id_list", "functions")}
                           for sid in sorted(used_seids)},
         "functions": {fid: _trim_function(ft[fid]) for fid in sorted(used_fids)},
+        "character_skills": {sid: character_skills[sid] for sid in sorted(character_skills)},
     }
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
     n_lv = sum(len(s["levels"]) for c in characters.values() for s in c["skills"].values())
     print(f"✅ characters {len(characters)} (skill-levels {n_lv}) · bosses {len(bosses)} "
-          f"· functions {len(used_fids)} · state_effects {len(used_seids)} → {OUT}")
+          f"· functions {len(used_fids)} · state_effects {len(used_seids)} "
+          f"· character_skills {len(character_skills)} → {OUT}")
 
 
 if __name__ == "__main__":
