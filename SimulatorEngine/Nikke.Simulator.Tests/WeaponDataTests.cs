@@ -165,12 +165,12 @@ public class WeaponDataTests
     public void DummyTarget_populates_def_and_proper_distance()
     {
         var ctx = new AttackContext(finalAtk: 1000, finalDef: 50);
-        // AR 로 거리 30 (AR 적정구간 [25,45]) 에서. 타겟 Fire — 상성 판정은 보류라 미반영.
+        // AR 로 거리 30 (AR 적정구간 [25,45]) 에서. Water 공격자 vs Fire 타겟 = 우월.
         var tgt = new DummyTarget(finalDef: 200, element: "Fire", distance: 30.0);
         tgt.PopulateContext(ref ctx, attackerElement: "Water", attackerWeaponType: "AR");
 
         Assert.Equal(200, ctx.FinalDef, 9);                 // DEF 덮어씀
-        Assert.Equal(0.0, ctx.SumStrongElem, 9);            // 상성 보류 → 무변경 (통합 시 0.1 기대)
+        Assert.Equal(0.1, ctx.SumStrongElem, 9);            // 상성 통합(T04, 2026-07-11) — 기본 우월 +0.1
         Assert.Equal(0.3, ctx.ProperDistanceBonus, 9);      // 적정거리 +0.3
     }
 
