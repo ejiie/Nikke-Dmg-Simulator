@@ -10,7 +10,7 @@
 ## 0. 범위
 
 엔진 = 공식 스킬 체인(`skill_chains.json`) + 검증된 대미지/스탯 코어를 **시간축 위에서 굴려** 팀 1회 run 의 총대미지(RNG 표본)를 내는 Runtime 층 = **Tier 2** (DESIGN §0.5).
-목표 형태(DESIGN §1): **event-driven 풀 tick 로테이션 sim**, 2모드 제어, 타겟 추상화.
+목표 형태(DESIGN §1): **60fps 프레임 tick 로테이션 sim** (event-jump 아님 — 2026-07-11 확정), 2모드 제어, 타겟 추상화.
 
 > ⚠️ 엔진은 **Tier 3(Evaluator)·4(Optimizer)·5(Web)·6(배포) 의 재사용 대상.** → **UI·compute·직렬화 무지 순수 라이브러리** 로 짓는다. 출력은 run 1회당 **총대미지 표본 1개**(Evaluator 가 N run → 분포). 절대 UI/서버 타입을 엔진에 끌어들이지 말 것.
 
@@ -72,32 +72,32 @@ SkillChainLoader ──(skill_chains.json, 공식)──> SkillTranslator ──
 
 각 M 끝에 **수용 기준(Acceptance)** 충족 + 가능하면 in-game 대조 후 다음.
 
-### M0 — Smoke wire (foundation 증명)
+### M0 ✅ — Smoke wire (foundation 증명)
 - **목표**: `StatTable.Initialize` → `new Nikke` → `BuildAttackContext` → `CalculateDamage` 를 **콘솔에서 1발** 굴려 숫자 1개.
 - **하는 것**: 진입점(테스트 콘솔/유닛테스트)에서 캐릭 1명 로드, 평타 컨텍스트 1개 만들어 호출.
 - **확정됨(2026-06-30)**: **W 단위** — 데이터 `multiplier` 는 percent-number(예 13.65); `Nikke` 생성자에서 `/100` 정규화 → `BasicAtkMultiplier`(엔티티)=fraction. `BuildAttackContext` 가 `SkillMultiplier` 에 주입(더는 TODO 아님). 회귀 가드 = `WUnitFoundationTests`.
-- **Acceptance**: ✅ W 정규화+주입 동작(fraction-scale 가드 통과) + 문서화(§6 D2). ⏸ **in-game FinalAtk 대조 대기** — 커밋 `stat_table.csv` 파싱 결함(cp949+비-quote-aware split)으로 실 FinalAtk 산출 막힘 + 사용자 제공 in-game 수치 필요. **이 게이트 통과 전 Wave1+ 착수 금지(ENGINE_WAVE0 K1).**
+- **Acceptance**: ✅ W 정규화+주입 동작(fraction-scale 가드 통과) + 문서화(§6 D2). ✅ **K1 게이트 통과** — `StatTable.Initialize` 견고 파서(cp949/멀티라인/콤마, 내용기반 행탐지)로 파싱 결함 해소 + **stat 조립 0-error 검증** (다캐릭·다레벨·돌파불변 — VERIFICATION_LOG). Wave1+ 진행됨.
 
-### M1 — 단일 캐릭 발사 루프 (시간축 등장)
+### M1 ✅ — 단일 캐릭 발사 루프 (시간축 등장 — K2 SimClock + K3 FiringModel + K8 RunOnce, 2026-07-08)
 - **목표**: SimClock + FiringModel 로 캐릭 1명이 N초 동안 쏘는 시간축 + 누적 대미지/DPS. 스킬·팀버프 없음.
 - **하는 것**: SimClock(이벤트큐), FiringModel(RPS/차지타이밍 → 발사 이벤트, 탄창 감소→재장전, 풀차지 판정), 매 발사 `BuildAttackContext`+크리RNG → `CalculateDamage` → MetricsCollector.
 - **Acceptance**: 무기별(AR/SR 등) DPS 가 RPS·탄창·재장전·차지 타이밍에 정합. 크리 RNG 켜고 N회 평균이 기대 크리율 반영.
 
-### M2 — 단일 캐릭 스킬 (브리지 + 런타임)
+### M2 🟡 — 단일 캐릭 스킬 (브리지 ✅ K4 / 런타임 ❌ = T01)
 - **목표**: 그 캐릭 *자기* 스킬(self 버프/트리거)을 시간축에 반영.
 - **하는 것**: SkillChainLoader(공식 skill_chains.json — ✅ K4), SkillTranslator(2축 분류+EffectRoute — ✅ K4), SkillRuntime(event→BuffInstance/DamageInstance — K7), BuffStore + BuffAggregator(활성버프→AttackContext, 니케식 합산 — K7).
 - **Acceptance**: passive/지속 버프가 컨텍스트에 반영, duration 만료 처리, `groups:[]` no-op, stack 분기(cumulative/replace) 동작.
 
-### M3 — 팀 (버프 전파 + 풀버스트)
+### M3 ❌ — 팀 (버프 전파 + 풀버스트 — = T02)
 - **목표**: 5인 + 교차버프 + 버스트 게이지 + Full Burst 사이클.
 - **하는 것**: 5 Combatant, ally-target 버프를 팀 BuffStore 로 전파, 버스트 게이지 누적→Full Burst(3인) 타임, `burst_start/active/end` 트리거.
 - **Acceptance**: 팀 총 DPS 가 버퍼 유무로 유의미 변동, Full Burst 창에서 버프 on/off.
 
-### M4 — 로테이션 제어 2모드
+### M4 ❌ — 로테이션 제어 2모드 (= T03 — 컨트롤 정책 directive 포함)
 - **목표**: `IRotationController` ← `AutoController`(게이지/쿨다운 자동) + `ScriptedController`(타임라인 입력).
 - **Acceptance**: 단순덱 자동 실행 / 기믹덱 스크립트대로 실행. 둘 다 같은 SimClock 소비.
 
-### M5 — 타겟 모델 + 출력
+### M5 🟡 — 타겟 모델 + 출력 (DummyTarget·Metrics ✅ / BossTarget ❌ = T04)
 - **목표**: `ITarget` ← `DummyTarget`(먼저) → `BossTarget`. MetricsCollector 리포트 확정.
 - **하는 것**: 타겟이 DEF/파츠/속성/거리 → `IsCoreHit/IsPartsHit/ProperDistanceBonus/SumStrongElem/FinalDef` 를 채움. 출력 지표(§6) 산출.
 - **Acceptance**: 더미로 엔진 검증 후 보스 데이터 주입 가능 구조.
@@ -108,12 +108,12 @@ SkillChainLoader ──(skill_chains.json, 공식)──> SkillTranslator ──
 
 > 인터페이스는 *제안*. 시그니처는 구현하며 다듬되, 책임/플러그인 지점/금지사항은 지킬 것.
 
-**SimClock** — 이산이벤트 큐. `Schedule(double atSec, Action ev)` / `Run(double untilSec)`. 최소시각 이벤트 pop→clock 전진→실행(새 이벤트 예약 가능). 동일시각 tie-break 결정적(삽입순). RNG 외 결정적.
+**SimClock** — 이벤트 큐 스케줄러. `Schedule(double atSec, Action ev)` / `Run(double untilSec)`. 최소시각 이벤트 pop→clock 전진→실행(새 이벤트 예약 가능). 동일시각 tie-break 결정적(삽입순). RNG 외 결정적. **(2026-07-11 확정: 역할 = 프레임 경계 스케줄러 — 권위 시간축 = 정수 frame(FACTS §4), 모든 예약 시각은 프레임 양자화. `Schedule(double)` API 유지하되 진입 전 양자화 강제; T01/T03 에서 `NowFrame`/`ScheduleFrame` 추가 검토. 분석적 event-jump 채택 안 함.)**
 
 **FiringModel** — ✅ **구현 완료** (2026-07-08, `Engine/FiringModel.cs` — 60fps 프레임 상태기계 + `ControlMode.Auto/Manual`·`FireStyle` 축, 15 테스트; SimClock 배선/이벤트 발행 = K8). 발사속도 권위 = **`Nikke.Weapon`(WeaponProfile, per-char)**. 참조 구현 = nikke-einkk `nikke.dart` + **사용자 실측 확정(2026-07-08, 3.5년 플레이 ground truth)**:
 - **발사 accumulator**: 매 프레임(비사격 포함) `countdown -= rateOfFire(RPM)`, 발사 시 `+= 60×fps`(=3600) — 구조적 1발/프레임 = MG nominal 70/s → 실효 60/s (`FireRateAtShot` 캡과 일치).
 - **MG ramp**: 발사마다 `+changePerShot` clamp[start,end]. **리셋 = 점진 감쇠** — 비사격 프레임마다 `(end−start)/reset_time` 하강 (즉시 리셋 아님; 부분 중단 = 부분 손실).
-- **상태 전이 (전 무기, 확정)**: 엄폐→조준 = `SpotFirstDelaySec`(0.2s; 비사격 동안 재-arm, 차지무기는 종료 프레임에 charge 1f 선시작) / 조준→엄폐 = `SpotLastDelaySec`(0.2s — einkk 은 UP형에만 적용하나 **실게임은 전 무기**; 데이터도 전 무기 20).
+- **상태 전이**: 엄폐→조준 = `SpotFirstDelaySec`(0.2s **확정**; 비사격 동안 재-arm, 차지무기는 종료 프레임에 charge 1f 선시작) / 조준→엄폐 = `SpotLastDelaySec` **⚠ 적용 범위 미정**(2026-07-11 강등 — 데이터는 전 무기 20(0.2s)이나 einkk 는 UP형 외 0 처리. 구현 현행 = 전 무기 0.2s 유지, T07 대조로 확정 — FACTS §8).
 - **재장전 (원시 규칙 — 특례 금지)**: R1 = 비사격 프레임(엄폐·전이·re-click 갭)마다 진행 · R2 = 실효 시간 ≤ 창이면 그 안에서 완료. 공식 = **니케식 group-then-round, 1/100초 정수 도메인** (권위 = `OverloadProcessor.ReduceTimeCs`, 사용자 확정 2026-07-08): `effectiveCs = baseCs − Σ_group round(baseCs×value×count)` — 동일값 버프 선합산 → 그룹 사사오입, 시간은 게임 timeData(1/100초 **정수**) 유지 + 버프 ×10000 정수 복원 = 순수 정수 연산(이진 오차 원천 차단). 차지속도 동일식. + 첫 재장전에 spot_last 가산(einkk). `ReloadBulletRate` 부분장전. **≥100% 버프 = re-click 이내 즉시 장전(확정)** → 톡톡이 장탄 무소모 / 비차지·maintain형 탄0도 re-click 내 충전 — R1/R2 에서 창발, 하드코딩 금지.
 - **SR/RL 3부류 (per-char 데이터 판별 — 무기타입 상수 금지 재확인)**:
   ① `input=UP, maintain=0`(68명): 발사 후 강제 엄폐 복귀 — 사이클 = last(0.2)+first(0.2)+charge (Maxwell 1.4s).
@@ -145,7 +145,7 @@ SkillChainLoader ──(skill_chains.json, 공식)──> SkillTranslator ──
 |---|---|---|---|
 | D1 | 엔진 코드 위치 | ✅ **`Nikke.Simulator.Engine` 분리 완료**(2026-06-30, K0) | Engine→Core 단방향(컴파일러가 Core→Engine 금지). 계약 스텁 동결. 조건: Core/Engine UI·compute 무지 유지 |
 | D2 | W 단위 | ✅ **확정 = `Nikke` 생성자 `/100`**(2026-06-30) | 데이터 `multiplier`=percent-number → 엔티티 `BasicAtkMultiplier`=fraction. golden 리그 W=4.995(fraction)와 정합. ETL 무수정 |
-| D3 | 파서 prerequisite | **런타임 먼저, 134 완성분 + 결손 no-op, 파서 병행** | 닭달걀 차단 |
+| D3 | 스킬 데이터원 | ✅ **재결정(2026-07-08) = 공식 FunctionTable 단일** (`SkillChainLoader`/`SkillTranslator` K4) | 구 결정("런타임 먼저+LLM 파서 병행")은 v3 가 유일 데이터원이던 시점 기준 — LLM 파서 폐기(`_archive/`), skills_parsed v3 = 검증 참조 강등 |
 | D4 | 출력 지표 | record-every-instance MetricsCollector | 총/DPS곡선/캐릭별/브래킷 전부 사후 집계 |
 | D5 | SimClock 자료구조 | min-heap 우선순위큐 | 동시각 삽입순 tie-break |
 | D6 | 스킬 enum | ✅ 공식 enum 미러(`OfficialSkillEnums.cs`, 기계생성) + 미지값 graceful | 게임 신버전 값 = Unknown no-op (D1 검증: 신값은 연속 추가뿐) |
@@ -153,9 +153,9 @@ SkillChainLoader ──(skill_chains.json, 공식)──> SkillTranslator ──
 ---
 
 ## 7. 데이터/검증 의존 (블로커 아닌 항목 — 병행)
-- ✅ 장비표·큐브·소장품 base/특수효과: **공식 blablalink JSON 연동 완료** (`GetEquipmentStats` + cube/collection base JSON + `EffectType`/`EffectTable`). 옛 "stub/예시 수치" 는 해소됨. 잔여 = 타이밍/조건부 효과(sim 루프 대기, `SKILL_DATA_BLABLALINK.md` §4.2).
+- ✅ 장비표·큐브·소장품 base/특수효과: **공식 blablalink JSON 연동 완료** (`GetEquipmentStats` + cube/collection base JSON + `EffectType`/`EffectTable`). 옛 "stub/예시 수치" 는 해소됨. ReloadSpeed/ChargeSpeed 타이밍 효과 = **소비 완료**(2026-07-08, `ReduceTimeCs`→FiringModel). 잔여 = BurstGauge(T02)·ReloadRounds/조건부 효과(트리거 시스템 = T01) — `SKILL_DATA_BLABLALINK.md` §4.2.
 - ProperDistance: ✅ 무기별 **범위** 확보(`proper_distance_table.json`; roledata bonusrange → MG 35-55·AR 25-45·SMG 15-35·SG 0-25·RL 0-0·SR 45-100). 보너스 **크기**(0.3?)만 미검증. (per-char `properRange` 도 merged DB 에 있어 SR 예외 보존.)
-- ✅ 무기 타이밍/명중원 데이터+모델(2026-07-01 유실→07-02 복구 통합): roledata shot 블록 → `weaponData`(clean/merged, ETL 정규화) → `WeaponDto`/`Nikke.Weapon`(WeaponProfile) + AccuracyModel/ProperDistanceTable/DummyTarget + `WeaponDataTests`(192캐릭 전수 불변식 포함). ⚠ 속성 상성 유틸(ElementAdvantage) 보류(사용자 결정). 잔여 = K3 소비(FiringModel) · HitRate 버프 배선 · merged DB 재생성(구 파일 weaponData 없음) · spot delay(0.2s) vs 구 실측 0.03s 캘리브레이션 · 타겟 코어/몸체 반지름 상수 확정.
+- ✅ 무기 타이밍/명중원 데이터+모델(2026-07-01 유실→07-02 복구 통합): roledata shot 블록 → `weaponData`(clean, ETL 정규화) → `WeaponDto`/`Nikke.Weapon`(WeaponProfile) + AccuracyModel/ProperDistanceTable/DummyTarget + `WeaponDataTests`(192캐릭 전수 불변식 포함). K3 소비 ✅(2026-07-08 FiringModel) · 0.03s 캘리브레이션 ✅ 해소(프레임격자+입력지연으로 규명 — spot 0.2s 확정, 구 WeaponStatTable 삭제). 잔여 = HitRate 버프 배선 · **merged DB 재생성 (⚠ 실블로커)**: 현 로컬 `nikke_merged_db_returned.json` 에 weaponData 없음 → 하네스 기본 경로로는 `WeaponProfile.Empty`(FireRate 0 = 발사 불가) — db_merger 재실행 필요 (테스트는 roledata_clean 직접 로드라 무관) · 타겟 코어/몸체 반지름 상수 확정 · ElementAdvantage 통합(T04 에서 보류 해제 — FACTS §7-5 단일 소스 경계).
 - 검증 전략: 슬라이스별 in-game 대조 + RNG 는 N회 수렴.
 
 ---

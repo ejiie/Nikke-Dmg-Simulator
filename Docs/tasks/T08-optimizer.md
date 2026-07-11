@@ -4,7 +4,8 @@
 
 ## 역할 (2026-07-10 사용자 확정)
 **기록 DB 에 축적된 결과를 보고 best K덱을 뽑는 선별기(selector).** **K = 5 확정** (solo raid MVP —
-사용자 2026-07-10; union raid 확장 시 3). 표본 생성·탐색은 T06 소관.
+사용자 2026-07-10; union raid 확장 시 3). 휴리스틱 분업(2026-07-11): **탐색 휴리스틱**(후보 덱
+생성·샘플링·우선순위) = T06 / **선별 휴리스틱**(set packing: greedy/beam/exact) = T08.
 tactic 은 sim 시점에 이미 결과에 반영됨(T03/T05) — Optimizer 는 tactic 을 모르고 분포만 본다.
 **목적함수 = `E[max of n runs]`** (확정 2026-07-11 — 리트라이 낚시 직접 모델). **n default = 13,
 유저 조정 가능** (덱마다 리트 횟수 다름). mean 아님 (DESIGN §1). `P(≥X)` = 컷 입력 시 옵션 모드.
@@ -19,7 +20,8 @@ tactic 은 sim 시점에 이미 결과에 반영됨(T03/T05) — Optimizer 는 t
 - 덱 파워 = `E[max of n]`: N 표본 오름차순 정렬 후 `Σ x_(i) × [(i/N)^n − ((i−1)/N)^n]` (order
   statistics — 분포 가정 없음). 집계는 항상 (engine, data, duration=180) 필터.
 - 선별: greedy(파워순 + 비중복 배제)로 시작 → 필요 시 beam/exact. 소규모 풀은 brute-force 대조.
-- 표본 부족 덱(신뢰구간 넓음) = **T06 에 보충 sim 요청** — Optimizer 가 sim 을 직접 돌리지 않는다.
+- 표본 부족 덱(신뢰구간 넓음) = **T06 에 부족 신호 보고만** — 새 덱 후보 생성·sim 직접 실행 안 함.
+  T06 이 신호를 선택적으로 받아 표본 우선순위 조정.
 - 팀조합 → 파워 **memoize/cache** (DESIGN §0.5: 고유 5인조 1회만 sim). deck_hash 키.
 
 ## 수용 기준
