@@ -53,7 +53,8 @@ Damage = floor( B2 × B3 × B4 × B5 )
 
 - **발사** = RPM accumulator (프레임당 `−=RPM`, 발사 시 `+=3600`) — 구조적 1발/프레임 → MG nominal 70/s = 실효 60/s.
 - **MG ramp**: 발사당 +100RPM clamp[60,4200]. **리셋 = 점진 감쇠** (비사격 프레임당 (end−start)/reset_time).
-- **상태 전이 = 전 무기 양방향**: 엄폐→조준 spot_first(0.2s) / 조준→엄폐 spot_last(0.2s).
+- **상태 전이**: 엄폐→조준 **spot_first(0.2s) = 확정**. 조준→엄폐 **spot_last(후딜) = ⚠ 미정**(2026-07-11
+  강등 — einkk 는 UP형 외 0 처리, 실게임 전 무기 0.2s 인지 T07 대조로 판명. §8). 구현 현행 = 전 무기 0.2s 유지.
 - **SR/RL 부류 = per-char 데이터** (무기타입 상수 금지): `input=UP,maintain=0`(발사 후 강제 복귀 — 사이클 83f≈1.4s) /
   `UP,maintain>0`(복귀 없음, 자체 후딜=maintain — SBS 0.23s·Raven 0.83s·A2 0.84s) /
   `DOWN_Charge`(only 풀차지 — Liberalio·Neon:VE 등) / `DOWN`(평사 — Pascal). SG 펠릿 5|10 per-char.
@@ -90,6 +91,9 @@ sd.bin(로컬 게임) ─ getFromLocalSdBin ─ ConfigBattle 상수 (burst_gauge
 - `EffectRoute.Unverified` 타입들 (FullBurstDamage·AddDamage 620건 등) = 브래킷 미검증 — T07 대조로 승격.
 - ElementAdvantage(순환 Water→Fire→Wind→Iron→Electric→Water, +0.1) = 내용 확정·**코드 통합 보류** (T04).
 - 차지속도 감쇠도 §3 감쇠식으로 통일 — ÷(1+Σ) 대안은 T07 에서 반증 시에만 재론.
+- **spot_last(모션 후딜) 적용 범위 = 미정** (2026-07-11 사용자 강등): 후보 = 전 무기 0.2s(데이터 전 무기 20)
+  vs einkk 방식(UP형만, 그 외 0). 자동 탄0 재장전의 spot_last 가산·SR 사이클 1.4s 의 구성 해석도 연동 —
+  사이클 83f **실측치 자체는 유지**, 분해 해석만 미정. T07 대조로 확정.
 - 타겟 코어/몸체 반지름 = 설정 상수 (실측 미비). ProperDistance 보너스 0.3 = 미검증 (구간은 공식 데이터).
 - 보스→니케 대미지: 기본 구조만 확정(§1) — 크리/코어/B3~B5 브래킷 적용 여부·계수 데이터원(MonsterSkillTable 미디코드) = 미검증.
 - `RLV2SwitchDelayTime=20`(ConfigBattle) 의미 미확정.
