@@ -19,6 +19,9 @@ namespace Nikke.Simulator.Engine.Skills
         [JsonPropertyName("bosses")] public Dictionary<string, BossChainDto> Bosses { get; set; } = new();
         [JsonPropertyName("state_effects")] public Dictionary<string, StateEffectDto> StateEffects { get; set; } = new();
         [JsonPropertyName("functions")] public Dictionary<string, FunctionDto> Functions { get; set; } = new();
+        /// <summary>UseCharacterSkillId(72) 대상 CharacterSkill 전개 (key = skill_id — T01 런타임 연쇄).
+        /// 구 조립본엔 없음 — 빈 사전 = graceful (해당 연쇄 no-op).</summary>
+        [JsonPropertyName("character_skills")] public Dictionary<string, SkillLevelDto> CharacterSkills { get; set; } = new();
     }
 
     /// <summary>니케 1명 — key = name_code. 스킬 3슬롯(skill1/skill2/burst) × 레벨.</summary>

@@ -3,6 +3,13 @@
 > 필독: `CLAUDE.md` → `ROADMAP.md` → `FACTS.md` → 이 문서 → `DataPipeline/crawler/RAID_BOSS.md`.
 > 의존: 없음 (T01 과 병렬 가능). MVP 핵심 — solo raid 덱 평가의 타겟 축.
 
+## 상태: ✅ 구현 완료 (2026-07-11)
+
+`Core/Combat/ElementAdvantage.cs`(순환+0.1, 단일 소스 — 골든 무변) · `Engine/Targets/SoloRaidBossTable.cs`
+(graceful 로더 — xba001_psid 미링크 변종 nullable 처리) · `BossTarget:ITarget` · DummyTarget 상성 배선 ·
+하네스 `--boss/--boss-level`. 수용 기준 충족: zeus Lv200 DEF 9107·Electric·Iron 상성 +0.1, 39변종 × 전레벨
+0-throw, 상성 5+역/무상성 테스트. 잔여 = 보스 passive 를 SkillRuntime 에 등록 (T02 배선) · 기믹 = post-MVP.
+
 ## 목표
 solo raid 보스 데이터 기반 `ITarget` 구현 — 시즌/난이도 보스를 골라 run.
 

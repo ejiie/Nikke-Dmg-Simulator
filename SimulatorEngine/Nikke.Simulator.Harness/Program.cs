@@ -6,6 +6,7 @@ using Nikke.Simulator.Core.Stats;
 using Nikke.Simulator.Engine;
 using Nikke.Simulator.Engine.Combat;
 using Nikke.Simulator.Engine.Metrics;
+using Nikke.Simulator.Engine.Skills;
 using Nikke.Simulator.Engine.Targets;
 using CoreNikke = Nikke.Simulator.Core.Entities.Nikke;
 
@@ -22,13 +23,19 @@ using CoreNikke = Nikke.Simulator.Core.Entities.Nikke;
 //   --tap               수동 톡톡이 (기본 = 풀차지; --manual 함의)
 //   --charge-err 0      수동 풀차징 인간 오차 상한(초)
 //   --reload-buff 0     Σ재장전 속도 버프 (0.5 = 50%; ≥1.0 = 즉시 장전)
-//   --def 0             타겟 DEF
+//   --def 0             타겟 DEF (더미 타겟)
 //   --dist 0            타겟 거리 (적정거리 판정 — bonusrange 단위)
 //   --core 0            타겟 코어 반지름 (0 = 코어힛 없음)
 //   --body 0            타겟 몸체 반지름 (0 = 빗맞음 없음)
+//   --boss <code|id>    solo raid 보스 타겟 (T04 — 예: ebg001_island_zeus; --def 무시)
+//   --boss-level 200    보스 레벨 (--boss 와 함께)
+//   --no-skills         T01 스킬 런타임 비활성 (기본 = skill_chains.json 있으면 자동 적용)
+//   --skill-lv 10       스킬 레벨 (skill1/2/burst 일괄)
 //
 // 필요 데이터 (Database/processed/): stat_table.csv(필수) + nikke_merged_db_returned.json(필수)
 //   + equip/cube/collection 표(있으면 반영). merged DB 재생성 = user_state → db_merger.py.
+//   스킬 = Database/raw/staticdata/assembled/skill_chains.json (gitignore — 부재 시 평타만).
+//   보스 = Database/raw/staticdata/raid/solo_raid_boss.json (gitignore).
 // ─────────────────────────────────────────────────────────────────────────────
 
 Console.OutputEncoding = Encoding.UTF8;
@@ -108,22 +115,60 @@ switch (args[0])
                 ChargeErrorMaxSec = OptD("--charge-err", 0),
                 ReloadSpeedBuff = OptD("--reload-buff", 0),
             };
-            var target = new DummyTarget(
-                finalDef: OptD("--def", 0),
-                distance: OptD("--dist", 0),
-                coreRadius: OptD("--core", 0),
-                bodyRadius: OptD("--body", 0));
+            // 타겟: --boss = solo raid 보스 (T04) / 기본 = 더미
+            ITarget target;
+            string bossCode = OptS("--boss");
+            if (bossCode != null)
+            {
+                int bossLevel = (int)OptD("--boss-level", 200);
+                if (!BossTarget.TryCreate(bossCode, bossLevel, out var boss,
+                        distance: OptD("--dist", 0), coreRadius: OptD("--core", 0), bodyRadius: OptD("--body", 0)))
+                {
+                    Console.WriteLine($"❌ 보스 '{bossCode}' Lv{bossLevel} 없음 (또는 solo_raid_boss.json 부재 — " +
+                                      "재생성: run_pipeline.py --stage staticdata).");
+                    return 1;
+                }
+                target = boss;
+            }
+            else
+            {
+                target = new DummyTarget(
+                    finalDef: OptD("--def", 0),
+                    distance: OptD("--dist", 0),
+                    coreRadius: OptD("--core", 0),
+                    bodyRadius: OptD("--body", 0));
+            }
 
             var nikke = new CoreNikke(dto, root.global_state);
-            PrintSpec(nikke, ctl, target, sec);
+
+            // 스킬 (T01): skill_chains.json 있으면 자동 — --no-skills 로 끔
+            SkillChainsDto chains = null;
+            CharacterChainDto chChain = null;
+            if (!Has("--no-skills") && SkillChainLoader.TryLoad(out chains))
+                chains.Characters.TryGetValue(args[1], out chChain);
+            int skillLv = (int)OptD("--skill-lv", 10);
+
+            PrintSpec(nikke, ctl, target, sec, chChain != null, skillLv);
 
             var results = new List<RunResult>(runs);
+            SkillRuntime lastRt = null;
             for (int i = 0; i < runs; i++)
             {
                 var team = new[] { new Combatant(nikke, dto.StaticInfo.name) { Firing = ctl } };
-                results.Add(SimulationRunner.RunOnce(team, target, SystemRandomSource.Instance, sec));
+                if (chChain != null)
+                {
+                    var rt = new SkillRuntime(chains); // run 1회당 인스턴스 1개 (상태 보유)
+                    rt.Register(team[0], chChain, skillLv, skillLv, skillLv);
+                    results.Add(SimulationRunner.RunOnce(team, target, SystemRandomSource.Instance, sec, rt));
+                    lastRt = rt;
+                }
+                else
+                {
+                    results.Add(SimulationRunner.RunOnce(team, target, SystemRandomSource.Instance, sec));
+                }
             }
             PrintResults(results, nikke, sec);
+            PrintNoOp(lastRt);
             return 0;
         }
 
@@ -140,6 +185,22 @@ void PrintUsage()
     Console.WriteLine("  nikke-harness list [필터]");
     Console.WriteLine("  nikke-harness run <name_code> [--sec 60] [--runs 1] [--manual] [--tap]");
     Console.WriteLine("      [--charge-err 0] [--reload-buff 0] [--def 0] [--dist 0] [--core 0] [--body 0]");
+    Console.WriteLine("      [--boss <code|monster_id> --boss-level 200] [--no-skills] [--skill-lv 10]");
+}
+
+string OptS(string key)
+{
+    int i = Array.IndexOf(args, key);
+    return i >= 0 && i + 1 < args.Length ? args[i + 1] : null;
+}
+
+static void PrintNoOp(SkillRuntime rt)
+{
+    if (rt == null || rt.NoOpCounters.Count == 0) return;
+    Console.WriteLine("─────────────────────────────────────────────");
+    Console.WriteLine("[T01 no-op 카운터 — 미배선/미검증 효과 (T02/T07 승격 대기)]");
+    foreach (var kv in rt.NoOpCounters.OrderByDescending(kv => kv.Value).Take(12))
+        Console.WriteLine($"  {kv.Key} × {kv.Value}");
 }
 
 static void TryInit(Action a)
@@ -155,7 +216,7 @@ double OptD(string key, double dflt)
 
 bool Has(string key) => Array.IndexOf(args, key) >= 0;
 
-static void PrintSpec(CoreNikke n, FiringControl ctl, DummyTarget t, double sec)
+static void PrintSpec(CoreNikke n, FiringControl ctl, ITarget t, double sec, bool skills, int skillLv)
 {
     var w = n.Weapon;
     Console.WriteLine("─────────────────────────────────────────────");
@@ -170,7 +231,9 @@ static void PrintSpec(CoreNikke n, FiringControl ctl, DummyTarget t, double sec)
     if (n.TimingReloadSpeed > 0 || n.TimingChargeSpeed > 0 || n.TimingBurstGauge > 0)
         Console.WriteLine($"큐브효과 : 재장전 {n.TimingReloadSpeed:P2} | 차지 {n.TimingChargeSpeed:P2} | " +
                           $"게이지 {n.TimingBurstGauge:P2}(K9 대기)");
-    Console.WriteLine($"타겟     : DEF {t.FinalDef:N0} | dist {t.Distance} | core r{t.CoreRadius} | body r{t.BodyRadius}");
+    string bossTag = t is BossTarget b ? $" | 보스 {b.Code} Lv{b.Level} ({b.Element}, HP {b.MaxHp:N0})" : "";
+    Console.WriteLine($"타겟     : DEF {t.FinalDef:N0} | dist {t.Distance} | core r{t.CoreRadius} | body r{t.BodyRadius}{bossTag}");
+    Console.WriteLine($"스킬     : {(skills ? $"T01 런타임 활성 (lv{skillLv} — 버스트=쿨마다 자동, 게이지 근사)" : "비활성 (평타만)")}");
     Console.WriteLine($"적정거리 : {n.ProperRangeMin}~{n.ProperRangeMax} → 보너스 {(t.Distance >= n.ProperRangeMin && t.Distance <= n.ProperRangeMax ? "적용권" : "밖")} (판정은 무기표 기준)");
     Console.WriteLine($"길이     : {sec}s ({sec * 60:N0} frames)");
     Console.WriteLine("─────────────────────────────────────────────");
@@ -188,8 +251,10 @@ static void PrintResults(List<RunResult> results, CoreNikke n, double sec)
     double crit = r.DamageByTag.GetValueOrDefault("crit=True");
     double core = r.DamageByTag.GetValueOrDefault("core=True");
     double full = r.DamageByTag.GetValueOrDefault("full=True");
+    double skill = r.DamageByTag.GetValueOrDefault("skill=True");
     Console.WriteLine($"        분해     : 크리 {crit:N0} ({Pct(crit, r.TotalDamage)}) | " +
-                      $"코어 {core:N0} ({Pct(core, r.TotalDamage)}) | 풀차지 {full:N0} ({Pct(full, r.TotalDamage)})");
+                      $"코어 {core:N0} ({Pct(core, r.TotalDamage)}) | 풀차지 {full:N0} ({Pct(full, r.TotalDamage)})" +
+                      (skill > 0 ? $" | 스킬 {skill:N0} ({Pct(skill, r.TotalDamage)})" : ""));
 
     int show = (int)Math.Min(10, r.DamagePerSecond.Count);
     Console.WriteLine($"        초당(첫 {show}s): " +

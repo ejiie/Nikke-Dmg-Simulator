@@ -52,8 +52,9 @@ namespace Nikke.Simulator.Engine.Targets
         public void PopulateContext(ref AttackContext ctx, string attackerElement, string attackerWeaponType)
         {
             ctx.FinalDef = FinalDef;
-            // 속성 상성(B5 기본 우월 +0.1) 판정 = 보류 (ElementAdvantage 통합 대기) — SumStrongElem 무변경.
-            // OL/버프 IncElementDmg 는 BuildAttackContext 에서 이미 합산됨.
+            // 속성 상성(B5 기본 우월 +0.1) — T04 통합(2026-07-11). 단일 소스 = ElementAdvantage (FACTS §7-5).
+            // OL/버프 IncElementDmg 는 별축 가산(BuildAttackContext/버프) — 여기서는 기본 우월항만.
+            ctx.SumStrongElem += ElementAdvantage.GetBonus(attackerElement, Element);
             // 적정거리 → B2 ProperDistanceBonus. 무기타입별 구간(공식 bonusrange 최빈값) + 이 타겟의 Distance.
             ctx.ProperDistanceBonus = ProperDistanceTable.GetBonus(attackerWeaponType, Distance);
         }
