@@ -68,6 +68,9 @@ namespace Nikke.Simulator.Engine.Skills
                     Check(s.HurtFunctionIds);
                 }
             }
+            if (c.CharacterSkills != null)
+                foreach (var sk in c.CharacterSkills.Values)
+                    Check(sk.FunctionIds);
 
             if (missing.Count > 0)
                 throw new InvalidDataException(

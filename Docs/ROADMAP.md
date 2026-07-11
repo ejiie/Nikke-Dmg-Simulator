@@ -31,7 +31,10 @@
 - **Tier 1 Core**: 대미지 공식(18골든 ≤1.3e-7) · 스탯 조립(0-error) · 라운딩 권위(OverloadProcessor) — FACTS §1~3.
 - **Wave1+**: SimClock(K2) · FiringModel(K3 — 발사/모션/재장전 전 스펙) · 공식 스킬 로더/번역기(K4) ·
   DummyTarget(K5) · Metrics(K6) · **RunOnce M1 배선(K8)** · M2 하네스(`nikke-harness`).
-- 테스트 129/129. 벤치: **180s run ≈ 26ms** (Release, 단일캐릭) → 코어당 ~14만 run/h.
+- **T01 SkillRuntime ✅ + T04 BossTarget/ElementAdvantage ✅** (2026-07-11 — THE GAP 코어 닫힘):
+  트리거→효과 루프(connected/UseCharacterSkillId), BuffAggregator, 상성 통합, 보스 39변종 타겟,
+  하네스 `--boss`/스킬 자동. 잔여 = ChangeWeapon 무기교체·InstantSkill body 계수·보스 passive 등록(T02 배선).
+- 테스트 169/169. 벤치: **180s run ≈ 26ms** (Release, 단일캐릭·스킬 전) → 코어당 ~14만 run/h.
 
 ## 4. 마일스톤 DAG (남은 작업 = 가지 문서)
 
@@ -39,7 +42,7 @@
 T07 M2 골든 대조(사용자·상시) ─┐
 T01 SkillRuntime(K7) ──────────┼──> T02 버스트 사이클+팀(K9) ──> T03 로테이션(K10) ─┐
 T04 BossTarget(K11) ───────────┘                                                     ├─> ver.0 MVP
-T05 Evaluator+기록DB(K12) ◄── (T01·T02·T04 후 실전 표본) ─────────────────────────────┤
+T05 Evaluator+기록DB(K12) ◄── (T01~T04 후 실전 표본 + tactic 스키마) ─────────────────┤
 T06 background runner ◄── T05                                                         │
 T08 Optimizer(K13) ◄── T05 ───────────────────────────────────────────────────────────┘
 이후(확장): union raid(데이터 복원+다팀 제약) · Web UI · 배포
@@ -47,12 +50,12 @@ T08 Optimizer(K13) ◄── T05 ───────────────�
 
 | 가지 | 내용 | 의존 |
 |---|---|---|
-| [T01](tasks/T01-skill-runtime.md) | SkillRuntime — 트리거→효과 적용 루프 (THE GAP 마지막 조각) | 없음 (즉시) |
+| [T01](tasks/T01-skill-runtime.md) | ✅(7/11) SkillRuntime — 트리거→효과 적용 루프 (잔여 = body 축·타이밍 스킬버프) | 없음 |
 | [T02](tasks/T02-burst-team.md) | 버스트 게이지·사이클 + 팀 5인 (K9) | T01 |
 | [T03](tasks/T03-rotation.md) | RotationController Auto/Scripted + 컨트롤 정책(택틱) (K10) | T02 |
-| [T04](tasks/T04-boss-target.md) | BossTarget + ElementAdvantage 통합 (K11) | 없음 (병렬 가능) |
-| [T05](tasks/T05-evaluator-db.md) | Evaluator + SQLite 기록 DB (K12) | T01·T02·T04 |
-| [T06](tasks/T06-background-runner.md) | 무작위 덱 background sim runner | T05 |
+| [T04](tasks/T04-boss-target.md) | ✅(7/11) BossTarget + ElementAdvantage 통합 (K11) | 없음 |
+| [T05](tasks/T05-evaluator-db.md) | Evaluator + SQLite 기록 DB (K12) | T01·T02·T03·T04 |
+| [T06](tasks/T06-background-runner.md) | 덱 후보 생성·샘플링 + background sim runner | T05 |
 | [T07](tasks/T07-m2-golden.md) | M2 in-game 골든 대조 (사용자 협업, 상시) | 하네스 ✅ |
 | [T08](tasks/T08-optimizer.md) | Optimizer — DB 기반 best-K 덱 선별(비중복)·tail 목적 (K13) | T05 |
 

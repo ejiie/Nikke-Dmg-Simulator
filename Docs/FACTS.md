@@ -7,16 +7,20 @@
 ## 1. 대미지 공식 (per-hit — 18골든, 잔차 ≤1.3e-7)
 
 ```
-Damage = floor( B2 × (1+ΣB3) × (1+ΣB4) × (1+ΣB5) )
-  P  = (FinalAtk − effectiveDef) × W × C
+Damage = floor( B2 × B3 × B4 × B5 )
+  P  = (FinalAtk − effectiveDef) × M                 ← M = 이 대미지 인스턴스의 계수 × 차지배율
+       M: 일반 무기 히트 = W×C · 비차지 히트 = W (C=1) · 직접 DealDamage 스킬 = function 계수 ·
+          보스 공격 = 평타/스킬 지정 계수. ChangeWeapon 유래 차지 히트 = 무기 히트 → W×C.
   B2 = floor(P) + Σ_active floor(P × bracket_i)      ← 가산 per-term FLOOR
        bracket ∈ { 적정거리 0.3, 풀버스트 0.5, 크리 Σcrit_dmg(기본0.5), 코어 1.0+Σcore_buff }
   B3 = 1+Σattack_dmg[+pierce][+parts][+dot][+seq]  · B4 = 1+Σdamage_taken[+distrib] · B5 = 1+Σstrong_elem
 ```
+- 표기 확정(2026-07-11): B3~B5 는 **(1+Σ) 팩터 자체** — 구 `(1+ΣB3)` 표기의 이중 정의 해소.
+  구현 = `SkillMultiplier`(W 슬롯) × 차지 C — `DamageCalculator` 현행 구조와 일치.
 - 최소뎀: `effectiveDef ≥ FinalAtk` → 무조건 1. True Damage: `effectiveDef := 0` (+B3 조건부 가산).
 - C(차지) = `(ChargeDmgBase + Σadd) × (1 + Σmult)` — 2축. 비차지 = 1.
-- **보스→니케 대미지 = 동일 구조** `(bossAtk − nikkeDef) × 계수` (계수 = 평타/스킬 계수 포괄 상위
-  개념 — 사용자 확정 2026-07-10). 브래킷 세부 적용 범위 = §8. MVP 는 딜 타겟만, 생존 시뮬은 확장(T04).
+- **보스→니케 대미지 = 동일 구조** `(bossAtk − nikkeDef) × M` (사용자 확정 2026-07-10). 브래킷 세부
+  적용 범위 = §8. MVP 는 딜 타겟만, 생존 시뮬은 확장(T04).
 - 구현 `Core/Combat/DamageCalculator.cs` · 골든 `DamageFormulaGoldenTests`.
 
 ## 2. 스탯 조립 (0-error 검증)
@@ -43,13 +47,14 @@ Damage = floor( B2 × (1+ΣB3) × (1+ΣB4) × (1+ΣB5) )
 | basicAttack `multiplier` | percent-number (13.65 = 13.65%) | Nikke 생성자에서 /100 = **W fraction** |
 | 큐브/소장품 effect values | percent-number | EffectTable 이 /100 = 분수 |
 | crit | 전 192캐릭 (15%, 150%) 단일 | AttackContext 기본값 |
-| 시뮬 시간축 | 60fps 프레임 격자 | 모든 지연 = 정수 프레임 |
+| 시뮬 시간축 | **60fps 프레임 격자 = canonical** (정수 frame; 초 = frame/60 파생) | 모든 지연·이벤트 시각 = 정수 프레임 양자화. cs/초 입력 = 단일 변환 지점 |
 
 ## 5. 발사/모션/재장전 스펙 (사용자 3.5년 실측 + einkk 교차 — ENGINE_GUIDE §5 상세)
 
 - **발사** = RPM accumulator (프레임당 `−=RPM`, 발사 시 `+=3600`) — 구조적 1발/프레임 → MG nominal 70/s = 실효 60/s.
 - **MG ramp**: 발사당 +100RPM clamp[60,4200]. **리셋 = 점진 감쇠** (비사격 프레임당 (end−start)/reset_time).
-- **상태 전이 = 전 무기 양방향**: 엄폐→조준 spot_first(0.2s) / 조준→엄폐 spot_last(0.2s).
+- **상태 전이**: 엄폐→조준 **spot_first(0.2s) = 확정**. 조준→엄폐 **spot_last(후딜) = ⚠ 미정**(2026-07-11
+  강등 — einkk 는 UP형 외 0 처리, 실게임 전 무기 0.2s 인지 T07 대조로 판명. §8). 구현 현행 = 전 무기 0.2s 유지.
 - **SR/RL 부류 = per-char 데이터** (무기타입 상수 금지): `input=UP,maintain=0`(발사 후 강제 복귀 — 사이클 83f≈1.4s) /
   `UP,maintain>0`(복귀 없음, 자체 후딜=maintain — SBS 0.23s·Raven 0.83s·A2 0.84s) /
   `DOWN_Charge`(only 풀차지 — Liberalio·Neon:VE 등) / `DOWN`(평사 — Pascal). SG 펠릿 5|10 per-char.
@@ -86,6 +91,9 @@ sd.bin(로컬 게임) ─ getFromLocalSdBin ─ ConfigBattle 상수 (burst_gauge
 - `EffectRoute.Unverified` 타입들 (FullBurstDamage·AddDamage 620건 등) = 브래킷 미검증 — T07 대조로 승격.
 - ElementAdvantage(순환 Water→Fire→Wind→Iron→Electric→Water, +0.1) = 내용 확정·**코드 통합 보류** (T04).
 - 차지속도 감쇠도 §3 감쇠식으로 통일 — ÷(1+Σ) 대안은 T07 에서 반증 시에만 재론.
+- **spot_last(모션 후딜) 적용 범위 = 미정** (2026-07-11 사용자 강등): 후보 = 전 무기 0.2s(데이터 전 무기 20)
+  vs einkk 방식(UP형만, 그 외 0). 자동 탄0 재장전의 spot_last 가산·SR 사이클 1.4s 의 구성 해석도 연동 —
+  사이클 83f **실측치 자체는 유지**, 분해 해석만 미정. T07 대조로 확정.
 - 타겟 코어/몸체 반지름 = 설정 상수 (실측 미비). ProperDistance 보너스 0.3 = 미검증 (구간은 공식 데이터).
 - 보스→니케 대미지: 기본 구조만 확정(§1) — 크리/코어/B3~B5 브래킷 적용 여부·계수 데이터원(MonsterSkillTable 미디코드) = 미검증.
 - `RLV2SwitchDelayTime=20`(ConfigBattle) 의미 미확정.

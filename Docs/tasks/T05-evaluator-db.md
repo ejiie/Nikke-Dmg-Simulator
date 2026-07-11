@@ -1,6 +1,7 @@
 # T05 — Evaluator + SQLite 기록 DB (구 K12)
 
-> 필독: `CLAUDE.md` → `ROADMAP.md` → `FACTS.md` → 이 문서. 의존: T01·T02·T04 (실전 표본 필요).
+> 필독: `CLAUDE.md` → `ROADMAP.md` → `FACTS.md` → 이 문서. 의존: T01·T02·**T03**·T04
+> (실전 표본 + tactic_json 스키마 = T03 산출).
 
 ## 목표
 팀 1개를 N회 run → **분포** 산출 + **기록 DB 축적**. "덱 파워" = 분포(평균·std·신뢰구간·tail).

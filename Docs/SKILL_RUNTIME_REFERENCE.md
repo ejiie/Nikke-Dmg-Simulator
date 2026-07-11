@@ -1,9 +1,10 @@
 # 스킬 런타임 참조 — THE GAP 을 nikke-einkk 로 매운다 (2026-07-07)
 
-> **목적**: 프로젝트 최대 갭 = 스킬 런타임(트리거 발동 + 효과 적용 + 로테이션). 현재 엔진은
-> `skills_parsed.json`(v3, LLM 키워드 파싱)에 의존 → 부정확·비공식. **참조 구현 = [d34d633f/nikke-einkk](https://github.com/d34d633f/nikke-einkk)**
+> **목적**: 프로젝트 최대 갭 = 스킬 런타임(트리거 발동 + 효과 적용 + 로테이션). 스킬 데이터원 =
+> **공식 FunctionTable** (2026-07-08 확정 — `SkillChainLoader`/`SkillTranslator` K4 ✅; 구 skills_parsed v3 폐기).
+> **참조 구현 = [d34d633f/nikke-einkk](https://github.com/d34d633f/nikke-einkk)**
 > — 완성된 NIKKE 데미지 시뮬(Dart, **MIT** = 참조/포팅 자유, 출처표기). 우리 계획(`Docs/DESIGN.md`
-> "full tick event-driven rotation sim")을 이미 구현. 이 문서 = 무엇을 어떻게 참조할지의 지도.
+> "60fps 프레임 tick 로테이션 sim" — 2026-07-11 확정)을 이미 구현. 이 문서 = 무엇을 어떻게 참조할지의 지도.
 > ⚠️ **코드 직접 복붙 금지**(언어 다름·라이선스 표기). 아키텍처/공식 효과모델을 우리 C#로 재구현.
 
 ## 0. 왜 nikke-einkk 인가

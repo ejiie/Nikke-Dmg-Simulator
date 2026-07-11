@@ -14,6 +14,8 @@
 - SG 펠릿 모델 확정 (FACTS §8).
 - `EffectRoute.Unverified` 타입 브래킷 배정 (FullBurstDamage·AddDamage 620 등) → 정식 슬롯 (SkillTranslator).
 - 차지속도 감쇠식·타겟 반지름·ProperDistance 0.3.
+- **spot_last(모션 후딜) 적용 범위** (2026-07-11 미정 강등 — FACTS §8): 전 무기 0.2s vs einkk(UP형만, 외 0).
+  판별 실험: 비-UP 무기(AR/SMG/MG)로 사격→엄폐→재조준 사이클 실측 — 후딜 유무가 사이클 길이에 12f 차이.
 
 ## 산출
 - 대조표(캐릭/조건/실측/sim/오차) → VERIFICATION_LOG. FACTS §8 항목 하나씩 해소.
