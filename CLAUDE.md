@@ -39,7 +39,8 @@ sim 은 사람이 직접(하네스) 또는 background 대량 자동 실행. **MV
 - **하네스**: `nikke-harness`(콘솔, M2 대조). **기록**: SQLite (T05).
 - **테스트**: `dotnet test SimulatorEngine`.
 
-## 현황 (2026-07-08)
+## 현황 (2026-07-11)
 
-Tier 1 Core ✅ (공식·스탯 검증). 엔진 Wave1+K8 M1 ✅ (SimClock·FiringModel·스킬로더·Metrics·RunOnce).
-다음 = **T01 SkillRuntime** (THE GAP 마지막) ∥ T04 BossTarget → T02/T03 → T05 기록DB → T06/T08.
+Tier 1 Core ✅ (공식·스탯 검증). 엔진 Wave1+K8 M1 ✅. **T01 SkillRuntime ✅ + T04 BossTarget ✅**
+(THE GAP 코어 닫힘 — 트리거→효과 루프·상성·보스 39변종, 테스트 169/169).
+다음 = **T02 버스트+팀** → T03 로테이션 → T05 기록DB → T06/T08. 상시 = T07 골든 대조.

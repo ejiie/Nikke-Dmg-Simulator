@@ -342,6 +342,27 @@ namespace Nikke.Simulator.Engine
             CurrentAmmo = Math.Min(_maxAmmo, CurrentAmmo + (int)Math.Round(ratio * _maxAmmo));
         }
 
+        /// <summary>스킬 탄약 회복 (T01 AmmoRefill — GainAmmo): +count 발, 상한 = 최대 탄창.</summary>
+        public void AddAmmo(int count)
+        {
+            if (count <= 0) return;
+            CurrentAmmo = Math.Min(_maxAmmo, CurrentAmmo + count);
+            if (CurrentAmmo > 0 && _forceReloading) CancelForceReload();
+        }
+
+        /// <summary>스킬 즉시 풀장전 (T01 — ForcedReload/AllAmmo): 재장전 상태도 해제.</summary>
+        public void RefillFull()
+        {
+            CurrentAmmo = _maxAmmo;
+            CancelForceReload();
+        }
+
+        private void CancelForceReload()
+        {
+            _forceReloading = false;
+            _reloadProgress = 0;
+        }
+
         /// <summary>비사격 프레임 공통: ramp 점진 감쇠 + 명중원 회복.</summary>
         private void NonFiringFrameUpkeep()
         {

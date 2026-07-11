@@ -3,6 +3,21 @@
 > 필독: `CLAUDE.md` → `ROADMAP.md` → `FACTS.md` → 이 문서 → `SKILL_RUNTIME_REFERENCE.md`(einkk 지도).
 > 의존: 없음 (K4 로더 ✅). 병렬 가능: T04.
 
+## 상태: ✅ 코어 구현 완료 (2026-07-11) — 잔여 항목 아래
+
+구현: `Engine/Events/BattleEvent.cs`(이벤트 계약) · `Engine/Skills/SkillRuntime.cs`(4단계 루프 +
+connected/UseCharacterSkillId 연쇄 + no-op 카운터) · `Engine/Buffs/BuffInstance.cs`(공식화 재정의) ·
+`Engine/Buffs/BuffAggregator.cs`(group-then-round) · SimulationRunner/하네스 배선 · 조립기
+`character_skills` 섹션(1,221 스킬 전개 — 재조립 완료). 테스트 169/169 (신규 40).
+E2E 스모크: Maxwell vs Zeus Lv200 30s — 상성/풀차지/스킬 정상, no-op 잔여 = OnSpawnMonster 뿐.
+
+**잔여 (후속 태스크로):**
+- CharacterSkill **body 축 미소비**: skill_type 7 = ChangeWeapon 무기 교체(FiringModel 재생성 훅 —
+  Maxwell 버스트) · 9 = InstantSkill 계수(skill_value_data) — `skilltype:N` 카운터로 가시화, T02/T07 승격.
+- FireTiming/ReloadTiming **스킬 버프** = no-op 카운터 (부호/의미 미검증 — 큐브 경로는 배선됨). T07 대조 후.
+- 버스트 = 쿨타임 자동 시전 근사 (게이지/사이클 = T02 대체). 보스 passive 등록 = T02 (팀·보스 배선).
+- DurationDamage(DoT)/적 디버프(Target 대상)/HP·버스트 트리거 발행 = no-op 카운터 (T02·확장).
+
 ## 목표
 공식 FunctionData 를 시뮬 루프에서 실행: 이벤트 발생 → 트리거 체크 → 버프 스폰/즉시 효과 → AttackContext 반영.
 완료 시 단일 캐릭이 **자기 스킬(패시브+버스트) 포함 DPS** 를 산출한다.

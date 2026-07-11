@@ -83,7 +83,7 @@ SkillChainLoader ──(skill_chains.json, 공식)──> SkillTranslator ──
 - **하는 것**: SimClock(이벤트큐), FiringModel(RPS/차지타이밍 → 발사 이벤트, 탄창 감소→재장전, 풀차지 판정), 매 발사 `BuildAttackContext`+크리RNG → `CalculateDamage` → MetricsCollector.
 - **Acceptance**: 무기별(AR/SR 등) DPS 가 RPS·탄창·재장전·차지 타이밍에 정합. 크리 RNG 켜고 N회 평균이 기대 크리율 반영.
 
-### M2 🟡 — 단일 캐릭 스킬 (브리지 ✅ K4 / 런타임 ❌ = T01)
+### M2 ✅ — 단일 캐릭 스킬 (브리지 K4 + 런타임 T01, 2026-07-11)
 - **목표**: 그 캐릭 *자기* 스킬(self 버프/트리거)을 시간축에 반영.
 - **하는 것**: SkillChainLoader(공식 skill_chains.json — ✅ K4), SkillTranslator(2축 분류+EffectRoute — ✅ K4), SkillRuntime(event→BuffInstance/DamageInstance — K7), BuffStore + BuffAggregator(활성버프→AttackContext, 니케식 합산 — K7).
 - **Acceptance**: passive/지속 버프가 컨텍스트에 반영, duration 만료 처리, `groups:[]` no-op, stack 분기(cumulative/replace) 동작.
@@ -97,7 +97,7 @@ SkillChainLoader ──(skill_chains.json, 공식)──> SkillTranslator ──
 - **목표**: `IRotationController` ← `AutoController`(게이지/쿨다운 자동) + `ScriptedController`(타임라인 입력).
 - **Acceptance**: 단순덱 자동 실행 / 기믹덱 스크립트대로 실행. 둘 다 같은 SimClock 소비.
 
-### M5 🟡 — 타겟 모델 + 출력 (DummyTarget·Metrics ✅ / BossTarget ❌ = T04)
+### M5 ✅ — 타겟 모델 + 출력 (DummyTarget·Metrics + BossTarget T04, 2026-07-11)
 - **목표**: `ITarget` ← `DummyTarget`(먼저) → `BossTarget`. MetricsCollector 리포트 확정.
 - **하는 것**: 타겟이 DEF/파츠/속성/거리 → `IsCoreHit/IsPartsHit/ProperDistanceBonus/SumStrongElem/FinalDef` 를 채움. 출력 지표(§6) 산출.
 - **Acceptance**: 더미로 엔진 검증 후 보스 데이터 주입 가능 구조.
@@ -127,7 +127,8 @@ SkillChainLoader ──(skill_chains.json, 공식)──> SkillTranslator ──
 
 **SkillTranslator (✅ K4)** — `FunctionDto` → 2축(DESIGN §5): Classify(트리거·조건 無+영구=Static / 그 외 Runtime) + Route(EffectRoute — 확실 슬롯/Unverified/Unknown).
 
-**SkillRuntime** — 트리거 등록부. 이벤트(skill_cast/on_hit/burst_*/every_n_shots/…) 발생 시 조건(`condition_on`/`required_token`/`hp_*`) 평가 후 effects 적용: 버프면 `BuffInstance`(stat/value/bracket/expirySec/stacks) 스폰, `deal_damage` 면 `DamageInstance`(W 슬롯, bracket=null) → 히트 인스턴스.
+**SkillRuntime** — ✅ **구현 완료** (2026-07-11, T01 — `Engine/Skills/SkillRuntime.cs`). einkk 4단계:
+TimingTrigger 매치 → StatusTrigger ×2 → 효과 적용(BuffInstance 스폰 / DealDamage·탄약 = pending 큐를 러너가 drain) → connected/UseCharacterSkillId 연쇄 (depth 가드). 미지 enum/미검증 route = **no-op + `NoOpCounters`**. 만료/OnCheckTime = `TickFrame`(frame 도메인). 잔여 = CharacterSkill body 축(ChangeWeapon 7/InstantSkill 9)·타이밍 스킬버프 — `tasks/T01-skill-runtime.md` 상태 절.
 
 **BuffStore + BuffAggregator** — Combatant별 + 팀 활성 `BuffInstance` 보관(만료 tick에 제거). 매 히트: 적용대상 버프를 **브래킷별 Sum*** 로 집계(니케식 group-then-round)해 `AttackContext` 채움.
 
@@ -155,7 +156,7 @@ SkillChainLoader ──(skill_chains.json, 공식)──> SkillTranslator ──
 ## 7. 데이터/검증 의존 (블로커 아닌 항목 — 병행)
 - ✅ 장비표·큐브·소장품 base/특수효과: **공식 blablalink JSON 연동 완료** (`GetEquipmentStats` + cube/collection base JSON + `EffectType`/`EffectTable`). 옛 "stub/예시 수치" 는 해소됨. ReloadSpeed/ChargeSpeed 타이밍 효과 = **소비 완료**(2026-07-08, `ReduceTimeCs`→FiringModel). 잔여 = BurstGauge(T02)·ReloadRounds/조건부 효과(트리거 시스템 = T01) — `SKILL_DATA_BLABLALINK.md` §4.2.
 - ProperDistance: ✅ 무기별 **범위** 확보(`proper_distance_table.json`; roledata bonusrange → MG 35-55·AR 25-45·SMG 15-35·SG 0-25·RL 0-0·SR 45-100). 보너스 **크기**(0.3?)만 미검증. (per-char `properRange` 도 merged DB 에 있어 SR 예외 보존.)
-- ✅ 무기 타이밍/명중원 데이터+모델(2026-07-01 유실→07-02 복구 통합): roledata shot 블록 → `weaponData`(clean, ETL 정규화) → `WeaponDto`/`Nikke.Weapon`(WeaponProfile) + AccuracyModel/ProperDistanceTable/DummyTarget + `WeaponDataTests`(192캐릭 전수 불변식 포함). K3 소비 ✅(2026-07-08 FiringModel) · 0.03s 캘리브레이션 ✅ 해소(프레임격자+입력지연으로 규명 — spot 0.2s 확정, 구 WeaponStatTable 삭제). 잔여 = HitRate 버프 배선 · **merged DB 재생성 (⚠ 실블로커)**: 현 로컬 `nikke_merged_db_returned.json` 에 weaponData 없음 → 하네스 기본 경로로는 `WeaponProfile.Empty`(FireRate 0 = 발사 불가) — db_merger 재실행 필요 (테스트는 roledata_clean 직접 로드라 무관) · 타겟 코어/몸체 반지름 상수 확정 · ElementAdvantage 통합(T04 에서 보류 해제 — FACTS §7-5 단일 소스 경계).
+- ✅ 무기 타이밍/명중원 데이터+모델(2026-07-01 유실→07-02 복구 통합): roledata shot 블록 → `weaponData`(clean, ETL 정규화) → `WeaponDto`/`Nikke.Weapon`(WeaponProfile) + AccuracyModel/ProperDistanceTable/DummyTarget + `WeaponDataTests`(192캐릭 전수 불변식 포함). K3 소비 ✅(2026-07-08 FiringModel) · 0.03s 캘리브레이션 ✅ 해소(프레임격자+입력지연으로 규명 — spot 0.2s 확정, 구 WeaponStatTable 삭제). 잔여 = HitRate 버프 배선 · 타겟 코어/몸체 반지름 상수 확정. ✅ 해소(2026-07-11): merged DB 재생성(db_merger 재실행 — weaponData 186명, 하네스 발사 정상) · ElementAdvantage 통합(T04 — `Core/Combat/ElementAdvantage.cs`, FACTS §7-5 단일 소스 준수, 골든 무변).
 - 검증 전략: 슬라이스별 in-game 대조 + RNG 는 N회 수렴.
 
 ---
