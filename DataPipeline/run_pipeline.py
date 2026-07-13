@@ -11,6 +11,10 @@ crawler 3종(roledata·static=로그인불필요, blabla=유저데이터)으로 
   python DataPipeline/run_pipeline.py                 # 전체 (crawl + etl)
   python DataPipeline/run_pipeline.py --stage etl     # ETL 만 (수집 생략)
   python DataPipeline/run_pipeline.py --stage crawl   # 수집만
+  python DataPipeline/run_pipeline.py --stage challenge # Challenge monster_id→spot_ai catalog
+  python DataPipeline/run_pipeline.py --stage behavior  # spot_ai→behavior graph/frame model
+  python DataPipeline/run_pipeline.py --stage timeline  # SpotMonster Timeline marker
+  python DataPipeline/run_pipeline.py --stage snapshot # Challenge catalog + snapshot manifest
   python DataPipeline/run_pipeline.py --skip-blabla   # blabla 크롤 제외(로그인 불필요)
   python DataPipeline/run_pipeline.py --dry-run       # 실행 계획만 출력
 
@@ -21,6 +25,12 @@ import os
 import subprocess
 import sys
 import time
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8")  # Windows cp949 콘솔 이모지 대응
+    sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.join(CURRENT_DIR, "..")
@@ -55,6 +65,30 @@ STATICDATA_STAGES = [
     ("sd:skill_chains", "crawler/staticdata_skill_chains.py", "Database/raw/staticdata/assembled/skill_chains.json"),
 ]
 
+CHALLENGE_CATALOG_STAGE = (
+    "sd:challenge_catalog",
+    "crawler/staticdata_challenge_catalog.py",
+    "Database/raw/staticdata/assembled/solo_raid_challenge_catalog.json",
+)
+
+SNAPSHOT_STAGE = (
+    "sd:snapshot",
+    "crawler/staticdata_snapshot_manifest.py",
+    "Database/raw/staticdata/snapshots/solo_raid_challenge/latest.json",
+)
+
+CHALLENGE_BEHAVIOR_STAGE = (
+    "sd:challenge_behavior",
+    "crawler/staticdata_challenge_behavior.py",
+    "Database/raw/staticdata/assembled/solo_raid_challenge_behavior.json",
+)
+
+CHALLENGE_TIMELINE_STAGE = (
+    "sd:challenge_timeline",
+    "crawler/staticdata_challenge_timeline.py",
+    "Database/raw/staticdata/assembled/solo_raid_challenge_timeline.json",
+)
+
 
 def run_stage(label, rel_path):
     """단계 1개를 subprocess 로 실행. (ok, returncode, elapsed) 반환."""
@@ -86,6 +120,17 @@ def build_plan(args):
         plan.extend(ETL_STAGES)
     if args.stage == "staticdata":
         plan.extend(STATICDATA_STAGES)
+        plan.append(CHALLENGE_CATALOG_STAGE)
+    if args.stage == "challenge":
+        plan.append(CHALLENGE_CATALOG_STAGE)
+    if args.stage == "behavior":
+        plan.append(CHALLENGE_CATALOG_STAGE)
+        plan.append(CHALLENGE_BEHAVIOR_STAGE)
+    if args.stage == "timeline":
+        plan.append(CHALLENGE_TIMELINE_STAGE)
+    if args.stage == "snapshot":
+        plan.append(CHALLENGE_CATALOG_STAGE)
+        plan.append(SNAPSHOT_STAGE)
     return plan
 
 
@@ -93,9 +138,17 @@ def main():
     parser = argparse.ArgumentParser(
         description="DataPipeline 오케스트레이터 (crawl 3종 → etl 7단계)"
     )
-    parser.add_argument("--stage", choices=["all", "crawl", "etl", "staticdata"], default="all",
-                        help="실행 범위. all=수집+가공(기본), crawl=수집만, etl=가공만, "
-                             "staticdata=공식 스킬/보스 체인(StaticData.zip 로컬 필요, gitignore 산출)")
+    parser.add_argument(
+        "--stage",
+        choices=["all", "crawl", "etl", "staticdata", "challenge", "behavior", "timeline", "snapshot"],
+        default="all",
+        help="실행 범위. all=수집+가공(기본), crawl=수집만, etl=가공만, "
+             "staticdata=공식 스킬/보스 체인(게임 설치 불필요), "
+             "challenge=Challenge monster_id→spot_ai catalog만, "
+             "behavior=Challenge spot_ai→behavior graph/frame model, "
+             "timeline=SpotMonster authoritative timeline marker, "
+             "snapshot=Challenge catalog 생성 후 현재 로컬 원천 manifest",
+    )
     parser.add_argument("--skip-blabla", action="store_true",
                         help="유저 데이터 크롤(getFromBlaLink) 제외 (로그인/브라우저 불필요할 때)")
     parser.add_argument("--skip-roledata", action="store_true",
