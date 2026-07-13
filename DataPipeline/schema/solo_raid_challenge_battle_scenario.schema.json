@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "solo_raid_challenge_battle_scenario.schema.json",
+  "title": "Solo Raid Challenge battle scenario input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "catalog_kind",
+    "scenario_id",
+    "season",
+    "source",
+    "battle",
+    "bindings",
+    "event_instances",
+    "catalog_digest_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "catalog_kind": {
+      "const": "solo_raid_challenge_battle_scenario"
+    },
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,95}$"
+    },
+    "evaluation_mode": {
+      "enum": ["requested_instances", "expand_180s_horizon"]
+    },
+    "season": { "const": "39" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["battle_timeline"],
+      "properties": {
+        "battle_timeline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sha256",
+            "catalog_digest_sha256",
+            "game_assembly_sha256"
+          ],
+          "properties": {
+            "sha256": { "$ref": "#/$defs/sha256" },
+            "catalog_digest_sha256": { "$ref": "#/$defs/sha256" },
+            "game_assembly_sha256": { "$ref": "#/$defs/sha256" }
+          }
+        }
+      }
+    },
+    "battle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["behavior_enable_frame", "delta_model"],
+      "properties": {
+        "behavior_enable_frame": { "$ref": "#/$defs/frame" },
+        "delta_model": {
+          "const": "fixed_60fps_float32_projection"
+        },
+        "pattern_tick_model": {
+          "const": "next_fixed60_frame"
+        },
+        "frame_horizon_exclusive": { "$ref": "#/$defs/frame" }
+      }
+    },
+    "bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_terminals",
+        "random_permutations",
+        "skill_effects"
+      ],
+      "properties": {
+        "task_terminals": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/task_terminal" }
+        },
+        "random_permutations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/random_permutation" }
+        },
+        "skill_effects": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/skill_effect" }
+        }
+      }
+    },
+    "event_instances": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/event_instance" }
+    },
+    "catalog_digest_sha256": { "$ref": "#/$defs/sha256" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "evaluation_mode": { "const": "expand_180s_horizon" }
+        },
+        "required": ["evaluation_mode"]
+      },
+      "then": {
+        "properties": {
+          "battle": {
+            "required": [
+              "behavior_enable_frame",
+              "delta_model",
+              "pattern_tick_model",
+              "frame_horizon_exclusive"
+            ]
+          },
+          "event_instances": { "maxItems": 0 }
+        }
+      },
+      "else": {
+        "properties": {
+          "event_instances": { "minItems": 1 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "frame": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "context": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(repeat|random)_[0-9]+$"
+      },
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "task_terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_id", "context", "frame", "status"],
+      "properties": {
+        "node_id": { "type": "integer", "minimum": 0 },
+        "context": { "$ref": "#/$defs/context" },
+        "frame": { "$ref": "#/$defs/frame" },
+        "status": { "enum": ["success", "failure"] },
+        "source": { "type": "string", "minLength": 1 }
+      }
+    },
+    "random_permutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_id", "activation_index", "children"],
+      "properties": {
+        "node_id": { "type": "integer", "minimum": 0 },
+        "activation_index": { "type": "integer", "minimum": 0 },
+        "children": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 0 }
+        },
+        "source": { "type": "string", "minLength": 1 }
+      }
+    },
+    "skill_effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_id", "context", "frame"],
+      "properties": {
+        "event_id": { "type": "string", "minLength": 1 },
+        "context": { "$ref": "#/$defs/context" },
+        "frame": { "$ref": "#/$defs/frame" },
+        "source": { "type": "string", "minLength": 1 }
+      }
+    },
+    "event_instance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_id"],
+      "properties": {
+        "event_id": { "type": "string", "minLength": 1 },
+        "instance_id": { "type": "string", "minLength": 1 },
+        "context": { "$ref": "#/$defs/context" }
+      }
+    }
+  }
+}

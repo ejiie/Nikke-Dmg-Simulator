@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nikke-dmg-simulator:solo-raid-challenge-snapshot:v1",
+  "title": "Solo Raid Challenge Source Snapshot Manifest",
+  "type": "object",
+  "required": [
+    "schema_ref",
+    "schema_version",
+    "snapshot_kind",
+    "privacy_tier",
+    "generated_at_utc",
+    "data_version",
+    "sources",
+    "pipeline_identity",
+    "artifacts",
+    "challenge",
+    "validation",
+    "exclusions"
+  ],
+  "properties": {
+    "schema_ref": {"type": "string"},
+    "schema_version": {"const": 1},
+    "snapshot_kind": {"const": "solo_raid_challenge"},
+    "privacy_tier": {"const": "internal_local"},
+    "generated_at_utc": {"type": "string", "format": "date-time"},
+    "data_version": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "data_version_algorithm": {"type": "string"},
+    "sources": {
+      "type": "object",
+      "required": ["client", "staticdata"]
+    },
+    "pipeline_identity": {
+      "type": "object",
+      "required": ["python_version", "scripts"]
+    },
+    "artifacts": {"type": "object"},
+    "challenge": {
+      "type": "object",
+      "required": ["scope", "entries", "coverage"],
+      "properties": {
+        "scope": {
+          "type": "object",
+          "required": ["mode", "difficulty_type", "label", "selection", "scope_digest_sha256"],
+          "properties": {
+            "mode": {"const": "solo_raid"},
+            "difficulty_type": {"const": 2},
+            "label": {"const": "challenge"},
+            "selection": {"const": "SoloRaidPresetTable.Difficulty_type == 2"},
+            "scope_digest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+          }
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "season",
+              "manager_ids",
+              "preset_id",
+              "preset_group_id",
+              "difficulty_type",
+              "wave_id",
+              "verification"
+            ],
+            "properties": {
+              "season": {"type": ["string", "null"]},
+              "manager_ids": {"type": "array", "items": {"type": "string"}},
+              "preset_id": {"type": "string"},
+              "preset_group_id": {"type": "string"},
+              "difficulty_type": {"const": 2},
+              "wave_id": {"type": "string"},
+              "exact_boss_monster_id": {"type": ["string", "null"]},
+              "verification": {"type": "object"}
+            }
+          }
+        },
+        "coverage": {"type": "object"}
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": ["status", "completeness_tier", "checks", "warnings"],
+      "properties": {
+        "status": {"enum": ["partial", "complete", "invalid"]},
+        "completeness_tier": {
+          "enum": ["source_snapshot", "static_only", "behavior", "frame_complete"]
+        }
+      }
+    },
+    "exclusions": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

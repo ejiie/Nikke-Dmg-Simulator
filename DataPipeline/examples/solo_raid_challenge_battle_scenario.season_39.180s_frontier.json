@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "catalog_kind": "solo_raid_challenge_battle_scenario",
+  "scenario_id": "s39-180s-offline-frontier",
+  "evaluation_mode": "expand_180s_horizon",
+  "season": "39",
+  "source": {
+    "battle_timeline": {
+      "sha256": "9717c8dcc43d955af28a50e1373a8f421b0b56e2e646e7368958961dee28aaec",
+      "catalog_digest_sha256": "f9c21b5d1b5553a4e29b908e4ce3d8845deda2de637552878da79c5d4fae67e8",
+      "game_assembly_sha256": "a14dad78b1401ac8f75a8e4c4a05c5c6dc522f0ae86dce81c51789e9efe670c2"
+    }
+  },
+  "battle": {
+    "behavior_enable_frame": 0,
+    "delta_model": "fixed_60fps_float32_projection",
+    "pattern_tick_model": "next_fixed60_frame",
+    "frame_horizon_exclusive": 10800
+  },
+  "bindings": {
+    "task_terminals": [],
+    "random_permutations": [],
+    "skill_effects": []
+  },
+  "event_instances": [],
+  "catalog_digest_sha256": "e9abb847ebc0ef281f41723f8c2d3946af8a07bf84ef076d53d8b94c3e9aca93"
+}

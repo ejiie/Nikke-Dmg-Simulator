@@ -67,11 +67,18 @@ monster per_sec=250 use_skill=100 skill_hit=10 shot_hit=4 hurt=4
 **필드셋 drift** 가 있어 정렬이 어긋나며 cascade. **JSON = 실제 직렬화 ground truth**,
 metadata+.mpk 조합보다 우월. sd.bin 밖 표는 이 JSON 을 못 구해 여전히 어려움.
 
-## 4. 미개척: dp(data pack) catalog 복호 (보류)
-`dp_<ver>_catalog.db` = `NKDB` 완전 암호화(고엔트로피, 평문 표이름 0). `.nds`(96B)=키material.
-`settings.json` 의 AES KeySets(v33–37, 5키/셋)로 복호 이론상 가능하나 (a) NKAddressable
-복호 스킴 RE 필요, (b) dp 는 십중팔구 **에셋 번들**(테이블 아님 — 테이블=서버 .mpk).
-→ 투자 대비 불확실, **보류.** 전 표 JSON 이 목표면 이쪽보다 서버팩 필드셋 교정이 유효.
+## 4. Addressables NKDB/bundle route (2026-07-13 개척)
+
+초기 조사에서 보류했던 `core/dp/fd_<ver>_catalog.db` route는 Challenge boss timeline 작업에서
+해결했다. catalog 자체가 segment별 AES-OFB + zlib 뒤 SQLite인 구조를 복원했고, key/entry/dependency
+관계로 `ExternalBehavior/spot/<spot_ai>`와 SpotMonster SD bundle의 content hash를 exact resolve한다.
+선택된 NAPS 파일은 `UnityFS`를 직접 읽고 serialized object relation을 따라 behavior tree와
+TimelineAsset marker를 추출한다.
+
+이 route의 목적은 전 table dump가 아니라 최소 FK와 timing 증거다. settings의 host/AES material,
+`.nds`, 복호 DB/CAB/metadata, bundle 원문과 생성 JSON은 계속 `Database/raw/staticdata/` 아래에서만
+다루며 커밋하지 않는다. 실행과 현재 시즌 39 결과는
+[`SOLO_RAID_CHALLENGE_TIMELINE.md`](SOLO_RAID_CHALLENGE_TIMELINE.md)를 참고한다.
 
 ## 5. 산출물
 - `getFromLocalSdBin.py` — sd.bin → 5 JSON + Config*_kv.json 추출(로컬경로 의존, 게임설치 필요).
