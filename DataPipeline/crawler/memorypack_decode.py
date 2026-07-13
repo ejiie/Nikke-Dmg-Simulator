@@ -25,9 +25,10 @@ except Exception:
 
 
 class Reader:
-    def __init__(self, buf):
+    def __init__(self, buf, *, strict_strings=False):
         self.b = buf
         self.o = 0
+        self.strict_strings = strict_strings
 
     def i8(self):
         v = self.b[self.o]; self.o += 1; return v
@@ -56,10 +57,12 @@ class Reader:
         if h <= -2:  # UTF8: h = ~byteCount
             bc = ~h
             _utf16 = self.i32()
-            s = self.b[self.o:self.o + bc].decode("utf-8", "replace"); self.o += bc
+            errors = "strict" if self.strict_strings else "replace"
+            s = self.b[self.o:self.o + bc].decode("utf-8", errors); self.o += bc
             return s
         # h > 0: UTF16
-        s = self.b[self.o:self.o + 2 * h].decode("utf-16-le", "replace"); self.o += 2 * h
+        errors = "strict" if self.strict_strings else "replace"
+        s = self.b[self.o:self.o + 2 * h].decode("utf-16-le", errors); self.o += 2 * h
         return s
 
     def eof(self):
@@ -113,9 +116,9 @@ def read_object(r, schema, schemas):
     return rec
 
 
-def decode_table(buf, schema_name, schemas):
+def decode_table(buf, schema_name, schemas, *, strict_strings=False):
     """최상위 = Array<Record>. [i32 length] + records."""
-    r = Reader(buf)
+    r = Reader(buf, strict_strings=strict_strings)
     n = r.i32()
     schema = schemas[schema_name]
     out = []
@@ -162,6 +165,40 @@ def decode_table_resync(buf, schema_name, schemas, id_lo=1, id_hi=9_999_999):
 
 # ── 스키마 (SharpnelXu/nikke-mpk-json-converter C# 모델, MemoryPackOrder 순) ──
 SCHEMAS = {
+    "SoloRaidManagerData": [
+        ("Id", "int"), ("Monster_preset", "int"), ("Ranking_group_id", "int"),
+    ],
+    "SoloRaidPresetData": [
+        ("Id", "int"), ("Preset_group_id", "int"), ("Difficulty_type", "enum"),
+        ("Quick_battle_type", "enum"), ("Character_lv", "int"),
+        ("Wave_open_condition", "int"), ("Wave_order", "int"), ("Wave", "int"),
+        ("Monster_stage_lv", "int"), ("Monster_stage_lv_change_group", "int"),
+        ("Dynamic_object_stage_lv", "int"), ("Cover_stage_lv", "int"),
+        ("Spot_autocontrol", "bool"), ("Wave_name", "string"),
+        ("Wave_description", "string"), ("Monster_image_si", "string"),
+        ("Monster_image", "string"), ("First_clear_reward_id", "int"),
+        ("Reward_id", "int"),
+    ],
+    # WaveDataTable.*: Stages.cs 선언 순서. 공개 모델의 일부 MemoryPackOrder 중복
+    # annotation은 오타이며, 아래 선언 순서로 현재 wave_Intercept_001 전체 286개
+    # 레코드와 nested object를 EOF까지 정확히 소비한다.
+    "WaveMonster": [
+        ("wave_monster_id", "long"), ("spawn_type", "enum"),
+    ],
+    "WavePathData": [
+        ("wave_path", "string"), ("private_monster_count", "int"),
+        ("wave_monster_list", "@WaveMonster[]"),
+    ],
+    "WaveData": [
+        ("stage_id", "int"), ("group_id", "string"), ("spot_mod", "enum"),
+        ("ui_theme", "enum"), ("battle_time", "int"), ("mod_value", "string"),
+        ("monster_count", "int"), ("use_intro_scene", "bool"), ("wave_repeat", "bool"),
+        ("point_data", "string"), ("point_data_fly", "string"),
+        ("background_name", "string"), ("theme", "enum"), ("theme_time", "enum"),
+        ("stage_info_bg", "string"), ("target_list", "long[]"),
+        ("wave_data", "@WavePathData[]"), ("close_monster_count", "int"),
+        ("mid_monster_count", "int"), ("far_monster_count", "int"),
+    ],
     "MonsterSkillInfoData": [
         ("skill_id", "int"), ("use_function_id_skill", "int[]"), ("hurt_function_id_skill", "int[]"),
     ],
@@ -184,8 +221,18 @@ SCHEMAS = {
         ("level_metal_resist", "int"), ("level_bio_resist", "int"), ("level_projectile_hp", "int"),
         ("level_broken_hp", "long"),
     ],
-    # MonsterSkillData(MonsterSkillTable): MemoryPackOrder 0-43 순. 실제 memberCount=46(게임이 +2 tail
-    # 추가) → decode_table_resync 로 앞 44필드만 신뢰 디코드. (repo 모델 order 32 중복 오타는 weapon_object_enum 채택.)
+    # MonsterModelTable: exact 13-member wire schema.  mon_prefab is the
+    # authoritative SpotMonster addressable stem used by the timeline stage.
+    "MonsterModelData": [
+        ("id", "int"), ("resource_id", "int"), ("mon_prefab", "string"),
+        ("grade", "enum"), ("monster_generation", "float"), ("size", "enum"),
+        ("dissolve_type", "enum"), ("attribute", "enum"), ("move_type", "enum"),
+        ("category_type_1", "enum"), ("category_type_2", "enum"),
+        ("category_type_3", "enum"), ("monster_class", "enum"),
+    ],
+    # MonsterSkillData(MonsterSkillTable): current wire memberCount=46 exact.
+    # 공개 모델의 Order(32) 중복 중 두 필드는 모두 존재하며 calling_group_id가 뒤따른다.
+    # current build가 추가한 show_breakable_time(bool)까지 포함하면 4703/4703 off==len.
     "MonsterSkillData": [
         ("id", "int"), ("name_localkey", "string"), ("description_localkey", "string"), ("skill_icon", "string"),
         ("skill_ani_number", "enum"), ("weapon_type", "enum"), ("attack_type", "enum"), ("fire_type", "enum"),
@@ -196,10 +243,12 @@ SCHEMAS = {
         ("break_object_hp_raito", "int"), ("move_object", "string[]"), ("delay_time", "int"),
         ("skill_value_type_01", "enum"), ("skill_value_01", "long"), ("skill_value_type_02", "enum"),
         ("skill_value_02", "long"), ("target_character_ratio", "int"), ("target_cover_ratio", "int"),
-        ("target_nothing_ratio", "int"), ("weapon_object_enum", "enum"), ("prefer_target", "enum"),
-        ("show_lock_on", "bool"), ("target_count", "int"), ("object_resource", "string[]"),
+        ("target_nothing_ratio", "int"), ("weapon_object_enum", "enum"), ("calling_group_id", "int"),
+        ("prefer_target", "enum"), ("show_lock_on", "bool"), ("target_count", "int"),
+        ("object_resource", "string[]"),
         ("object_position_type", "enum"), ("object_position", "double[]"), ("is_using_timeline", "bool"),
-        ("control_gauge", "int"), ("control_parts", "int[]"), ("cancel_type", "enum"), ("linked_parts", "enum"),
+        ("control_gauge", "int"), ("show_breakable_time", "bool"), ("control_parts", "int[]"),
+        ("cancel_type", "enum"), ("linked_parts", "enum"),
     ],
     # MonsterPartData: 선언순 (public 모델의 Order(2) 중복은 오타 → 선언순이 실제 23필드와 일치)
     "MonsterPartData": [
@@ -323,6 +372,8 @@ def main():
 
     tables = {"MonsterPartsTable.mpk": "MonsterPartData", "MonsterTable.mpk": "MonsterData",
               "MonsterStatEnhanceTable.mpk": "MonsterStatEnhanceData",
+              "MonsterModelTable.mpk": "MonsterModelData",
+              "MonsterSkillTable.mpk": "MonsterSkillData",
               # 스킬 계층 (2026-07-08 D1): 니케 링크 → 스킬 → function 원자
               "CharacterTable.mpk": "NikkeCharacterData",
               "CharacterSkillTable.mpk": "SkillData",
