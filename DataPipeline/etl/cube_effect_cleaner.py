@@ -9,6 +9,8 @@ description 구절의 키워드로 식별한다. 큐브 레벨(1~15) → 스킬 
   type, value_placeholder, values:[v_lvl1..v_lvl15],
   description_values:{description_value_NN:[v_lvl1..v_lvl15]}, conditional, desc
 }]} }
+description_values 는 value_placeholder 를 **제외한** 나머지 설명 인자(트리거 임계값·
+지속시간 등)만 담는다 — 효과 값 배열은 values 한 곳에만 존재.
 effect type 어휘는 C# EffectType enum 과 1:1.
 """
 import json
@@ -109,8 +111,13 @@ def parse_effects(skill, skill_levels):
     """
     raw_desc = skill.get("description_localkey") or ""
     desc = strip_html(raw_desc)
-    description_values = description_values_of(skill, skill_levels)
-    conditional = len(description_values) >= 2
+    all_values = description_values_of(skill, skill_levels)
+    conditional = len(all_values) >= 2
+
+    def extra_values(placeholder):
+        # 효과 값 배열은 values 에만 두고, 여기엔 나머지 인자만 남긴다 (중복 저장 금지).
+        return {k: v for k, v in all_values.items() if k != placeholder}
+
     effects = []
     context = ""
 
@@ -127,8 +134,8 @@ def parse_effects(skill, skill_levels):
             effects.append({
                 "type": etype,
                 "value_placeholder": placeholder,
-                "values": description_values[placeholder],
-                "description_values": description_values,
+                "values": all_values[placeholder],
+                "description_values": extra_values(placeholder),
                 "conditional": conditional,
                 "desc": desc,
             })
@@ -139,15 +146,15 @@ def parse_effects(skill, skill_levels):
 
     # 미지/새 형식도 버리지 않는다. 기존 shape를 유지하고 첫 참조값(없으면 v01)을
     # no-op Unknown으로 내보내 다음 게임 버전의 enum drift를 관찰할 수 있게 한다.
-    placeholder = next(iter(description_values), "description_value_01")
+    placeholder = next(iter(all_values), "description_value_01")
     nn = int(placeholder.rsplit("_", 1)[1])
     return [{
         "type": effect_type_of(desc),
         "value_placeholder": placeholder,
-        "values": description_values.get(placeholder) or resolve_values(
+        "values": all_values.get(placeholder) or resolve_values(
             skill, skill_levels, nn
         ),
-        "description_values": description_values,
+        "description_values": extra_values(placeholder),
         "conditional": conditional,
         "desc": desc,
     }]

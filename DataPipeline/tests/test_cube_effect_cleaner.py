@@ -24,6 +24,7 @@ class CubeEffectCleanerTests(unittest.TestCase):
         self.assertEqual("ReloadSpeed", effects[0]["type"])
         self.assertEqual("description_value_01", effects[0]["value_placeholder"])
         self.assertEqual([10.0, 20.0, 30.0], effects[0]["values"])
+        self.assertEqual({}, effects[0]["description_values"])
         self.assertFalse(effects[0]["conditional"])
 
     def test_bastion_uses_second_placeholder_and_preserves_trigger(self):
@@ -42,11 +43,9 @@ class CubeEffectCleanerTests(unittest.TestCase):
         self.assertEqual("ReloadRounds", effect["type"])
         self.assertEqual("description_value_02", effect["value_placeholder"])
         self.assertEqual([1.0, 2.0, 3.0], effect["values"])
+        # description_values 는 value_placeholder(v02) 를 제외한 나머지 인자만.
         self.assertEqual(
-            {
-                "description_value_01": [10.0, 10.0, 10.0],
-                "description_value_02": [1.0, 2.0, 3.0],
-            },
+            {"description_value_01": [10.0, 10.0, 10.0]},
             effect["description_values"],
         )
         self.assertTrue(effect["conditional"])
@@ -77,6 +76,7 @@ class CubeEffectCleanerTests(unittest.TestCase):
             [20.0, 20.0, 20.0],
             effect["description_values"]["description_value_03"],
         )
+        self.assertNotIn("description_value_02", effect["description_values"])
 
     def test_missing_placeholder_data_is_graceful_noop(self):
         effects = parse_effects(
