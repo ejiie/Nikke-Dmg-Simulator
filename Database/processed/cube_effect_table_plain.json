@@ -1,0 +1,885 @@
+[
+  {
+    "cube_id": 1000301,
+    "cube_name": "Assault Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. Hit Rate ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        2.54,
+        2.54,
+        3.81,
+        3.81,
+        3.81,
+        3.81,
+        5.09,
+        5.09,
+        5.09,
+        5.09,
+        5.09,
+        5.09,
+        5.09,
+        5.09,
+        5.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000301,
+    "cube_name": "Assault Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000302,
+    "cube_name": "Onslaught Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. Charge Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        2.54,
+        2.54,
+        3.81,
+        3.81,
+        3.81,
+        3.81,
+        5.09,
+        5.09,
+        5.09,
+        5.09,
+        5.09,
+        5.09,
+        5.09,
+        5.09,
+        5.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000302,
+    "cube_name": "Onslaught Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000303,
+    "cube_name": "Resilience Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. Reload Speed ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        14.84,
+        14.84,
+        22.27,
+        22.27,
+        22.27,
+        22.27,
+        29.69,
+        29.69,
+        29.69,
+        29.69,
+        29.69,
+        29.69,
+        29.69,
+        29.69,
+        29.69
+      ]
+    }
+  },
+  {
+    "cube_id": 1000303,
+    "cube_name": "Resilience Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000304,
+    "cube_name": "Bastion Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates when firing {description_value_01} round(s). Reload ▲ {description_value_02} round(s).",
+    "parameters": {
+      "description_value_01": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ],
+      "description_value_02": [
+        1.0,
+        1.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        3.0,
+        3.0,
+        3.0,
+        3.0,
+        3.0,
+        3.0,
+        3.0,
+        3.0,
+        3.0
+      ]
+    }
+  },
+  {
+    "cube_id": 1000304,
+    "cube_name": "Bastion Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000305,
+    "cube_name": "Adjutant Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. Charge Speed ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        1.06,
+        1.06,
+        1.59,
+        1.59,
+        1.59,
+        1.59,
+        2.12,
+        2.12,
+        2.12,
+        2.12,
+        2.12,
+        2.12,
+        2.12,
+        2.12,
+        2.12
+      ]
+    }
+  },
+  {
+    "cube_id": 1000305,
+    "cube_name": "Adjutant Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000306,
+    "cube_name": "Wingman Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. Max Ammunition Capacity ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        14.84,
+        14.84,
+        22.27,
+        22.27,
+        22.27,
+        22.27,
+        29.69,
+        29.69,
+        29.69,
+        29.69,
+        29.69,
+        29.69,
+        29.69,
+        29.69,
+        29.69
+      ]
+    }
+  },
+  {
+    "cube_id": 1000306,
+    "cube_name": "Wingman Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000307,
+    "cube_name": "Quantum Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. Burst Gauge filling speed ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        2.33,
+        2.33,
+        3.5,
+        3.5,
+        3.5,
+        3.5,
+        4.66,
+        4.66,
+        4.66,
+        4.66,
+        4.66,
+        4.66,
+        4.66,
+        4.66,
+        4.66
+      ]
+    }
+  },
+  {
+    "cube_id": 1000307,
+    "cube_name": "Quantum Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000308,
+    "cube_name": "Vigor Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. Max HP ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        4.84,
+        4.84,
+        7.27,
+        7.27,
+        7.27,
+        7.27,
+        9.69,
+        9.69,
+        9.69,
+        9.69,
+        9.69,
+        9.69,
+        9.69,
+        9.69,
+        9.69
+      ]
+    }
+  },
+  {
+    "cube_id": 1000308,
+    "cube_name": "Vigor Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000309,
+    "cube_name": "Endurance Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. DEF ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        24.2,
+        24.2,
+        36.35,
+        36.35,
+        36.35,
+        36.35,
+        48.45,
+        48.45,
+        48.45,
+        48.45,
+        48.45,
+        48.45,
+        48.45,
+        48.45,
+        48.45
+      ]
+    }
+  },
+  {
+    "cube_id": 1000309,
+    "cube_name": "Endurance Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000310,
+    "cube_name": "Healing Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. Potency of HP granted ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        8.08,
+        8.08,
+        12.12,
+        12.12,
+        12.12,
+        12.12,
+        16.16,
+        16.16,
+        16.16,
+        16.16,
+        16.16,
+        16.16,
+        16.16,
+        16.16,
+        16.16
+      ]
+    }
+  },
+  {
+    "cube_id": 1000310,
+    "cube_name": "Healing Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000311,
+    "cube_name": "Tempering Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. Damage Taken ▼ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        4.84,
+        4.84,
+        7.27,
+        7.27,
+        7.27,
+        7.27,
+        9.69,
+        9.69,
+        9.69,
+        9.69,
+        9.69,
+        9.69,
+        9.69,
+        9.69,
+        9.69
+      ]
+    }
+  },
+  {
+    "cube_id": 1000311,
+    "cube_name": "Tempering Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000312,
+    "cube_name": "Assist Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates when HP is lower than {description_value_01}%. Max HP ▲ {description_value_02}% for {description_value_03} sec.",
+    "parameters": {
+      "description_value_01": [
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "description_value_02": [
+        6.07,
+        6.07,
+        9.1,
+        9.1,
+        9.1,
+        9.1,
+        12.14,
+        12.14,
+        12.14,
+        12.14,
+        12.14,
+        12.14,
+        12.14,
+        12.14,
+        12.14
+      ],
+      "description_value_03": [
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ]
+    }
+  },
+  {
+    "cube_id": 1000312,
+    "cube_name": "Assist Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000313,
+    "cube_name": "Destruction Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. Damage to Parts ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        15.95,
+        15.95,
+        23.92,
+        23.92,
+        23.92,
+        23.92,
+        31.9,
+        31.9,
+        31.9,
+        31.9,
+        31.9,
+        31.9,
+        31.9,
+        31.9,
+        31.9
+      ]
+    }
+  },
+  {
+    "cube_id": 1000313,
+    "cube_name": "Destruction Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000314,
+    "cube_name": "Piercing Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. Pierce Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        7.07,
+        7.07,
+        10.6,
+        10.6,
+        10.6,
+        10.6,
+        14.14,
+        14.14,
+        14.14,
+        14.14,
+        14.14,
+        14.14,
+        14.14,
+        14.14,
+        14.14
+      ]
+    }
+  },
+  {
+    "cube_id": 1000314,
+    "cube_name": "Piercing Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000315,
+    "cube_name": "Rupture Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. True Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        7.07,
+        7.07,
+        10.6,
+        10.6,
+        10.6,
+        10.6,
+        14.14,
+        14.14,
+        14.14,
+        14.14,
+        14.14,
+        14.14,
+        14.14,
+        14.14,
+        14.14
+      ]
+    }
+  },
+  {
+    "cube_id": 1000315,
+    "cube_name": "Rupture Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  },
+  {
+    "cube_id": 1000316,
+    "cube_name": "Stealth Cube",
+    "rarity": "SSR",
+    "skill_index": 1,
+    "description": "■ Activates at the start of battle. Max HP of Cover ▲ {description_value_01}% of the caster's Max HP.",
+    "parameters": {
+      "description_value_01": [
+        7.26,
+        7.26,
+        10.91,
+        10.91,
+        10.91,
+        10.91,
+        14.54,
+        14.54,
+        14.54,
+        14.54,
+        14.54,
+        14.54,
+        14.54,
+        14.54,
+        14.54
+      ]
+    }
+  },
+  {
+    "cube_id": 1000316,
+    "cube_name": "Stealth Cube",
+    "rarity": "SSR",
+    "skill_index": 2,
+    "description": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%.",
+    "parameters": {
+      "description_value_01": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.48,
+        8.48,
+        8.48,
+        8.48,
+        10.6,
+        12.72,
+        14.84,
+        14.84,
+        16.96,
+        16.96,
+        19.09
+      ]
+    }
+  }
+]

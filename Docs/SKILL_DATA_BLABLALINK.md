@@ -112,6 +112,9 @@ skill1/2 는 `skill_table:"StateEffect"` — 패시브 효과도 StateEffect 함
   `values`에 담고, `description_values`에는 **나머지** placeholder(임계/지속)의 레벨별 배열만 보존한다
   (효과값 중복 저장 안 함 — 2026-07-16).
   `conditional: true`인 항목은 트리거 런타임이 구현되기 전까지 `EffectTable` 로더에서 no-op한다.
+- 외부 공유용 export 2종을 같은 cleaner가 함께 생성 (2026-07-16): `cube_effect_table_semantic.json`
+  (typed — `trigger:{type: ShotsFired|HpBelow, values}`·`duration_sec` 의미 필드),
+  `cube_effect_table_plain.json` (무해석 flat — 스킬당 1행, 전체 placeholder 값 나열). 엔진은 미소비.
 
 **생존 (DPS 스코프 밖, 우선순위 낮음)**:
 - `DamageTaken` (Tempering 큐브 / 소장품): **캐릭이 적에게서 받는 뎀 감소** (B4 아님!)

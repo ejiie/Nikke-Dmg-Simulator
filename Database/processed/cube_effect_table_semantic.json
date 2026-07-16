@@ -1,0 +1,888 @@
+{
+  "1000301": {
+    "name": "Assault Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "HitRate",
+        "values": [
+          2.54,
+          2.54,
+          3.81,
+          3.81,
+          3.81,
+          3.81,
+          5.09,
+          5.09,
+          5.09,
+          5.09,
+          5.09,
+          5.09,
+          5.09,
+          5.09,
+          5.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Hit Rate ▲ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000302": {
+    "name": "Onslaught Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "ChargeDamage",
+        "values": [
+          2.54,
+          2.54,
+          3.81,
+          3.81,
+          3.81,
+          3.81,
+          5.09,
+          5.09,
+          5.09,
+          5.09,
+          5.09,
+          5.09,
+          5.09,
+          5.09,
+          5.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Charge Damage ▲ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000303": {
+    "name": "Resilience Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "ReloadSpeed",
+        "values": [
+          14.84,
+          14.84,
+          22.27,
+          22.27,
+          22.27,
+          22.27,
+          29.69,
+          29.69,
+          29.69,
+          29.69,
+          29.69,
+          29.69,
+          29.69,
+          29.69,
+          29.69
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Reload Speed ▲ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000304": {
+    "name": "Bastion Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "ReloadRounds",
+        "values": [
+          1.0,
+          1.0,
+          2.0,
+          2.0,
+          2.0,
+          2.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        "trigger": {
+          "type": "ShotsFired",
+          "values": [
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0
+          ]
+        },
+        "duration_sec": null,
+        "desc": "■ Activates when firing {description_value_01} round(s). Reload ▲ {description_value_02} round(s)."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000305": {
+    "name": "Adjutant Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "ChargeSpeed",
+        "values": [
+          1.06,
+          1.06,
+          1.59,
+          1.59,
+          1.59,
+          1.59,
+          2.12,
+          2.12,
+          2.12,
+          2.12,
+          2.12,
+          2.12,
+          2.12,
+          2.12,
+          2.12
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Charge Speed ▲ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000306": {
+    "name": "Wingman Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "MaxAmmo",
+        "values": [
+          14.84,
+          14.84,
+          22.27,
+          22.27,
+          22.27,
+          22.27,
+          29.69,
+          29.69,
+          29.69,
+          29.69,
+          29.69,
+          29.69,
+          29.69,
+          29.69,
+          29.69
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Max Ammunition Capacity ▲ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000307": {
+    "name": "Quantum Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "BurstGauge",
+        "values": [
+          2.33,
+          2.33,
+          3.5,
+          3.5,
+          3.5,
+          3.5,
+          4.66,
+          4.66,
+          4.66,
+          4.66,
+          4.66,
+          4.66,
+          4.66,
+          4.66,
+          4.66
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Burst Gauge filling speed ▲ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000308": {
+    "name": "Vigor Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "MaxHp",
+        "values": [
+          4.84,
+          4.84,
+          7.27,
+          7.27,
+          7.27,
+          7.27,
+          9.69,
+          9.69,
+          9.69,
+          9.69,
+          9.69,
+          9.69,
+          9.69,
+          9.69,
+          9.69
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Max HP ▲ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000309": {
+    "name": "Endurance Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "Def",
+        "values": [
+          24.2,
+          24.2,
+          36.35,
+          36.35,
+          36.35,
+          36.35,
+          48.45,
+          48.45,
+          48.45,
+          48.45,
+          48.45,
+          48.45,
+          48.45,
+          48.45,
+          48.45
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. DEF ▲ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000310": {
+    "name": "Healing Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "HealPotency",
+        "values": [
+          8.08,
+          8.08,
+          12.12,
+          12.12,
+          12.12,
+          12.12,
+          16.16,
+          16.16,
+          16.16,
+          16.16,
+          16.16,
+          16.16,
+          16.16,
+          16.16,
+          16.16
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Potency of HP granted ▲ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000311": {
+    "name": "Tempering Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "DamageTaken",
+        "values": [
+          4.84,
+          4.84,
+          7.27,
+          7.27,
+          7.27,
+          7.27,
+          9.69,
+          9.69,
+          9.69,
+          9.69,
+          9.69,
+          9.69,
+          9.69,
+          9.69,
+          9.69
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Damage Taken ▼ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000312": {
+    "name": "Assist Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "MaxHp",
+        "values": [
+          6.07,
+          6.07,
+          9.1,
+          9.1,
+          9.1,
+          9.1,
+          12.14,
+          12.14,
+          12.14,
+          12.14,
+          12.14,
+          12.14,
+          12.14,
+          12.14,
+          12.14
+        ],
+        "trigger": {
+          "type": "HpBelow",
+          "values": [
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0
+          ]
+        },
+        "duration_sec": [
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0
+        ],
+        "desc": "■ Activates when HP is lower than {description_value_01}%. Max HP ▲ {description_value_02}% for {description_value_03} sec."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000313": {
+    "name": "Destruction Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "PartsDamage",
+        "values": [
+          15.95,
+          15.95,
+          23.92,
+          23.92,
+          23.92,
+          23.92,
+          31.9,
+          31.9,
+          31.9,
+          31.9,
+          31.9,
+          31.9,
+          31.9,
+          31.9,
+          31.9
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Damage to Parts ▲ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000314": {
+    "name": "Piercing Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "PierceDamage",
+        "values": [
+          7.07,
+          7.07,
+          10.6,
+          10.6,
+          10.6,
+          10.6,
+          14.14,
+          14.14,
+          14.14,
+          14.14,
+          14.14,
+          14.14,
+          14.14,
+          14.14,
+          14.14
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Pierce Damage ▲ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000315": {
+    "name": "Rupture Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "TrueDamage",
+        "values": [
+          7.07,
+          7.07,
+          10.6,
+          10.6,
+          10.6,
+          10.6,
+          14.14,
+          14.14,
+          14.14,
+          14.14,
+          14.14,
+          14.14,
+          14.14,
+          14.14,
+          14.14
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. True Damage ▲ {description_value_01}%."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  },
+  "1000316": {
+    "name": "Stealth Cube",
+    "rare": "SSR",
+    "effects": [
+      {
+        "type": "CoverHp",
+        "values": [
+          7.26,
+          7.26,
+          10.91,
+          10.91,
+          10.91,
+          10.91,
+          14.54,
+          14.54,
+          14.54,
+          14.54,
+          14.54,
+          14.54,
+          14.54,
+          14.54,
+          14.54
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Max HP of Cover ▲ {description_value_01}% of the caster's Max HP."
+      },
+      {
+        "type": "ElementAdvantageDamage",
+        "values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          8.48,
+          8.48,
+          8.48,
+          8.48,
+          10.6,
+          12.72,
+          14.84,
+          14.84,
+          16.96,
+          16.96,
+          19.09
+        ],
+        "trigger": null,
+        "duration_sec": null,
+        "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
+      }
+    ]
+  }
+}

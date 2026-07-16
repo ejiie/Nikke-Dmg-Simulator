@@ -5,12 +5,23 @@
 description 구절의 키워드로 식별한다. 큐브 레벨(1~15) → 스킬 레벨(level1/2/3 배열)
 → description_value_list[valueIdx].description_value[skillLevel-1] 로 레벨별 값을 해석한다.
 
-출력: { tid: {name, rare, effects:[{
-  type, value_placeholder, values:[v_lvl1..v_lvl15],
-  description_values:{description_value_NN:[v_lvl1..v_lvl15]}, conditional, desc
-}]} }
-description_values 는 value_placeholder 를 **제외한** 나머지 설명 인자(트리거 임계값·
-지속시간 등)만 담는다 — 효과 값 배열은 values 한 곳에만 존재.
+출력 3종 (모두 값 배열 = 큐브 레벨 1..15, index 0 = lvl 1):
+
+1. cube_effect_table.json — C# 엔진 계약 (EffectTable.cs 가 type/values/conditional 소비).
+   { tid: {name, rare, effects:[{
+     type, value_placeholder, values:[v_lvl1..v_lvl15],
+     description_values:{description_value_NN:[...]}, conditional, desc
+   }]} }
+   description_values 는 value_placeholder 를 **제외한** 나머지 설명 인자(트리거 임계값·
+   지속시간 등)만 담는다 — 효과 값 배열은 values 한 곳에만 존재.
+
+2. cube_effect_table_semantic.json — 외부 공유용 typed 버전. placeholder dict 대신
+   의미 필드: effects:[{type, values, trigger:{type: ShotsFired|HpBelow|Unknown,
+   values}|null, duration_sec:[...]|null, desc}]. 미분류 잔여 인자는 params 로 무손실 보존.
+
+3. cube_effect_table_plain.json — 외부 공유용 무해석 버전. 스킬당 1행 flat 리스트:
+   [{cube_id, cube_name, rarity, skill_index, description(placeholder 원문),
+     parameters:{description_value_NN:[...]}}] — 효과 분류/해석 없음, 소비자가 해석.
 effect type 어휘는 C# EffectType enum 과 1:1.
 """
 import json
@@ -19,8 +30,19 @@ import re
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_FILE = os.path.join(CURRENT_DIR, "..", "..", "Database", "raw", "blabla_static_tables.json")
-OUT_FILE = os.path.join(CURRENT_DIR, "..", "..", "Database", "processed", "cube_effect_table.json")
+PROCESSED_DIR = os.path.join(CURRENT_DIR, "..", "..", "Database", "processed")
+OUT_FILE = os.path.join(PROCESSED_DIR, "cube_effect_table.json")
+OUT_SEMANTIC = os.path.join(PROCESSED_DIR, "cube_effect_table_semantic.json")
+OUT_PLAIN = os.path.join(PROCESSED_DIR, "cube_effect_table_plain.json")
 PLACEHOLDER_RE = re.compile(r"\{description_value_(\d+)\}")
+# 조건부 효과 파라미터 역할 (semantic 출력용): 트리거 = "Activates when ..." 문장 안
+# placeholder, 지속시간 = "for {NN} sec" 패턴. 미지 트리거 구절 = Unknown 보존 (drift 관찰).
+TRIGGER_RE = re.compile(r"Activates when ([^.{]*)\{description_value_(\d+)\}")
+DURATION_RE = re.compile(r"for \{description_value_(\d+)\} sec")
+TRIGGER_PHRASES = [
+    ("firing", "ShotsFired"),
+    ("HP is lower than", "HpBelow"),
+]
 
 # description 구절 → EffectType (순서 중요: 더 긴/구체적 구절 먼저)
 EFFECT_KEYWORDS = [
@@ -160,6 +182,70 @@ def parse_effects(skill, skill_levels):
     }]
 
 
+def classify_extra_params(desc):
+    """desc(HTML 제거, placeholder 보존)에서 부가 인자의 역할을 찾는다.
+
+    반환: {placeholder: ("trigger", 트리거타입) | ("duration", None)}.
+    """
+    roles = {}
+    match = TRIGGER_RE.search(desc)
+    if match:
+        phrase, nn = match.group(1), int(match.group(2))
+        ttype = next((t for kw, t in TRIGGER_PHRASES if kw in phrase), "Unknown")
+        roles[f"description_value_{nn:02d}"] = ("trigger", ttype)
+    for match in DURATION_RE.finditer(desc):
+        placeholder = f"description_value_{int(match.group(1)):02d}"
+        roles.setdefault(placeholder, ("duration", None))
+    return roles
+
+
+def semantic_effect(effect):
+    """엔진 계약 effect → typed 외부 공유 형식 (trigger/duration_sec 의미 필드)."""
+    roles = classify_extra_params(effect["desc"])
+    trigger = None
+    duration = None
+    leftover = {}
+    for placeholder, values in effect["description_values"].items():
+        role = roles.get(placeholder)
+        if role and role[0] == "trigger" and trigger is None:
+            trigger = {"type": role[1], "values": values}
+        elif role and role[0] == "duration" and duration is None:
+            duration = values
+        else:
+            leftover[placeholder] = values   # 미분류 잔여 — 무손실 보존
+    out = {
+        "type": effect["type"],
+        "values": effect["values"],
+        "trigger": trigger,
+        "duration_sec": duration,
+        "desc": effect["desc"],
+    }
+    if leftover:
+        out["params"] = leftover
+    return out
+
+
+def build_plain(cubes):
+    """무해석 flat 버전: 스킬당 1행, 모든 placeholder 값을 그대로 나열."""
+    rows = []
+    level_keys = ("level1", "level2", "level3")
+    for tid, c in sorted(cubes.items(), key=lambda kv: int(kv[0])):
+        skills = c.get("harmonycube_skill_group") or []
+        for i, sk in enumerate(skills):
+            if not sk:
+                continue
+            skill_levels = c.get(level_keys[i], []) if i < len(level_keys) else []
+            rows.append({
+                "cube_id": int(tid),
+                "cube_name": c.get("name_localkey"),
+                "rarity": c.get("item_rare"),
+                "skill_index": i + 1,
+                "description": strip_html(sk.get("description_localkey") or ""),
+                "parameters": description_values_of(sk, skill_levels),
+            })
+    return rows
+
+
 def clean_cube_effects():
     print("🧊 큐브 특수효과 파싱 (cubes → cube_effect_table)...")
     if not os.path.exists(RAW_FILE):
@@ -184,11 +270,22 @@ def clean_cube_effects():
             "effects": effects,
         }
 
-    os.makedirs(os.path.dirname(OUT_FILE), exist_ok=True)
-    with open(OUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(out, f, ensure_ascii=False, indent=2)
+    semantic = {
+        tid: {
+            "name": v["name"],
+            "rare": v["rare"],
+            "effects": [semantic_effect(e) for e in v["effects"]],
+        }
+        for tid, v in out.items()
+    }
+    plain = build_plain(cubes)
+
+    os.makedirs(PROCESSED_DIR, exist_ok=True)
+    for path, payload in ((OUT_FILE, out), (OUT_SEMANTIC, semantic), (OUT_PLAIN, plain)):
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
     types = sorted({e["type"] for v in out.values() for e in v["effects"]})
-    print(f"✅ {len(out)} 큐브 → '{OUT_FILE}'  (effect types: {types})")
+    print(f"✅ {len(out)} 큐브 → '{OUT_FILE}' (+semantic/plain)  (effect types: {types})")
 
 
 if __name__ == "__main__":
