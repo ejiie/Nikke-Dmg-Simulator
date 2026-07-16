@@ -43,6 +43,17 @@ public class EffectTableTests
     }
 
     [Fact]
+    public void Conditional_cube_effects_are_noop_until_runtime_supports_them()
+    {
+        var bastion = EffectTable.GetCubeEffects(1000304, 15);
+        var assist = EffectTable.GetCubeEffects(1000312, 15);
+
+        Assert.DoesNotContain(EffectType.ReloadRounds, bastion.Keys);
+        Assert.DoesNotContain(EffectType.MaxHp, assist.Keys);
+        Assert.Equal(0.1909, assist[EffectType.ElementAdvantageDamage], Tol);
+    }
+
+    [Fact]
     public void UnknownCube_returnsEmpty()
     {
         Assert.Empty(EffectTable.GetCubeEffects(999999, 15));

@@ -13,7 +13,12 @@ namespace Nikke.Simulator.Core.Data.Constants
     /// </summary>
     public static class EffectTable
     {
-        private class EffEntryDto { public string type { get; set; } public List<double> values { get; set; } }
+        private class EffEntryDto
+        {
+            public string type { get; set; }
+            public List<double> values { get; set; }
+            public bool conditional { get; set; }
+        }
         private class CubeDto { public List<EffEntryDto> effects { get; set; } }
         private class CollDto { public List<EffEntryDto> effects { get; set; } }
 
@@ -36,6 +41,9 @@ namespace Nikke.Simulator.Core.Data.Constants
             var list = new List<(EffectType, double[])>();
             foreach (var e in effects ?? new List<EffEntryDto>())
             {
+                // 조건부 효과는 트리거/지속시간까지 실행할 런타임 계약이 아직 없다.
+                // JSON에는 전체 인자를 보존하되 여기서는 상시 버프로 오적용하지 않고 no-op한다.
+                if (e.conditional) continue;
                 if (Enum.TryParse<EffectType>(e.type, out var et) && et != EffectType.Unknown)
                     list.Add((et, (e.values ?? new List<double>()).ToArray()));
             }

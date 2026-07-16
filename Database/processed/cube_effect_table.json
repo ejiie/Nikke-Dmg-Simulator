@@ -5,6 +5,7 @@
     "effects": [
       {
         "type": "HitRate",
+        "value_placeholder": "description_value_01",
         "values": [
           2.54,
           2.54,
@@ -22,11 +23,31 @@
           5.09,
           5.09
         ],
+        "description_values": {
+          "description_value_01": [
+            2.54,
+            2.54,
+            3.81,
+            3.81,
+            3.81,
+            3.81,
+            5.09,
+            5.09,
+            5.09,
+            5.09,
+            5.09,
+            5.09,
+            5.09,
+            5.09,
+            5.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Hit Rate ▲ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -44,6 +65,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -55,6 +95,7 @@
     "effects": [
       {
         "type": "ChargeDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           2.54,
           2.54,
@@ -72,11 +113,31 @@
           5.09,
           5.09
         ],
+        "description_values": {
+          "description_value_01": [
+            2.54,
+            2.54,
+            3.81,
+            3.81,
+            3.81,
+            3.81,
+            5.09,
+            5.09,
+            5.09,
+            5.09,
+            5.09,
+            5.09,
+            5.09,
+            5.09,
+            5.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Charge Damage ▲ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -94,6 +155,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -105,6 +185,7 @@
     "effects": [
       {
         "type": "ReloadSpeed",
+        "value_placeholder": "description_value_01",
         "values": [
           14.84,
           14.84,
@@ -122,11 +203,31 @@
           29.69,
           29.69
         ],
+        "description_values": {
+          "description_value_01": [
+            14.84,
+            14.84,
+            22.27,
+            22.27,
+            22.27,
+            22.27,
+            29.69,
+            29.69,
+            29.69,
+            29.69,
+            29.69,
+            29.69,
+            29.69,
+            29.69,
+            29.69
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Reload Speed ▲ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -144,6 +245,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -155,28 +275,66 @@
     "effects": [
       {
         "type": "ReloadRounds",
+        "value_placeholder": "description_value_02",
         "values": [
-          10.0,
-          10.0,
-          10.0,
-          10.0,
-          10.0,
-          10.0,
-          10.0,
-          10.0,
-          10.0,
-          10.0,
-          10.0,
-          10.0,
-          10.0,
-          10.0,
-          10.0
+          1.0,
+          1.0,
+          2.0,
+          2.0,
+          2.0,
+          2.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0,
+          3.0
         ],
+        "description_values": {
+          "description_value_01": [
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0
+          ],
+          "description_value_02": [
+            1.0,
+            1.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0
+          ]
+        },
         "conditional": true,
         "desc": "■ Activates when firing {description_value_01} round(s). Reload ▲ {description_value_02} round(s)."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -194,6 +352,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -205,6 +382,7 @@
     "effects": [
       {
         "type": "ChargeSpeed",
+        "value_placeholder": "description_value_01",
         "values": [
           1.06,
           1.06,
@@ -222,11 +400,31 @@
           2.12,
           2.12
         ],
+        "description_values": {
+          "description_value_01": [
+            1.06,
+            1.06,
+            1.59,
+            1.59,
+            1.59,
+            1.59,
+            2.12,
+            2.12,
+            2.12,
+            2.12,
+            2.12,
+            2.12,
+            2.12,
+            2.12,
+            2.12
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Charge Speed ▲ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -244,6 +442,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -255,6 +472,7 @@
     "effects": [
       {
         "type": "MaxAmmo",
+        "value_placeholder": "description_value_01",
         "values": [
           14.84,
           14.84,
@@ -272,11 +490,31 @@
           29.69,
           29.69
         ],
+        "description_values": {
+          "description_value_01": [
+            14.84,
+            14.84,
+            22.27,
+            22.27,
+            22.27,
+            22.27,
+            29.69,
+            29.69,
+            29.69,
+            29.69,
+            29.69,
+            29.69,
+            29.69,
+            29.69,
+            29.69
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Max Ammunition Capacity ▲ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -294,6 +532,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -305,6 +562,7 @@
     "effects": [
       {
         "type": "BurstGauge",
+        "value_placeholder": "description_value_01",
         "values": [
           2.33,
           2.33,
@@ -322,11 +580,31 @@
           4.66,
           4.66
         ],
+        "description_values": {
+          "description_value_01": [
+            2.33,
+            2.33,
+            3.5,
+            3.5,
+            3.5,
+            3.5,
+            4.66,
+            4.66,
+            4.66,
+            4.66,
+            4.66,
+            4.66,
+            4.66,
+            4.66,
+            4.66
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Burst Gauge filling speed ▲ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -344,6 +622,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -355,6 +652,7 @@
     "effects": [
       {
         "type": "MaxHp",
+        "value_placeholder": "description_value_01",
         "values": [
           4.84,
           4.84,
@@ -372,11 +670,31 @@
           9.69,
           9.69
         ],
+        "description_values": {
+          "description_value_01": [
+            4.84,
+            4.84,
+            7.27,
+            7.27,
+            7.27,
+            7.27,
+            9.69,
+            9.69,
+            9.69,
+            9.69,
+            9.69,
+            9.69,
+            9.69,
+            9.69,
+            9.69
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Max HP ▲ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -394,6 +712,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -405,6 +742,7 @@
     "effects": [
       {
         "type": "Def",
+        "value_placeholder": "description_value_01",
         "values": [
           24.2,
           24.2,
@@ -422,11 +760,31 @@
           48.45,
           48.45
         ],
+        "description_values": {
+          "description_value_01": [
+            24.2,
+            24.2,
+            36.35,
+            36.35,
+            36.35,
+            36.35,
+            48.45,
+            48.45,
+            48.45,
+            48.45,
+            48.45,
+            48.45,
+            48.45,
+            48.45,
+            48.45
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. DEF ▲ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -444,6 +802,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -455,6 +832,7 @@
     "effects": [
       {
         "type": "HealPotency",
+        "value_placeholder": "description_value_01",
         "values": [
           8.08,
           8.08,
@@ -472,11 +850,31 @@
           16.16,
           16.16
         ],
+        "description_values": {
+          "description_value_01": [
+            8.08,
+            8.08,
+            12.12,
+            12.12,
+            12.12,
+            12.12,
+            16.16,
+            16.16,
+            16.16,
+            16.16,
+            16.16,
+            16.16,
+            16.16,
+            16.16,
+            16.16
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Potency of HP granted ▲ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -494,6 +892,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -505,6 +922,7 @@
     "effects": [
       {
         "type": "DamageTaken",
+        "value_placeholder": "description_value_01",
         "values": [
           4.84,
           4.84,
@@ -522,11 +940,31 @@
           9.69,
           9.69
         ],
+        "description_values": {
+          "description_value_01": [
+            4.84,
+            4.84,
+            7.27,
+            7.27,
+            7.27,
+            7.27,
+            9.69,
+            9.69,
+            9.69,
+            9.69,
+            9.69,
+            9.69,
+            9.69,
+            9.69,
+            9.69
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Damage Taken ▼ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -544,6 +982,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -555,28 +1012,83 @@
     "effects": [
       {
         "type": "MaxHp",
+        "value_placeholder": "description_value_02",
         "values": [
-          20.0,
-          20.0,
-          20.0,
-          20.0,
-          20.0,
-          20.0,
-          20.0,
-          20.0,
-          20.0,
-          20.0,
-          20.0,
-          20.0,
-          20.0,
-          20.0,
-          20.0
+          6.07,
+          6.07,
+          9.1,
+          9.1,
+          9.1,
+          9.1,
+          12.14,
+          12.14,
+          12.14,
+          12.14,
+          12.14,
+          12.14,
+          12.14,
+          12.14,
+          12.14
         ],
+        "description_values": {
+          "description_value_01": [
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0
+          ],
+          "description_value_02": [
+            6.07,
+            6.07,
+            9.1,
+            9.1,
+            9.1,
+            9.1,
+            12.14,
+            12.14,
+            12.14,
+            12.14,
+            12.14,
+            12.14,
+            12.14,
+            12.14,
+            12.14
+          ],
+          "description_value_03": [
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0
+          ]
+        },
         "conditional": true,
         "desc": "■ Activates when HP is lower than {description_value_01}%. Max HP ▲ {description_value_02}% for {description_value_03} sec."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -594,6 +1106,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -605,6 +1136,7 @@
     "effects": [
       {
         "type": "PartsDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           15.95,
           15.95,
@@ -622,11 +1154,31 @@
           31.9,
           31.9
         ],
+        "description_values": {
+          "description_value_01": [
+            15.95,
+            15.95,
+            23.92,
+            23.92,
+            23.92,
+            23.92,
+            31.9,
+            31.9,
+            31.9,
+            31.9,
+            31.9,
+            31.9,
+            31.9,
+            31.9,
+            31.9
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Damage to Parts ▲ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -644,6 +1196,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -655,6 +1226,7 @@
     "effects": [
       {
         "type": "PierceDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           7.07,
           7.07,
@@ -672,11 +1244,31 @@
           14.14,
           14.14
         ],
+        "description_values": {
+          "description_value_01": [
+            7.07,
+            7.07,
+            10.6,
+            10.6,
+            10.6,
+            10.6,
+            14.14,
+            14.14,
+            14.14,
+            14.14,
+            14.14,
+            14.14,
+            14.14,
+            14.14,
+            14.14
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Pierce Damage ▲ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -694,6 +1286,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -705,6 +1316,7 @@
     "effects": [
       {
         "type": "TrueDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           7.07,
           7.07,
@@ -722,11 +1334,31 @@
           14.14,
           14.14
         ],
+        "description_values": {
+          "description_value_01": [
+            7.07,
+            7.07,
+            10.6,
+            10.6,
+            10.6,
+            10.6,
+            14.14,
+            14.14,
+            14.14,
+            14.14,
+            14.14,
+            14.14,
+            14.14,
+            14.14,
+            14.14
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. True Damage ▲ {description_value_01}%."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -744,6 +1376,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
@@ -755,6 +1406,7 @@
     "effects": [
       {
         "type": "CoverHp",
+        "value_placeholder": "description_value_01",
         "values": [
           7.26,
           7.26,
@@ -772,11 +1424,31 @@
           14.54,
           14.54
         ],
+        "description_values": {
+          "description_value_01": [
+            7.26,
+            7.26,
+            10.91,
+            10.91,
+            10.91,
+            10.91,
+            14.54,
+            14.54,
+            14.54,
+            14.54,
+            14.54,
+            14.54,
+            14.54,
+            14.54,
+            14.54
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Max HP of Cover ▲ {description_value_01}% of the caster's Max HP."
       },
       {
         "type": "ElementAdvantageDamage",
+        "value_placeholder": "description_value_01",
         "values": [
           0.0,
           0.0,
@@ -794,6 +1466,25 @@
           16.96,
           19.09
         ],
+        "description_values": {
+          "description_value_01": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.48,
+            8.48,
+            8.48,
+            8.48,
+            10.6,
+            12.72,
+            14.84,
+            14.84,
+            16.96,
+            16.96,
+            19.09
+          ]
+        },
         "conditional": false,
         "desc": "■ Activates at the start of battle. Elemental Advantage Attack Damage ▲ {description_value_01}%."
       }
