@@ -108,7 +108,9 @@ skill1/2 는 `skill_table:"StateEffect"` — 패시브 효과도 StateEffect 함
 **조건부 효과 (sim 런타임의 트리거/조건 시스템 필요)**:
 - Bastion: "N발 발사 → M발 재장전" (발사 카운트 트리거)
 - Assist: "HP < X% → MaxHP +Y% Z초" (HP 임계 트리거 + 지속시간)
-- effect 표의 `conditional: true` + `desc` 로 식별. placeholder 다중값(임계/효과/지속) 별도 해석 필요.
+- effect 표는 `value_placeholder`로 실제 효과값(Bastion/Assist 모두 `description_value_02`)을 지목하고,
+  `description_values`에 설명이 참조하는 모든 placeholder의 레벨별 배열(임계/효과/지속)을 무손실 보존한다.
+  `conditional: true`인 항목은 트리거 런타임이 구현되기 전까지 `EffectTable` 로더에서 no-op한다.
 
 **생존 (DPS 스코프 밖, 우선순위 낮음)**:
 - `DamageTaken` (Tempering 큐브 / 소장품): **캐릭이 적에게서 받는 뎀 감소** (B4 아님!)
