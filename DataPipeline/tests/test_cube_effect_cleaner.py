@@ -1,0 +1,92 @@
+import unittest
+
+from DataPipeline.etl.cube_effect_cleaner import parse_effects
+
+
+def _skill(description, *value_rows):
+    return {
+        "description_localkey": description,
+        "description_value_list": [
+            {"description_value": [str(value) for value in row]}
+            for row in value_rows
+        ],
+    }
+
+
+class CubeEffectCleanerTests(unittest.TestCase):
+    def test_single_placeholder_keeps_legacy_values(self):
+        effects = parse_effects(
+            _skill("Reload Speed ▲ {description_value_01}%.", [10, 20, 30]),
+            [1, 2, 3],
+        )
+
+        self.assertEqual(1, len(effects))
+        self.assertEqual("ReloadSpeed", effects[0]["type"])
+        self.assertEqual("description_value_01", effects[0]["value_placeholder"])
+        self.assertEqual([10.0, 20.0, 30.0], effects[0]["values"])
+        self.assertFalse(effects[0]["conditional"])
+
+    def test_bastion_uses_second_placeholder_and_preserves_trigger(self):
+        effects = parse_effects(
+            _skill(
+                "■ Activates when firing {description_value_01} round(s).\n"
+                "<color=#00AEFF>Reload ▲ {description_value_02} round(s).</color>",
+                [10, 10, 10],
+                [1, 2, 3],
+            ),
+            [1, 2, 3],
+        )
+
+        self.assertEqual(1, len(effects))
+        effect = effects[0]
+        self.assertEqual("ReloadRounds", effect["type"])
+        self.assertEqual("description_value_02", effect["value_placeholder"])
+        self.assertEqual([1.0, 2.0, 3.0], effect["values"])
+        self.assertEqual(
+            {
+                "description_value_01": [10.0, 10.0, 10.0],
+                "description_value_02": [1.0, 2.0, 3.0],
+            },
+            effect["description_values"],
+        )
+        self.assertTrue(effect["conditional"])
+
+    def test_assist_preserves_threshold_effect_and_duration(self):
+        effects = parse_effects(
+            _skill(
+                "■ Activates when HP is lower than {description_value_01}%.\n"
+                "<color=#00AEFF>Max HP ▲ {description_value_02}% for "
+                "{description_value_03} sec.</color>",
+                [20, 20, 20],
+                [6.07, 9.1, 12.14],
+                [20, 20, 20],
+            ),
+            [1, 2, 3],
+        )
+
+        self.assertEqual(1, len(effects))
+        effect = effects[0]
+        self.assertEqual("MaxHp", effect["type"])
+        self.assertEqual("description_value_02", effect["value_placeholder"])
+        self.assertEqual([6.07, 9.1, 12.14], effect["values"])
+        self.assertEqual(
+            [20.0, 20.0, 20.0],
+            effect["description_values"]["description_value_01"],
+        )
+        self.assertEqual(
+            [20.0, 20.0, 20.0],
+            effect["description_values"]["description_value_03"],
+        )
+
+    def test_missing_placeholder_data_is_graceful_noop(self):
+        effects = parse_effects(
+            _skill("Reload ▲ {description_value_02} round(s).", [10]),
+            [1, 2],
+        )
+
+        self.assertEqual("ReloadRounds", effects[0]["type"])
+        self.assertEqual([0.0, 0.0], effects[0]["values"])
+
+
+if __name__ == "__main__":
+    unittest.main()
